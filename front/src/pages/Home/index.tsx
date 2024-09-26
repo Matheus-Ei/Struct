@@ -1,13 +1,12 @@
-import Icons from "../../services/Icons";
+import SimpleButton from "../../components/wrapper/SimpleButton";
 import * as S from "./styles";
 
-const index = () => {
+const Home = () => {
     return (
         <S.Body>
-            <S.Text>TESTE HOME</S.Text>
-            <Icons library="fa6" name="FaBarcode" style={{width: 100}}/>
+            <SimpleButton><h1>TEST</h1></SimpleButton>
         </S.Body>
     );
 };
 
-export default index;
+export default Home;

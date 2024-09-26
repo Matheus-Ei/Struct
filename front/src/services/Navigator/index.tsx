@@ -14,7 +14,7 @@ class Navigator {
             <BrowserRouter>
                 <Routes>
                     {routes.map((item) => {
-                        return this.addRoute(item.path, item.element);
+                        return this.addRoute(item[0], item[1]);
                     })}
                 </Routes>
             </BrowserRouter>
