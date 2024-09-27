@@ -1,10 +1,10 @@
-import SimpleButton from "../../components/wrapper/SimpleButton";
+import Card from "../../components/wrapper/Card";
 import * as S from "./styles";
 
 const Home = () => {
     return (
         <S.Body>
-            <SimpleButton><h1>TEST</h1></SimpleButton>
+            <Card width={40}><h1>Test</h1></Card>
         </S.Body>
     );
 };

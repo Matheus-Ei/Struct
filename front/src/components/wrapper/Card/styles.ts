@@ -6,11 +6,11 @@ export const Body = styled.div`
     justify-content: center;
     align-items: center;
 
+    height: 20%;
     width: 90%;
-    height: 90%;
 
-    background-color: lightgray;
+    background-color: white;
 
-    border: solid gray 1px;
+    border: solid black 1px;
     border-radius: 10px;
 `
