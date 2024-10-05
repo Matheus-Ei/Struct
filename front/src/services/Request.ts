@@ -2,16 +2,17 @@ import axios from "axios";
 
 class Request {
     static async get(url: string) {
-        const data: string = await axios.get(url);
-        const treatedData: Object = await JSON.parse(data);
-        return treatedData;
+        const request = await axios.get(url);
+        const data = await request.data;
+        return data;
     }
 
     static async post(url: string, data: Object) {
-        const result: string = await axios.post(url, JSON.stringify(data));
-        const treatedResult: Object = await JSON.parse(result);
-        return treatedResult;
+        const request = await axios.post(url, data);
+        const response = await request.data;
+        return response;
     }
 }
 
 export default Request;
+

@@ -5,11 +5,11 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import routes from "./routes";
 
 class Navigator {
-    addRoute(path: string, element: () => JSX.Element) {
+    addRoute(path: string, element: () => JSX.Element): JSX.Element {
         return <Route path={path} element={element()}></Route>;
     }
 
-    setup() {
+    setup(): JSX.Element {
         return (
             <BrowserRouter>
                 <Routes>

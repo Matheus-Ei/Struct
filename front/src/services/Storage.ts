@@ -1,35 +1,29 @@
 export class LocalStorage {
-    static get(key: string) {
+    static get(key: string): any | null {
         const item: string | null = localStorage.getItem(key);
-        return (item == null) ? false : JSON.parse(item)
-
+        return item ? JSON.parse(item) : null;
     }
 
-    static set(key: string, value: Object) {
+    static set(key: string, value: Object): void {
         localStorage.setItem(key, JSON.stringify(value));
-        return true;
     }
 
-    static del(key: string) {
+    static del(key: string): void {
         localStorage.removeItem(key);
-        return true;
     }
 }
 
 export class SessionStorage {
-    static get(key: string) {
+    static get(key: string): any | null {
         const item: string | null = sessionStorage.getItem(key);
-        return (item == null) ? false : JSON.parse(item)
+        return item ? JSON.parse(item) : null;
     }
 
-    static set(key: string, value: Object) {
+    static set(key: string, value: Object): void {
         sessionStorage.setItem(key, JSON.stringify(value));
-        return true;
     }
 
-    static del(key: string) {
+    static del(key: string): void {
         sessionStorage.removeItem(key);
-        return true;
     }
 }
-
