@@ -1,9 +1,9 @@
-import Home from "../../pages/Home";
+import Login from "../../pages/Login";
 
 type RoutesType = Array<[string, () => JSX.Element]>;
 
 const routes: RoutesType = [
-    ["/", Home]
+    ["/", Login]
 ];
 
 export default routes;
