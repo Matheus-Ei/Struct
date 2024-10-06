@@ -1,9 +1,9 @@
-import UserRoute from "../routes/userRoute.js";
+import UserRoute from "../routes/user.js";
 
 type MainRoutesType = Array<[String, Object]>
 
 const mainRoutes: MainRoutesType = [
-    ["/user", UserRoute.router],
+    ["/users", UserRoute.router],
 ];
 
 export default mainRoutes;

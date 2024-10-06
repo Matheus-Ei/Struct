@@ -1,4 +1,4 @@
-CREATE TABLE user (
+CREATE TABLE users (
     id SERIAL PRIMARY KEY,
 
     name VARCHAR(100),
@@ -21,7 +21,7 @@ CREATE TABLE settings (
     user_id INT,
     CONSTRAINT fk_user
         FOREIGN KEY (user_id)
-        REFERENCES user (id)
+        REFERENCES users (id)
         ON DELETE CASCADE
 );
 
@@ -44,7 +44,7 @@ CREATE TABLE project (
     owner_user_id INT,
     CONSTRAINT fk_owner_user
         FOREIGN KEY (owner_user_id)
-        REFERENCES user (id)
+        REFERENCES users (id)
         ON DELETE CASCADE
 );
 
@@ -55,7 +55,7 @@ CREATE TABLE relationship_shared_project (
     user_shared_id INT,
     CONSTRAINT fk_user_shared
         FOREIGN KEY (user_shared_id)
-        REFERENCES user (id),
+        REFERENCES users (id),
     project_id INT,
     CONSTRAINT fk_project
         FOREIGN KEY (project_id)

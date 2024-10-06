@@ -14,7 +14,7 @@ const connection: DatabaseType = {
     database: "struct",
     host: "localhost",
     port: 5432,
-    user: "root",
+    user: "postgres",
     password: "Senha@1234",
 };
 

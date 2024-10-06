@@ -1,5 +1,5 @@
 import express from "express";
-import mainRoutes from "./system/mainRoutes.js";
+import mainRoutes from "./system/routes.js";
 
 export class App {
     private app: any;
