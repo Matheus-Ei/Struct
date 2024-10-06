@@ -2,35 +2,27 @@ import { DataTypes, Model } from "sequelize";
 import sequelize from "../system/database";
 
 import UserModel from "./user";
+import ProjectModel from "./project";
 
-class ProjectModel extends Model {
+class RelationshipSharedProjectModel extends Model {
     public id!: number;
-
-    public title!: string;
-    public description!: string;
-
-    public projectTypeId!: number;
-    public ownerUserId!: number;
+    public permissions!: number;
+    public userSharedId!: number;
+    public projectId!: number;
 }
 
-ProjectModel.init(
+RelationshipSharedProjectModel.init(
     {
         id: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
             primaryKey: true,
         },
-
-        title: {
-            type: DataTypes.STRING,
+        permissions: {
+            type: DataTypes.INTEGER,
             allowNull: false,
         },
-        description: {
-            type: DataTypes.STRING,
-            allowNull: false,
-        },
-
-        projectTypeId: {
+        userSharedId: {
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
@@ -38,20 +30,20 @@ ProjectModel.init(
                 key: "id",
             },
         },
-        ownerUserId: {
+        projectId: {
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
-                model: UserModel,
+                model: ProjectModel,
                 key: "id",
             },
         },
     },
     {
         sequelize,
-        tableName: "project",
+        tableName: "relationship_shared_project",
         timestamps: false,
     }
 );
 
-export default ProjectModel;
+export default RelationshipSharedProjectModel;

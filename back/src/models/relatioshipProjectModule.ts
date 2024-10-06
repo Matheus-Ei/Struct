@@ -1,57 +1,45 @@
+
 import { DataTypes, Model } from "sequelize";
 import sequelize from "../system/database";
 
-import UserModel from "./user";
+import ModuleModel from "./module";
+import ProjectModel from "./project";
 
-class ProjectModel extends Model {
+class RelationshipProjectModuleModel extends Model {
     public id!: number;
-
-    public title!: string;
-    public description!: string;
-
-    public projectTypeId!: number;
-    public ownerUserId!: number;
+    public moduleId!: number;
+    public projectId!: number;
 }
 
-ProjectModel.init(
+RelationshipProjectModuleModel.init(
     {
         id: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
             primaryKey: true,
         },
-
-        title: {
-            type: DataTypes.STRING,
-            allowNull: false,
-        },
-        description: {
-            type: DataTypes.STRING,
-            allowNull: false,
-        },
-
-        projectTypeId: {
+        moduleId: {
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
-                model: UserModel,
+                model: ModuleModel,
                 key: "id",
             },
         },
-        ownerUserId: {
+        projectId: {
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
-                model: UserModel,
+                model: ProjectModel,
                 key: "id",
             },
         },
     },
     {
         sequelize,
-        tableName: "project",
+        tableName: "relationship_project_module",
         timestamps: false,
     }
 );
 
-export default ProjectModel;
+export default RelationshipProjectModuleModel;

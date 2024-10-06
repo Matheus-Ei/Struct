@@ -3,55 +3,48 @@ import sequelize from "../system/database";
 
 import UserModel from "./user";
 
-class ProjectModel extends Model {
+class SettingsModel extends Model {
     public id!: number;
-
-    public title!: string;
-    public description!: string;
-
-    public projectTypeId!: number;
-    public ownerUserId!: number;
+    public language!: string;
+    public country!: string;
+    public theme!: string;
+    public userId!: number;
 }
 
-ProjectModel.init(
+SettingsModel.init(
     {
         id: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
             primaryKey: true,
         },
-
-        title: {
-            type: DataTypes.STRING,
+        language: {
+            type: DataTypes.STRING(50),
             allowNull: false,
         },
-        description: {
-            type: DataTypes.STRING,
+        country: {
+            type: DataTypes.STRING(50),
             allowNull: false,
         },
-
-        projectTypeId: {
+        theme: {
+            type: DataTypes.STRING(50),
+            allowNull: false,
+        },
+        userId: {
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
                 model: UserModel,
                 key: "id",
             },
-        },
-        ownerUserId: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            references: {
-                model: UserModel,
-                key: "id",
-            },
+            onDelete: "CASCADE",
         },
     },
     {
         sequelize,
-        tableName: "project",
+        tableName: "settings",
         timestamps: false,
     }
 );
 
-export default ProjectModel;
+export default SettingsModel;
