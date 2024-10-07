@@ -2,6 +2,7 @@ import { DataTypes, Model } from "sequelize";
 import sequelize from "../system/database";
 
 import UserModel from "./user";
+import ProjectTypeModel from "./project_type";
 
 class ProjectModel extends Model {
     public id!: number;
@@ -34,7 +35,7 @@ ProjectModel.init(
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
-                model: UserModel,
+                model: ProjectTypeModel,
                 key: "id",
             },
         },

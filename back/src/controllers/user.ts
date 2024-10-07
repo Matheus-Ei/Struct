@@ -18,13 +18,21 @@ class UserController {
         }
     }
 
-    public register(req: Request, res: Response) {}
+    public register(req: Request, res: Response) {
 
-    public login(req: Request, res: Response) {}
+    }
 
-    public pay(req: Request, res: Response) {}
+    public login(req: Request, res: Response) {
 
-    public cancelSubscription(req: Request, res: Response) {}
+    }
+
+    public pay(req: Request, res: Response) {
+
+    }
+
+    public cancelSubscription(req: Request, res: Response) {
+
+    }
 }
 
 export default new UserController();
