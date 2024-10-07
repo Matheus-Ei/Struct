@@ -7,18 +7,19 @@ assignees: ''
 
 ---
 
-# Feature Title
-
 ## Description
 Provide a clear and concise description of the feature, including the problem it solves and the benefit it will bring. Be specific and avoid ambiguity.
 
-## Goals
-- What are the objectives of implementing this feature?
-- How will it improve the project or product?
+## Field
+- [ ] Back-end
+- [ ] Front-end
+- [ ] Database
 
 ## Acceptance Criteria
-- Clearly define the criteria for this feature to be considered complete.
-- Include any functional, non-functional, or technical requirements.
+- [ ] Clearly define the criteria for this feature to be considered complete. Include any functional, non-functional, or technical requirements.
+
+## Goals (optional)
+- What are the objectives of implementing this feature?
 
 ## User Stories (optional)
 - **As a [user type]**, I want [goal], so that [reason].
