@@ -1,0 +1,27 @@
+services:
+  postgres:
+    image: postgres
+    restart: always
+
+    volumes:
+      - /var/lib/postgresql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Senha@1234
+      POSTGRES_DB: postgres
+      TZ: America/Sao_Paulo
+
+    ports:
+      - "5432:5432"
+
+  pgadmin:
+    image: dpage/pgadmin4
+
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+
+    ports:
+      - "80:80"
