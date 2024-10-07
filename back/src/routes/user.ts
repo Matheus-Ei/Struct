@@ -13,6 +13,8 @@ class UserRoute {
         this.router.get("/get/:id", UserController.get);
 
         this.router.post("/register", UserController.register);
+
+        this.router.post("/login", UserController.login);
     }
 }
 

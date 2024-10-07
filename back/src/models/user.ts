@@ -9,7 +9,7 @@ class UserModel extends Model {
     public password!: string;
     public photo?: any;
     public paid!: boolean;
-    public last_paid_date: any;
+    public last_paid_date?: any;
 }
 
 UserModel.init(

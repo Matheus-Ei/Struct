@@ -5,28 +5,28 @@ class Text {
         this.text = text;
     }
 
-    bold() {
-
+    bold(): string {
+        return `**${this.text}**`
     }
 
-    italic() {
-
+    italic(): string {
+        return `*${this.text}*`
     }
 
-    codeBlock() {
-
+    codeBlock(): string {
+        return "```" + this.text + "```"
     }
 
-    size(size: number) {
-
+    size(size: number): string {
+        return ``
     }
 
-    color(color: string) {
-
+    color(color: string): string {
+        return ``
     }
 
-    link(source: string) {
-
+    link(source: string): string {
+        return ``
     }
 }
 

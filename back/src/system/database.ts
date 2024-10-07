@@ -1,28 +1,49 @@
 import { Sequelize } from "sequelize";
+import dotenv from "dotenv";
 
 interface DatabaseType {
-    type: string;
-    database: string;
-    host: string;
-    port: number;
-    user: string;
-    password: string;
+    type: string | undefined;
+    database: string | undefined;
+    host: string | undefined;
+    port: number | undefined;
+    user: string | undefined;
+    password: string | undefined;
 }
 
+dotenv.config();
+
+const type = process.env.DATABASE_TYPE;
+const database = process.env.DATABASE_NAME;
+const host = process.env.DATABASE_HOST;
+const port = Number(process.env.DATABASE_PORT);
+const user = process.env.DATABASE_USER;
+const password = process.env.DATABASE_PASSWORD;
+
 const connection: DatabaseType = {
-    type: "postgres",
-    database: "struct",
-    host: "localhost",
-    port: 5432,
-    user: "postgres",
-    password: "Senha@1234",
+    type,
+    database,
+    host,
+    port,
+    user,
+    password,
 };
 
 const sequelize = new Sequelize(
-    `${connection.type}://${connection.user}:${connection.password}@${connection.host}:${connection.port}/${connection.database}`,
+    connection.database as string,
+    connection.user as string,
+    connection.password as string,
     {
-        dialect: "postgres",
+        host: connection.host,
+        dialect: connection.type as "postgres",
+        port: connection.port,
         logging: false,
+
+        dialectOptions: {
+            ssl: {
+                require: true,
+                rejectUnauthorized: false,
+            },
+        },
     }
 );
 
