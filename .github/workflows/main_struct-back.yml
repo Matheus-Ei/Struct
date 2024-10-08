@@ -1,0 +1,82 @@
+# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
+# More GitHub Actions for Azure: https://github.com/Azure/actions
+
+name: Build and deploy Node.js app to Azure Web App - struct-back
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the repository
+      - uses: actions/checkout@v4
+
+      # Set up the Node.js version
+      - name: Set up Node.js version
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20.x'
+
+      # Install dependencies, build, and test
+      - name: npm install, build, and test
+        run: |
+          cd back # Navega para a pasta 'back'
+          npm install
+          npm run build --if-present
+          npm run test --if-present
+
+      # Zip the build artifact for deployment
+      - name: Zip artifact for deployment
+        run: |
+          cd back/dist # Entra na pasta onde a build foi gerada
+          zip -r ../../release.zip . # Zipa todos os arquivos da build
+
+      # Upload the build artifact
+      - name: Upload artifact for deployment job
+        uses: actions/upload-artifact@v4
+        with:
+          name: node-app
+          path: release.zip
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    environment:
+      name: 'Production'
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+    permissions:
+      id-token: write # This is required for requesting the JWT
+
+    steps:
+      # Download the build artifact from the build job
+      - name: Download artifact from build job
+        uses: actions/download-artifact@v4
+        with:
+          name: node-app
+
+      # Unzip the build artifact
+      - name: Unzip artifact for deployment
+        run: unzip release.zip
+      
+      # Login to Azure using secrets
+      - name: Login to Azure
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_6B4982EB99AA450BA6750CB7C0B1F0AC }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_88DB142B43D94442AACEC7558C10CE54 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_9DB29B5A76BD4E1AAE855CBED08E9C8E }}
+
+      # Deploy to Azure Web App
+      - name: 'Deploy to Azure Web App'
+        id: deploy-to-webapp
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: 'struct-back'
+          slot-name: 'Production'
+          package: .
