@@ -36,7 +36,7 @@ jobs:
       - name: Zip artifact for deployment
         run: |
           cd back/dist 
-          zip -r ../../release.zip ./* 
+          zip -r ../../release.zip ./*
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
@@ -69,11 +69,10 @@ jobs:
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_7E2C6EAE3DE54CD2805F60DF096D98C0 }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_40DBD62C0D964813A07E9A6339BE29D7 }}
 
-
       - name: 'Run Azure Functions Action'
         uses: Azure/functions-action@v1
         id: fa
         with:
           app-name: 'struct-backend'
           slot-name: 'production'
-          package: './back/dist'
+          package: './release.zip'
