@@ -1,7 +1,4 @@
-# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
-# More GitHub Actions for Azure: https://github.com/Azure/actions
-
-name: Build and deploy Node.js app to Azure Web App - struct-back
+name: Azure web app - Struct back-end
 
 on:
   push:
@@ -26,7 +23,7 @@ jobs:
       # Install dependencies, build, and test
       - name: npm install, build, and test
         run: |
-          cd back # Navega para a pasta 'back'
+          cd back
           npm install
           npm run build --if-present
           npm run test --if-present
@@ -34,8 +31,8 @@ jobs:
       # Zip the build artifact for deployment
       - name: Zip artifact for deployment
         run: |
-          cd back/dist # Entra na pasta onde a build foi gerada
-          zip -r ../../release.zip . # Zipa todos os arquivos da build
+          cd back/dist
+          zip -r ../../release.zip ./
 
       # Upload the build artifact
       - name: Upload artifact for deployment job
@@ -51,7 +48,7 @@ jobs:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
     permissions:
-      id-token: write # This is required for requesting the JWT
+      id-token: write
 
     steps:
       # Download the build artifact from the build job
