@@ -1,6 +1,8 @@
 import { Request, Response } from "express";
 import UserModel from "../models/user.js";
 import Hash from "../services/hash.js";
+import Token from "../services/token.js";
+import Cookie from "../services/cookie.js";
 
 class UserController {
     public async get(req: Request, res: Response) {
@@ -59,6 +61,17 @@ class UserController {
 
             if (user) {
                 if (isMatch) {
+                    const refresh = new Token(
+                        process.env.REFRESH_SECRET as string
+                    );
+                    const access = new Token(process.env.JWT_SECRET as string);
+
+                    const accessTk = access.generate({ mail }, "1h");
+                    const refreshTk = refresh.generate({ mail }, "7d");
+
+                    Cookie.generate("access_token", accessTk, res);
+                    Cookie.generate("refresh_token", refreshTk, res);
+
                     res.status(201).json({ status: true });
                 } else {
                     res.status(201).json({ status: false });
@@ -77,6 +90,8 @@ class UserController {
     public async pay(req: Request, res: Response) {}
 
     public async cancelSubscription(req: Request, res: Response) {}
+
+    public async logout(req: Request, res: Response) {}
 }
 
 export default new UserController();

@@ -1,6 +1,8 @@
 import express from "express";
 import mainRoutes from "./system/routes.js";
 import dotenv from "dotenv";
+import cookieParser from 'cookie-parser';
+
 import auth from "./middlewares/auth.js";
 
 export class App {
@@ -8,9 +10,8 @@ export class App {
 
     constructor() {
         this.app = express();
-        this.app.use(express.json());
 
-        this.middleware();
+        this.middlewares();
         this.routes();
     }
 
@@ -20,7 +21,10 @@ export class App {
         });
     }
 
-    private middleware(): void {
+    private middlewares(): void {
+        this.app.use(cookieParser());
+        this.app.use(express.json());
+
         this.app.use(auth);
     }
 

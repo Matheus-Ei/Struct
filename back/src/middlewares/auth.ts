@@ -1,25 +1,29 @@
-import { Request, Response, NextFunction } from 'express';
-import dotenv from 'dotenv';
+import { Request, Response, NextFunction } from "express";
+import dotenv from "dotenv";
+import Cookie from "../services/cookie.js";
+import Token from "../services/token.js";
 
 dotenv.config();
 
 const auth = (req: Request, res: Response, next: NextFunction) => {
-    const apiUser = process.env.API_USER;
-    const apiToken = process.env.API_TOKEN;
-
-    const user = req.headers['user'] as string;
-    const token = req.headers['token'] as string;
-
-    if (!user || !token) {
-        return res.status(401).json({ message: "Missing user or token in headers" });
+    if (req.path === "/users/login" || req.path === "/users/register") {
+        return next();
     }
 
-    if (user !== apiUser || token !== apiToken) {
-        return res.status(403).json({ message: "Invalid user or token" });
+    const accessToken = Cookie.get("access_token", req);
+    const mail = req.headers["mail"] as string;
+
+    const tk = new Token(process.env.JWT_SECRET as string);
+
+    if (!accessToken) {
+        return res.status(401).json({ message: "Missing token cookie" });
+    }
+
+    if (!tk.verify(accessToken, mail, "mail")) {
+        return res.status(401).json({ message: "Invalid token" });
     }
 
     next();
 };
-
 
 export default auth;
