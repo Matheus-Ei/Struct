@@ -6,7 +6,7 @@ import Token from "../services/token.js";
 dotenv.config();
 
 const auth = (req: Request, res: Response, next: NextFunction) => {
-    if (req.path === "/users/login" || req.path === "/users/register") {
+    if (req.path === "/users/login" || req.path === "/users/register" || req.path === "/token/refresh") {
         return next();
     }
 

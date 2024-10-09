@@ -3,7 +3,6 @@ name: Azure web app - Struct back-end
 on:
   push:
     branches:
-      - main
       - develop
   workflow_dispatch:
 
