@@ -1,6 +1,7 @@
 import express from "express";
 import mainRoutes from "./system/routes.js";
 import dotenv from "dotenv";
+import auth from "./middlewares/auth.js";
 
 export class App {
     private app: any;
@@ -8,6 +9,8 @@ export class App {
     constructor() {
         this.app = express();
         this.app.use(express.json());
+
+        this.middleware();
         this.routes();
     }
 
@@ -15,6 +18,10 @@ export class App {
         mainRoutes.map((item) => {
             this.app.use(item[0], item[1]);
         });
+    }
+
+    private middleware(): void {
+        this.app.use(auth);
     }
 
     public listen(port: number) {
