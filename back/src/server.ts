@@ -1,5 +1,6 @@
 import express from "express";
 import mainRoutes from "./system/routes.js";
+import dotenv from "dotenv";
 
 export class App {
     private app: any;
@@ -24,4 +25,7 @@ export class App {
 }
 
 const app = new App();
-app.listen(5000);
+
+dotenv.config();
+const port = Number(process.env.PORT);
+app.listen(port);
