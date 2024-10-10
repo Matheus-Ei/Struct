@@ -6,7 +6,6 @@ export const Body = styled.div`
     align-items: center;
 
     width: 100%;
-    max-height: 30%;
 `;
 
 export const Image = styled.img`

@@ -1,8 +1,12 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import routes from "./routes";
 
 class Navigator {
-    addRoute(path: string, element: () => JSX.Element, key: number): JSX.Element {
+    addRoute(
+        path: string,
+        element: () => JSX.Element,
+        key: number
+    ): JSX.Element {
         return <Route path={path} element={element()} key={key}></Route>;
     }
 
@@ -16,6 +20,10 @@ class Navigator {
                 </Routes>
             </BrowserRouter>
         );
+    }
+
+    public static navigate(path: string) {
+        <Navigate to={path} replace={true} />
     }
 }
 

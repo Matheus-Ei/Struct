@@ -9,11 +9,6 @@ export const Body = styled.button`
     padding-left: 50px;
     padding-right: 50px;
 
-    color: black;
-
-    &:active {
-        background-color: black;
-        color: white;
-        border: solid black 1px;
-    }
+    width: 50%;
+    height: 8%;
 `;

@@ -1,5 +1,5 @@
 import * as S from "./styles"
-import * as I from "./interface"
+import * as T from "./types"
 
 const Separator = () => {
     return null;

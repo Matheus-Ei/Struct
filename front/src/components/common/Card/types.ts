@@ -1,6 +1,5 @@
 export interface CardProps {
     children: JSX.Element;
-    style?: Object;
 
     width?: number;
     height?: number;
@@ -8,4 +7,7 @@ export interface CardProps {
     justifyContent?: string;
     alignItems?: string;
     flexDirection?: string;
+    gap?: number;
+    backgroundColor?: string;
+    borderColor?: string;
 }

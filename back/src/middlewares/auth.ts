@@ -6,12 +6,17 @@ import Token from "../services/token.js";
 dotenv.config();
 
 const auth = (req: Request, res: Response, next: NextFunction) => {
-    if (req.path === "/users/login" || req.path === "/users/register" || req.path === "/token") {
+    if (
+        req.path === "/users/login" ||
+        req.path === "/users/register" ||
+        req.path === "/token/check" ||
+        req.path === "/token/refresh"
+    ) {
         return next();
     }
 
     const accessToken = Cookie.get("access_token", req);
-    const id = req.headers["id"] as string;
+    const id = Cookie.get("id", req);
 
     const tk = new Token(process.env.JWT_SECRET as string);
 

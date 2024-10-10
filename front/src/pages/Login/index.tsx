@@ -1,36 +1,68 @@
-import Card from "../../components/Card";
-import Image from "../../components/Image";
-import Input from "../../components/Input";
-import Text from "../../components/Text";
-import { useTheme } from "../../hooks/useTheme";
+// Utils
 import * as S from "./styles";
+
+// Components
+import Card from "../../components/common/Card";
+import { CardHeader } from "../../components/layout/CardHeader";
+import { MultInput } from "../../components/layout/MultInputs";
+import SimpleButton from "../../components/common/SimpleButton";
+import Text from "../../components/common/Text";
+
+// Hooks
+import { useState } from "react";
+import { useTheme } from "../../hooks/useTheme";
+import Request from "../../services/Request";
+import Navigator from "../../services/Navigator";
 
 const Login = () => {
     const theme = useTheme();
 
+    const [mail, setMail] = useState();
+    const [password, setPassword] = useState();
+
+    const handleLogin = () => {
+        const url = `${process.env.REACT_APP_BACK_URL}/users/login`;
+        Request.post(url, {
+            mail,
+            password,
+        }).then((response) => {
+            if (response.status === true) {
+                return Navigator.navigate('/dashboard')
+            } else {
+                console.error("Login wasn't sucessfull")
+            }
+        });
+    };
+
     return (
         <S.Body>
-            <Card width={30} height={80} flexDirection="column" justifyContent="flex-start">
+            <Card
+                width={30}
+                height={60}
+                flexDirection="column"
+                justifyContent="center"
+                gap={10}
+            >
                 <>
-                    <Image
-                        width={90}
+                    <CardHeader
                         src={require("../../assets/images/logo-1920x1080-1.png")}
+                        text="Venha fazer parte de um mundo mais organizado."
+                        flexDirection="column"
                     />
 
-                    <Text
-                        text="This is a test element..."
-                        color={theme.middle}
+                    <MultInput
+                        srcList={[
+                            ["Mail...", setMail],
+                            ["Password...", setPassword],
+                        ]}
                     />
 
-                    <Input
-                        text="test"
-                        width={100}
-                        height={70}
-                        borderRadius={10}
-                        primaryColor={theme.primary}
-                        middleColor={theme.middle}
-                        secondaryColor={theme.secondary}
-                    />
+                    <SimpleButton
+                        backgroundColor={theme.secondary}
+                        onClick={handleLogin}
+                    >
+                        <Text text="LOGIN" color={theme.primary} />
+                    </SimpleButton>
                 </>
             </Card>
         </S.Body>

@@ -6,7 +6,7 @@ import Cookie from "../services/cookie.js";
 
 class UserController {
     public async get(req: Request, res: Response) {
-        const { id } = req.params;
+        const id = Cookie.get('id', req);
 
         try {
             const user = await UserModel.findByPk(id);
@@ -43,7 +43,7 @@ class UserController {
     }
 
     public async login(req: Request, res: Response) {
-        const { id, mail, password } = req.body;
+        const { mail, password } = req.body;
 
         try {
             const user = await UserModel.findOne({
@@ -58,20 +58,25 @@ class UserController {
                 user?.dataValues.password
             );
 
-            const isMatchId = (user?.dataValues.id == id)
-
-            if (user && id) {
-                if (isMatchPass && isMatchId) {
+            if (user) {
+                if (isMatchPass) {
                     const refresh = new Token(
                         process.env.REFRESH_SECRET as string
                     );
                     const access = new Token(process.env.JWT_SECRET as string);
 
-                    const accessTk = access.generate({ id }, "1h");
-                    const refreshTk = refresh.generate({ id }, "7d");
+                    const accessTk = access.generate(
+                        { id: user?.dataValues.id },
+                        "1h"
+                    );
+                    const refreshTk = refresh.generate(
+                        { id: user?.dataValues.id },
+                        "7d"
+                    );
 
                     Cookie.generate("access_token", accessTk, res);
                     Cookie.generate("refresh_token", refreshTk, res);
+                    Cookie.generate("id", user?.dataValues.id, res);
 
                     res.status(201).json({ status: true });
                 } else {
@@ -93,6 +98,10 @@ class UserController {
     public async cancelSubscription(req: Request, res: Response) {}
 
     public async logout(req: Request, res: Response) {}
+
+    public async delete(req: Request, res: Response) {}
+
+    public async projects(req: Request, res: Response) {}
 }
 
 export default new UserController();

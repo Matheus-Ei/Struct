@@ -12,7 +12,7 @@ class TokenRoute {
     private init() {
         this.router.post("/refresh", TokenController.refresh);
 
-        this.router.post("/check", TokenController.check);
+        this.router.get("/check", TokenController.check);
     }
 }
 

@@ -1,7 +1,8 @@
 import mainRoutes from "./system/routes.js";
-import cookieParser from 'cookie-parser';
+import cookieParser from "cookie-parser";
 import express from "express";
 import dotenv from "dotenv";
+import cors from "cors";
 
 import auth from "./middlewares/auth.js";
 
@@ -24,6 +25,13 @@ export class App {
     private middlewares(): void {
         this.app.use(cookieParser());
         this.app.use(express.json());
+
+        this.app.use(
+            cors({
+                credentials: true,
+                origin: true,
+            })
+        );
 
         this.app.use(auth);
     }
