@@ -11,7 +11,7 @@ const auth = (req: Request, res: Response, next: NextFunction) => {
     }
 
     const accessToken = Cookie.get("access_token", req);
-    const mail = req.headers["mail"] as string;
+    const id = req.headers["id"] as string;
 
     const tk = new Token(process.env.JWT_SECRET as string);
 
@@ -19,7 +19,7 @@ const auth = (req: Request, res: Response, next: NextFunction) => {
         return res.status(401).json({ message: "Missing token cookie" });
     }
 
-    if (!tk.verify(accessToken, mail, "mail")) {
+    if (!tk.verify(accessToken, id, "id")) {
         return res.status(401).json({ message: "Invalid token" });
     }
 

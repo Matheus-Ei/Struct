@@ -1,12 +1,11 @@
 import * as S from "./styles";
-import * as I from "./interface"
+import * as I from "./interface";
 
 const Image = ({ src, width, height }: I.ImageProps) => {
     const style = {
         width: `${width}%`,
-        height: `${height}%`
-    }
-
+        height: `${height}%`,
+    };
 
     return (
         <S.Body>

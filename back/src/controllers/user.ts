@@ -43,7 +43,7 @@ class UserController {
     }
 
     public async login(req: Request, res: Response) {
-        const { mail, password } = req.body;
+        const { id, mail, password } = req.body;
 
         try {
             const user = await UserModel.findOne({
@@ -53,20 +53,22 @@ class UserController {
             });
 
             const hashObj = new Hash();
-            const isMatch = await hashObj.compare(
+            const isMatchPass = await hashObj.compare(
                 password,
                 user?.dataValues.password
             );
 
-            if (user) {
-                if (isMatch) {
+            const isMatchId = (user?.dataValues.id == id)
+
+            if (user && id) {
+                if (isMatchPass && isMatchId) {
                     const refresh = new Token(
                         process.env.REFRESH_SECRET as string
                     );
                     const access = new Token(process.env.JWT_SECRET as string);
 
-                    const accessTk = access.generate({ mail }, "1h");
-                    const refreshTk = refresh.generate({ mail }, "7d");
+                    const accessTk = access.generate({ id }, "1h");
+                    const refreshTk = refresh.generate({ id }, "7d");
 
                     Cookie.generate("access_token", accessTk, res);
                     Cookie.generate("refresh_token", refreshTk, res);

@@ -1,20 +1,21 @@
-interface VarType {
-    [keys: string]: string;
-}
+import * as I from "./interface";
 
-const light: VarType = {
+const light: I.VarType = {
     primary: "#ffffff",
+    middle: "#888888",
     secondary: "#000000",
 };
 
-const dark: VarType = {
+const dark: I.VarType = {
     primary: "#000000",
+    middle: "#888888",
     secondary: "#ffffff",
 };
 
-const themes: any = {
+const styles: any = {
+    default: light,
     light,
     dark,
 };
 
-export default themes;
+export default styles;
