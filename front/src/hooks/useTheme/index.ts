@@ -25,7 +25,7 @@ export const useColor = (newTheme?: string) => {
         if (newTheme) {
             setColors(theme[newTheme]);
         } else {
-            setColors(theme["white"]);
+            setColors(theme["light"]);
         }
     });
 

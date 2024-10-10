@@ -1,7 +1,7 @@
-import express from "express";
 import mainRoutes from "./system/routes.js";
-import dotenv from "dotenv";
 import cookieParser from 'cookie-parser';
+import express from "express";
+import dotenv from "dotenv";
 
 import auth from "./middlewares/auth.js";
 

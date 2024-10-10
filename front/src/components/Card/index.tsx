@@ -1,16 +1,5 @@
 import * as S from "./styles";
-
-interface CardProps {
-    children: JSX.Element;
-    style?: Object;
-
-    width?: number;
-    height?: number;
-    radius?: number;
-    justifyContent?: string;
-    alignItems?: string;
-    flexDirection?: string;
-}
+import * as I from "./interface";
 
 const Card = ({
     children,
@@ -21,7 +10,7 @@ const Card = ({
     justifyContent,
     alignItems,
     flexDirection,
-}: CardProps) => {
+}: I.CardProps) => {
     if (style) {
         return <S.Body style={style}>{children}</S.Body>;
     }

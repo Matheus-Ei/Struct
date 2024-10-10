@@ -1,13 +1,7 @@
 import * as S from "./styles";
+import * as I from "./interface"
 
-interface ButtonProps {
-    children: JSX.Element;
-    style?: Object;
-    black?: boolean;
-    onClick?: () => {};
-}
-
-const SimpleButton = ({ children, style, black, onClick }: ButtonProps) => {
+const SimpleButton = ({ children, style, black, onClick }: I.ButtonProps) => {
     if (black) {
         return (
             <S.BodyBlack style={style} onClick={onClick}>

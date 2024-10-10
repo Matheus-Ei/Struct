@@ -26,7 +26,6 @@ class UserController {
 
         const hashObj = new Hash();
         const hashPassword = await hashObj.make(password);
-        console.log(hashPassword);
 
         try {
             const newUser = await UserModel.create({
