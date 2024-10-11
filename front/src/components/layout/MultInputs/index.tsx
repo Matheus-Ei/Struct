@@ -5,7 +5,10 @@ import * as T from "./types";
 // Components
 import Input from "../../common/Input";
 
-const MultInput = ({ srcList }: T.MultInputsProps) => {
+// Libraries
+import React from "react";
+
+const MultInput = ({ srcList }: T.MultInputsProps): JSX.Element => {
     return (
         <S.Body>
             {srcList.map((item: any, index: number) => {
@@ -16,6 +19,7 @@ const MultInput = ({ srcList }: T.MultInputsProps) => {
                         width={80}
                         height={100}
                         borderRadius={10}
+                        isPassword={item[2]}
                         key={index}
                     />
                 );
@@ -24,4 +28,4 @@ const MultInput = ({ srcList }: T.MultInputsProps) => {
     );
 };
 
-export default MultInput;
+export default React.memo(MultInput);

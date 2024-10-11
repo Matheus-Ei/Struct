@@ -17,7 +17,7 @@ export const useSize = () => {
 
 export const context = createContext<any>(undefined);
 export const ThemeProvider = ({ children }: any) => {
-    const [theme, defTheme] = useState<I.VarType>(styles["default"]);
+    const [theme, defTheme] = useState<I.Theme>(styles["default"]);
 
     return (
         <context.Provider value={{ theme, defTheme }}>
@@ -26,7 +26,7 @@ export const ThemeProvider = ({ children }: any) => {
     );
 };
 
-export const useTheme = (newTheme?: string) => {
+export const useTheme = (newTheme?: string): I.Theme => {
     const { theme, defTheme } = useContext(context);
 
     if (newTheme) {

@@ -2,8 +2,11 @@
 import * as S from "./styles"
 import * as T from "./types"
 
-const Separator = () => {
-    return null;
+// Libraries
+import React from "react";
+
+const Separator = (): JSX.Element => {
+    return <div></div>;
 };
 
-export default Separator;
+export default React.memo(Separator);

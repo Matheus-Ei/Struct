@@ -3,6 +3,7 @@ import routes from "./routes";
 
 // Components
 import { Routes, Route } from "react-router-dom";
+import React from "react";
 
 class Navigator {
     addRoute(
@@ -10,7 +11,7 @@ class Navigator {
         element: () => JSX.Element,
         key: number
     ): JSX.Element {
-        return <Route path={path} element={element()} key={key}></Route>;
+        return <Route path={path} element={React.createElement(element)} key={key}></Route>;
     }
 
     setup(): JSX.Element {

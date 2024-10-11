@@ -6,8 +6,9 @@ import { useTheme } from "./hooks/useTheme";
 
 function App() {
     const theme = useTheme();
+
     if (theme.primary) {
-        const body = document.querySelector("body")
+        const body = document.querySelector("body");
         if (body) {
             body.style.backgroundColor = theme.primary;
         }

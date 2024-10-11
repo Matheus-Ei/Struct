@@ -6,9 +6,11 @@ export const Body = styled.button`
     border: solid black 1px;
     border-radius: 10px;
 
+    padding: 20px;
+
     padding-left: 50px;
     padding-right: 50px;
 
-    width: 50%;
-    height: 8%;
+    width: auto;
+    height: auto
 `;

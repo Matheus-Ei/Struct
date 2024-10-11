@@ -7,6 +7,6 @@ export const Body = styled.div`
 
     flex-direction: column;
 
-    height: 30%;
+    height: 25vh;
     max-width: 100%;
 `

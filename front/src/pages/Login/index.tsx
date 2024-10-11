@@ -8,34 +8,26 @@ import MultInput from "../../components/layout/MultInputs";
 import SimpleButton from "../../components/common/SimpleButton";
 
 // Hooks
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-// Services
-import Request from "../../services/Request";
+// Utils
+import LoginClass from "../../utils/login";
+import File from "../../utils/file";
+import Message from "../../components/common/Message";
+import BlankSeparator from "../../components/common/BlankSeparator";
 
-const Login = () => {
+const Login = (): JSX.Element => {
+    const [mail, setMail] = useState<string>("");
+    const [password, setPassword] = useState<string>("");
+
+    const [error, setError] = useState<boolean>(false);
+
     const navigate = useNavigate();
-    const [logo, setLogo] = useState();
 
-    useEffect(() => {
-        setLogo(require("../../assets/images/logo-1920x1080-1.png"));
-    }, []);
-
-    const [mail, setMail] = useState();
-    const [password, setPassword] = useState();
-
-    const handleLogin = () => {
-        const url = `${process.env.REACT_APP_BACK_URL}/users/login`;
-        Request.post(url, {
-            mail,
-            password,
-        }).then((response) => {
-            if (response.status === true) {
-                return navigate("/dashboard");
-            } else {
-                console.error("Login wasn't sucessfull");
-            }
+    const makeLogin = () => {
+        LoginClass.make(mail, password, navigate).then((response) => {
+            setError(!response);
         });
     };
 
@@ -43,26 +35,38 @@ const Login = () => {
         <S.Body>
             <Card
                 width={28}
-                height={65}
                 flexDirection="column"
                 justifyContent="center"
                 gap={10}
             >
                 <>
                     <CardHeader
-                        src={logo}
+                        src={File.get("images/logo-1920x1080-1.png")}
                         text="Venha fazer parte de um mundo mais organizado."
                         flexDirection="column"
                     />
 
+                    <BlankSeparator size={100} direction="vertical" />
+
+                    <Message
+                        text="Mail or password is incorrect, try again..."
+                        type="error"
+                        cardStyle="text"
+                        isVisible={error}
+                    />
+
                     <MultInput
                         srcList={[
-                            ["Mail...", setMail],
-                            ["Password...", setPassword],
+                            ["Mail...", setMail, false],
+                            ["Password...", setPassword, true],
                         ]}
                     />
 
-                    <SimpleButton text="LOGIN" onClick={handleLogin} />
+                    <BlankSeparator size={30} direction="vertical" />
+
+                    <SimpleButton text="LOGIN" onClick={makeLogin} />
+
+                    <BlankSeparator size={20} direction="vertical" />
                 </>
             </Card>
         </S.Body>

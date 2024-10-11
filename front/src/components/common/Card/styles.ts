@@ -6,8 +6,8 @@ export const Body = styled.div`
     justify-content: center;
     align-items: center;
 
-    height: 20%;
-    width: 90%;
+    height: auto;
+    width: auto;
 
     background-color: white;
 

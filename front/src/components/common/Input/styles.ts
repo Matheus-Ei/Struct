@@ -4,12 +4,14 @@ export const Body = styled.div`
     display: flex;
 
     align-items: center;
-    justify-content: flex-start;
+    justify-content: center;
 
-    flex-direction: column;
+    flex-direction: row;
 
-    width: 100%;
+    width: 95%;
     height: 60px;
+
+    gap: 10px;
 `;
 
 export const Input = styled.input`
@@ -19,4 +21,8 @@ export const Input = styled.input`
     border: solid 1px;
     padding-left: 10px;
     font-size: 1.2em;
+`;
+
+export const PasswordButton = styled.button`
+    border: none;
 `;

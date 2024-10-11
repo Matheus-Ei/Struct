@@ -1,1 +1,1 @@
-export type ToggleType = [value: boolean, toggleValue: () => void];
+export type ToggleType = [value: boolean, toggleValue: (value?: boolean) => void];

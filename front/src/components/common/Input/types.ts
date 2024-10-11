@@ -5,4 +5,6 @@ export interface InputProps {
     width?: number;
     borderRadius?: number;
     height?: number;
+
+    isPassword: boolean;
 }

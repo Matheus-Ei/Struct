@@ -9,7 +9,10 @@ import Image from "../../common/Image";
 // Hooks
 import { useTheme } from "../../../hooks/useTheme";
 
-const CardHeader = ({ src, flexDirection, text }: T.CardHeaderProps) => {
+// Libraries
+import React from "react";
+
+const CardHeader = ({ src, flexDirection, text }: T.CardHeaderProps): JSX.Element => {
     const theme = useTheme();
 
     const bodyStyle: Object = { flexDirection };
@@ -24,10 +27,10 @@ const CardHeader = ({ src, flexDirection, text }: T.CardHeaderProps) => {
 
     return (
         <S.Body style={bodyStyle}>
-            <Image containerHeight={60} width={90} src={src} />
+            <Image containerHeight={60} width={60} src={src} />
             {paragraph}
         </S.Body>
     );
 };
 
-export default CardHeader;
+export default React.memo(CardHeader);
