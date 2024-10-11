@@ -1,4 +1,7 @@
+// Libraries
 import { DataTypes, Model } from "sequelize";
+
+// Database
 import sequelize from "../system/database";
 
 class ProjectTypeModel extends Model {

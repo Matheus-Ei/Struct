@@ -1,8 +1,13 @@
-import { useTheme } from "../../../hooks/useTheme";
-import Image from "../../common/Image";
-import Text from "../../common/Text";
+// Modules
 import * as S from "./styles";
 import * as T from "./types";
+
+// Components
+import Text from "../../common/Text";
+import Image from "../../common/Image";
+
+// Hooks
+import { useTheme } from "../../../hooks/useTheme";
 
 const CardHeader = ({ src, flexDirection, text }: T.CardHeaderProps) => {
     const theme = useTheme();

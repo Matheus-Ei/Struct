@@ -1,4 +1,4 @@
-// Utils
+// Modules
 import * as S from "./styles";
 
 // Components
@@ -9,7 +9,6 @@ import SimpleButton from "../../components/common/SimpleButton";
 
 // Hooks
 import { useEffect, useState } from "react";
-import { useTheme } from "../../hooks/useTheme";
 import { useNavigate } from "react-router-dom";
 
 // Services

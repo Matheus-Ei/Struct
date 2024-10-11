@@ -1,5 +1,8 @@
-import { useTheme } from "./hooks/useTheme";
+// Components
 import Navigator from "./services/Navigator";
+
+// Hooks
+import { useTheme } from "./hooks/useTheme";
 
 function App() {
     const theme = useTheme();

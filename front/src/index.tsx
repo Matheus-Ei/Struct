@@ -1,9 +1,14 @@
+// React
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { BrowserRouter } from "react-router-dom";
 import App from "./App";
-import { ThemeProvider } from "./hooks/useTheme";
+
+// Modules
 import "./utils/global.css";
+
+// Components
+import { BrowserRouter } from "react-router-dom";
+import { ThemeProvider } from "./hooks/useTheme";
 
 const root = ReactDOM.createRoot(
     document.getElementById("root") as HTMLElement

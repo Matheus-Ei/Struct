@@ -1,9 +1,13 @@
-import { useEffect } from "react";
-import { useTheme } from "../../../hooks/useTheme";
-import useToggle from "../../../hooks/useToggle";
-import Text from "../Text";
+// Modules
 import * as S from "./styles";
 import * as T from "./types";
+
+// Components
+import Text from "../Text";
+
+// Hooks
+import { useTheme } from "../../../hooks/useTheme";
+import useToggle from "../../../hooks/useToggle";
 
 const SimpleButton = ({ text, onClick }: T.ButtonProps) => {
     const theme = useTheme();

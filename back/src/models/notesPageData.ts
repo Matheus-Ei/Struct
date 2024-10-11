@@ -1,6 +1,10 @@
+// Libraries
 import { DataTypes, Model } from "sequelize";
+
+// Models
 import sequelize from "../system/database";
 
+// Database
 import PageDataModel from "./pageData";
 
 class NotesPageDataModel extends Model {

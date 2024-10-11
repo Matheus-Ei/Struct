@@ -1,12 +1,17 @@
+// Libraries
 import { Request, Response } from "express";
-import UserModel from "../models/user.js";
-import Hash from "../services/hash.js";
-import Token from "../services/token.js";
+
+// Services
 import Cookie from "../services/cookie.js";
+import Token from "../services/token.js";
+import Hash from "../services/hash.js";
+
+// Models
+import UserModel from "../models/user.js";
 
 class UserController {
     public async get(req: Request, res: Response) {
-        const id = Cookie.get('id', req);
+        const id = Cookie.get("id", req);
 
         try {
             const user = await UserModel.findByPk(id);

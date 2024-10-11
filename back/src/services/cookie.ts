@@ -1,3 +1,4 @@
+// Libraries
 import { Request, Response } from "express";
 
 class Cookie {
@@ -19,7 +20,7 @@ class Cookie {
             httpOnly: true,
             secure: true,
             maxAge: 7 * 24 * 60 * 60 * 1000,
-            sameSite: "strict" as "strict",
+            sameSite: "none" as "none",
             ...options,
         };
 
@@ -31,7 +32,7 @@ class Cookie {
     }
 
     public static get(name: string, req: Request) {
-        return req.cookies[name]
+        return req.cookies[name];
     }
 }
 

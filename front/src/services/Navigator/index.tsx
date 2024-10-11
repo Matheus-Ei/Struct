@@ -1,5 +1,8 @@
-import { Routes, Route, Navigate } from "react-router-dom";
+// Modules
 import routes from "./routes";
+
+// Components
+import { Routes, Route } from "react-router-dom";
 
 class Navigator {
     addRoute(

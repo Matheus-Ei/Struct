@@ -35,5 +35,3 @@ export const useTheme = (newTheme?: string) => {
 
     return theme;
 };
-
-

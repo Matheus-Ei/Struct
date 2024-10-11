@@ -1,7 +1,12 @@
+// Util
+import checkLogin from "../../utils/checkLogin";
+
+// Modules
+import * as S from "./styles";
+
+// Hooks
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import checkLogin from "../../utils/checkLogin";
-import * as S from "./styles";
 
 const Dashboard = () => {
     const navigate = useNavigate();

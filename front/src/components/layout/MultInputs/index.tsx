@@ -1,7 +1,9 @@
-import { useTheme } from "../../../hooks/useTheme";
-import Input from "../../common/Input";
+// Modules
 import * as S from "./styles";
 import * as T from "./types";
+
+// Components
+import Input from "../../common/Input";
 
 const MultInput = ({ srcList }: T.MultInputsProps) => {
     return (

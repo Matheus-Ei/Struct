@@ -1,4 +1,7 @@
+// Libraries
 import { Router } from "express";
+
+// Controllers
 import UserController from "../controllers/user.js";
 
 class UserRoute {
