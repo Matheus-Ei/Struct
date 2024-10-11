@@ -21,7 +21,7 @@ class Token {
             const decoded: any = jwt.verify(token, this.key);
             const decValue: string = decoded[field];
 
-            return decValue === value;
+            return decValue == value;
         } catch (error) {
             return false;
         }

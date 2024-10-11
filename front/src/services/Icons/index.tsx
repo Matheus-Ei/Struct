@@ -1,14 +1,7 @@
 import lib from "./library";
+import * as I from "./interface";
 
-interface IconsProps {
-    library: string;
-    name: string;
-    style?: Object;
-    color?: string;
-    size?: number;
-}
-
-const Icons = ({ library, name, style, color, size }: IconsProps) => {
+const Icons = ({ library, name, style, color, size }: I.IconsProps) => {
     const repository: any = lib[library];
     const RequiredIcon = repository[name];
 

@@ -6,7 +6,7 @@ import Cookie from "../services/cookie.js";
 
 class UserController {
     public async get(req: Request, res: Response) {
-        const { id } = req.params;
+        const id = Cookie.get('id', req);
 
         try {
             const user = await UserModel.findByPk(id);
@@ -26,7 +26,6 @@ class UserController {
 
         const hashObj = new Hash();
         const hashPassword = await hashObj.make(password);
-        console.log(hashPassword);
 
         try {
             const newUser = await UserModel.create({
@@ -54,23 +53,30 @@ class UserController {
             });
 
             const hashObj = new Hash();
-            const isMatch = await hashObj.compare(
+            const isMatchPass = await hashObj.compare(
                 password,
                 user?.dataValues.password
             );
 
             if (user) {
-                if (isMatch) {
+                if (isMatchPass) {
                     const refresh = new Token(
                         process.env.REFRESH_SECRET as string
                     );
                     const access = new Token(process.env.JWT_SECRET as string);
 
-                    const accessTk = access.generate({ mail }, "1h");
-                    const refreshTk = refresh.generate({ mail }, "7d");
+                    const accessTk = access.generate(
+                        { id: user?.dataValues.id },
+                        "1h"
+                    );
+                    const refreshTk = refresh.generate(
+                        { id: user?.dataValues.id },
+                        "7d"
+                    );
 
                     Cookie.generate("access_token", accessTk, res);
                     Cookie.generate("refresh_token", refreshTk, res);
+                    Cookie.generate("id", user?.dataValues.id, res);
 
                     res.status(201).json({ status: true });
                 } else {
@@ -92,6 +98,10 @@ class UserController {
     public async cancelSubscription(req: Request, res: Response) {}
 
     public async logout(req: Request, res: Response) {}
+
+    public async delete(req: Request, res: Response) {}
+
+    public async projects(req: Request, res: Response) {}
 }
 
 export default new UserController();

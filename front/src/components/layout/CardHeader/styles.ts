@@ -4,7 +4,9 @@ export const Body = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-   
-    width: 99vw;
-    height: 98vh;
-`;
+
+    flex-direction: column;
+
+    height: 30%;
+    max-width: 100%;
+`
