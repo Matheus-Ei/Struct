@@ -10,7 +10,6 @@ import cookieParser from "cookie-parser";
 // Routes
 import mainRoutes from "./system/routes.js";
 
-
 export class App {
     private app: any;
 

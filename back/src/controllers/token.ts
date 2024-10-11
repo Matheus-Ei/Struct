@@ -9,21 +9,11 @@ import Cookie from "../services/cookie.js";
 dotenv.config();
 
 class TokenController {
-    private getValues(req: Request) {
-        const id = Cookie.get("id", req);
-
-        const refreshToken = Cookie.get("refresh_token", req);
-        const accessToken = Cookie.get("access_token", req);
-
-        const refreshObject = new Token(process.env.REFRESH_SECRET as string);
-        const accessObject = new Token(process.env.JWT_SECRET as string);
-
-        return { id, refreshToken, accessToken, refreshObject, accessObject };
-    }
-
     public async refresh(req: Request, res: Response) {
-        const { refreshObject, refreshToken, id, accessObject } =
-            this.getValues(req);
+        const accessObject = new Token(process.env.JWT_SECRET as string);
+        const id = Cookie.get("id", req);
+        const refreshObject = new Token(process.env.REFRESH_SECRET as string);
+        const refreshToken = Cookie.get("refresh_token", req);
 
         const refreshIsValid = refreshObject.verify(refreshToken, id, "id");
 
@@ -49,7 +39,9 @@ class TokenController {
     }
 
     public async check(req: Request, res: Response) {
-        const { accessToken, id, accessObject } = this.getValues(req);
+        const accessToken = Cookie.get("access_token", req);
+        const id = Cookie.get("id", req);
+        const accessObject = new Token(process.env.JWT_SECRET as string);
 
         const accessIsValid = accessObject.verify(accessToken, id, "id");
 
