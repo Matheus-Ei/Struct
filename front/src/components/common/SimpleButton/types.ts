@@ -1,6 +1,4 @@
 export interface ButtonProps {
-    children: JSX.Element;
+    text: string;
     onClick?: () => any;
-    backgroundColor?: string;
-    borderColor?: string;
 }

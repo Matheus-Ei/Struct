@@ -23,9 +23,10 @@ class TokenController {
 
         try {
             const accessTk = access.generate({ id }, "1h");
+            Cookie.generate("access_token", accessTk, res);
+
             res.status(201).json({
                 message: "Access token was generated successfuly",
-                token: accessTk,
             });
         } catch (error) {
             res.status(500).json({

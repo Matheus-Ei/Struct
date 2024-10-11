@@ -3,19 +3,25 @@ import * as S from "./styles";
 
 // Components
 import Card from "../../components/common/Card";
-import { CardHeader } from "../../components/layout/CardHeader";
-import { MultInput } from "../../components/layout/MultInputs";
+import CardHeader from "../../components/layout/CardHeader";
+import MultInput from "../../components/layout/MultInputs";
 import SimpleButton from "../../components/common/SimpleButton";
-import Text from "../../components/common/Text";
 
 // Hooks
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTheme } from "../../hooks/useTheme";
+import { useNavigate } from "react-router-dom";
+
+// Services
 import Request from "../../services/Request";
-import Navigator from "../../services/Navigator";
 
 const Login = () => {
-    const theme = useTheme();
+    const navigate = useNavigate();
+    const [logo, setLogo] = useState();
+
+    useEffect(() => {
+        setLogo(require("../../assets/images/logo-1920x1080-1.png"));
+    }, []);
 
     const [mail, setMail] = useState();
     const [password, setPassword] = useState();
@@ -27,9 +33,9 @@ const Login = () => {
             password,
         }).then((response) => {
             if (response.status === true) {
-                return Navigator.navigate('/dashboard')
+                return navigate("/dashboard");
             } else {
-                console.error("Login wasn't sucessfull")
+                console.error("Login wasn't sucessfull");
             }
         });
     };
@@ -37,15 +43,15 @@ const Login = () => {
     return (
         <S.Body>
             <Card
-                width={30}
-                height={60}
+                width={28}
+                height={65}
                 flexDirection="column"
                 justifyContent="center"
                 gap={10}
             >
                 <>
                     <CardHeader
-                        src={require("../../assets/images/logo-1920x1080-1.png")}
+                        src={logo}
                         text="Venha fazer parte de um mundo mais organizado."
                         flexDirection="column"
                     />
@@ -57,12 +63,7 @@ const Login = () => {
                         ]}
                     />
 
-                    <SimpleButton
-                        backgroundColor={theme.secondary}
-                        onClick={handleLogin}
-                    >
-                        <Text text="LOGIN" color={theme.primary} />
-                    </SimpleButton>
+                    <SimpleButton text="LOGIN" onClick={handleLogin} />
                 </>
             </Card>
         </S.Body>

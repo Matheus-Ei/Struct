@@ -3,9 +3,7 @@ import Input from "../../common/Input";
 import * as S from "./styles";
 import * as T from "./types";
 
-export const MultInput = ({ srcList }: T.MultInputsProps) => {
-    const theme = useTheme();
-
+const MultInput = ({ srcList }: T.MultInputsProps) => {
     return (
         <S.Body>
             {srcList.map((item: any, index: number) => {
@@ -16,9 +14,6 @@ export const MultInput = ({ srcList }: T.MultInputsProps) => {
                         width={80}
                         height={100}
                         borderRadius={10}
-                        backgroundColor={theme.primary}
-                        borderColor={theme.middle}
-                        fontColor={theme.secondary}
                         key={index}
                     />
                 );
@@ -26,3 +21,5 @@ export const MultInput = ({ srcList }: T.MultInputsProps) => {
         </S.Body>
     );
 };
+
+export default MultInput;

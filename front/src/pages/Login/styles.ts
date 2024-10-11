@@ -5,6 +5,6 @@ export const Body = styled.div`
     align-items: center;
     justify-content: center;
    
-    width: 100vw;
-    height: 100vh;
+    width: 99vw;
+    height: 98vh;
 `;

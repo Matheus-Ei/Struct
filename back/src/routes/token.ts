@@ -10,7 +10,7 @@ class TokenRoute {
     }
 
     private init() {
-        this.router.post("/refresh", TokenController.refresh);
+        this.router.get("/refresh", TokenController.refresh);
 
         this.router.get("/check", TokenController.check);
     }

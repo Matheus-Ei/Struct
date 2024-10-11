@@ -1,3 +1,4 @@
+import { useTheme } from "../../../hooks/useTheme";
 import * as S from "./styles";
 import * as T from "./types";
 
@@ -10,9 +11,12 @@ const Card = ({
     alignItems,
     flexDirection,
     gap,
-    backgroundColor,
-    borderColor,
 }: T.CardProps) => {
+    const theme = useTheme();
+
+    const backgroundColor = theme.primary;
+    const borderColor = theme.secondary;
+
     const style: Object = {
         width: `${width}%`,
         height: `${height}%`,

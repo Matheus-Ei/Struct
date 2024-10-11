@@ -1,19 +1,23 @@
+import { useTheme } from "../../../hooks/useTheme";
 import * as S from "./styles";
 import * as T from "./types";
 
 const Input = ({
     text,
     setInput,
-    backgroundColor,
-    fontColor,
-    borderColor,
     height,
     width,
     borderRadius,
 }: T.InputProps) => {
+    const theme = useTheme();
+
     const handleInputChange = (event: any) => {
         setInput(event.target.value);
     };
+
+    const fontColor = theme.secondary;
+    const backgroundColor = theme.primary;
+    const borderColor = theme.middle;
 
     const style = {
         width: `${width}%`,

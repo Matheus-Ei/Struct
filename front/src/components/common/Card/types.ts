@@ -8,6 +8,4 @@ export interface CardProps {
     alignItems?: string;
     flexDirection?: string;
     gap?: number;
-    backgroundColor?: string;
-    borderColor?: string;
 }

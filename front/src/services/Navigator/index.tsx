@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import routes from "./routes";
 
 class Navigator {
@@ -12,18 +12,12 @@ class Navigator {
 
     setup(): JSX.Element {
         return (
-            <BrowserRouter>
-                <Routes>
-                    {routes.map((item, index) => {
-                        return this.addRoute(item[0], item[1], index);
-                    })}
-                </Routes>
-            </BrowserRouter>
+            <Routes>
+                {routes.map((item, index) => {
+                    return this.addRoute(item[0], item[1], index);
+                })}
+            </Routes>
         );
-    }
-
-    public static navigate(path: string) {
-        <Navigate to={path} replace={true} />
     }
 }
 

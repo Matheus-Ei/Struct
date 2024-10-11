@@ -1,10 +1,10 @@
+import { useTheme } from "../../../hooks/useTheme";
 import Image from "../../common/Image";
 import Text from "../../common/Text";
-import { useTheme } from "../../../hooks/useTheme";
 import * as S from "./styles";
 import * as T from "./types";
 
-export const CardHeader = ({ src, flexDirection, text }: T.CardHeaderProps) => {
+const CardHeader = ({ src, flexDirection, text }: T.CardHeaderProps) => {
     const theme = useTheme();
 
     const bodyStyle: Object = { flexDirection };
@@ -12,8 +12,8 @@ export const CardHeader = ({ src, flexDirection, text }: T.CardHeaderProps) => {
     const paragraph = text ? (
         <Text
             text={text}
-            containerWidth={60}
             color={theme.middle}
+            containerWidth={75}
         />
     ) : null;
 
@@ -24,3 +24,5 @@ export const CardHeader = ({ src, flexDirection, text }: T.CardHeaderProps) => {
         </S.Body>
     );
 };
+
+export default CardHeader;
