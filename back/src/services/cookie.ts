@@ -25,6 +25,22 @@ class Cookie {
         };
 
         res.cookie(name, cookieValue, cookieOptions);
+
+        const setCookieHeader = res.getHeader("Set-Cookie");
+        if (Array.isArray(setCookieHeader)) {
+            res.setHeader(
+                "Set-Cookie",
+                setCookieHeader.map((cookie) =>
+                    cookie.includes("Partitioned")
+                        ? cookie
+                        : `${cookie}; Partitioned`
+                )
+            );
+        } else if (typeof setCookieHeader === "string") {
+            if (!setCookieHeader.includes("Partitioned")) {
+                res.setHeader("Set-Cookie", `${setCookieHeader}; Partitioned`);
+            }
+        }
     }
 
     public static delete(name: string, res: Response) {
