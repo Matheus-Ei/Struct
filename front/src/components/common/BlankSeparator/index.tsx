@@ -1,4 +1,5 @@
 // Modules
+import * as S from "./styles";
 import * as T from "./types";
 
 // Libraries
@@ -8,13 +9,7 @@ const BlankSeparator = ({
     size,
     direction,
 }: T.BlankSeparatorProps): JSX.Element => {
-    let style: Object = {};
-
-    if (direction === "horisontal") {
-        style = { width: `${size}px` };
-    } else {
-        style = { height: `${size}px` };
-    }
+    const style = S.getStyle(direction, size);
 
     return <div style={style}></div>;
 };

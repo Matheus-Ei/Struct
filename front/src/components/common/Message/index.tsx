@@ -5,6 +5,7 @@ import * as T from "./types";
 // Hooks
 import { useTheme } from "../../../hooks/useTheme";
 
+// Components
 import Text from "../Text";
 
 const Message = ({
@@ -13,32 +14,7 @@ const Message = ({
     cardStyle,
     isVisible,
 }: T.MessageProps): JSX.Element => {
-    const theme = useTheme();
-
-    let backgroundColor: string = theme.primary;
-    let color: string = theme.primary;
-
-    let mainColor: string = theme.primary;
-
-    if (type === "error") {
-        mainColor = theme.error;
-    } else if (type === "success") {
-        mainColor = theme.success;
-    }
-
-    if (cardStyle === "block") {
-        backgroundColor = mainColor;
-    } else {
-        color = mainColor;
-    }
-
-    const display = isVisible ? "flex" : "none";
-
-    const style: Object = {
-        color,
-        backgroundColor,
-        display,
-    };
+    const style = S.getStyle(useTheme(), type, cardStyle, isVisible);
 
     return (
         <S.Body style={style}>

@@ -4,7 +4,7 @@ export interface CardProps {
     width?: number;
     height?: number;
 
-    justifyContent?: string;
-    alignItems?: string;
-    flexDirection?: string;
+    justifyContent?: "center" | "flex-start" | "flex-end";
+    alignItems?: "center" | "flex-start" | "flex-end";
+    flexDirection?: "row" | "column";
 }

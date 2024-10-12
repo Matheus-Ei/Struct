@@ -1,7 +1,7 @@
 export interface InputProps {
     text: string;
     setInput: (event: Event) => any;
-    isPassword?: boolean;
+    isPassword: boolean;
 
     width?: number;
     height?: number;

@@ -10,56 +10,46 @@ import useToggle from "../../../hooks/useToggle";
 import React from "react";
 import Icons from "../../../services/Icons";
 
+const passwordButton = (
+    showPassword: boolean,
+    toggleShowPassword: () => React.ComponentState,
+    isPassword: boolean,
+    theme: any
+) => {
+    if (!isPassword) {
+        return null;
+    }
+
+    return (
+        <S.PasswordButton
+            style={{ backgroundColor: theme.primary }}
+            onClick={() => toggleShowPassword()}
+        >
+            <Icons
+                library="fa6"
+                name={showPassword ? "FaEye" : "FaEyeSlash"}
+                color={theme.middle}
+                size={30}
+            />
+        </S.PasswordButton>
+    );
+};
+
 const Input = ({
     text,
     setInput,
+    isPassword,
     height,
     width,
-    isPassword,
 }: T.InputProps): JSX.Element => {
     const theme = useTheme();
-    const [showPassword, toggleShowPassword] = useToggle(isPassword || false);
+    const [showPassword, toggleShowPassword] = useToggle(isPassword);
 
-    // Function to get the input from the form
     const handleInputChange = (event: any) => {
         setInput(event.target.value);
     };
 
-    // Function to change the eye icon
-    const changeEyeIcon = () => {
-        const ico = showPassword ? "FaEye" : "FaEyeSlash";
-
-        return (
-            <Icons library="fa6" name={ico} color={theme.middle} size={30} />
-        );
-    };
-
-    // Function to show the password button
-    const passwordShowButton = () => {
-        return (
-            <S.PasswordButton
-                style={{ backgroundColor: theme.primary }}
-                onClick={() => toggleShowPassword()}
-            >
-                {changeEyeIcon()}
-            </S.PasswordButton>
-        );
-    };
-
-    // Function to check if the form is the type password
-    const checkIfIsPassword = () => {
-        if (isPassword) {
-            return passwordShowButton();
-        }
-    };
-
-    const style = {
-        width: `${width}%`,
-        height: `${height}%`,
-        color: theme.secondary,
-        backgroundColor: theme.primary,
-        borderColor: theme.middle,
-    };
+    const style = S.getStyle(width, height, theme);
 
     return (
         <S.Body>
@@ -70,7 +60,12 @@ const Input = ({
                 placeholder={text}
             ></S.Input>
 
-            {checkIfIsPassword()}
+            {passwordButton(
+                showPassword,
+                toggleShowPassword,
+                isPassword,
+                theme
+            )}
         </S.Body>
     );
 };

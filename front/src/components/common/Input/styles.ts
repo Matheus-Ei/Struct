@@ -13,8 +13,6 @@ export const Body = styled.div`
 `;
 
 export const Input = styled.input`
-    background-color: white;
-
     border: solid 1px;
     border-radius: 10px;
 
@@ -31,3 +29,19 @@ export const PasswordButton = styled.button`
     width: 0px;
     padding: 0px;
 `;
+
+export const getStyle = (
+    width: number | undefined,
+    height: number | undefined,
+    theme: any
+) => {
+    const style = {
+        width: `${width}%`,
+        height: `${height}%`,
+        color: theme.secondary,
+        backgroundColor: theme.primary,
+        borderColor: theme.middle,
+    };
+
+    return style;
+};

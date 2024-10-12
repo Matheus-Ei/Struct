@@ -14,33 +14,16 @@ const Button = ({ text, onClick, inverse }: T.ButtonProps): JSX.Element => {
     const [isClicked, toggleIsClicked] = useToggle(false);
 
     useEffect(() => {
-        if (inverse) {
-            toggleIsClicked(inverse);
-        }
+        toggleIsClicked(inverse);
     }, []);
 
-    // Style definitions
-    const theme = useTheme();
-    const secondary = theme.secondary;
-    const primary = theme.primary;
+    const style = S.getStyle(useTheme(), isClicked);
 
-    const style = isClicked
-        ? {
-              borderColor: secondary,
-              backgroundColor: primary,
-          }
-        : { borderColor: primary, backgroundColor: secondary };
-
-    // Event functions
-    const onMouseLeave = () => {
-        toggleIsClicked(false);
-
-        if (inverse) {
-            toggleIsClicked(true);
-        }
+    const returnDefaultStyle = () => {
+        toggleIsClicked(inverse);
     };
 
-    const changeStyle = () => {
+    const toggleStyle = () => {
         toggleIsClicked();
     };
 
@@ -48,9 +31,9 @@ const Button = ({ text, onClick, inverse }: T.ButtonProps): JSX.Element => {
         <S.Body
             style={style}
             onClick={onClick}
-            onMouseDown={changeStyle}
-            onMouseUp={changeStyle}
-            onMouseLeave={onMouseLeave}
+            onMouseDown={toggleStyle}
+            onMouseUp={toggleStyle}
+            onMouseLeave={returnDefaultStyle}
         >
             <Text text={text} color={style.borderColor} />
         </S.Body>

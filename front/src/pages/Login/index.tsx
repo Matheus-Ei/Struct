@@ -3,8 +3,8 @@ import * as S from "./styles";
 
 // Components
 import Card from "../../components/common/Card";
-import CardHeader from "../../components/layout/CardHeader";
-import MultInput from "../../components/layout/MultInputs";
+import Logo from "../../components/layout/Logo";
+import Form from "../../components/layout/Form";
 import Button from "../../components/common/Button";
 
 // Hooks
@@ -16,11 +16,13 @@ import LoginClass from "../../utils/login";
 import File from "../../utils/file";
 import Message from "../../components/common/Message";
 import BlankSeparator from "../../components/common/BlankSeparator";
+import { useTheme } from "../../hooks/useTheme";
 
 const Login = (): JSX.Element => {
     const [mail, setMail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
 
+    const theme = useTheme();
     const [error, setError] = useState<boolean>(false);
 
     const navigate = useNavigate();
@@ -33,14 +35,10 @@ const Login = (): JSX.Element => {
 
     return (
         <S.Body>
-            <Card
-                width={30}
-                flexDirection="column"
-                justifyContent="center"
-            >
+            <Card width={30} flexDirection="column" justifyContent="center">
                 <>
-                    <CardHeader
-                        src={File.get("images/logo-1920x1080-1-black.png")}
+                    <Logo
+                        src={File.get(`images/logo-1920x1080-1-${theme.style}.png`)}
                         text="Venha fazer parte de um mundo mais organizado."
                         flexDirection="column"
                     />
@@ -54,16 +52,14 @@ const Login = (): JSX.Element => {
                         isVisible={error}
                     />
 
-                    <MultInput
-                        srcList={[
+                    <Form
+                        src={[
                             ["Mail...", setMail, false],
                             ["Password...", setPassword, true],
                         ]}
+                        action={makeLogin}
+                        sendText="LOGIN"
                     />
-
-                    <BlankSeparator size={30} direction="vertical" />
-
-                    <Button text="LOGIN" onClick={makeLogin} />
 
                     <BlankSeparator size={20} direction="vertical" />
                 </>

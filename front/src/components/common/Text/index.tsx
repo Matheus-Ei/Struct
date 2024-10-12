@@ -5,7 +5,13 @@ import * as T from "./types";
 // Libraries
 import React from "react";
 
-const Text = ({ text, color, size, weight, containerWidth }: T.TextProps): JSX.Element => {
+const Text = ({
+    text,
+    color,
+    size,
+    weight,
+    containerWidth,
+}: T.TextProps): JSX.Element => {
     const style: Object = {
         color,
         fontSize: `${size}em`,

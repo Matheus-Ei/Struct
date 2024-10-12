@@ -4,14 +4,15 @@ import * as T from "./types";
 
 // Components
 import Input from "../../common/Input";
+import Button from "../../common/Button";
 
 // Libraries
 import React from "react";
 
-const MultInput = ({ srcList }: T.MultInputsProps): JSX.Element => {
+const Form = ({ src, action, sendText }: T.FormProps): JSX.Element => {
     return (
         <S.Body>
-            {srcList.map((item: any, index: number) => {
+            {src.map((item: any, index: number) => {
                 return (
                     <Input
                         text={item[0]}
@@ -23,8 +24,10 @@ const MultInput = ({ srcList }: T.MultInputsProps): JSX.Element => {
                     />
                 );
             })}
+
+            <Button text={sendText} onClick={action} inverse={false} />
         </S.Body>
     );
 };
 
-export default React.memo(MultInput);
+export default React.memo(Form);

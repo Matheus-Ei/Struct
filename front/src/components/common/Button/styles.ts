@@ -1,8 +1,6 @@
 import styled from "styled-components";
 
 export const Body = styled.button`
-    background-color: white;
-
     border: solid black 1px;
     border-radius: 10px;
 
@@ -12,5 +10,16 @@ export const Body = styled.button`
     padding-right: 3vw;
 
     width: auto;
-    height: auto
+    height: auto;
 `;
+
+export const getStyle = (theme: any, isClicked: boolean) => {
+    const style = isClicked
+        ? {
+              borderColor: theme.secondary,
+              backgroundColor: theme.primary,
+          }
+        : { borderColor: theme.primary, backgroundColor: theme.secondary };
+
+    return style;
+};

@@ -3,6 +3,6 @@ export interface ImageProps {
 
     borderRadius?: number;
 
-    containerHeight?: number;
+    bodyHeight?: number;
     width?: number;
 }

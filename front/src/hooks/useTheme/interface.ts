@@ -3,11 +3,14 @@ export interface VarType {
 }
 
 export interface Theme {
-    primary: string,
-    middle: string,
-    secondary: string,
+    primary: string;
+    secondary: string;
 
-    error: string,
-    success: string,
+    middle: string;
+    semi: string;
 
+    error: string;
+    success: string;
+
+    style: "black" | "white";
 }

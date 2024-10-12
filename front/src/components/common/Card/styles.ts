@@ -9,8 +9,6 @@ export const Body = styled.div`
     height: auto;
     width: auto;
 
-    background-color: white;
-
     border: solid black 1px;
     border-radius: 10px;
 `

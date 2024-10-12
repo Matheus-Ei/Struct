@@ -1,4 +1,4 @@
 export interface BlankSeparatorProps {
     size: number;
-    direction: string;
+    direction: "vertical" | "horisontal";
 }

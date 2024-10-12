@@ -1,6 +1,6 @@
 // Modules
-import * as S from "./styles"
-import * as T from "./types"
+import * as S from "./styles";
+import * as T from "./types";
 
 // Libraries
 import React from "react";

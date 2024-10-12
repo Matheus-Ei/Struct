@@ -11,18 +11,18 @@ import React from "react";
 const Image = ({
     src,
     borderRadius,
-    containerHeight,
+    bodyHeight,
     width,
 }: T.ImageProps): JSX.Element => {
     const theme = useTheme();
 
-    const containerStyle = { height: `${containerHeight}%` };
-
+    const bodyStyle = { height: `${bodyHeight}%` };
     const borderColor = theme.middle;
+
     const imageStyle = { borderRadius, borderColor, width: `${width}%` };
 
     return (
-        <S.Body style={containerStyle}>
+        <S.Body style={bodyStyle}>
             <S.Image src={src} style={imageStyle} />
         </S.Body>
     );
