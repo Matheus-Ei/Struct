@@ -5,5 +5,6 @@ export interface SelectorProps {
     icon: string;
     repository: string;
     isSelected: boolean;
-    setSelected: Dispatch<SetStateAction<string>>;
+    setSelected?: Dispatch<SetStateAction<string>>;
+    onClick?: () => any;
 }

@@ -26,14 +26,16 @@ class Login {
         }
     }
 
-    static check(navigate: NavigateFunction) {
+    static async check(navigate: NavigateFunction) {
         const checkTkUrl = `${process.env.REACT_APP_BACK_URL}/token/check`;
 
-        Request.get(checkTkUrl).then((response) => {
-            if (response === false) {
-                navigate("/login");
-            }
-        });
+        const response = await Request.get(checkTkUrl);
+        if (response === false) {
+            navigate("/login");
+            return true;
+        }
+
+        return false;
     }
 }
 

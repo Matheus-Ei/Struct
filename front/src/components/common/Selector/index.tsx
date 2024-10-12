@@ -12,6 +12,7 @@ const Selector = ({
     repository,
     isSelected,
     setSelected,
+    onClick,
 }: T.SelectorProps): JSX.Element => {
     const theme = useTheme();
 
@@ -21,7 +22,13 @@ const Selector = ({
     };
 
     const handleClick = () => {
-        setSelected(name);
+        if(setSelected) {
+            setSelected(name);
+        }
+
+        if (onClick) {
+            onClick();
+        }
     };
 
     return (

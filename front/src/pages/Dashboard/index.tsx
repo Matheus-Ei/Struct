@@ -1,12 +1,11 @@
-// Util
-import Login from "../../utils/login";
-
 // Modules
 import * as S from "./styles";
 
+// HOCs
+import Loader from "../../HOCs/Loader";
+
 // Hooks
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 // Components
 import Menu from "./components/Menu";
@@ -14,11 +13,6 @@ import Page from "./components/Page";
 
 const Dashboard = (): JSX.Element => {
     const [selectedName, setSelected] = useState<string>("Home");
-    const navigate = useNavigate();
-
-    useEffect(() => {
-        Login.check(navigate);
-    }, []);
 
     return (
         <S.Body>
@@ -30,4 +24,5 @@ const Dashboard = (): JSX.Element => {
     );
 };
 
-export default Dashboard;
+
+export default Loader(Dashboard);
