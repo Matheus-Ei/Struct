@@ -9,18 +9,16 @@ import useToggle from "../../../hooks/useToggle";
 // Libraries
 import React from "react";
 import Icons from "../../../services/Icons";
-import BlankSeparator from "../BlankSeparator";
 
 const Input = ({
     text,
     setInput,
     height,
     width,
-    borderRadius,
     isPassword,
 }: T.InputProps): JSX.Element => {
     const theme = useTheme();
-    const [showPassword, toggleShowPassword] = useToggle(isPassword);
+    const [showPassword, toggleShowPassword] = useToggle(isPassword || false);
 
     // Function to get the input from the form
     const handleInputChange = (event: any) => {
@@ -32,7 +30,7 @@ const Input = ({
         const ico = showPassword ? "FaEye" : "FaEyeSlash";
 
         return (
-            <Icons library="fa6" name={ico} color={theme.secondary} size={30} />
+            <Icons library="fa6" name={ico} color={theme.middle} size={30} />
         );
     };
 
@@ -53,13 +51,11 @@ const Input = ({
         if (isPassword) {
             return passwordShowButton();
         }
-        return <BlankSeparator size={40} direction="horisontal" />;
     };
 
     const style = {
         width: `${width}%`,
         height: `${height}%`,
-        borderRadius: `${borderRadius}px`,
         color: theme.secondary,
         backgroundColor: theme.primary,
         borderColor: theme.middle,
@@ -73,6 +69,7 @@ const Input = ({
                 style={style}
                 placeholder={text}
             ></S.Input>
+
             {checkIfIsPassword()}
         </S.Body>
     );

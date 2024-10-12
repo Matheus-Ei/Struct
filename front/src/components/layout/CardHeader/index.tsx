@@ -21,13 +21,14 @@ const CardHeader = ({ src, flexDirection, text }: T.CardHeaderProps): JSX.Elemen
         <Text
             text={text}
             color={theme.middle}
+            size={1.2}
             containerWidth={75}
         />
     ) : null;
 
     return (
         <S.Body style={bodyStyle}>
-            <Image containerHeight={60} width={60} src={src} />
+            <Image containerHeight={50} width={60} src={src} />
             {paragraph}
         </S.Body>
     );

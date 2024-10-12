@@ -1,7 +1,7 @@
 import * as I from "./interface";
 
 const light: I.VarType = {
-    primary: "#ffffff",
+    primary: "#f9f9f9",
     middle: "#888888",
     secondary: "#000000",
 
@@ -10,8 +10,8 @@ const light: I.VarType = {
 };
 
 const dark: I.VarType = {
-    primary: "#000000",
-    middle: "#888888",
+    primary: "#111111",
+    middle: "#a8a8a8",
     secondary: "#ffffff",
 
     error: "#cc0000",

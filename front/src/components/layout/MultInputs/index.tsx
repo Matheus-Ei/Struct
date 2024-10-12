@@ -16,9 +16,8 @@ const MultInput = ({ srcList }: T.MultInputsProps): JSX.Element => {
                     <Input
                         text={item[0]}
                         setInput={item[1]}
-                        width={80}
+                        width={90}
                         height={100}
-                        borderRadius={10}
                         isPassword={item[2]}
                         key={index}
                     />

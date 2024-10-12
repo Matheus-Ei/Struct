@@ -12,27 +12,20 @@ const Card = ({
     children,
     width,
     height,
-    radius,
     justifyContent,
     alignItems,
     flexDirection,
-    gap,
 }: T.CardProps): JSX.Element => {
     const theme = useTheme();
-
-    const backgroundColor = theme.primary;
-    const borderColor = theme.secondary;
 
     const style: Object = {
         width: `${width}%`,
         height: `${height}%`,
-        borderRadius: radius,
         justifyContent,
         alignItems,
         flexDirection,
-        gap: `${gap}%`,
-        backgroundColor,
-        borderColor,
+        backgroundColor: theme.primary,
+        borderColor: theme.secondary,
     };
 
     return <S.Body style={style}>{children}</S.Body>;

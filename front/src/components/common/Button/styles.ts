@@ -6,10 +6,10 @@ export const Body = styled.button`
     border: solid black 1px;
     border-radius: 10px;
 
-    padding: 20px;
+    padding: 1.4vh;
 
-    padding-left: 50px;
-    padding-right: 50px;
+    padding-left: 3vw;
+    padding-right: 3vw;
 
     width: auto;
     height: auto

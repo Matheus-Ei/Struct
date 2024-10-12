@@ -5,7 +5,7 @@ import * as S from "./styles";
 import Card from "../../components/common/Card";
 import CardHeader from "../../components/layout/CardHeader";
 import MultInput from "../../components/layout/MultInputs";
-import SimpleButton from "../../components/common/SimpleButton";
+import Button from "../../components/common/Button";
 
 // Hooks
 import { useState } from "react";
@@ -34,19 +34,18 @@ const Login = (): JSX.Element => {
     return (
         <S.Body>
             <Card
-                width={28}
+                width={30}
                 flexDirection="column"
                 justifyContent="center"
-                gap={10}
             >
                 <>
                     <CardHeader
-                        src={File.get("images/logo-1920x1080-1.png")}
+                        src={File.get("images/logo-1920x1080-1-black.png")}
                         text="Venha fazer parte de um mundo mais organizado."
                         flexDirection="column"
                     />
 
-                    <BlankSeparator size={100} direction="vertical" />
+                    <BlankSeparator size={60} direction="vertical" />
 
                     <Message
                         text="Mail or password is incorrect, try again..."
@@ -64,7 +63,7 @@ const Login = (): JSX.Element => {
 
                     <BlankSeparator size={30} direction="vertical" />
 
-                    <SimpleButton text="LOGIN" onClick={makeLogin} />
+                    <Button text="LOGIN" onClick={makeLogin} />
 
                     <BlankSeparator size={20} direction="vertical" />
                 </>

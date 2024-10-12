@@ -3,9 +3,8 @@ export interface CardProps {
 
     width?: number;
     height?: number;
-    radius?: number;
+
     justifyContent?: string;
     alignItems?: string;
     flexDirection?: string;
-    gap?: number;
 }
