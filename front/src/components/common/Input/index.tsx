@@ -8,32 +8,9 @@ import useToggle from "../../../hooks/useToggle";
 
 // Libraries
 import React from "react";
-import Icons from "../../../services/Icons";
 
-const passwordButton = (
-    showPassword: boolean,
-    toggleShowPassword: () => React.ComponentState,
-    isPassword: boolean,
-    theme: any
-) => {
-    if (!isPassword) {
-        return null;
-    }
-
-    return (
-        <S.PasswordButton
-            style={{ backgroundColor: theme.primary }}
-            onClick={() => toggleShowPassword()}
-        >
-            <Icons
-                library="fa6"
-                name={showPassword ? "FaEye" : "FaEyeSlash"}
-                color={theme.middle}
-                size={30}
-            />
-        </S.PasswordButton>
-    );
-};
+// Components
+import PasswordButton from "./components/PasswordButton";
 
 const Input = ({
     text,
@@ -60,12 +37,11 @@ const Input = ({
                 placeholder={text}
             ></S.Input>
 
-            {passwordButton(
-                showPassword,
-                toggleShowPassword,
-                isPassword,
-                theme
-            )}
+            <PasswordButton
+                showPassword={showPassword}
+                toggleShowPassword={toggleShowPassword}
+                isPassword={isPassword}
+            />
         </S.Body>
     );
 };

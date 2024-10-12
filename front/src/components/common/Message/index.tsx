@@ -11,13 +11,13 @@ import Text from "../Text";
 const Message = ({
     text,
     type,
-    cardStyle,
+    style,
     isVisible,
 }: T.MessageProps): JSX.Element => {
-    const style = S.getStyle(useTheme(), type, cardStyle, isVisible);
+    const bodyStyle = S.getStyle(useTheme(), type, style, isVisible);
 
     return (
-        <S.Body style={style}>
+        <S.Body style={bodyStyle}>
             <Text text={text} size={1} />
         </S.Body>
     );

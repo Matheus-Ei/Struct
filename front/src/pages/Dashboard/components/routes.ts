@@ -1,11 +1,11 @@
 // Components
-import Home from "../pages/Home";
-import Pages from "../pages/Pages";
-import Profile from "../pages/Profile";
-import Projects from "../pages/Projects";
-import Settings from "../pages/Settings";
-import Shared from "../pages/Shared";
-import Subscription from "../pages/Subscription";
+import Home from "../../Home";
+import Pages from "../../Pages";
+import Profile from "../../Profile";
+import Projects from "../../Projects";
+import Settings from "../../Settings";
+import Shared from "../../Shared";
+import Subscription from "../../Subscription";
 
 export type SingleRouteType = [string, string, string, () => JSX.Element];
 export type RoutesType = Array<SingleRouteType>;

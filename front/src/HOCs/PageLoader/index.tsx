@@ -1,27 +1,29 @@
 // Hooks
-import { useState, useEffect, ComponentType } from "react";
+import React, { useState, useEffect, ComponentType } from "react";
 import { useNavigate } from "react-router-dom";
 
 // Components
 import Login from "../../utils/login";
 import LoadingPage from "./LoadingPage";
 
-const Loader = (WrappedComponent: ComponentType) => {
+const PageLoader = (WrappedComponent: ComponentType, checkLogin?: boolean) => {
     return function WithLoader(props: any) {
         const [loading, setLoading] = useState(true);
         const navigate = useNavigate();
 
         const check = async () => {
-            setLoading(true);
-
             const response = await Login.check(navigate);
-            setTimeout(() => {
-                setLoading(response);
-            }, 500);
+            setLoading(response);
         };
 
         useEffect(() => {
-            check();
+            if (checkLogin) {
+                check();
+            }
+
+            setTimeout(() => {
+                setLoading(false);
+            }, 500);
         }, []);
 
         if (loading) {
@@ -32,4 +34,4 @@ const Loader = (WrappedComponent: ComponentType) => {
     };
 };
 
-export default Loader;
+export default PageLoader;

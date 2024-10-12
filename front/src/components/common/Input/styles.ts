@@ -20,16 +20,6 @@ export const Input = styled.input`
     font-size: 1.2em;
 `;
 
-export const PasswordButton = styled.button`
-    position: relative;
-    border: none;
-
-    right: 50px;
-
-    width: 0px;
-    padding: 0px;
-`;
-
 export const getStyle = (
     width: number | undefined,
     height: number | undefined,

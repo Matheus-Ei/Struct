@@ -10,9 +10,9 @@ import React from "react";
 
 const Image = ({
     src,
-    borderRadius,
-    bodyHeight,
     width,
+    bodyHeight,
+    borderRadius,
 }: T.ImageProps): JSX.Element => {
     const theme = useTheme();
 

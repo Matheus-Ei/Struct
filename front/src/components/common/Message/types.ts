@@ -1,6 +1,6 @@
 export interface MessageProps {
     text: string;
     type: string;
-    cardStyle: string;
+    style: string;
     isVisible: boolean;
 }

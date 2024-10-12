@@ -11,7 +11,7 @@ const LoadingPage = () => {
     const theme = useTheme();
     return (
         <S.Body>
-            <FourSquare color={theme.secondary} size="large" speedPlus={-2} />
+            <FourSquare color={theme.secondary} size="large" speedPlus={2} />
         </S.Body>
     );
 };

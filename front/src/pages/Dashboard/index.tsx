@@ -2,7 +2,7 @@
 import * as S from "./styles";
 
 // HOCs
-import Loader from "../../HOCs/Loader";
+import PageLoader from "../../HOCs/PageLoader";
 
 // Hooks
 import { useState } from "react";
@@ -24,5 +24,4 @@ const Dashboard = (): JSX.Element => {
     );
 };
 
-
-export default Loader(Dashboard);
+export default PageLoader(Dashboard, true);

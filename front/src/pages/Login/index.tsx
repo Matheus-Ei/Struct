@@ -5,7 +5,6 @@ import * as S from "./styles";
 import Card from "../../components/common/Card";
 import Logo from "../../components/layout/Logo";
 import Form from "../../components/layout/Form";
-import Button from "../../components/common/Button";
 
 // Hooks
 import { useState } from "react";
@@ -17,6 +16,7 @@ import File from "../../utils/file";
 import Message from "../../components/common/Message";
 import BlankSeparator from "../../components/common/BlankSeparator";
 import { useTheme } from "../../hooks/useTheme";
+import PageLoader from "../../HOCs/PageLoader";
 
 const Login = (): JSX.Element => {
     const [mail, setMail] = useState<string>("");
@@ -38,7 +38,9 @@ const Login = (): JSX.Element => {
             <Card width={30} flexDirection="column" justifyContent="center">
                 <>
                     <Logo
-                        src={File.get(`images/logo-1920x1080-1-${theme.style}.png`)}
+                        src={File.get(
+                            `images/logo-1920x1080-1-${theme.style}.png`
+                        )}
                         text="Venha fazer parte de um mundo mais organizado."
                         flexDirection="column"
                     />
@@ -48,7 +50,7 @@ const Login = (): JSX.Element => {
                     <Message
                         text="Mail or password is incorrect, try again..."
                         type="error"
-                        cardStyle="text"
+                        style="text"
                         isVisible={error}
                     />
 
@@ -68,4 +70,4 @@ const Login = (): JSX.Element => {
     );
 };
 
-export default Login;
+export default PageLoader(Login);
