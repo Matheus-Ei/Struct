@@ -24,9 +24,9 @@ A clear and concise description of what you expected to happen.
 If applicable, add screenshots to help explain your problem.
 
 ## Enviroment
- - Device: Computer
- - OS: Windows
- - Browser: Firefox
+ - Device: 
+ - OS: 
+ - Browser: 
 
 ## Additional context
 Add any other context about the problem here.
