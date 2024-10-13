@@ -9,9 +9,6 @@ import Paragraph from "./components/Paragraph";
 // Hooks
 import { useTheme } from "../../../hooks/useTheme";
 
-// Libraries
-import React from "react";
-
 const Logo = ({
     src,
     flexDirection,
@@ -27,4 +24,4 @@ const Logo = ({
     );
 };
 
-export default React.memo(Logo);
+export default Logo;

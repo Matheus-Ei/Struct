@@ -1,6 +1,3 @@
-// Libraries
-import { Dispatch, SetStateAction } from "react";
-
 export interface PageProps {
     selectedName: string;
 }

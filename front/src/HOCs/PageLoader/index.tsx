@@ -1,5 +1,5 @@
 // Hooks
-import React, { useState, useEffect, ComponentType } from "react";
+import { useState, useEffect, ComponentType } from "react";
 import { useNavigate } from "react-router-dom";
 
 // Components
@@ -7,7 +7,7 @@ import Login from "../../utils/login";
 import LoadingPage from "./LoadingPage";
 
 const PageLoader = (WrappedComponent: ComponentType, checkLogin?: boolean) => {
-    return function WithLoader(props: any) {
+    return function WithLoader() {
         const [loading, setLoading] = useState(true);
         const navigate = useNavigate();
 
@@ -30,7 +30,7 @@ const PageLoader = (WrappedComponent: ComponentType, checkLogin?: boolean) => {
             return <LoadingPage />;
         }
 
-        return <WrappedComponent {...props} />;
+        return <WrappedComponent />;
     };
 };
 

@@ -5,21 +5,16 @@ import * as T from "./types";
 // Hooks
 import { useTheme } from "../../../hooks/useTheme";
 
-// Libraries
-import React from "react";
-
-const Image = ({
-    src,
-    width,
-    bodyHeight,
-    borderRadius,
-}: T.ImageProps): JSX.Element => {
+const Image = ({ src, width, bodyHeight, borderRadius }: T.ImageProps) => {
     const theme = useTheme();
 
     const bodyStyle = { height: `${bodyHeight}%` };
-    const borderColor = theme.middle;
 
-    const imageStyle = { borderRadius, borderColor, width: `${width}%` };
+    const imageStyle = {
+        borderRadius,
+        borderColor: theme.middle,
+        width: `${width}%`,
+    };
 
     return (
         <S.Body style={bodyStyle}>
@@ -28,4 +23,4 @@ const Image = ({
     );
 };
 
-export default React.memo(Image);
+export default Image;

@@ -5,9 +5,6 @@ import * as T from "./types";
 // Hooks
 import { useTheme } from "../../../hooks/useTheme";
 
-// Libraries
-import React from "react";
-
 const Card = ({
     children,
     width,
@@ -15,7 +12,7 @@ const Card = ({
     justifyContent,
     alignItems,
     flexDirection,
-}: T.CardProps): JSX.Element => {
+}: T.CardProps)=> {
     const theme = useTheme();
 
     const style: Object = {
@@ -31,4 +28,4 @@ const Card = ({
     return <S.Body style={style}>{children}</S.Body>;
 };
 
-export default React.memo(Card);
+export default Card;

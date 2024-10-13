@@ -11,12 +11,12 @@ export const Body = styled.div`
 
     border-radius: 10px;
 
-    padding: 15px;
+    padding: 2%;
 
-    padding-left: 35px;
-    padding-right: 35px;
+    padding-left: 5%;
+    padding-right: 5%;
 
-    margin-bottom: 15px;
+    margin-bottom: 2vh;
 
     font-style: italic;
 `;

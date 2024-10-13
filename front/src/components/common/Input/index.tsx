@@ -6,9 +6,6 @@ import * as T from "./types";
 import { useTheme } from "../../../hooks/useTheme";
 import useToggle from "../../../hooks/useToggle";
 
-// Libraries
-import React from "react";
-
 // Components
 import PasswordButton from "./components/PasswordButton";
 
@@ -18,7 +15,7 @@ const Input = ({
     isPassword,
     height,
     width,
-}: T.InputProps): JSX.Element => {
+}: T.InputProps)=> {
     const theme = useTheme();
     const [showPassword, toggleShowPassword] = useToggle(isPassword);
 
@@ -46,4 +43,4 @@ const Input = ({
     );
 };
 
-export default React.memo(Input);
+export default Input;

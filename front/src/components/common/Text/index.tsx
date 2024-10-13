@@ -2,20 +2,11 @@
 import * as S from "./styles";
 import * as T from "./types";
 
-// Libraries
-import React from "react";
-
-const Text = ({
-    text,
-    color,
-    size,
-    weight,
-    containerWidth,
-}: T.TextProps): JSX.Element => {
+const Text = ({ text, color, size, weight, containerWidth }: T.TextProps) => {
     const style: Object = {
         color,
-        fontSize: `${size}em`,
         fontWeight: weight,
+        fontSize: size ? `${size}em` : "",
     };
 
     const containerStyle = { width: `${containerWidth}%` };
@@ -27,4 +18,4 @@ const Text = ({
     );
 };
 
-export default React.memo(Text);
+export default Text;

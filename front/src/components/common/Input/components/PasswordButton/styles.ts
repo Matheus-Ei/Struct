@@ -7,6 +7,6 @@ export const PasswordButton = styled.button`
 
     right: 50px;
 
-    width: 0px;
-    padding: 0px;
+    width: 0;
+    padding: 0;
 `;

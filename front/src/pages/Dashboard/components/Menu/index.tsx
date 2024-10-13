@@ -3,9 +3,6 @@ import * as S from "./styles";
 import * as T from "./types";
 import routes from "../routes";
 
-// Libraries
-import React, { useState } from "react";
-
 // Hooks
 import { useTheme } from "../../../../hooks/useTheme";
 
@@ -43,5 +40,4 @@ const Menu = ({ selectedName, setSelected }: T.MenuProps) => {
     );
 };
 
-// {React.createElement(page)}
-export default React.memo(Menu);
+export default Menu;

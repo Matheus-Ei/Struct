@@ -8,12 +8,7 @@ import { useTheme } from "../../../hooks/useTheme";
 // Components
 import Text from "../Text";
 
-const Message = ({
-    text,
-    type,
-    style,
-    isVisible,
-}: T.MessageProps): JSX.Element => {
+const Message = ({ text, type, style, isVisible }: T.MessageProps) => {
     const bodyStyle = S.getStyle(useTheme(), type, style, isVisible);
 
     return (

@@ -11,7 +11,7 @@ import { useState } from "react";
 import Menu from "./components/Menu";
 import Page from "./components/Page";
 
-const Dashboard = (): JSX.Element => {
+const Dashboard = () => {
     const [selectedName, setSelected] = useState<string>("Home");
 
     return (

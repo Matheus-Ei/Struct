@@ -10,5 +10,5 @@ export const Body = styled.div`
 
     width: 100%;
 
-    gap: 20px;
+    gap: 2vh;
 `;

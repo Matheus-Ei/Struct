@@ -7,6 +7,7 @@ import Settings from "../../Settings";
 import Shared from "../../Shared";
 import Subscription from "../../Subscription";
 
+// Types
 export type SingleRouteType = [string, string, string, () => JSX.Element];
 export type RoutesType = Array<SingleRouteType>;
 

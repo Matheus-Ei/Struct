@@ -8,9 +8,9 @@ import Text from "../Text";
 // Hooks
 import { useTheme } from "../../../hooks/useTheme";
 import useToggle from "../../../hooks/useToggle";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 
-const Button = ({ text, onClick, inverse }: T.ButtonProps): JSX.Element => {
+const Button = ({ text, onClick, inverse }: T.ButtonProps) => {
     const [isClicked, toggleIsClicked] = useToggle(false);
 
     useEffect(() => {
@@ -40,4 +40,4 @@ const Button = ({ text, onClick, inverse }: T.ButtonProps): JSX.Element => {
     );
 };
 
-export default React.memo(Button);
+export default Button;

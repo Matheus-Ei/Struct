@@ -4,7 +4,7 @@ import * as T from "./types";
 import routes from "../routes";
 
 // Libraries
-import React, { useState } from "react";
+import React from "react";
 
 const Page = ({ selectedName }: T.PageProps) => {
     return (
@@ -19,4 +19,4 @@ const Page = ({ selectedName }: T.PageProps) => {
     );
 };
 
-export default React.memo(Page);
+export default Page;

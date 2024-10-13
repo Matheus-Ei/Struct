@@ -1,4 +1,5 @@
-import styled from 'styled-components';
+// Libraries
+import styled from "styled-components";
 
 export const Body = styled.div`
     display: flex;
@@ -10,4 +11,4 @@ export const Body = styled.div`
 
     width: 70%;
     height: 90%;
-`
+`;

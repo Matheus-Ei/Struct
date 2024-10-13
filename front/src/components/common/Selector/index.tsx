@@ -13,7 +13,7 @@ const Selector = ({
     isSelected,
     setSelected,
     onClick,
-}: T.SelectorProps): JSX.Element => {
+}: T.SelectorProps) => {
     const theme = useTheme();
 
     const bodyStyle: Object = {
@@ -22,7 +22,7 @@ const Selector = ({
     };
 
     const handleClick = () => {
-        if(setSelected) {
+        if (setSelected) {
             setSelected(name);
         }
 

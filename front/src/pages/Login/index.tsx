@@ -18,7 +18,7 @@ import BlankSeparator from "../../components/common/BlankSeparator";
 import { useTheme } from "../../hooks/useTheme";
 import PageLoader from "../../HOCs/PageLoader";
 
-const Login = (): JSX.Element => {
+const Login = () => {
     const [mail, setMail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
 

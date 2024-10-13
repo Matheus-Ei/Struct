@@ -6,10 +6,7 @@ import * as T from "./types";
 import Input from "../../common/Input";
 import Button from "../../common/Button";
 
-// Libraries
-import React from "react";
-
-const Form = ({ src, action, sendText }: T.FormProps): JSX.Element => {
+const Form = ({ src, action, sendText }: T.FormProps) => {
     return (
         <S.Body>
             {src.map((item: any, index: number) => {
@@ -30,4 +27,4 @@ const Form = ({ src, action, sendText }: T.FormProps): JSX.Element => {
     );
 };
 
-export default React.memo(Form);
+export default Form;

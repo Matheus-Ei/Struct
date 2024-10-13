@@ -7,8 +7,8 @@ const light: I.VarType = {
     middle: "#888888",
     semi: "#e6e6e6",
 
-    error: "#cc0000",
-    success: "#4BB543",
+    error: "#ff9898",
+    success: "#83ee84",
 
     style: "black",
 };

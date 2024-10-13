@@ -19,5 +19,6 @@ export const Body = styled.div`
 `;
 
 export const Text = styled.p`
+    font-size: clamp(12px, 1vw, 20px);
     cursor: default;
 `;

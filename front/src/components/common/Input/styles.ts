@@ -17,7 +17,7 @@ export const Input = styled.input`
     border-radius: 10px;
 
     padding-left: 10px;
-    font-size: 1.2em;
+    font-size: clamp(10px, 1vw, 20px);
 `;
 
 export const getStyle = (
