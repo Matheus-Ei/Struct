@@ -44,11 +44,20 @@ class Cookie {
     }
 
     public static delete(name: string, res: Response) {
-        res.clearCookie(name);
+        try {
+            res.clearCookie(name);
+        } catch (error) {
+            console.error(error);
+        }
     }
 
     public static get(name: string, req: Request) {
-        return req.cookies[name];
+        try {
+            return req.cookies[name];
+        } catch (error) {
+            console.error(error);
+            return null;
+        }
     }
 }
 

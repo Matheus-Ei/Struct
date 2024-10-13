@@ -2,7 +2,7 @@
 import { DataTypes, Model } from "sequelize";
 
 // Database
-import sequelize from "../system/database";
+import connection from "../services/database/connection.js";
 
 class ProjectTypeModel extends Model {
     public id!: number;
@@ -22,7 +22,7 @@ ProjectTypeModel.init(
         },
     },
     {
-        sequelize,
+        sequelize: connection,
         tableName: "project_type",
         timestamps: false,
     }

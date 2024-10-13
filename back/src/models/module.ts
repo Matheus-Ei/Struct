@@ -2,7 +2,7 @@
 import { DataTypes, Model } from "sequelize";
 
 // Database
-import sequelize from "../system/database";
+import connection from "../services/database/connection.js";
 
 class ModuleModel extends Model {
     public id!: number;
@@ -27,7 +27,7 @@ ModuleModel.init(
         },
     },
     {
-        sequelize,
+        sequelize: connection,
         tableName: "module",
         timestamps: false,
     }

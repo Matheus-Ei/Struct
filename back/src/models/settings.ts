@@ -2,7 +2,7 @@
 import { DataTypes, Model } from "sequelize";
 
 // Database
-import sequelize from "../system/database";
+import connection from "../services/database/connection.js";
 
 // Models
 import UserModel from "./user";
@@ -45,7 +45,7 @@ SettingsModel.init(
         },
     },
     {
-        sequelize,
+        sequelize: connection,
         tableName: "settings",
         timestamps: false,
     }

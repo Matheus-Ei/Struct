@@ -10,7 +10,7 @@ class Login {
         password: string,
         navigate: NavigateFunction
     ) {
-        const url = `${process.env.REACT_APP_BACK_URL}/users/login`;
+        const url = `${process.env.REACT_APP_BACK_URL}/user/login`;
 
         const response = await Request.post(url, {
             mail,

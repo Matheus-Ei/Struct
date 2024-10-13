@@ -10,8 +10,8 @@ dotenv.config();
 
 const auth = (req: Request, res: Response, next: NextFunction) => {
     if (
-        req.path === "/users/login" ||
-        req.path === "/users/register" ||
+        req.path === "/user/login" ||
+        req.path === "/user/register" ||
         req.path === "/token/check" ||
         req.path === "/token/refresh"
     ) {

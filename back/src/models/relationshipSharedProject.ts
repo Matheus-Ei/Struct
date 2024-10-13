@@ -2,7 +2,7 @@
 import { DataTypes, Model } from "sequelize";
 
 // Database
-import sequelize from "../system/database";
+import connection from "../services/database/connection.js";
 
 // Models
 import UserModel from "./user";
@@ -44,7 +44,7 @@ RelationshipSharedProjectModel.init(
         },
     },
     {
-        sequelize,
+        sequelize: connection,
         tableName: "relationship_shared_project",
         timestamps: false,
     }

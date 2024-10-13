@@ -2,7 +2,7 @@
 import { DataTypes, Model } from "sequelize";
 
 // Models
-import sequelize from "../system/database";
+import connection from "../services/database/connection.js";
 
 // Database
 import PageDataModel from "./pageData";
@@ -28,7 +28,7 @@ NotesPageDataModel.init(
         },
     },
     {
-        sequelize,
+        sequelize: connection,
         tableName: "notes_page_data",
         timestamps: false,
     }

@@ -2,7 +2,7 @@
 import { Sequelize } from "sequelize";
 import dotenv from "dotenv";
 
-interface DatabaseType {
+interface CredentialsType {
     type: string | undefined;
     database: string | undefined;
     host: string | undefined;
@@ -20,7 +20,7 @@ const port = Number(process.env.DATABASE_PORT);
 const user = process.env.DATABASE_USER;
 const password = process.env.DATABASE_PASSWORD;
 
-const connection: DatabaseType = {
+const credentials: CredentialsType = {
     type,
     database,
     host,
@@ -29,14 +29,14 @@ const connection: DatabaseType = {
     password,
 };
 
-const sequelize = new Sequelize(
-    connection.database as string,
-    connection.user as string,
-    connection.password as string,
+const connection = new Sequelize(
+    credentials.database as string,
+    credentials.user as string,
+    credentials.password as string,
     {
-        host: connection.host,
-        dialect: connection.type as "postgres",
-        port: connection.port,
+        host: credentials.host,
+        dialect: credentials.type as "postgres",
+        port: credentials.port,
         logging: false,
 
         dialectOptions: {
@@ -48,4 +48,4 @@ const sequelize = new Sequelize(
     }
 );
 
-export default sequelize;
+export default connection;

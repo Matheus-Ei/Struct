@@ -21,6 +21,8 @@ class TokenController {
             res.status(401).json({
                 message: "The refresh token isn't valid",
             });
+
+            return;
         }
 
         try {
@@ -30,11 +32,15 @@ class TokenController {
             res.status(201).json({
                 message: "Access token was generated successfuly",
             });
+
+            return;
         } catch (error) {
             res.status(500).json({
                 message: "Error refreshing the token",
                 error,
             });
+
+            return;
         }
     }
 
@@ -50,11 +56,15 @@ class TokenController {
                 message: "The access token isn't valid",
                 login: false,
             });
+
+            return;
         } else {
             res.status(200).json({
                 message: "The access token is valid",
                 login: true,
             });
+
+            return;
         }
     }
 }

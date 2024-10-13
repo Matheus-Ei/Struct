@@ -2,7 +2,7 @@
 import { DataTypes, Model } from "sequelize";
 
 // Database
-import sequelize from "../system/database";
+import connection from "../services/database/connection.js";
 
 class PageDataModel extends Model {
     public id!: number;
@@ -32,7 +32,7 @@ PageDataModel.init(
         },
     },
     {
-        sequelize,
+        sequelize: connection,
         tableName: "page_data",
         timestamps: false,
     }

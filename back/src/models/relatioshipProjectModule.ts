@@ -2,7 +2,7 @@
 import { DataTypes, Model } from "sequelize";
 
 // Database
-import sequelize from "../system/database";
+import connection from "../services/database/connection.js";
 
 // Models
 import ModuleModel from "./module";
@@ -39,7 +39,7 @@ RelationshipProjectModuleModel.init(
         },
     },
     {
-        sequelize,
+        sequelize: connection,
         tableName: "relationship_project_module",
         timestamps: false,
     }
