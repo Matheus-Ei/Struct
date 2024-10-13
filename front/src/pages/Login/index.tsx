@@ -9,14 +9,16 @@ import Form from "../../components/layout/Form";
 // Hooks
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTheme } from "../../hooks/useTheme";
 
 // Utils
 import LoginClass from "../../utils/login";
 import File from "../../utils/file";
 import Message from "../../components/common/Message";
 import BlankSeparator from "../../components/common/BlankSeparator";
-import { useTheme } from "../../hooks/useTheme";
-import PageLoader from "../../HOCs/PageLoader";
+
+// HOCs
+import withLoader from "../../HOCs/withLoader";
 
 const Login = () => {
     const [mail, setMail] = useState<string>("");
@@ -70,4 +72,4 @@ const Login = () => {
     );
 };
 
-export default PageLoader(Login);
+export default withLoader(Login, "large");

@@ -4,6 +4,9 @@ import * as S from "./styles";
 // Components
 import Project from "./components/Project";
 
+// HOCs
+import withLoader from "../../HOCs/withLoader";
+
 const Projects = () => {
     return (
         <S.Body>
@@ -12,4 +15,4 @@ const Projects = () => {
     );
 };
 
-export default Projects;
+export default withLoader(Projects, "small");

@@ -6,7 +6,12 @@ import * as T from "./types";
 import Input from "../../common/Input";
 import Button from "../../common/Button";
 
+// Animations
+import scale from "../../../animations/scale";
+
 const Form = ({ src, action, sendText }: T.FormProps) => {
+    const AnimatedButton = scale(Button, 1.05, "hover");
+
     return (
         <S.Body>
             {src.map((item: any, index: number) => {
@@ -22,7 +27,7 @@ const Form = ({ src, action, sendText }: T.FormProps) => {
                 );
             })}
 
-            <Button text={sendText} onClick={action} inverse={false} />
+            <AnimatedButton text={sendText} onClick={action} inverse={false} />
         </S.Body>
     );
 };

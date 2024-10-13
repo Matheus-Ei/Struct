@@ -4,7 +4,12 @@ import * as T from "./types";
 
 // Hooks
 import { useTheme } from "../../../hooks/useTheme";
+
+// Services
 import Icons from "../../../services/Icons";
+
+// Animations
+import scale from "../../../animations/scale";
 
 const Selector = ({
     name,
@@ -39,4 +44,4 @@ const Selector = ({
     );
 };
 
-export default Selector;
+export default scale(scale(Selector, 1.05, "hover"), 0.95, "click");
