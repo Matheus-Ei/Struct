@@ -1,4 +1,7 @@
+// Libraries
 import { Router } from "express";
+
+// Controllers
 import TokenController from "../controllers/token.js";
 
 class TokenRoute {
@@ -10,9 +13,9 @@ class TokenRoute {
     }
 
     private init() {
-        this.router.post("/refresh", TokenController.refresh);
+        this.router.get("/refresh", TokenController.refresh);
 
-        this.router.post("/check", TokenController.check);
+        this.router.get("/check", TokenController.check);
     }
 }
 

@@ -1,6 +1,10 @@
+// Libraries
 import { DataTypes, Model } from "sequelize";
-import sequelize from "../system/database";
 
+// Database
+import connection from "../services/database/connection.js";
+
+// Models
 import UserModel from "./user";
 import ProjectTypeModel from "./project_type";
 
@@ -49,7 +53,7 @@ ProjectModel.init(
         },
     },
     {
-        sequelize,
+        sequelize: connection,
         tableName: "project",
         timestamps: false,
     }

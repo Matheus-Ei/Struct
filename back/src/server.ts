@@ -1,9 +1,14 @@
+// Libraries
 import express from "express";
-import mainRoutes from "./system/routes.js";
 import dotenv from "dotenv";
-import cookieParser from 'cookie-parser';
-
 import auth from "./middlewares/auth.js";
+
+// Middlewares
+import cors from "cors";
+import cookieParser from "cookie-parser";
+
+// Routes
+import mainRoutes from "./system/routes.js";
 
 export class App {
     private app: any;
@@ -24,6 +29,13 @@ export class App {
     private middlewares(): void {
         this.app.use(cookieParser());
         this.app.use(express.json());
+
+        this.app.use(
+            cors({
+                credentials: true,
+                origin: true,
+            })
+        );
 
         this.app.use(auth);
     }

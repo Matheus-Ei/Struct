@@ -1,5 +1,8 @@
+// Libraries
 import { DataTypes, Model } from "sequelize";
-import sequelize from "../system/database";
+
+// Database
+import connection from "../services/database/connection.js";
 
 class PageDataModel extends Model {
     public id!: number;
@@ -29,7 +32,7 @@ PageDataModel.init(
         },
     },
     {
-        sequelize,
+        sequelize: connection,
         tableName: "page_data",
         timestamps: false,
     }

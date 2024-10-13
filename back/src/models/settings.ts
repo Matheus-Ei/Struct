@@ -1,6 +1,10 @@
+// Libraries
 import { DataTypes, Model } from "sequelize";
-import sequelize from "../system/database";
 
+// Database
+import connection from "../services/database/connection.js";
+
+// Models
 import UserModel from "./user";
 
 class SettingsModel extends Model {
@@ -41,7 +45,7 @@ SettingsModel.init(
         },
     },
     {
-        sequelize,
+        sequelize: connection,
         tableName: "settings",
         timestamps: false,
     }

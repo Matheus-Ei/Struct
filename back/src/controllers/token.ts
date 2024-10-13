@@ -1,54 +1,70 @@
+// Libraries
 import { Request, Response } from "express";
-import Token from "../services/token.js";
 import dotenv from "dotenv";
+
+// Services
+import Token from "../services/token.js";
+import Cookie from "../services/cookie.js";
 
 dotenv.config();
 
 class TokenController {
     public async refresh(req: Request, res: Response) {
-        const { mail, refreshToken } = req.body;
+        const accessObject = new Token(process.env.JWT_SECRET as string);
+        const id = Cookie.get("id", req);
+        const refreshObject = new Token(process.env.REFRESH_SECRET as string);
+        const refreshToken = Cookie.get("refresh_token", req);
 
-        const refresh = new Token(process.env.REFRESH_SECRET as string);
-        const access = new Token(process.env.JWT_SECRET as string);
-
-        const refreshIsValid = refresh.verify(refreshToken, mail, "mail");
+        const refreshIsValid = refreshObject.verify(refreshToken, id, "id");
 
         if (!refreshIsValid) {
             res.status(401).json({
                 message: "The refresh token isn't valid",
             });
+
+            return;
         }
 
         try {
-            const accessTk = access.generate({ mail }, "1h");
+            const accessTk = accessObject.generate({ id }, "1h");
+            Cookie.generate("access_token", accessTk, res);
+
             res.status(201).json({
                 message: "Access token was generated successfuly",
-                token: accessTk,
             });
+
+            return;
         } catch (error) {
             res.status(500).json({
                 message: "Error refreshing the token",
                 error,
             });
+
+            return;
         }
     }
+
     public async check(req: Request, res: Response) {
-        const { mail, accessToken } = req.body;
+        const accessToken = Cookie.get("access_token", req);
+        const id = Cookie.get("id", req);
+        const accessObject = new Token(process.env.JWT_SECRET as string);
 
-        const access = new Token(process.env.JWT_SECRET as string);
-
-        const accessIsValid = access.verify(accessToken, mail, "mail");
+        const accessIsValid = accessObject.verify(accessToken, id, "id");
 
         if (!accessIsValid) {
             res.status(401).json({
                 message: "The access token isn't valid",
                 login: false,
             });
+
+            return;
         } else {
             res.status(200).json({
                 message: "The access token is valid",
                 login: true,
             });
+
+            return;
         }
     }
 }

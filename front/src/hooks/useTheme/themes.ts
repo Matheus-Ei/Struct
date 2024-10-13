@@ -1,46 +1,35 @@
-interface VarType {
-    [keys: string]: string;
-}
+import * as I from "./interface";
 
-const white: VarType = {
-    backDef: "#ffffff",
-    backMid: "#F3F3F3",
-    backInv: "#000000",
+const light: I.VarType = {
+    primary: "#f9f9f9",
+    secondary: "#000000",
 
-    fontDef: "#000000",
-    fontMid: "#888888",
-    fontInv: "#ffffff",
+    middle: "#888888",
+    semi: "#e6e6e6",
 
-    bordDef: "#000000",
-    bordMid: "#717171",
-    bordInv: "#ffffff",
+    error: "#ff9898",
+    success: "#83ee84",
 
-    iconDef: "#000000",
-    iconMid: "#888888",
-    iconInv: "#ffffff",
+    style: "black",
 };
 
-const dark: VarType = {
-    backDef: "#000000",
-    backMid: "#888888",
-    backInv: "#ffffff",
+const dark: I.VarType = {
+    primary: "#111111",
+    secondary: "#ffffff",
 
-    fontDef: "#ffffff",
-    fontMid: "#888888",
-    fontInv: "#000000",
+    middle: "#a8a8a8",
+    semi: "#373737",
 
-    bordDef: "#ffffff",
-    bordMid: "#717171",
-    bordInv: "#000000",
+    error: "#cc0000",
+    success: "#4BB543",
 
-    iconDef: "#ffffff",
-    iconMid: "#888888",
-    iconInv: "#000000",
+    style: "white",
 };
 
-const themes: any = {
-    white,
+const styles: any = {
+    default: light,
+    light,
     dark,
 };
 
-export default themes;
+export default styles;

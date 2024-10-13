@@ -1,3 +1,4 @@
+// Libraries
 import { Request, Response } from "express";
 
 class Cookie {
@@ -19,19 +20,44 @@ class Cookie {
             httpOnly: true,
             secure: true,
             maxAge: 7 * 24 * 60 * 60 * 1000,
-            sameSite: "strict" as "strict",
+            sameSite: "none" as "none",
             ...options,
         };
 
         res.cookie(name, cookieValue, cookieOptions);
+
+        const setCookieHeader = res.getHeader("Set-Cookie");
+        if (Array.isArray(setCookieHeader)) {
+            res.setHeader(
+                "Set-Cookie",
+                setCookieHeader.map((cookie) =>
+                    cookie.includes("Partitioned")
+                        ? cookie
+                        : `${cookie}; Partitioned`
+                )
+            );
+        } else if (typeof setCookieHeader === "string") {
+            if (!setCookieHeader.includes("Partitioned")) {
+                res.setHeader("Set-Cookie", `${setCookieHeader}; Partitioned`);
+            }
+        }
     }
 
     public static delete(name: string, res: Response) {
-        res.clearCookie(name);
+        try {
+            res.clearCookie(name);
+        } catch (error) {
+            console.error(error);
+        }
     }
 
     public static get(name: string, req: Request) {
-        return req.cookies[name]
+        try {
+            return req.cookies[name];
+        } catch (error) {
+            console.error(error);
+            return null;
+        }
     }
 }
 

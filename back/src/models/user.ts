@@ -1,5 +1,8 @@
+// Libraries
 import { DataTypes, Model } from "sequelize";
-import sequelize from "../system/database.js";
+
+// Database
+import connection from "../services/database/connection.js";
 
 class UserModel extends Model {
     public id!: number;
@@ -51,7 +54,7 @@ UserModel.init(
         },
     },
     {
-        sequelize,
+        sequelize: connection,
         tableName: "users",
         timestamps: false,
     }

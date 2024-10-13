@@ -1,6 +1,10 @@
+// Libraries
 import { DataTypes, Model } from "sequelize";
-import sequelize from "../system/database";
 
+// Models
+import connection from "../services/database/connection.js";
+
+// Database
 import PageDataModel from "./pageData";
 
 class NotesPageDataModel extends Model {
@@ -24,7 +28,7 @@ NotesPageDataModel.init(
         },
     },
     {
-        sequelize,
+        sequelize: connection,
         tableName: "notes_page_data",
         timestamps: false,
     }

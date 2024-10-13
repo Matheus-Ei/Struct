@@ -1,4 +1,7 @@
+// Libraries
 import { Router } from "express";
+
+// Controllers
 import UserController from "../controllers/user.js";
 
 class UserRoute {
@@ -10,7 +13,7 @@ class UserRoute {
     }
 
     private init() {
-        this.router.get("/get/:id", UserController.get);
+        this.router.get("/get", UserController.get);
 
         this.router.post("/register", UserController.register);
 

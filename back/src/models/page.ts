@@ -1,6 +1,10 @@
+// Libraries
 import { DataTypes, Model } from "sequelize";
-import sequelize from "../system/database";
 
+// Database
+import connection from "../services/database/connection.js";
+
+// Models
 import PageDataModel from "./pageData";
 import ProjectModel from "./project";
 import ModuleModel from "./module";
@@ -54,7 +58,7 @@ PageModel.init(
         },
     },
     {
-        sequelize,
+        sequelize: connection,
         tableName: "page",
         timestamps: false,
     }

@@ -1,5 +1,8 @@
+// Libraries
 import { DataTypes, Model } from "sequelize";
-import sequelize from "../system/database";
+
+// Database
+import connection from "../services/database/connection.js";
 
 class ModuleModel extends Model {
     public id!: number;
@@ -24,7 +27,7 @@ ModuleModel.init(
         },
     },
     {
-        sequelize,
+        sequelize: connection,
         tableName: "module",
         timestamps: false,
     }

@@ -1,3 +1,4 @@
+// Libraries
 import bcrypt from "bcrypt";
 
 class Hash {
@@ -5,10 +6,11 @@ class Hash {
         const saltRounds = 10;
 
         try {
+            console.log(text)
             const hash = await bcrypt.hash(text, saltRounds);
             return hash;
         } catch (error) {
-            throw new Error("Error generating the text hash: " + error);
+            console.error(error)
         }
     }
 
@@ -17,7 +19,7 @@ class Hash {
             const isMatch = await bcrypt.compare(text, hash);
             return isMatch;
         } catch (error) {
-            throw error;
+            console.error(error)
         }
     }
 }
