@@ -5,14 +5,14 @@ import { DataTypes, Model } from "sequelize";
 import connection from "../services/database/connection.js";
 
 // Models
-import UserModel from "./user";
+import UserModel from "./user.js";
 
 class SettingsModel extends Model {
     public id!: number;
     public language!: string;
     public country!: string;
     public theme!: string;
-    public userId!: number;
+    public user_id!: number;
 }
 
 SettingsModel.init(
@@ -34,7 +34,7 @@ SettingsModel.init(
             type: DataTypes.STRING(50),
             allowNull: false,
         },
-        userId: {
+        user_id: {
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {

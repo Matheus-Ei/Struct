@@ -5,16 +5,16 @@ import { DataTypes, Model } from "sequelize";
 import connection from "../services/database/connection.js";
 
 // Database
-import PageDataModel from "./pageData";
+import PageDataModel from "./pageData.js";
 
 class NotesPageDataModel extends Model {
-    public pageDataId!: number;
+    public id!: number;
     public content!: string;
 }
 
 NotesPageDataModel.init(
     {
-        pageDataId: {
+        id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
             references: {

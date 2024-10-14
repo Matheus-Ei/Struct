@@ -5,16 +5,16 @@ import { DataTypes, Model } from "sequelize";
 import connection from "../services/database/connection.js";
 
 // Models
-import PageDataModel from "./pageData";
-import ProjectModel from "./project";
-import ModuleModel from "./module";
+import PageDataModel from "./pageData.js";
+import ProjectModel from "./project.js";
+import ModuleModel from "./module.js";
 
 class PageModel extends Model {
     public id!: number;
-    public pageDataId!: number;
-    public parentPageId!: number | null;
-    public projectId!: number;
-    public moduleId!: number;
+    public page_data!: number;
+    public parent_page_id!: number | null;
+    public project_id!: number;
+    public module_id!: number;
 }
 
 PageModel.init(
@@ -24,7 +24,7 @@ PageModel.init(
             autoIncrement: true,
             primaryKey: true,
         },
-        pageDataId: {
+        page_data: {
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
@@ -32,7 +32,7 @@ PageModel.init(
                 key: "id",
             },
         },
-        parentPageId: {
+        parent_page_id: {
             type: DataTypes.INTEGER,
             allowNull: true,
             references: {
@@ -40,7 +40,7 @@ PageModel.init(
                 key: "id",
             },
         },
-        projectId: {
+        project_id: {
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
@@ -48,7 +48,7 @@ PageModel.init(
                 key: "id",
             },
         },
-        moduleId: {
+        module_id: {
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {

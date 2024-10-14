@@ -55,11 +55,13 @@ CREATE TABLE relationship_shared_project (
     user_shared_id INT,
     CONSTRAINT fk_user_shared
         FOREIGN KEY (user_shared_id)
-        REFERENCES users (id),
+        REFERENCES users (id)
+        ON DELETE CASCADE,
     project_id INT,
     CONSTRAINT fk_project
         FOREIGN KEY (project_id)
         REFERENCES project (id)
+        ON DELETE CASCADE
 );
 
 CREATE TABLE module (
@@ -80,6 +82,7 @@ CREATE TABLE relationship_project_module (
     CONSTRAINT fk_project
         FOREIGN KEY (project_id)
         REFERENCES project (id)
+        ON DELETE CASCADE
 );
 
 CREATE TABLE page_data (
@@ -96,15 +99,18 @@ CREATE TABLE page (
     page_data INT,
     CONSTRAINT fk_page_data
         FOREIGN KEY (page_data)
-        REFERENCES page_data (id),
+        REFERENCES page_data (id)
+        ON DELETE CASCADE,
     parent_page_id INT NULL,
     CONSTRAINT fk_parent_page
         FOREIGN KEY (parent_page_id)
-        REFERENCES page (id),
+        REFERENCES page (id)
+        ON DELETE CASCADE,
     project_id INT,
     CONSTRAINT fk_project
         FOREIGN KEY (project_id)
-        REFERENCES project (id),
+        REFERENCES project (id)
+        ON DELETE CASCADE,
     module_id INT,
     CONSTRAINT fk_module
         FOREIGN KEY (module_id)
@@ -119,5 +125,6 @@ CREATE TABLE notes_page_data (
     CONSTRAINT fk_page_data
         FOREIGN KEY (page_data_id)
         REFERENCES page_data (id)
+        ON DELETE CASCADE
 );
 
