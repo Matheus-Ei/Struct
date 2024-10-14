@@ -4,6 +4,7 @@ import * as T from "./types";
 
 // Components
 import Project from "./components/Project";
+import Actions from "./components/Actions";
 
 // HOCs
 import withLoader from "../../HOCs/withLoader";
@@ -13,7 +14,7 @@ import Request from "../../services/Request";
 
 // Hooks
 import { useTheme } from "../../hooks/useTheme";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 const getProjects = (projects: any, setProjects: T.SetProjectsType) => {
     return projects.map((item: any, index: number) => {
@@ -45,12 +46,19 @@ const Projects = () => {
     return (
         <S.Body>
             {projects.length !== 0 ? (
-                <S.Grid>{getProjects(projects, setProjects)}</S.Grid>
+                <S.Grid
+                    style={{
+                        borderBottomColor: theme.semi,
+                    }}
+                >
+                    {getProjects(projects, setProjects)}
+                </S.Grid>
             ) : (
                 <p style={{ color: theme.middle }}>
                     Big things will be here soon...
                 </p>
             )}
+            <Actions />
         </S.Body>
     );
 };

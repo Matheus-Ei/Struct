@@ -19,6 +19,7 @@ import BlankSeparator from "../../components/common/BlankSeparator";
 
 // HOCs
 import withLoader from "../../HOCs/withLoader";
+import LineSeparator from "../../components/common/LineSeparator";
 
 const Login = () => {
     const [mail, setMail] = useState<string>("");
@@ -65,7 +66,11 @@ const Login = () => {
                         sendText="LOGIN"
                     />
 
-                    <BlankSeparator size={20} direction="vertical" />
+                    <BlankSeparator size={35} direction="vertical" />
+
+                    <LineSeparator text="Or login with" width={80} style="dual"/>
+
+                    <BlankSeparator size={120} direction="vertical" />
                 </S.CardBody>
             </Card>
         </S.Body>
