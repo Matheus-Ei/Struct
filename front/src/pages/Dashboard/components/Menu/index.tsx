@@ -19,7 +19,7 @@ const Menu = ({ selectedName, setSelected }: T.MenuProps) => {
     return (
         <S.Body>
             <Image
-                width={60}
+                width={80}
                 src={File.get(`images/logo-1920x1080-2-${theme.style}.png`)}
             />
             <S.Content>

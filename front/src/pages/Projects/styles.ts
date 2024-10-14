@@ -2,15 +2,14 @@ import styled from "styled-components";
 
 export const Body = styled.div`
     width: 100%;
-    height: 85vh;
+    height: 100%;
 
     display: flex;
 
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
 
     flex-direction: column;
-
 `;
 
 export const Grid = styled.div`
@@ -20,7 +19,7 @@ export const Grid = styled.div`
     grid-template-rows: repeat(3, 1fr);
 
     width: 95%;
-    height: 80%;
+    height: 70%;
 
     column-gap: 3vh;
     grid-row-gap: 3vh;
@@ -29,4 +28,5 @@ export const Grid = styled.div`
     overflow-x: hidden;
 
     padding-right: 1vw;
+
 `;

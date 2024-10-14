@@ -10,9 +10,26 @@ import withLoader from "../../HOCs/withLoader";
 // Services
 import Request from "../../services/Request";
 import { useEffect, useState } from "react";
+import { useTheme } from "../../hooks/useTheme";
+
+const getProjects = (projects: any) => {
+    return projects.map((item: any, index: number) => {
+        return (
+            <Project
+                id={item.id}
+                title={item.title}
+                description={item.description}
+                type={item.type}
+                modules={item.module}
+                key={index}
+            />
+        );
+    });
+};
 
 const Projects = () => {
     const [projects, setProjects] = useState([]);
+    const theme = useTheme();
 
     useEffect(() => {
         const backUrl = process.env.REACT_APP_BACK_URL as string;
@@ -23,20 +40,13 @@ const Projects = () => {
 
     return (
         <S.Body>
-            <S.Grid>
-                {projects.map((item: any, index: number) => {
-                    return (
-                        <Project
-                            id={item.id}
-                            title={item.title}
-                            description={item.description}
-                            type={item.type}
-                            modules={item.module}
-                            key={index}
-                        />
-                    );
-                })}
-            </S.Grid>
+            {projects ? (
+                <S.Grid>{getProjects(projects)}</S.Grid>
+            ) : (
+                <p style={{ color: theme.middle }}>
+                    Big things will be here soon...
+                </p>
+            )}
         </S.Body>
     );
 };

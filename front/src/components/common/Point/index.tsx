@@ -16,6 +16,7 @@ const Point = ({ icon, library, text }: T.PointProps) => {
                 size={20}
                 color={theme.secondary}
             />
+
             <Text text={text} color={theme.secondary} />
         </S.Body>
     );

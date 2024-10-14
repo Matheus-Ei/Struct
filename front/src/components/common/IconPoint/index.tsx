@@ -9,11 +9,11 @@ const IconPoint = ({ icons }: T.IconPointProps) => {
 
     return (
         <S.Body>
-            {icons.map((item: Array<string>, index: number) => {
+            {icons.map((item: T.IconType, index: number) => {
                 return (
                     <Icons
-                        name={item[0]}
-                        library={item[1]}
+                        name={item.name}
+                        library={item.library}
                         size={20}
                         color={theme.secondary}
                         key={index}

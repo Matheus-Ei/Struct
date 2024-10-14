@@ -4,10 +4,10 @@ import styled from "styled-components";
 export const Body = styled.div`
     display: flex;
 
-    justify-content: center;
+    justify-content: flex-start;
 
     flex-direction: column;
 
-    width: 70vw;
-    height: 90vh;
+    width: 75%;
+    height: 80%;
 `;

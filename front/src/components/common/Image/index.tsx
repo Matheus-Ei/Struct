@@ -5,20 +5,19 @@ import * as T from "./types";
 // Hooks
 import { useTheme } from "../../../hooks/useTheme";
 
-const Image = ({ src, width, bodyHeight, borderRadius }: T.ImageProps) => {
+const Image = ({ src, width, height, borderRadius }: T.ImageProps) => {
     const theme = useTheme();
 
-    const bodyStyle = { height: `${bodyHeight}%` };
-
-    const imageStyle = {
+    const bodyStyle = {
+        height: `${height}%`,
+        width: `${width}%`,
         borderRadius,
         borderColor: theme.middle,
-        width: `${width}%`,
     };
 
     return (
         <S.Body style={bodyStyle}>
-            <S.Image src={src} style={imageStyle} />
+            <S.Image src={src} />
         </S.Body>
     );
 };

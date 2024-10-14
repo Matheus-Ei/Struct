@@ -7,8 +7,8 @@ export const Body = styled.div`
     align-items: center;
     justify-content: center;
 
-    width: 99vw;
-    height: 95vh;
+    width: 100%;
+    height: 100%;
 `;
 
 export const Content = styled.div`
@@ -19,6 +19,6 @@ export const Content = styled.div`
 
     flex-direction: row;
 
-    width: 85vw;
-    height: 95vh;
+    width: 90%;
+    height: 98vh;
 `;

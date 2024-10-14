@@ -6,6 +6,7 @@ import * as S from "./styles";
 import Card from "../../../../components/common/Card";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import fade from "../../../../animations/fade";
 
 const Project = ({ id, title, description, type, modules }: T.ProjectProps) => {
     return (
@@ -21,4 +22,4 @@ const Project = ({ id, title, description, type, modules }: T.ProjectProps) => {
     );
 };
 
-export default Project;
+export default fade(Project, 'in');
