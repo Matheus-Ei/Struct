@@ -1,3 +1,4 @@
+// Libraries
 import styled from "styled-components";
 
 export const Body = styled.div`
@@ -6,5 +7,8 @@ export const Body = styled.div`
     align-items: center;
     justify-content: center;
 
-    margin-top: 10%;
+    flex-direction: column;
+
+    gap: 1vh;
+    margin-top: 2vh;
 `;

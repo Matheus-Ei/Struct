@@ -1,3 +1,6 @@
 import styled from "styled-components";
 
-export const Body = styled.div``;
+export const Body = styled.div`
+    width: auto;
+    height: auto;
+`;

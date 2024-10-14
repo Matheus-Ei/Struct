@@ -18,7 +18,7 @@ const Logo = ({
 
     return (
         <S.Body style={bodyStyle}>
-            <Image bodyHeight={60} width={80} src={src} />
+            <Image height={60} width={80} src={src} />
             <Paragraph text={text} theme={useTheme()} />
         </S.Body>
     );

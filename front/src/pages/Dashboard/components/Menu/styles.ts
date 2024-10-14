@@ -4,11 +4,12 @@ export const Body = styled.div`
     display: flex;
 
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
 
     flex-direction: column;
 
-    max-width: 30%;
+    width: 20%;
+    height: 85%;
 
     gap: 5vh;
 `;
@@ -21,7 +22,7 @@ export const Content = styled.div`
 
     flex-direction: column;
 
-    gap: 1vh;
+    gap: 2vh;
 
-    font-size: 1.3rem;
+    font-size: 1.6rem;
 `;

@@ -13,11 +13,9 @@ export type SetProjectsType = Dispatch<
     >
 >;
 
-export interface ProjectProps {
-    id: number;
-    title: string;
-    description: string;
+export interface FooterProps {
     type: "Singular" | "Compost" | "Monopage";
     modules: Array<string>;
+    projectId: number;
     setProjects: SetProjectsType;
 }

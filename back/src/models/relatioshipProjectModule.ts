@@ -5,13 +5,13 @@ import { DataTypes, Model } from "sequelize";
 import connection from "../services/database/connection.js";
 
 // Models
-import ModuleModel from "./module";
-import ProjectModel from "./project";
+import ModuleModel from "./module.js";
+import ProjectModel from "./project.js";
 
 class RelationshipProjectModuleModel extends Model {
     public id!: number;
-    public moduleId!: number;
-    public projectId!: number;
+    public module_id!: number;
+    public project_id!: number;
 }
 
 RelationshipProjectModuleModel.init(
@@ -21,7 +21,7 @@ RelationshipProjectModuleModel.init(
             autoIncrement: true,
             primaryKey: true,
         },
-        moduleId: {
+        module_id: {
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
@@ -29,7 +29,7 @@ RelationshipProjectModuleModel.init(
                 key: "id",
             },
         },
-        projectId: {
+        project_id: {
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {

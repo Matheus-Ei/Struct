@@ -12,7 +12,7 @@ import Menu from "./components/Menu";
 import Page from "./components/Page";
 
 const Dashboard = () => {
-    const [selectedName, setSelected] = useState<string>("Home");
+    const [selectedName, setSelected] = useState<string>("Projects");
 
     return (
         <S.Body>

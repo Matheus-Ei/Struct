@@ -19,6 +19,6 @@ export const Content = styled.div`
 
     flex-direction: row;
 
-    width: 75vw;
-    height: 95vh;
+    width: 90%;
+    height: 98vh;
 `;

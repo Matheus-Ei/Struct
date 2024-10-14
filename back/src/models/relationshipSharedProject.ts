@@ -5,14 +5,14 @@ import { DataTypes, Model } from "sequelize";
 import connection from "../services/database/connection.js";
 
 // Models
-import UserModel from "./user";
-import ProjectModel from "./project";
+import UserModel from "./user.js";
+import ProjectModel from "./project.js";
 
 class RelationshipSharedProjectModel extends Model {
     public id!: number;
     public permissions!: number;
-    public userSharedId!: number;
-    public projectId!: number;
+    public user_shared_id!: number;
+    public project_id!: number;
 }
 
 RelationshipSharedProjectModel.init(
@@ -26,7 +26,7 @@ RelationshipSharedProjectModel.init(
             type: DataTypes.INTEGER,
             allowNull: false,
         },
-        userSharedId: {
+        user_shared_id: {
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
@@ -34,7 +34,7 @@ RelationshipSharedProjectModel.init(
                 key: "id",
             },
         },
-        projectId: {
+        project_id: {
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {

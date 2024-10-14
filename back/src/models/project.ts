@@ -5,8 +5,8 @@ import { DataTypes, Model } from "sequelize";
 import connection from "../services/database/connection.js";
 
 // Models
-import UserModel from "./user";
-import ProjectTypeModel from "./project_type";
+import UserModel from "./user.js";
+import ProjectTypeModel from "./project_type.js";
 
 class ProjectModel extends Model {
     public id!: number;
@@ -14,8 +14,8 @@ class ProjectModel extends Model {
     public title!: string;
     public description!: string;
 
-    public projectTypeId!: number;
-    public ownerUserId!: number;
+    public project_type_id!: number;
+    public owner_user_id!: number;
 }
 
 ProjectModel.init(
@@ -35,7 +35,7 @@ ProjectModel.init(
             allowNull: false,
         },
 
-        projectTypeId: {
+        project_type_id: {
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
@@ -43,7 +43,7 @@ ProjectModel.init(
                 key: "id",
             },
         },
-        ownerUserId: {
+        owner_user_id: {
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
