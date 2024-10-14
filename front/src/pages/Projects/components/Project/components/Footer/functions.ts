@@ -1,6 +1,21 @@
+// Services
+import Request from "../../../../../../services/Request";
+
+import * as T from "./types";
+
 export const handleOpen = (projectId: number) => {};
 
-export const handleDelete = (projectId: number) => {};
+export const handleDelete = (
+    projectId: number,
+    setProjects: T.SetProjectsType
+) => {
+    const backendUrl = process.env.REACT_APP_BACK_URL as string;
+    Request.delete(`${backendUrl}/project/delete/${projectId}`);
+
+    setProjects((prev: any) => {
+        return prev.filter((item: any) => item.id !== projectId);
+    });
+};
 
 export const handleEdit = (projectId: number) => {};
 

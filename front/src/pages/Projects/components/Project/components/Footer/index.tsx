@@ -8,7 +8,7 @@ import ButtonIcon from "../../../../../../components/common/ButtonIcon";
 import Point from "../../../../../../components/common/Point";
 import IconPoint from "../../../../../../components/common/IconPoint";
 
-const Footer = ({ type, modules, projectId }: T.FooterProps) => {
+const Footer = ({ type, modules, projectId, setProjects }: T.FooterProps) => {
     const typeIcon = F.getTypeIcon(type);
 
     const allModulesIcon = modules.map((item) => {
@@ -49,7 +49,7 @@ const Footer = ({ type, modules, projectId }: T.FooterProps) => {
                     name="FaTrash"
                     library="fa"
                     size={20}
-                    onClick={() => F.handleDelete(projectId)}
+                    onClick={() => F.handleDelete(projectId, setProjects)}
                 />
             </S.Actions>
         </S.Footer>

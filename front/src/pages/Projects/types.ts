@@ -1,6 +1,14 @@
 // Libraries
 import { Dispatch, SetStateAction } from "react";
 
+export type ProjectsType = Array<{
+    id: number;
+    title: string;
+    description: string;
+    type: "Singular" | "Monopage" | "Compost";
+    module: Array<string>;
+}>;
+
 export type SetProjectsType = Dispatch<
     SetStateAction<
         Array<{
@@ -12,10 +20,3 @@ export type SetProjectsType = Dispatch<
         }>
     >
 >;
-
-export interface FooterProps {
-    type: "Singular" | "Compost" | "Monopage";
-    modules: Array<string>;
-    projectId: number;
-    setProjects: SetProjectsType;
-}

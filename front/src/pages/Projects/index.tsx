@@ -1,5 +1,6 @@
 // Modules
 import * as S from "./styles";
+import * as T from "./types";
 
 // Components
 import Project from "./components/Project";
@@ -9,10 +10,12 @@ import withLoader from "../../HOCs/withLoader";
 
 // Services
 import Request from "../../services/Request";
-import { useEffect, useState } from "react";
-import { useTheme } from "../../hooks/useTheme";
 
-const getProjects = (projects: any) => {
+// Hooks
+import { useTheme } from "../../hooks/useTheme";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
+
+const getProjects = (projects: any, setProjects: T.SetProjectsType) => {
     return projects.map((item: any, index: number) => {
         return (
             <Project
@@ -22,13 +25,14 @@ const getProjects = (projects: any) => {
                 type={item.type}
                 modules={item.module}
                 key={index}
+                setProjects={setProjects}
             />
         );
     });
 };
 
 const Projects = () => {
-    const [projects, setProjects] = useState([]);
+    const [projects, setProjects] = useState<T.ProjectsType>([]);
     const theme = useTheme();
 
     useEffect(() => {
@@ -40,8 +44,8 @@ const Projects = () => {
 
     return (
         <S.Body>
-            {projects ? (
-                <S.Grid>{getProjects(projects)}</S.Grid>
+            {projects.length !== 0 ? (
+                <S.Grid>{getProjects(projects, setProjects)}</S.Grid>
             ) : (
                 <p style={{ color: theme.middle }}>
                     Big things will be here soon...

@@ -6,6 +6,5 @@ export const Body = styled.div`
     align-items: center;
     justify-content: center;
 
-    width: 99%;
-    height: 99vh;
+    margin-top: 10%;
 `;
