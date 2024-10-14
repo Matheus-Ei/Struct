@@ -16,7 +16,7 @@ class ProjectController {
                 `SELECT project.id AS id,
 	                    project.title AS title,
 	                    project.description AS description,
-	                    MAX(project_type.name) as type,
+	                    MAX(INITCAP(project_type.name)) as type,
 	                    ARRAY_AGG(INITCAP(module.name)) AS module
                  FROM relationship_project_module
                  JOIN project ON relationship_project_module.project_id = project.id

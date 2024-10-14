@@ -37,8 +37,8 @@ const Login = () => {
 
     return (
         <S.Body>
-            <Card width={30} flexDirection="column" justifyContent="center">
-                <>
+            <Card width={30}>
+                <S.CardBody>
                     <Logo
                         src={File.get(
                             `images/logo-1920x1080-1-${theme.style}.png`
@@ -66,7 +66,7 @@ const Login = () => {
                     />
 
                     <BlankSeparator size={20} direction="vertical" />
-                </>
+                </S.CardBody>
             </Card>
         </S.Body>
     );

@@ -6,5 +6,5 @@ export const Text = styled.p`
     margin: 0;
 
     text-align: center;
-    font-size: clamp(10px, 2vw, 20px);
+    font-size: clamp(8px, 2vw, 18px);
 `;

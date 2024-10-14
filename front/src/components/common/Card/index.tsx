@@ -9,18 +9,12 @@ const Card = ({
     children,
     width,
     height,
-    justifyContent,
-    alignItems,
-    flexDirection,
 }: T.CardProps)=> {
     const theme = useTheme();
 
     const style: Object = {
         width: `${width}%`,
         height: `${height}%`,
-        justifyContent,
-        alignItems,
-        flexDirection,
         backgroundColor: theme.primary,
         borderColor: theme.secondary,
     };

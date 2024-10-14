@@ -2,25 +2,23 @@
 import * as T from "./types";
 import * as S from "./styles";
 
-// Libraries
-import React from "react";
+// Components
 import Card from "../../../../components/common/Card";
-import Text from "../../../../components/common/Text";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 
-const Project = ({}: T.ProjectProps) => {
+const Project = ({ id, title, description, type, modules }: T.ProjectProps) => {
     return (
         <S.Body>
-            <Card
-                width={20}
-                height={20}
-                justifyContent="center"
-                alignItems="center"
-                flexDirection="column"
-            >
-                <Text text="Test" />
+            <Card width={100} height={100}>
+                <S.CardBody>
+                    <Header title={title} description={description} />
+
+                    <Footer type={type} modules={modules} projectId={id} />
+                </S.CardBody>
             </Card>
         </S.Body>
     );
 };
 
-export default React.memo(Project);
+export default Project;

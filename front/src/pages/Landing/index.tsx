@@ -1,4 +1,8 @@
+// Modules
 import * as S from "./styles";
+
+// HOCs
+import withLoader from "../../HOCs/withLoader";
 
 const Landing = () => {
     return (
@@ -8,4 +12,4 @@ const Landing = () => {
     );
 };
 
-export default Landing;
+export default withLoader(Landing, "small");

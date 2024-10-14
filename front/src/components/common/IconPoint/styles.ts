@@ -4,8 +4,9 @@ export const Body = styled.div`
     display: flex;
 
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
 
-    width: 99%;
-    height: 99vh;
+    flex-direction: row;
+
+    gap: 1vw;
 `;
