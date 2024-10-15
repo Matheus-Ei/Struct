@@ -1,6 +1,3 @@
-// Modules
-import * as S from "./styles";
-
 // Components
 import Card from "../../components/common/Card";
 import Logo from "../../components/layout/Logo";
@@ -37,9 +34,12 @@ const Login = () => {
     };
 
     return (
-        <S.Body>
+        <div className="flex-body fill-all-definitive">
             <Card width={30}>
-                <S.CardBody>
+                <div
+                    className="flex-body fill-all"
+                    style={{ flexDirection: "column" }}
+                >
                     <Logo
                         src={File.get(
                             `images/logo-1920x1080-1-${theme.style}.png`
@@ -68,12 +68,16 @@ const Login = () => {
 
                     <BlankSeparator size={35} direction="vertical" />
 
-                    <LineSeparator text="Or login with" width={80} style="dual"/>
+                    <LineSeparator
+                        text="Or login with"
+                        width={80}
+                        style="dual"
+                    />
 
                     <BlankSeparator size={120} direction="vertical" />
-                </S.CardBody>
+                </div>
             </Card>
-        </S.Body>
+        </div>
     );
 };
 

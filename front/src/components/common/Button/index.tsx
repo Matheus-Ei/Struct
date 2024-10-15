@@ -28,15 +28,16 @@ const Button = ({ text, onClick, inverse }: T.ButtonProps) => {
     };
 
     return (
-        <S.Body
+        <div
+            className="set-border space-around"
             style={style}
             onClick={onClick}
             onMouseDown={toggleStyle}
             onMouseUp={toggleStyle}
             onMouseLeave={returnDefaultStyle}
         >
-            <Text text={text} color={style.borderColor} />
-        </S.Body>
+            <Text text={text} color={style.borderColor} size={1.2} />
+        </div>
     );
 };
 

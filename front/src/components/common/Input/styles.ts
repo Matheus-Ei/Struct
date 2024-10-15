@@ -1,25 +1,3 @@
-import styled from "styled-components";
-
-export const Body = styled.div`
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    flex-direction: row;
-
-    width: 95%;
-    height: 6vh;
-`;
-
-export const Input = styled.input`
-    border: solid 1px;
-    border-radius: 10px;
-
-    padding-left: 10px;
-    font-size: clamp(10px, 1vw, 20px);
-`;
-
 export const getStyle = (
     width: number | undefined,
     height: number | undefined,
@@ -31,6 +9,8 @@ export const getStyle = (
         color: theme.secondary,
         backgroundColor: theme.primary,
         borderColor: theme.middle,
+        fontSize: "1.1em",
+        paddingLeft: "0.8vw",
     };
 
     return style;

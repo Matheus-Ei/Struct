@@ -1,11 +1,8 @@
-// Modules
-import * as S from "./styles";
-
 // HOCs
 import withLoader from "../../HOCs/withLoader";
 
 const Profile = () => {
-    return <S.Body>Profile</S.Body>;
+    return <div className="flex-body">Profile</div>;
 };
 
 export default withLoader(Profile, "small");

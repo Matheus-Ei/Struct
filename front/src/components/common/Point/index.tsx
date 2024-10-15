@@ -1,15 +1,21 @@
 // Modules
-import { useTheme } from "../../../hooks/useTheme";
+import * as T from "./types";
+
+// Components
 import Icons from "../../../services/Icons";
 import Text from "../Text";
-import * as S from "./styles";
-import * as T from "./types";
+
+// Hooks
+import { useTheme } from "../../../hooks/useTheme";
 
 const Point = ({ icon, library, text }: T.PointProps) => {
     const theme = useTheme();
 
     return (
-        <S.Body>
+        <div
+            className="flex-body"
+            style={{ justifyContent: "flex-start", gap: "1vw" }}
+        >
             <Icons
                 name={icon}
                 library={library}
@@ -18,7 +24,7 @@ const Point = ({ icon, library, text }: T.PointProps) => {
             />
 
             <Text text={text} color={theme.secondary} />
-        </S.Body>
+        </div>
     );
 };
 

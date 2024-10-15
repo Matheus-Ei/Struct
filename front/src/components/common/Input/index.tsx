@@ -7,15 +7,9 @@ import { useTheme } from "../../../hooks/useTheme";
 import useToggle from "../../../hooks/useToggle";
 
 // Components
-import PasswordButton from "./components/PasswordButton";
+import PasswordButton from "./PasswordButton";
 
-const Input = ({
-    text,
-    setInput,
-    isPassword,
-    height,
-    width,
-}: T.InputProps)=> {
+const Input = ({ text, setInput, isPassword, height, width }: T.InputProps) => {
     const theme = useTheme();
     const [showPassword, toggleShowPassword] = useToggle(isPassword);
 
@@ -26,20 +20,27 @@ const Input = ({
     const style = S.getStyle(width, height, theme);
 
     return (
-        <S.Body>
-            <S.Input
+        <div
+            style={{
+                width: "95%",
+                height: "5vh",
+            }}
+            className="flex-body"
+        >
+            <input
+                className="set-border space-around"
                 onChange={handleInputChange}
                 type={!showPassword ? "text" : "password"}
                 style={style}
                 placeholder={text}
-            ></S.Input>
+            ></input>
 
             <PasswordButton
                 showPassword={showPassword}
                 toggleShowPassword={toggleShowPassword}
                 isPassword={isPassword}
             />
-        </S.Body>
+        </div>
     );
 };
 

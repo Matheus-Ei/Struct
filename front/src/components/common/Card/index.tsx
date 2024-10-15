@@ -1,5 +1,4 @@
 // Modules
-import * as S from "./styles";
 import * as T from "./types";
 
 // Hooks
@@ -19,7 +18,7 @@ const Card = ({
         borderColor: theme.secondary,
     };
 
-    return <S.Body style={style}>{children}</S.Body>;
+    return <div className="flex-body set-border" style={style}>{children}</div>;
 };
 
 export default Card;

@@ -1,5 +1,4 @@
 // Modules
-import * as S from "./styles";
 import * as T from "./types";
 
 const Text = ({ text, color, size, weight, containerWidth }: T.TextProps) => {
@@ -7,14 +6,17 @@ const Text = ({ text, color, size, weight, containerWidth }: T.TextProps) => {
         color,
         fontWeight: weight,
         fontSize: size ? `${size}em` : "",
+        cursor: "default",
     };
 
     const containerStyle = { width: `${containerWidth}%` };
 
     return (
-        <S.Body style={containerStyle}>
-            <S.Text style={style}>{text}</S.Text>
-        </S.Body>
+        <div style={containerStyle}>
+            <p style={style} className="basic-text">
+                {text}
+            </p>
+        </div>
     );
 };
 

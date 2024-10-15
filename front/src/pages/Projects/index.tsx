@@ -1,10 +1,10 @@
 // Modules
-import * as S from "./styles";
 import * as T from "./types";
+import "./styles.css";
 
 // Components
-import Project from "./components/Project";
-import Actions from "./components/Actions";
+import Project from "./Project";
+import Actions from "./Actions";
 
 // HOCs
 import withLoader from "../../HOCs/withLoader";
@@ -44,22 +44,26 @@ const Projects = () => {
     }, []);
 
     return (
-        <S.Body>
+        <div
+            className="flex-body fill-all"
+            style={{ justifyContent: "flex-start", flexDirection: "column" }}
+        >
             {projects.length !== 0 ? (
-                <S.Grid
+                <div
+                    className="scroll-grid-2x2"
                     style={{
                         borderBottomColor: theme.semi,
                     }}
                 >
                     {getProjects(projects, setProjects)}
-                </S.Grid>
+                </div>
             ) : (
                 <p style={{ color: theme.middle }}>
                     Big things will be here soon...
                 </p>
             )}
             <Actions />
-        </S.Body>
+        </div>
     );
 };
 

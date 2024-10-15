@@ -1,5 +1,4 @@
 // Modules
-import * as S from "./styles";
 import * as T from "./types";
 
 // Components
@@ -13,7 +12,10 @@ const Form = ({ src, action, sendText }: T.FormProps) => {
     const AnimatedButton = scale(Button, 1.05, "hover");
 
     return (
-        <S.Body>
+        <div
+            className="flex-body"
+            style={{ flexDirection: "column", gap: "5vh", width: "90%" }}
+        >
             {src.map((item: any, index: number) => {
                 return (
                     <Input
@@ -28,7 +30,7 @@ const Form = ({ src, action, sendText }: T.FormProps) => {
             })}
 
             <AnimatedButton text={sendText} onClick={action} inverse={false} />
-        </S.Body>
+        </div>
     );
 };
 

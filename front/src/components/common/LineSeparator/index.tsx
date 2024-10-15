@@ -1,17 +1,29 @@
 // Modules
-import { useTheme } from "../../../hooks/useTheme";
-import Text from "../Text";
-import * as S from "./styles";
 import * as T from "./types";
+import './styles.css';
+
+// Hooks
+import { useTheme } from "../../../hooks/useTheme";
+
+// Components
+import Text from "../Text";
 
 const LineSeparator = ({ text, width, style }: T.LineSeparatorProps) => {
     const theme = useTheme();
     const color = theme.middle;
 
-    const Line = () => <S.Line style={{ borderColor: color }} />;
+    const Line = () => (
+        <hr
+            style={{ borderColor: color }}
+            className="line-separator-horisontal"
+        />
+    );
 
     return (
-        <S.Body style={{ width: `${width}%` }}>
+        <div
+            style={{ width: `${width}%`, justifyContent: "space-between" }}
+            className="flex-body"
+        >
             <Line />
 
             <Text text={text} color={color} size={1} />
@@ -19,9 +31,12 @@ const LineSeparator = ({ text, width, style }: T.LineSeparatorProps) => {
             {style === "dual" ? (
                 <Line />
             ) : (
-                <S.Line style={{ border: "none" }} />
+                <hr
+                    style={{ border: "none" }}
+                    className="line-separator-horisontal"
+                />
             )}
-        </S.Body>
+        </div>
     );
 };
 

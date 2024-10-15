@@ -1,0 +1,47 @@
+.dashboard-content {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    flex-direction: row;
+
+    width: 90%;
+    height: 98vh;
+}
+
+.dashboard-menu-body {
+    display: flex;
+
+    align-items: center;
+    justify-content: flex-start;
+
+    flex-direction: column;
+
+    width: 20%;
+    height: 85%;
+
+    gap: 5vh;
+}
+
+.dashboard-menu-content {
+    display: flex;
+
+    align-items: flex-start;
+    justify-content: center;
+
+    flex-direction: column;
+
+    gap: 2vh;
+}
+
+.dashboard-page-body {
+    display: flex;
+
+    justify-content: flex-start;
+
+    flex-direction: column;
+
+    width: 75%;
+    height: 80%;
+}

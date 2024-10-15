@@ -1,5 +1,5 @@
-// Modules
-import * as S from "./styles";
+// Libraries
+import "./styles.css";
 
 // HOCs
 import withLoader from "../../HOCs/withLoader";
@@ -8,19 +8,19 @@ import withLoader from "../../HOCs/withLoader";
 import { useState } from "react";
 
 // Components
-import Menu from "./components/Menu";
-import Page from "./components/Page";
+import Menu from "./Menu";
+import Page from "./Page";
 
 const Dashboard = () => {
     const [selectedName, setSelected] = useState<string>("Projects");
 
     return (
-        <S.Body>
-            <S.Content>
+        <div className="flex-body fill-all">
+            <div className="dashboard-content">
                 <Menu selectedName={selectedName} setSelected={setSelected} />
                 <Page selectedName={selectedName} />
-            </S.Content>
-        </S.Body>
+            </div>
+        </div>
     );
 };
 

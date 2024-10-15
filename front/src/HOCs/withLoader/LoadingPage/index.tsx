@@ -1,5 +1,3 @@
-// Modules
-import * as S from "./styles";
 import * as T from "./types";
 
 // Hooks
@@ -11,9 +9,9 @@ import { FourSquare } from "react-loading-indicators";
 const LoadingPage = ({ size }: T.LoadingPageProps) => {
     const theme = useTheme();
     return (
-        <S.Body>
+        <div className="flex-body" style={{ marginTop: "10%" }}>
             <FourSquare color={theme.secondary} size={size} speedPlus={2} />
-        </S.Body>
+        </div>
     );
 };
 

@@ -12,9 +12,9 @@ const Message = ({ text, type, style, isVisible }: T.MessageProps) => {
     const bodyStyle = S.getStyle(useTheme(), type, style, isVisible);
 
     return (
-        <S.Body style={bodyStyle}>
+        <div style={bodyStyle} className="set-border flex-body space-around">
             <Text text={text} size={1} />
-        </S.Body>
+        </div>
     );
 };
 

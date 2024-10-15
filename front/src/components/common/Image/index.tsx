@@ -1,5 +1,4 @@
 // Modules
-import * as S from "./styles";
 import * as T from "./types";
 
 // Hooks
@@ -16,9 +15,9 @@ const Image = ({ src, width, height, borderRadius }: T.ImageProps) => {
     };
 
     return (
-        <S.Body style={bodyStyle}>
-            <S.Image src={src} />
-        </S.Body>
+        <div style={bodyStyle} className="flex-body">
+            <img style={{ width: "100%" }} src={src} />
+        </div>
     );
 };
 

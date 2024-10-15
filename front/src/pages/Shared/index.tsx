@@ -1,11 +1,8 @@
-// Modules
-import * as S from "./styles";
-
 // HOCs
 import withLoader from "../../HOCs/withLoader";
 
 const Shared = () => {
-    return <S.Body>Shared</S.Body>;
+    return <div className="flex-body">Shared</div>;
 };
 
 export default withLoader(Shared, "small");

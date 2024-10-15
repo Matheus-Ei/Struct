@@ -1,11 +1,8 @@
-// Modules
-import * as S from "./styles";
-
 // HOCs
 import withLoader from "../../HOCs/withLoader";
 
 const Subscription = () => {
-    return <S.Body>Subscription</S.Body>;
+    return <div className="flex-body">Subscription</div>;
 };
 
 export default withLoader(Subscription, "small");

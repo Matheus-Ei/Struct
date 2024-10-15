@@ -1,6 +1,6 @@
 // Modules
-import * as S from "./styles";
 import * as T from "./types";
+import "./styles.css";
 
 // Hooks
 import { useTheme } from "../../../hooks/useTheme";
@@ -37,10 +37,10 @@ const Selector = ({
     };
 
     return (
-        <S.Body onClick={handleClick} style={bodyStyle}>
+        <div onClick={handleClick} style={bodyStyle} className="selector-body">
             <Icons name={icon} library={repository} color={theme.secondary} />
-            <S.Text>{name}</S.Text>
-        </S.Body>
+            <p style={{ cursor: "default" }}>{name}</p>
+        </div>
     );
 };
 

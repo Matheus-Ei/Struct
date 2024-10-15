@@ -1,14 +1,20 @@
 // Modules
-import { useTheme } from "../../../hooks/useTheme";
-import Icons from "../../../services/Icons";
-import * as S from "./styles";
 import * as T from "./types";
+
+// Hooks
+import { useTheme } from "../../../hooks/useTheme";
+
+// Components
+import Icons from "../../../services/Icons";
 
 const IconPoint = ({ icons }: T.IconPointProps) => {
     const theme = useTheme();
 
     return (
-        <S.Body>
+        <div
+            className="flex-body"
+            style={{ justifyContent: "flex-start", gap: "1vw" }}
+        >
             {icons.map((item: T.IconType, index: number) => {
                 return (
                     <Icons
@@ -20,7 +26,7 @@ const IconPoint = ({ icons }: T.IconPointProps) => {
                     />
                 );
             })}
-        </S.Body>
+        </div>
     );
 };
 

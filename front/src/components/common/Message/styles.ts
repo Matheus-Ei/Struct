@@ -1,26 +1,3 @@
-import styled from "styled-components";
-
-export const Body = styled.div`
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    width: auto;
-    height: auto;
-
-    border-radius: 10px;
-
-    padding: 2%;
-
-    padding-left: 5%;
-    padding-right: 5%;
-
-    margin-bottom: 2vh;
-
-    font-style: italic;
-`;
-
 export const getStyle = (
     theme: any,
     type: string,
