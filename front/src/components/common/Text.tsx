@@ -1,7 +1,12 @@
-// Modules
-import * as T from "./types";
+interface TextProps {
+    text: string;
+    color?: string;
+    size?: number;
+    containerWidth?: number;
+    weight?: string;
+}
 
-const Text = ({ text, color, size, weight, containerWidth }: T.TextProps) => {
+const Text = ({ text, color, size, weight, containerWidth }: TextProps) => {
     const style: Object = {
         color,
         fontWeight: weight,

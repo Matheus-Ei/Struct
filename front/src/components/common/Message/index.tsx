@@ -1,6 +1,5 @@
 // Modules
 import * as S from "./styles";
-import * as T from "./types";
 
 // Hooks
 import { useTheme } from "../../../hooks/useTheme";
@@ -8,7 +7,14 @@ import { useTheme } from "../../../hooks/useTheme";
 // Components
 import Text from "../Text";
 
-const Message = ({ text, type, style, isVisible }: T.MessageProps) => {
+interface MessageProps {
+    text: string;
+    type: string;
+    style: string;
+    isVisible: boolean;
+}
+
+const Message = ({ text, type, style, isVisible }: MessageProps) => {
     const bodyStyle = S.getStyle(useTheme(), type, style, isVisible);
 
     return (

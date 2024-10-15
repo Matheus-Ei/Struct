@@ -1,23 +1,36 @@
-// Modules
-import * as S from "./styles";
-import * as T from "./types";
-
 // Components
-import Text from "../Text";
+import Text from "./Text";
 
 // Hooks
-import { useTheme } from "../../../hooks/useTheme";
-import useToggle from "../../../hooks/useToggle";
+import { useTheme } from "../../hooks/useTheme";
+import useToggle from "../../hooks/useToggle";
 import { useEffect } from "react";
 
-const Button = ({ text, onClick, inverse }: T.ButtonProps) => {
+export const getStyle = (theme: any, isClicked: boolean) => {
+    const style = isClicked
+        ? {
+              borderColor: theme.secondary,
+              backgroundColor: theme.primary,
+          }
+        : { borderColor: theme.primary, backgroundColor: theme.secondary };
+
+    return style;
+};
+
+interface ButtonProps {
+    text: string;
+    onClick: () => any;
+    inverse: boolean;
+}
+
+const Button = ({ text, onClick, inverse }: ButtonProps) => {
     const [isClicked, toggleIsClicked] = useToggle(false);
 
     useEffect(() => {
         toggleIsClicked(inverse);
     }, []);
 
-    const style = S.getStyle(useTheme(), isClicked);
+    const style = getStyle(useTheme(), isClicked);
 
     const returnDefaultStyle = () => {
         toggleIsClicked(inverse);

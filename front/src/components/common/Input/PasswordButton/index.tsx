@@ -1,16 +1,24 @@
 // Modules
-import * as T from "./types";
 import "./styles.css";
 
 // Services
 import Icons from "../../../../services/Icons";
 import { useTheme } from "../../../../hooks/useTheme";
 
+// Libraries
+import React from "react";
+
+interface PasswordButtonProps {
+    showPassword: boolean;
+    toggleShowPassword: () => React.ComponentState;
+    isPassword: boolean;
+}
+
 const PasswordButton = ({
     showPassword,
     toggleShowPassword,
     isPassword,
-}: T.PasswordButtonProps) => {
+}: PasswordButtonProps) => {
     const theme = useTheme();
 
     if (!isPassword) {

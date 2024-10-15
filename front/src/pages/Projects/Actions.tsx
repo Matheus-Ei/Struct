@@ -1,12 +1,12 @@
-// Modules
-import * as T from "./types";
-import * as F from "./functions";
-
 // Components
-import Selector from "../../../components/common/Selector";
-import LineSeparator from "../../../components/common/LineSeparator";
+import Selector from "../../components/common/Selector";
+import LineSeparator from "../../components/common/LineSeparator";
 
-const Actions = ({}: T.ActionsProps) => {
+const createProject = (type: string) => {};
+
+interface ActionsProps {}
+
+const Actions = ({}: ActionsProps) => {
     return (
         <div className="projects-actions-body">
             <LineSeparator text="New Project" width={50} style="dual" />
@@ -15,7 +15,7 @@ const Actions = ({}: T.ActionsProps) => {
                     name="Singular"
                     icon="GoSingleSelect"
                     repository="go"
-                    onClick={() => F.createProject("Singular")}
+                    onClick={() => createProject("Singular")}
                     isSelected={false}
                 />
 
@@ -23,7 +23,7 @@ const Actions = ({}: T.ActionsProps) => {
                     name="Compost"
                     icon="RiCheckboxMultipleBlankFill"
                     repository="ri"
-                    onClick={() => F.createProject("Compost")}
+                    onClick={() => createProject("Compost")}
                     isSelected={false}
                 />
 
@@ -31,7 +31,7 @@ const Actions = ({}: T.ActionsProps) => {
                     name="Monopage"
                     icon="SiPronounsdotpage"
                     repository="si"
-                    onClick={() => F.createProject("Monopage")}
+                    onClick={() => createProject("Monopage")}
                     isSelected={false}
                 />
             </div>

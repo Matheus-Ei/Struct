@@ -1,10 +1,16 @@
-// Modules
-import * as T from "./types";
-
 // Hooks
-import { useTheme } from "../../../hooks/useTheme";
+import { useTheme } from "../../hooks/useTheme";
 
-const Image = ({ src, width, height, borderRadius }: T.ImageProps) => {
+interface ImageProps {
+    src: string;
+
+    borderRadius?: number;
+
+    height?: number;
+    width?: number;
+}
+
+const Image = ({ src, width, height, borderRadius }: ImageProps) => {
     const theme = useTheme();
 
     const bodyStyle = {

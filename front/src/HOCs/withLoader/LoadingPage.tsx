@@ -1,12 +1,14 @@
-import * as T from "./types";
-
 // Hooks
-import { useTheme } from "../../../hooks/useTheme";
+import { useTheme } from "../../hooks/useTheme";
 
 // Components
 import { FourSquare } from "react-loading-indicators";
 
-const LoadingPage = ({ size }: T.LoadingPageProps) => {
+interface LoadingPageProps {
+    size: "small" | "medium" | "large";
+}
+
+const LoadingPage = ({ size }: LoadingPageProps) => {
     const theme = useTheme();
     return (
         <div className="flex-body" style={{ marginTop: "10%" }}>

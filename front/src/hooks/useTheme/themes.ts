@@ -1,4 +1,4 @@
-import * as I from "./interface";
+import * as I from "./types";
 
 const light: I.VarType = {
     primary: "#ffffff",

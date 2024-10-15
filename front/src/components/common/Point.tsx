@@ -1,14 +1,17 @@
-// Modules
-import * as T from "./types";
-
 // Components
-import Icons from "../../../services/Icons";
-import Text from "../Text";
+import Icons from "../../services/Icons";
+import Text from "./Text";
 
 // Hooks
-import { useTheme } from "../../../hooks/useTheme";
+import { useTheme } from "../../hooks/useTheme";
 
-const Point = ({ icon, library, text }: T.PointProps) => {
+interface PointProps {
+    text: string;
+    icon: string;
+    library: string;
+}
+
+const Point = ({ icon, library, text }: PointProps) => {
     const theme = useTheme();
 
     return (

@@ -1,11 +1,13 @@
-// Modules
-import * as T from "./types";
-
 // Components
-import Text from "../../../../components/common/Text";
-import { useTheme } from "../../../../hooks/useTheme";
+import Text from "../../../components/common/Text";
+import { useTheme } from "../../../hooks/useTheme";
 
-const Header = ({ title, description }: T.HeaderProps) => {
+interface HeaderProps {
+    title: string;
+    description: string;
+}
+
+const Header = ({ title, description }: HeaderProps) => {
     const theme = useTheme();
 
     return (

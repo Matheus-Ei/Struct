@@ -1,6 +1,6 @@
 import { useEffect, createContext, useState, useContext } from "react";
 import styles from "./themes";
-import * as I from "./interface";
+import * as T from "./types";
 
 export const useSize = () => {
     const [size, setSize] = useState<Object>();
@@ -17,7 +17,7 @@ export const useSize = () => {
 
 export const context = createContext<any>(undefined);
 export const ThemeProvider = ({ children }: any) => {
-    const [theme, defTheme] = useState<I.Theme>(styles["default"]);
+    const [theme, defTheme] = useState<T.Theme>(styles["default"]);
 
     return (
         <context.Provider value={{ theme, defTheme }}>
@@ -26,7 +26,7 @@ export const ThemeProvider = ({ children }: any) => {
     );
 };
 
-export const useTheme = (newTheme?: string): I.Theme => {
+export const useTheme = (newTheme?: string): T.Theme => {
     const { theme, defTheme } = useContext(context);
 
     if (newTheme) {

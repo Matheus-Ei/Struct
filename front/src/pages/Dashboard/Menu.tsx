@@ -1,18 +1,27 @@
 // Modules
-import * as T from "./types";
-import routes from "../routes";
+import routes from "./routes";
 
 // Hooks
-import { useTheme } from "../../../hooks/useTheme";
+import { useTheme } from "../../hooks/useTheme";
 
 // Utils
-import File from "../../../utils/file";
+import File from "../../utils/file";
 
 // Components
-import Selector from "../../../components/common/Selector";
-import Image from "../../../components/common/Image";
+import Selector from "../../components/common/Selector";
+import Image from "../../components/common/Image";
 
-const Menu = ({ selectedName, setSelected }: T.MenuProps) => {
+// Libraries
+import { Dispatch, SetStateAction } from "react";
+
+interface MenuProps {
+    selectedName: string;
+    setSelected: Dispatch<SetStateAction<string>>;
+}
+
+type SingleRouteType = [string, string, string, () => JSX.Element];
+
+const Menu = ({ selectedName, setSelected }: MenuProps) => {
     const theme = useTheme();
 
     return (
@@ -22,7 +31,7 @@ const Menu = ({ selectedName, setSelected }: T.MenuProps) => {
                 src={File.get(`images/logo-1920x1080-2-${theme.style}.png`)}
             />
             <div className="dashboard-menu-content">
-                {routes.map((item: T.SingleRouteType, index: number) => {
+                {routes.map((item: SingleRouteType, index: number) => {
                     return (
                         <Selector
                             name={item[0]}

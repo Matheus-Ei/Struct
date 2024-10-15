@@ -1,5 +1,4 @@
 // Modules
-import * as T from "./types";
 import "./styles.css";
 
 // Hooks
@@ -8,8 +7,20 @@ import { useTheme } from "../../../hooks/useTheme";
 // Services
 import Icons from "../../../services/Icons";
 
+// Libraries
+import { Dispatch, SetStateAction } from "react";
+
 // Animations
 import scale from "../../../animations/scale";
+
+interface SelectorProps {
+    name: string;
+    icon: string;
+    repository: string;
+    isSelected: boolean;
+    setSelected?: Dispatch<SetStateAction<string>>;
+    onClick?: () => any;
+}
 
 const Selector = ({
     name,
@@ -18,7 +29,7 @@ const Selector = ({
     isSelected,
     setSelected,
     onClick,
-}: T.SelectorProps) => {
+}: SelectorProps) => {
     const theme = useTheme();
 
     const bodyStyle: Object = {

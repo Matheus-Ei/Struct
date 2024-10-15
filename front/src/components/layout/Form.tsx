@@ -1,14 +1,17 @@
-// Modules
-import * as T from "./types";
-
 // Components
-import Input from "../../common/Input";
-import Button from "../../common/Button";
+import Input from "../common/Input";
+import Button from "../common/Button";
 
 // Animations
-import scale from "../../../animations/scale";
+import scale from "../../animations/scale";
 
-const Form = ({ src, action, sendText }: T.FormProps) => {
+interface FormProps {
+    src: Array<any>;
+    action: () => void;
+    sendText: string;
+}
+
+const Form = ({ src, action, sendText }: FormProps) => {
     const AnimatedButton = scale(Button, 1.05, "hover");
 
     return (

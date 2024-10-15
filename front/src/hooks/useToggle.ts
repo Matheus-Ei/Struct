@@ -1,8 +1,7 @@
-// Modules
-import * as T from "./types";
-
 // Hooks
 import { useState } from "react";
+
+type ToggleType = [value: boolean, toggleValue: (value?: boolean) => void];
 
 const useToggle = (defaultValue: boolean) => {
     const [value, setValue] = useState(defaultValue);
@@ -13,7 +12,7 @@ const useToggle = (defaultValue: boolean) => {
         );
     };
 
-    const returnValues: T.ToggleType = [value, toggleValue];
+    const returnValues: ToggleType = [value, toggleValue];
     return returnValues;
 };
 

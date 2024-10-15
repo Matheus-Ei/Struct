@@ -1,6 +1,5 @@
 // Modules
 import * as S from "./styles";
-import * as T from "./types";
 
 // Hooks
 import { useTheme } from "../../../hooks/useTheme";
@@ -9,7 +8,17 @@ import useToggle from "../../../hooks/useToggle";
 // Components
 import PasswordButton from "./PasswordButton";
 
-const Input = ({ text, setInput, isPassword, height, width }: T.InputProps) => {
+// Types
+interface InputProps {
+    text: string;
+    setInput: (event: Event) => any;
+    isPassword: boolean;
+
+    width?: number;
+    height?: number;
+}
+
+const Input = ({ text, setInput, isPassword, height, width }: InputProps) => {
     const theme = useTheme();
     const [showPassword, toggleShowPassword] = useToggle(isPassword);
 

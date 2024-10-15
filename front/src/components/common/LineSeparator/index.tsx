@@ -1,6 +1,5 @@
 // Modules
-import * as T from "./types";
-import './styles.css';
+import "./styles.css";
 
 // Hooks
 import { useTheme } from "../../../hooks/useTheme";
@@ -8,7 +7,13 @@ import { useTheme } from "../../../hooks/useTheme";
 // Components
 import Text from "../Text";
 
-const LineSeparator = ({ text, width, style }: T.LineSeparatorProps) => {
+interface LineSeparatorProps {
+    text: string;
+    width: number;
+    style: "mono" | "dual";
+}
+
+const LineSeparator = ({ text, width, style }: LineSeparatorProps) => {
     const theme = useTheme();
     const color = theme.middle;
 
