@@ -19,9 +19,7 @@ interface BlankSeparatorProps {
 }
 
 const BlankSeparator = ({ size, direction }: BlankSeparatorProps) => {
-    const style = getStyle(direction, size);
-
-    return <div style={style}></div>;
+    return <div></div>;
 };
 
 export default BlankSeparator;

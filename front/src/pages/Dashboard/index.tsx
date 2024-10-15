@@ -1,6 +1,3 @@
-// Libraries
-import "./styles.css";
-
 // HOCs
 import withLoader from "../../HOCs/withLoader";
 
@@ -15,11 +12,9 @@ const Dashboard = () => {
     const [selectedName, setSelected] = useState<string>("Projects");
 
     return (
-        <div className="flex-body fill-all">
-            <div className="dashboard-content">
-                <Menu selectedName={selectedName} setSelected={setSelected} />
-                <Page selectedName={selectedName} />
-            </div>
+        <div>
+            <Menu selectedName={selectedName} setSelected={setSelected} />
+            <Page selectedName={selectedName} />
         </div>
     );
 };

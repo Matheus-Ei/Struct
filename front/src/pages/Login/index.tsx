@@ -34,18 +34,14 @@ const Login = () => {
     };
 
     return (
-        <div className="flex-body fill-all-definitive">
-            <Card width={30}>
-                <div
-                    className="flex-body fill-all"
-                    style={{ flexDirection: "column" }}
-                >
+        <div>
+            <Card>
+                <div style={{ flexDirection: "column" }}>
                     <Logo
                         src={File.get(
                             `images/logo-1920x1080-1-${theme.style}.png`
                         )}
                         text="Venha fazer parte de um mundo mais organizado."
-                        flexDirection="column"
                     />
 
                     <BlankSeparator size={60} direction="vertical" />

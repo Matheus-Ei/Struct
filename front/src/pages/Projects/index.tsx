@@ -1,6 +1,5 @@
 // Modules
 import * as T from "./types";
-import "./styles.css";
 
 // Components
 import Project from "./Project";
@@ -13,7 +12,6 @@ import withLoader from "../../HOCs/withLoader";
 import Request from "../../services/Request";
 
 // Hooks
-import { useTheme } from "../../hooks/useTheme";
 import { useEffect, useState } from "react";
 
 const getProjects = (projects: any, setProjects: T.SetProjectsType) => {
@@ -34,7 +32,6 @@ const getProjects = (projects: any, setProjects: T.SetProjectsType) => {
 
 const Projects = () => {
     const [projects, setProjects] = useState<T.ProjectsType>([]);
-    const theme = useTheme();
 
     useEffect(() => {
         const backUrl = process.env.REACT_APP_BACK_URL as string;
@@ -44,23 +41,11 @@ const Projects = () => {
     }, []);
 
     return (
-        <div
-            className="flex-body fill-all"
-            style={{ justifyContent: "flex-start", flexDirection: "column" }}
-        >
+        <div>
             {projects.length !== 0 ? (
-                <div
-                    className="scroll-grid-2x2"
-                    style={{
-                        borderBottomColor: theme.semi,
-                    }}
-                >
-                    {getProjects(projects, setProjects)}
-                </div>
+                <div>{getProjects(projects, setProjects)}</div>
             ) : (
-                <p style={{ color: theme.middle }}>
-                    Big things will be here soon...
-                </p>
+                <p>Big things will be here soon...</p>
             )}
             <Actions />
         </div>

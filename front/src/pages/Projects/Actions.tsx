@@ -8,9 +8,9 @@ interface ActionsProps {}
 
 const Actions = ({}: ActionsProps) => {
     return (
-        <div className="projects-actions-body">
+        <div>
             <LineSeparator text="New Project" width={50} style="dual" />
-            <div className="projects-actions-content">
+            <div>
                 <Selector
                     name="Singular"
                     icon="GoSingleSelect"

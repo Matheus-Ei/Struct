@@ -18,20 +18,18 @@ const Project = ({
     setProjects,
 }: T.ProjectProps) => {
     return (
-        <div className="project-body">
-            <Card width={100} height={100}>
-                <div className="project-card-body">
-                    <Header title={title} description={description} />
+        <Card>
+            <div>
+                <Header title={title} description={description} />
 
-                    <Footer
-                        type={type}
-                        modules={modules}
-                        projectId={id}
-                        setProjects={setProjects}
-                    />
-                </div>
-            </Card>
-        </div>
+                <Footer
+                    type={type}
+                    modules={modules}
+                    projectId={id}
+                    setProjects={setProjects}
+                />
+            </div>
+        </Card>
     );
 };
 

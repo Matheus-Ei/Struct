@@ -2,7 +2,7 @@
 import withLoader from "../../HOCs/withLoader";
 
 const Profile = () => {
-    return <div className="flex-body">Profile</div>;
+    return <div>Profile</div>;
 };
 
 export default withLoader(Profile, "small");

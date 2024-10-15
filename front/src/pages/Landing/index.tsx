@@ -1,10 +1,13 @@
 // HOCs
 import withLoader from "../../HOCs/withLoader";
 
+// Components
+import Text from "../../components/common/Text";
+
 const Landing = () => {
     return (
-        <div className="flex-body">
-            <p>Landing page</p>
+        <div>
+            <Text text="Test" />
         </div>
     );
 };

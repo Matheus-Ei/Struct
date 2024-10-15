@@ -1,6 +1,5 @@
 // Components
 import Text from "../../../components/common/Text";
-import { useTheme } from "../../../hooks/useTheme";
 
 interface HeaderProps {
     title: string;
@@ -8,13 +7,11 @@ interface HeaderProps {
 }
 
 const Header = ({ title, description }: HeaderProps) => {
-    const theme = useTheme();
-
     return (
-        <div className="project-header-body">
-            <Text text={title} weight="bold" color={theme.secondary} />
+        <div>
+            <Text text={title} />
 
-            <Text text={description} containerWidth={90} color={theme.middle} />
+            <Text text={description} />
         </div>
     );
 };

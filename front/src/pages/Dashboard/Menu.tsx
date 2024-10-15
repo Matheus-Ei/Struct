@@ -25,12 +25,11 @@ const Menu = ({ selectedName, setSelected }: MenuProps) => {
     const theme = useTheme();
 
     return (
-        <div className="dashboard-menu-body">
+        <div>
             <Image
-                width={80}
                 src={File.get(`images/logo-1920x1080-2-${theme.style}.png`)}
             />
-            <div className="dashboard-menu-content">
+            <div>
                 {routes.map((item: SingleRouteType, index: number) => {
                     return (
                         <Selector

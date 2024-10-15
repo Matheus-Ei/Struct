@@ -2,7 +2,7 @@
 import withLoader from "../../HOCs/withLoader";
 
 const Subscription = () => {
-    return <div className="flex-body">Subscription</div>;
+    return <div>Subscription</div>;
 };
 
 export default withLoader(Subscription, "small");

@@ -15,8 +15,8 @@ const Footer = ({ type, modules, projectId, setProjects }: T.FooterProps) => {
     });
 
     return (
-        <div className="project-footer-body">
-            <div className="project-footer-informations">
+        <div>
+            <div>
                 <Point icon={typeIcon[0]} library={typeIcon[1]} text={type} />
                 {type !== "Compost" ? (
                     <Point
@@ -29,25 +29,22 @@ const Footer = ({ type, modules, projectId, setProjects }: T.FooterProps) => {
                 )}
             </div>
 
-            <div className="project-footer-actions">
+            <div>
                 <ButtonIcon
-                    name="MdOpenInNew"
+                    icon="MdOpenInNew"
                     library="md"
-                    size={20}
                     onClick={() => F.handleOpen(projectId)}
                 />
 
                 <ButtonIcon
-                    name="FaRegEdit"
+                    icon="FaRegEdit"
                     library="fa"
-                    size={20}
                     onClick={() => F.handleEdit(projectId)}
                 />
 
                 <ButtonIcon
-                    name="FaTrash"
+                    icon="FaTrash"
                     library="fa"
-                    size={20}
                     onClick={() => F.handleDelete(projectId, setProjects)}
                 />
             </div>

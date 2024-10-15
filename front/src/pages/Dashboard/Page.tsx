@@ -12,7 +12,7 @@ type SingleRouteType = [string, string, string, () => JSX.Element];
 
 const Page = ({ selectedName }: PageProps) => {
     return (
-        <div className="dashboard-page-body">
+        <div>
             {routes.map((item: SingleRouteType, index: number) => {
                 const page = item[3];
                 if (item[0] === selectedName) {
