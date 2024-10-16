@@ -1,0 +1,51 @@
+/* Libraries */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap");
+
+body {
+    @apply bg-primary text-secondary transition-colors duration-500;
+    font-family: "Instrument Sans", sans-serif;
+}
+
+/* Themes */
+:root {
+    --primary: #ffffff;
+    --secondary: #000000;
+
+    --middle: #888888;
+    --semi: #e6e6e6;
+
+    --error: #ff9898;
+    --success: #83ee84;
+
+    --font: "Instrument Sans", sans-serif;
+}
+
+[data-theme="light"] {
+    --primary: #ffffff;
+    --secondary: #000000;
+
+    --middle: #888888;
+    --semi: #e6e6e6;
+
+    --error: #ff9898;
+    --success: #83ee84;
+
+    --font: "Instrument Sans", sans-serif;
+}
+
+[data-theme="dark"] {
+    --primary: #111111;
+    --secondary: #ffffff;
+
+    --middle: #a8a8a8;
+    --semi: #373737;
+
+    --error: #cc0000;
+    --success: #4bb543;
+
+    --font: "Instrument Sans", sans-serif;
+}

@@ -16,7 +16,7 @@ class Navigator {
         );
     }
 
-    setup(): JSX.Element {
+    setup() {
         return (
             <Routes>
                 {routes.map((item, index) => {
