@@ -34,9 +34,11 @@ const Login = () => {
     };
 
     return (
-        <div>
+        <div className="flex items-center justify-center w-screen h-screen">
             <Card>
-                <div style={{ flexDirection: "column" }}>
+                <div className="flex flex-col items-center justify-center w-[30vw] h-[60vh] ">
+                    <BlankSeparator size={60} direction="vertical" />
+
                     <Logo
                         src={File.get(
                             `images/logo-1920x1080-1-${theme.style}.png`
@@ -64,11 +66,7 @@ const Login = () => {
 
                     <BlankSeparator size={35} direction="vertical" />
 
-                    <LineSeparator
-                        text="Or login with"
-                        width={80}
-                        style="dual"
-                    />
+                    <LineSeparator text="Or login with" style="dual" />
 
                     <BlankSeparator size={120} direction="vertical" />
                 </div>

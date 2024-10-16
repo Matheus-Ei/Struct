@@ -9,7 +9,7 @@ interface ActionsProps {}
 const Actions = ({}: ActionsProps) => {
     return (
         <div>
-            <LineSeparator text="New Project" width={50} style="dual" />
+            <LineSeparator text="New Project" style="dual" />
             <div>
                 <Selector
                     name="Singular"

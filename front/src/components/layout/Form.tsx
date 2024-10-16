@@ -10,7 +10,7 @@ interface FormProps {
 
 const Form = ({ src, action, sendText }: FormProps) => {
     return (
-        <div>
+        <div className="flex flex-col items-center justify-center gap-2 w-full">
             {src.map((item: any, index: number) => {
                 return (
                     <Input
@@ -22,7 +22,7 @@ const Form = ({ src, action, sendText }: FormProps) => {
                 );
             })}
 
-            <Button text={sendText} onClick={action} />
+            <Button text={sendText} onClick={action} inverse={true} />
         </div>
     );
 };

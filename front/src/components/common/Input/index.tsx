@@ -7,7 +7,7 @@ import PasswordButton from "./PasswordButton";
 interface InputProps {
     text: string;
     isPassword: boolean;
-    setInput: (event: Event) => any;
+    setInput: (arg0: any) => any;
 }
 
 const Input = ({ text, setInput, isPassword }: InputProps) => {
@@ -18,8 +18,9 @@ const Input = ({ text, setInput, isPassword }: InputProps) => {
     };
 
     return (
-        <div>
+        <div className="flex items-center h-14 w-4/5">
             <input
+                className="rounded-lg border border-neutral-400 dark:border-neutral-700 pl-3 h-full w-full"
                 onChange={handleInputChange}
                 type={!showPassword ? "text" : "password"}
                 placeholder={text}

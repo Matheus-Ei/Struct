@@ -9,8 +9,10 @@ interface PointProps {
 }
 
 const Point = ({ icon, library, text }: PointProps) => {
+    const style = `flex items-center justify-center w-fit gap-5 rounded-lg px-5 py-1`;
+
     return (
-        <div>
+        <div className={style}>
             <Icons name={icon} library={library} size={20} />
 
             <Text text={text} />

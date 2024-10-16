@@ -20,8 +20,16 @@ const PasswordButton = ({
     }
 
     return (
-        <div onClick={() => toggleShowPassword()}>
-            <Icons library="fa6" name={showPassword ? "FaEye" : "FaEyeSlash"} />
+        <div
+            className="relative right-14 h-fit w-0"
+            onClick={() => toggleShowPassword()}
+        >
+            <Icons
+                library="fa6"
+                name={showPassword ? "FaEye" : "FaEyeSlash"}
+                size={30}
+                color="neutral-300"
+            />
         </div>
     );
 };

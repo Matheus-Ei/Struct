@@ -14,7 +14,7 @@ interface IconPointProps {
 
 const IconPoint = ({ icons }: IconPointProps) => {
     return (
-        <div>
+        <div className="flex flex-row gap-4">
             {icons.map((item: IconType, index: number) => {
                 return (
                     <Icons

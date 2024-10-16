@@ -2,14 +2,16 @@
 import withLoader from "../../HOCs/withLoader";
 
 // Components
-import Text from "../../components/common/Text";
+import { useDark } from "../../hooks/useTheme";
+import { useEffect, useState } from "react";
 
 const Landing = () => {
-    return (
-        <div>
-            <Text text="Test" />
-        </div>
-    );
+    const [theme, setTheme] = useDark();
+    useEffect(() => {
+        setTheme("light");
+    }, []);
+
+    return <div></div>;
 };
 
 export default withLoader(Landing, "small");

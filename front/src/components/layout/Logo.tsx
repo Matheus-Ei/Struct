@@ -9,7 +9,7 @@ interface LogoProps {
 
 const Logo = ({ src, text }: LogoProps): JSX.Element => {
     return (
-        <div>
+        <div className="flex flex-col items-center h-[30%]">
             <Image src={src} />
             <Text text={text ? text : ""} />
         </div>

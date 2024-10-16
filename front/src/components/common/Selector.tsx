@@ -31,8 +31,9 @@ const Selector = ({
         }
     };
 
+    const style = `flex items-center justify-center w-fit gap-5 ${isSelected && "bg-neutral-100 dark:bg-neutral-800"} rounded-lg px-5 py-1`;
     return (
-        <div onClick={handleClick}>
+        <div className={style} onClick={handleClick}>
             <Icons name={icon} library={repository} />
             <p>{name}</p>
         </div>

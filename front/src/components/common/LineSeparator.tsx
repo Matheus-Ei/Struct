@@ -3,20 +3,17 @@ import Text from "./Text";
 
 interface LineSeparatorProps {
     text: string;
-    width: number;
     style: "mono" | "dual";
 }
 
-const LineSeparator = ({ text, width, style }: LineSeparatorProps) => {
-    const Line = () => <hr />;
-
+const LineSeparator = ({ text, style }: LineSeparatorProps) => {
     return (
-        <div>
-            <Line />
+        <div className="flex flex-row items-center justify-between w-3/4 ">
+            <hr className="border w-1/3" />
 
             <Text text={text} />
 
-            {style === "dual" ? <Line /> : <hr />}
+            <hr className="border w-1/3" />
         </div>
     );
 };

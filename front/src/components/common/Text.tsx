@@ -3,7 +3,7 @@ interface TextProps {
 }
 
 const Text = ({ text }: TextProps) => {
-    return <p className="text-neutral-950 dark:text-neutral-50">{text}</p>;
+    return <p className="text-center w-fit m-0">{text}</p>;
 };
 
 export default Text;
