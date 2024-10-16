@@ -10,7 +10,8 @@ class Login {
         password: string,
         navigate: NavigateFunction
     ) {
-        const url = `${process.env.REACT_APP_BACK_URL}/user/login`;
+        const url = `${process.env.REACT_APP_BACK_URL as string}/user/login`;
+        console.log(url);
 
         const response = await Request.post(url, {
             mail,
@@ -27,7 +28,7 @@ class Login {
     }
 
     static async check(navigate: NavigateFunction) {
-        const checkTkUrl = `${process.env.REACT_APP_BACK_URL}/token/check`;
+        const checkTkUrl = `${process.env.REACT_APP_BACK_URL as string}/token/check`;
 
         const response = await Request.get(checkTkUrl);
         if (response === false) {
