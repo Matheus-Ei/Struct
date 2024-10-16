@@ -1,14 +1,14 @@
 // Libraries
 import express from "express";
 import dotenv from "dotenv";
-import auth from "./middlewares/auth.js";
+import auth from "./middlewares/auth";
 
 // Middlewares
 import cors from "cors";
 import cookieParser from "cookie-parser";
 
 // Routes
-import mainRoutes from "./system/routes.js";
+import mainRoutes from "./system/routes";
 
 export class App {
     private app: any;

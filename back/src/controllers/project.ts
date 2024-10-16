@@ -2,14 +2,14 @@
 import { Request, Response } from "express";
 
 // Services
-import Cookie from "../services/cookie.js";
+import Cookie from "../services/cookie";
 
 // Services
-import operations from "../services/database/operations.js";
+import operations from "../services/database/operations";
 
 // Models
-import ProjectModel from "../models/project.js";
-import RelationshipProjectModuleModel from "../models/relatioshipProjectModule.js";
+import ProjectModel from "../models/project";
+import RelationshipProjectModuleModel from "../models/relatioshipProjectModule";
 
 class ProjectController {
     public async get(req: Request, res: Response) {

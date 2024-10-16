@@ -1,7 +1,7 @@
 // Routes
-import UserRoute from "../routes/user.js";
-import TokenRoute from "../routes/token.js";
-import ProjectRoute from "../routes/project.js";
+import UserRoute from "../routes/user";
+import TokenRoute from "../routes/token";
+import ProjectRoute from "../routes/project";
 
 type MainRoutesType = Array<[String, Object]>;
 
