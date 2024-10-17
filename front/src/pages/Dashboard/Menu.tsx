@@ -15,10 +15,10 @@ interface MenuProps {
 
 const Menu = ({ selected, setSelected }: MenuProps) => {
     return (
-        <div className="w-1/4 h-[90vh] flex flex-col items-center justify-center">
+        <div className="w-1/4 h-[90vh] flex flex-col items-center justify-center text-base-content">
             <Logo className="relative right-2 w-36 h-36 mb-12" />
 
-            <div className="flex flex-col gap-4 items-start">
+            <div className="flex flex-col gap-4 items-start text-primary">
                 {endpoints.map((item, index) => {
                     const handleClick = () => {
                         setSelected(item.name);

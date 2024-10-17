@@ -20,7 +20,7 @@ class Cookie {
             httpOnly: true,
             secure: true,
             maxAge: 7 * 24 * 60 * 60 * 1000,
-            sameSite: "none" as "none",
+            sameSite: "strict" as "strict", //"none" as "none"
             ...options,
         };
 

@@ -30,9 +30,9 @@ const Login = () => {
         <div className="w-screen h-screen flex items-center justify-center">
             <Card>
                 <div className="flex flex-col items-center justify-center w-[30vw]">
-                    <Logo className="text-secondary w-full h-fit mb-4" />
+                    <Logo className="text-primary w-full h-fit mb-4" />
 
-                    <p className="text-middle mb-32 text-center text-lg">
+                    <p className="text-primary mb-32 text-center text-lg">
                         Venha fazer parte de um mundo mais organizado.
                     </p>
 
@@ -49,7 +49,7 @@ const Login = () => {
                         isPassword={true}
                     />
 
-                    <Button text="LOGIN" inverse={true} onClick={handleLogin} />
+                    <Button text="LOGIN" inverse={false} onClick={handleLogin} />
                 </div>
             </Card>
         </div>
