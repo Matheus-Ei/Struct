@@ -11,7 +11,6 @@ class Login {
         navigate: NavigateFunction
     ) {
         const url = `${process.env.REACT_APP_BACK_URL as string}/user/login`;
-        console.log(url);
 
         const response = await Request.post(url, {
             mail,

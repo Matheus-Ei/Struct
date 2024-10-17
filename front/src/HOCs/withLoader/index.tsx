@@ -9,11 +9,7 @@ import LoadingPage from "./LoadingPage";
 // Libraries
 import { motion, AnimatePresence } from "framer-motion";
 
-const withLoader = (
-    WrappedComponent: ComponentType,
-    size: "small" | "medium" | "large",
-    checkLogin?: boolean
-) => {
+const withLoader = (WrappedComponent: ComponentType, checkLogin?: boolean) => {
     return function WithLoader() {
         const [loading, setLoading] = useState(true);
         const [canRenderComponent, setCanRenderComponent] = useState(false);

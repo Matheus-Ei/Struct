@@ -1,40 +1,47 @@
 // Components
-import Button from "../../components/Button";
-import Card from "../../components/Card";
-import Input from "../../components/Input";
+import Button from "../components/Button";
+import Card from "../components/Card";
+import Input from "../components/Input";
+import { ReactComponent as Logo } from "../assets/logo-1800x400-1.svg";
 
 // Utils
-import login from "../../utils/login";
+import login from "../utils/login";
 
 // Hooks
 import { useState } from "react";
 import { useNavigate } from "react-router";
-import File from "../../services/File";
+import Message from "../components/Message";
+import useToggle from "../hooks/useToggle";
 
 const Login = () => {
-    document.documentElement.setAttribute("data-theme", "light");
-
     const [mail, setMail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
+    const [error, toggleError] = useToggle(false);
 
     const navigate = useNavigate();
 
     const handleLogin = () => {
-        login.make(mail, password, navigate);
+        login.make(mail, password, navigate).then((response) => {
+            toggleError(true);
+        });
     };
 
     return (
         <div className="w-screen h-screen flex items-center justify-center">
             <Card>
                 <div className="flex flex-col items-center justify-center w-[30vw]">
-                    <h1 className="text-secondary font-bold text-4xl mb-2">
-                        LOGIN
-                    </h1>
+                    <Logo className="text-secondary w-full h-fit mb-4" />
 
                     <p className="text-middle mb-32 text-center text-lg">
                         Venha fazer parte de um mundo mais organizado.
                     </p>
 
+                    <Message
+                        text="Mail or password incorrect, please, try again..."
+                        type="error"
+                        style="text"
+                        isVisible={error}
+                    />
                     <Input text="Mail" setValue={setMail} />
                     <Input
                         text="Password"

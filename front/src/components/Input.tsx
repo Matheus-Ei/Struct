@@ -11,7 +11,7 @@ const Input = ({ text, setValue, isPassword }: InputProps) => {
 
     return (
         <input
-            className="border rounded-lg h-12 w-[95%] pl-4 border-middle mb-3 bg-primary"
+            className="border rounded-lg h-14 w-[95%] pl-4 border-middle mb-3 bg-primary"
             placeholder={text}
             onChange={handleChange}
             type={!isPassword ? "text" : "password"}
