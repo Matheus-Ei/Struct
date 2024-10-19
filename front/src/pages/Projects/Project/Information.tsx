@@ -1,9 +1,8 @@
+// Components
 import Point from "components/Point";
 
-interface InformationProps {
-    type: "Singular" | "Compost" | "Monopage";
-    modules: Array<string>;
-}
+// Modules
+import { InformationProps } from "../types";
 
 const getModulesIcons = (module: string) => {
     switch (module) {
@@ -49,7 +48,7 @@ const getModules = ({ type, modules }: InformationProps) => {
 
         case "Compost":
             return (
-                <div className="ml-2 flex flex-row items-start justify-center gap-2">
+                <div className="ml-3 flex flex-row items-start justify-center gap-2">
                     {modules.map((item, index) => {
                         const [icon, library] = getModulesIcons(item);
                         return (

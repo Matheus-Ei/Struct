@@ -1,28 +1,11 @@
+// Components
 import Card from "components/Card";
-import { Dispatch, SetStateAction } from "react";
 import Actions from "./Actions";
 import Header from "./Header";
 import Information from "./Information";
 
-// Components
-interface ProjectProps {
-    title: string;
-    description: string;
-    type: "Singular" | "Compost" | "Monopage";
-    modules: Array<string>;
-    projectId: number;
-    setProjects: Dispatch<
-        SetStateAction<
-            Array<{
-                title: string;
-                description: string;
-                type: "Singular" | "Compost" | "Monopage";
-                module: Array<string>;
-                id: number;
-            }>
-        >
-    >;
-}
+// Modules
+import { ProjectProps } from "../types";
 
 const Project = ({
     title,

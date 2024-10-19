@@ -1,21 +1,11 @@
+// Components
 import Point from "components/Point";
-import { Dispatch, SetStateAction } from "react";
+
+// Services
 import Request from "services/Request";
 
-interface ActionsProps {
-    projectId: number;
-    setProjects: Dispatch<
-        SetStateAction<
-            Array<{
-                title: string;
-                description: string;
-                type: "Singular" | "Compost" | "Monopage";
-                module: Array<string>;
-                id: number;
-            }>
-        >
-    >;
-}
+// Modules
+import { ActionsProps } from "../types";
 
 const handleDelete = ({ projectId, setProjects }: ActionsProps) => {
     Request.delete(

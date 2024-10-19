@@ -1,7 +1,5 @@
-interface HeaderProps {
-    title: string;
-    description: string;
-}
+// Modules
+import { HeaderProps } from "../types";
 
 const Header = ({ title, description }: HeaderProps) => {
     return (

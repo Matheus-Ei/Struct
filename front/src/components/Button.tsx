@@ -6,7 +6,7 @@ interface ButtonProps {
 }
 
 const Button = ({ children, inverse, text, onClick }: ButtonProps) => {
-    const size = "border w-fit h-fit px-16 py-4 rounded-xl";
+    const size = "border w-fit h-fit px-16 py-4 rounded-btn";
 
     const color = inverse
         ? `bg-primary border-primary`

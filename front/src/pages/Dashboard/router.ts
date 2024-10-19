@@ -7,7 +7,7 @@ import Pages from "../Projects";
 import Projects from "../Projects";
 import Shared from "../Projects";
 import Subscription from "../Projects";
-import Settings from "../Projects";
+import Settings from "../Settings";
 import Profile from "../Projects";
 
 interface Endpoint {
@@ -23,7 +23,11 @@ const endpoints: EndpointsLogic = [
     { name: "Pages", icon: ["RiPagesLine", "ri"], component: Pages },
     { name: "Projects", icon: ["GrProjects", "gr"], component: Projects },
     { name: "Shared", icon: ["IoMdShare", "io"], component: Shared },
-    { name: "Subscription", icon: ["MdOutlineAttachMoney", "md"], component: Subscription },
+    {
+        name: "Subscription",
+        icon: ["MdOutlineAttachMoney", "md"],
+        component: Subscription,
+    },
     { name: "Settings", icon: ["IoIosSettings", "io"], component: Settings },
     { name: "Profile", icon: ["FaUser", "fa"], component: Profile },
 ];
