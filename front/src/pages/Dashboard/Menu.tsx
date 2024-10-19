@@ -15,27 +15,25 @@ interface MenuProps {
 
 const Menu = ({ selected, setSelected }: MenuProps) => {
     return (
-        <div className="ml-10 w-fit h-[90vh] flex flex-col items-center justify-center">
-            <div className="w-fit h-fit py-12 px-10 flex flex-col items-center justify-center bg-primary rounded-xl">
-                <Logo className="relative right-2 w-36 h-36 mb-12 text-primary-content" />
+        <div className="ml-[2%] w-fit h-[90vh] flex flex-col items-center justify-center">
+            <Logo className="relative right-2 w-36 h-36 mb-12 text-base-content" />
 
-                <div className="flex flex-col gap-4 items-start text-primary-content">
-                    {endpoints.map((item, index) => {
-                        const handleClick = () => {
-                            setSelected(item.name);
-                        };
-                        return (
-                            <Point
-                                text={item.name}
-                                icon={item.icon[0]}
-                                library={item.icon[1]}
-                                isSelected={item.name === selected}
-                                onClick={handleClick}
-                                key={index}
-                            />
-                        );
-                    })}
-                </div>
+            <div className="flex flex-col gap-4 items-start text-base-content">
+                {endpoints.map((item, index) => {
+                    const handleClick = () => {
+                        setSelected(item.name);
+                    };
+                    return (
+                        <Point
+                            text={item.name}
+                            icon={item.icon[0]}
+                            library={item.icon[1]}
+                            isSelected={item.name === selected}
+                            onClick={handleClick}
+                            key={index}
+                        />
+                    );
+                })}
             </div>
         </div>
     );

@@ -17,7 +17,7 @@ const Point = ({ text, icon, library, isSelected, onClick }: PointProps) => {
     return (
         <div
             onClick={handleClick}
-            className={`flex gap-6 justify-center items-center py-2 px-6 rounded-lg ${isSelected && "bg-primary-content text-primary"}`}
+            className={`flex gap-6 justify-center items-center py-2 px-6 rounded-lg ${isSelected && "bg-primary text-primary-content"}`}
         >
             <Icons library={library} name={icon} size={24} />
             <p className="cursor-default text-lg">{text}</p>
