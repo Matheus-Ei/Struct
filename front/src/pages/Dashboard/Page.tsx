@@ -8,7 +8,7 @@ interface PageProps {
 
 const Page = ({ selected }: PageProps) => {
     return (
-        <div className="h-[90vh] w-[73%]">
+        <div className="h-[90vh] w-[80%]">
             {endpoints.map((item) => {
                 return (
                     item.name === selected &&

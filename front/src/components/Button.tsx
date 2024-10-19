@@ -9,11 +9,11 @@ const Button = ({ children, inverse, text, onClick }: ButtonProps) => {
     const size = "border w-fit h-fit px-16 py-4 rounded-xl";
 
     const color = inverse
-        ? `bg-base-100 border-primary`
-        : `bg-primary border-base-200`;
+        ? `bg-primary-content border-primary`
+        : `bg-primary border-primary-content`;
 
     const buttonStyle = `${size} ${color}`;
-    const textStyle = inverse ? `text-primary font-bold` : `text-base-200 font-bold`;
+    const textStyle = inverse ? `text-primary font-bold` : `text-primary-content font-bold`;
 
     const handdleClick = () => {
         if (onClick) {

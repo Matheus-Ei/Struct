@@ -61,7 +61,7 @@ module.exports = {
                     "base-100": "#ffffff", // Background color
                     "base-200": "#ededed", // Little darker than background
                     "base-300": "#e0e0e0", // More darker than background
-                    "base-content": "#000000", 
+                    "base-content": "#000000",
 
                     // For errors
                     error: "#db0000",
@@ -78,6 +78,21 @@ module.exports = {
                     // Success
                     success: "#15db00",
                     "success-content": "#ffffff",
+                },
+
+                default: {
+                    primary: "#f3f4f6",
+                    secondary: "#1c1917",
+
+                    accent: "#6b7280",
+                    neutral: "#6b7280",
+
+                    "base-100": "#f3f4f6",
+
+                    info: "#60a5fa",
+                    success: "#84cc16",
+                    warning: "#eab308",
+                    error: "#dc2626",
                 },
             },
         ],
