@@ -2,7 +2,7 @@
 import { Router } from "express";
 
 // Controllers
-import TokenController from "../controllers/token.js";
+import TokenController from "../controllers/token";
 
 class TokenRoute {
     public router: Router;

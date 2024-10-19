@@ -1,18 +1,8 @@
 // Components
 import Navigator from "./services/Navigator";
 
-// Hooks
-import { useTheme } from "./hooks/useTheme";
-
 function App() {
-    const theme = useTheme();
-
-    if (theme.primary) {
-        const body = document.querySelector("body");
-        if (body) {
-            body.style.backgroundColor = theme.primary;
-        }
-    }
+    document.documentElement.setAttribute("data-theme", "default");
 
     const navigate = new Navigator();
     return navigate.setup();

@@ -1,21 +1,27 @@
 // Modules
 import lib from "./library";
-import * as I from "./interface";
 
-const Icons = ({ library, name, style, color, size }: I.IconsProps) => {
+interface IconsProps {
+    library: string;
+    name: string;
+    color?: string;
+    size?: number;
+}
+
+const Icons = ({ library, name, color, size }: IconsProps) => {
     const repository: any = lib[library];
 
     try {
         const RequiredIcon = repository[name];
 
-        return <RequiredIcon style={style} color={color} size={size} />;
+        return <RequiredIcon size={size} />;
     } catch (error) {
         console.error(error);
 
         const errorRepo: any = lib["fa6"];
         const RequiredIcon = errorRepo["FaQuestion"];
 
-        return <RequiredIcon style={style} color={color} size={size} />;
+        return <RequiredIcon color={color} size={size} />;
     }
 };
 

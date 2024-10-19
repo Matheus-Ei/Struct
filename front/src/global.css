@@ -1,0 +1,13 @@
+/* Libraries */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap");
+
+body {
+    @apply bg-base-100 text-base-content transition-colors duration-500;
+
+    font-family: 'Instrument Sans', sans-serif;
+}
+

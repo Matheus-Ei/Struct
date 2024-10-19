@@ -1,27 +1,20 @@
-// Modules
-import * as S from "./styles";
-
 // HOCs
+import { useState } from "react";
 import withLoader from "../../HOCs/withLoader";
 
-// Hooks
-import { useState } from "react";
-
 // Components
-import Menu from "./components/Menu";
-import Page from "./components/Page";
+import Menu from "./Menu";
+import Page from "./Page";
 
 const Dashboard = () => {
-    const [selectedName, setSelected] = useState<string>("Projects");
+    const [selected, setSelected] = useState<string>("Home");
 
     return (
-        <S.Body>
-            <S.Content>
-                <Menu selectedName={selectedName} setSelected={setSelected} />
-                <Page selectedName={selectedName} />
-            </S.Content>
-        </S.Body>
+        <div className="flex flex-row justify-between items-center px-[1vw] w-screen h-screen">
+            <Menu selected={selected} setSelected={setSelected} />
+            <Page selected={selected} />
+        </div>
     );
 };
 
-export default withLoader(Dashboard, "large", true);
+export default withLoader(Dashboard, true);

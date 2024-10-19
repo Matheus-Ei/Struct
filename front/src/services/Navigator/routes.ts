@@ -1,6 +1,6 @@
+import Landing from "../../pages/Landing";
 import Login from "../../pages/Login";
 import Dashboard from "../../pages/Dashboard";
-import Landing from "../../pages/Landing";
 
 type RoutesType = Array<[string, () => JSX.Element]>;
 

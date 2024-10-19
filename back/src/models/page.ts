@@ -2,12 +2,12 @@
 import { DataTypes, Model } from "sequelize";
 
 // Database
-import connection from "../services/database/connection.js";
+import connection from "../services/database/connection";
 
 // Models
-import PageDataModel from "./pageData.js";
-import ProjectModel from "./project.js";
-import ModuleModel from "./module.js";
+import PageDataModel from "./pageData";
+import ProjectModel from "./project";
+import ModuleModel from "./module";
 
 class PageModel extends Model {
     public id!: number;
