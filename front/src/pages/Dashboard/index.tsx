@@ -1,6 +1,8 @@
 // HOCs
+import withLoader from "HOCs/withLoader";
+
+// Hooks
 import { useState } from "react";
-import withLoader from "../../HOCs/withLoader";
 
 // Components
 import Menu from "./Menu";

@@ -16,7 +16,7 @@ const Icons = ({ library, name, color, size }: IconsProps) => {
 
         return <RequiredIcon size={size} />;
     } catch (error) {
-        console.error(error);
+        // console.error(error);
 
         const errorRepo: any = lib["fa6"];
         const RequiredIcon = errorRepo["FaQuestion"];

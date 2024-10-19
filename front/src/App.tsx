@@ -1,8 +1,8 @@
 // Components
-import Navigator from "./services/Navigator";
+import Navigator from "services/Navigator";
 
 function App() {
-    document.documentElement.setAttribute("data-theme", "default");
+    document.documentElement.setAttribute("data-theme", "forest");
 
     const navigate = new Navigator();
     return navigate.setup();

@@ -3,7 +3,7 @@ import React, { useState, useEffect, ComponentType } from "react";
 import { useNavigate } from "react-router-dom";
 
 // Components
-import Login from "../../utils/login";
+import Login from "utils/login";
 import LoadingPage from "./LoadingPage";
 
 // Libraries

@@ -9,10 +9,10 @@ interface PageProps {
 const Page = ({ selected }: PageProps) => {
     return (
         <div className="h-[90vh] w-[80%]">
-            {endpoints.map((item) => {
+            {endpoints.map((item, index) => {
                 return (
                     item.name === selected &&
-                    React.createElement(item.component)
+                    React.createElement(item.component, { key: index })
                 );
             })}
         </div>

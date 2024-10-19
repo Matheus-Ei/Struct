@@ -1,10 +1,10 @@
 // Services
-import Icons from "../services/Icons";
+import Icons from "services/Icons";
 
 interface PointProps {
-    text: string;
     icon: string;
     library: string;
+    text?: string;
     isSelected?: boolean;
     onClick?: () => void;
 }
@@ -17,10 +17,10 @@ const Point = ({ text, icon, library, isSelected, onClick }: PointProps) => {
     return (
         <div
             onClick={handleClick}
-            className={`flex gap-6 justify-center items-center py-2 px-6 rounded-lg ${isSelected && "bg-primary text-primary-content"}`}
+            className={`flex ${text ? "gap-4 py-2 px-4" : "p-1"} justify-center items-center rounded-lg ${isSelected && "bg-primary text-primary-content"}`}
         >
             <Icons library={library} name={icon} size={24} />
-            <p className="cursor-default text-lg">{text}</p>
+            {text && <p className="cursor-default">{text}</p>}
         </div>
     );
 };

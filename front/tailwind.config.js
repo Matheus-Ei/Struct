@@ -82,12 +82,13 @@ module.exports = {
 
                 default: {
                     primary: "#1c1917",
-                    secondary: "#f3f4f6",
+                    secondary: "#f3f3f3",
 
                     accent: "#6b7280",
                     neutral: "#6b7280",
 
-                    "base-100": "#f3f4f6",
+                    "base-100": "#f3f3f3",
+                    "base-200": "#eeeeee",
 
                     info: "#60a5fa",
                     success: "#84cc16",
