@@ -1,21 +1,16 @@
 // Services
 import { useState } from "react";
 import Icons from "services/Icons";
-import { LocalStorage } from "services/Storage";
 import Theme from "services/Theme";
 
 const ThemeController = () => {
-    const oldTheme = LocalStorage.get("theme");
-    const [theme, setTheme] = useState(oldTheme ? oldTheme.theme : "default");
-
+    const [theme, setTheme] = useState(Theme.getCurrent());
     const themes = Theme.getKeys();
 
     const handleThemeChange = (event: any) => {
-        const newTheme = event.target.value;
+        const { newTheme } = Theme.set(event.target.value);
 
-        LocalStorage.set("theme", { theme: newTheme });
         setTheme(newTheme);
-        document.documentElement.setAttribute("data-theme", newTheme);
     };
 
     return (
@@ -24,11 +19,12 @@ const ThemeController = () => {
                 <p className="w-20 text-start">{theme}</p>
                 <Icons name="MdExpandMore" library="md" />
             </div>
+
             <ul
                 tabIndex={0}
-                className="dropdown-content bg-base-300 rounded-box z-[1] w-52 p-2 shadow-2xl"
+                className="dropdown-content bg-base-300 rounded-box z-[1] w-52 p-2 shadow-2xl overflow-y-scroll overflow-x-hidden h-56 pr-3"
             >
-                {themes.map((item, index) => {
+                {themes.map((item: any, index: number) => {
                     return (
                         <li key={index}>
                             <input
