@@ -2,13 +2,11 @@
 import { ComponentType } from "react";
 
 // Pages
-import Home from "../Projects";
-import Pages from "../Projects";
-import Projects from "../Projects";
-import Shared from "../Projects";
-import Subscription from "../Projects";
+import Home from "../Settings";
+import Tools from "../Settings";
+import Subscription from "../Settings";
 import Settings from "../Settings";
-import Profile from "../Projects";
+import Profile from "../Settings";
 
 interface Endpoint {
     name: string;
@@ -20,9 +18,7 @@ type EndpointsLogic = Array<Endpoint>;
 
 const endpoints: EndpointsLogic = [
     { name: "Home", icon: ["FaHome", "fa"], component: Home },
-    { name: "Pages", icon: ["RiPagesLine", "ri"], component: Pages },
-    { name: "Projects", icon: ["GrProjects", "gr"], component: Projects },
-    { name: "Shared", icon: ["IoMdShare", "io"], component: Shared },
+    { name: "Tools", icon: ["RiPagesLine", "ri"], component: Tools },
     {
         name: "Subscription",
         icon: ["MdOutlineAttachMoney", "md"],

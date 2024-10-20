@@ -1,4 +1,8 @@
+// Components
 import ThemeController from "./ThemeController";
+
+// HOCs
+import withLoader from "HOCs/withLoader";
 
 const Settings = () => {
     return (
@@ -9,4 +13,4 @@ const Settings = () => {
     );
 };
 
-export default Settings;
+export default withLoader(Settings);

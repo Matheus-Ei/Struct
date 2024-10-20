@@ -9,7 +9,6 @@ import Request from "services/Request";
 
 // Components
 import Project from "./Project";
-import Actions from "./Actions";
 
 // Modules
 import { ProjectType, SetProjectType } from "./types";
@@ -56,14 +55,10 @@ const Projects = () => {
     }, []);
 
     return (
-        <div className="flex flex-col gap-12 items-center justify-start w-full h-[90vh]">
-            <h1 className="font-bold text-lg">Projects</h1>
-
+        <div className="flex flex-col gap-12 mt-24 items-center justify-start w-full h-[90vh]">
             {projects.length === 0
                 ? emptyProjects()
                 : hasProjects(projects, setProjects)}
-
-            <Actions />
         </div>
     );
 };
