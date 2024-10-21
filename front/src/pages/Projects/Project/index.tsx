@@ -1,17 +1,28 @@
-// Components
-import Card from "components/Card";
-import Header from "./Header";
+// Services
+import Icons from "services/Icons";
 
-// Modules
-import { ProjectProps } from "../types";
+interface ProjectProps {
+    title: string;
+    description: string;
+    id: number;
+}
 
-const Project = ({ title, description }: ProjectProps) => {
+const handleModal = (id: number) => {
+    return null;
+};
+
+const Project = ({ title, description, id }: ProjectProps) => {
     return (
-        <Card>
-            <div className="flex flex-col items-center justify-between h-fit w-fit">
-                <Header title={title} description={description} />
+        <div className="flex flex-col w-96 h-32 border border-primary rounded-btn p-3 justify-between">
+            <div>
+                <h1 className="text-lg font-bold">{title}</h1>
+                <p>{description}</p>
             </div>
-        </Card>
+
+            <button onClick={() => handleModal(id)}>
+                <Icons name="MdOpenInNew" library="md" size={20} />
+            </button>
+        </div>
     );
 };
 

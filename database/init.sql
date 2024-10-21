@@ -13,6 +13,7 @@ CREATE TABLE relationship_plan_benefits (
     id SERIAL PRIMARY KEY,
     subscription_plan_id INT NOT NULL,
     subscription_benefits_id INT NOT NULL,
+
     CONSTRAINT fk_subscription_plan
         FOREIGN KEY(subscription_plan_id) 
         REFERENCES subscription_plan (id)
@@ -23,10 +24,13 @@ CREATE TABLE relationship_plan_benefits (
         ON DELETE CASCADE
 );
 
+CREATE TYPE subscription_status AS ENUM ('Active', 'Inactive', 'Suspended', 'Canceled');
 CREATE TABLE subscription (
     id SERIAL PRIMARY KEY,
     last_paid DATE,
+    status subscription_status,
     subscription_plan_id INT NOT NULL,
+
     CONSTRAINT fk_subscription_plan
         FOREIGN KEY(subscription_plan_id) 
         REFERENCES subscription_plan (id)
@@ -46,9 +50,10 @@ CREATE TABLE users (
     mail VARCHAR(100) NOT NULL UNIQUE,
     nickname VARCHAR(50),
     password VARCHAR(255) NOT NULL,
-    photo BYTEA,
+    photo VARCHAR(400), -- Saves only the image URL
     subscription_id INT,
     settings_id INT,
+
     CONSTRAINT fk_subscription
         FOREIGN KEY(subscription_id) 
         REFERENCES subscription (id)
@@ -64,12 +69,19 @@ CREATE TABLE project_type (
     name VARCHAR(100) NOT NULL
 );
 
+CREATE TABLE permission_level (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
+    description TEXT
+);
+
 CREATE TABLE project (
     id SERIAL PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
     description TEXT,
     project_type_id INT NOT NULL,
     owner_user_id INT NOT NULL,
+
     CONSTRAINT fk_project_type
         FOREIGN KEY(project_type_id)
         REFERENCES project_type (id),
@@ -81,9 +93,13 @@ CREATE TABLE project (
 
 CREATE TABLE relationship_shared_project (
     id SERIAL PRIMARY KEY,
-    permissions INT NOT NULL,
+    permission_level_id INT NOT NULL,
     user_shared_id INT NOT NULL,
     project_id INT NOT NULL,
+
+    CONSTRAINT fk_permission_level
+        FOREIGN KEY(permission_level_id)
+        REFERENCES permission_level (id),
     CONSTRAINT fk_user_shared
         FOREIGN KEY(user_shared_id)
         REFERENCES users (id)
@@ -104,6 +120,7 @@ CREATE TABLE relationship_project_module (
     id SERIAL PRIMARY KEY,
     module_id INT NOT NULL,
     project_id INT NOT NULL,
+
     CONSTRAINT fk_module
         FOREIGN KEY(module_id)
         REFERENCES module (id),
@@ -126,6 +143,7 @@ CREATE TABLE page (
     parent_page_id INT NULL,
     project_id INT NOT NULL,
     module_id INT NOT NULL,
+
     CONSTRAINT fk_page_data
         FOREIGN KEY(page_data_id)
         REFERENCES page_data (id)

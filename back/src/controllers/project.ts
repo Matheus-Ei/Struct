@@ -9,7 +9,7 @@ import operations from "../services/database/operations";
 
 // Models
 import ProjectModel from "../models/project";
-import RelationshipProjectModuleModel from "../models/relatioshipProjectModule";
+import RelationshipProjectModuleModel from "../models/relationshipProjectModule";
 
 class ProjectController {
     public async get(req: Request, res: Response) {

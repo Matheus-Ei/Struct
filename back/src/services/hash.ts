@@ -6,7 +6,6 @@ class Hash {
         const saltRounds = 10;
 
         try {
-            console.log(text)
             const hash = await bcrypt.hash(text, saltRounds);
             return hash;
         } catch (error) {

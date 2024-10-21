@@ -1,40 +1,32 @@
-// HOCs
-import withLoader from "HOCs/withLoader";
-
-// Hooks
 import { useEffect, useState } from "react";
-
-// Services
 import Request from "services/Request";
-
-// Components
 import Project from "./Project";
 
-// Modules
-import { ProjectType, SetProjectType } from "./types";
+export type ProjectType = Array<{
+    title: string;
+    description: string;
+    type: "Singular" | "Compost" | "Monopage";
+    module: Array<string>;
+    id: number;
+}>;
 
-const emptyProjects = () => {
-    return (
-        <div className="flex items-start justify-center w-full h-full">
-            <p className="text-base-content">Big things will be here soon...</p>
-        </div>
-    );
-};
+const Projects = () => {
+    const [projects, setProjects] = useState<ProjectType>([]);
 
-const hasProjects = (projects: ProjectType, setProjects: SetProjectType) => {
+    useEffect(() => {
+        Request.get("project/get-all").then((response) => {
+            setProjects(response);
+        });
+    }, []);
+
     return (
-        <div
-            className={`grid grid-cols-3 gap-4 overflow-y-scroll h-[60vh] w-fit pr-5 ${projects.length > 6 && "border-btn border-neutral"}`}
-        >
+        <div className="grid grid-cols-4 w-fit h-fit gap-6">
             {projects.map((item, index) => {
                 return (
                     <Project
                         title={item.title}
                         description={item.description}
-                        type={item.type}
-                        modules={item.module}
-                        projectId={item.id}
-                        setProjects={setProjects}
+                        id={item.id}
                         key={index}
                     />
                 );
@@ -43,24 +35,4 @@ const hasProjects = (projects: ProjectType, setProjects: SetProjectType) => {
     );
 };
 
-const Projects = () => {
-    const [projects, setProjects] = useState<ProjectType>([]);
-
-    useEffect(() => {
-        Request.get(
-            (process.env.REACT_APP_BACK_URL as string) + "/project/get-all"
-        ).then((item) => {
-            setProjects(item);
-        });
-    }, []);
-
-    return (
-        <div className="flex flex-col gap-12 mt-24 items-center justify-start w-full h-[90vh]">
-            {projects.length === 0
-                ? emptyProjects()
-                : hasProjects(projects, setProjects)}
-        </div>
-    );
-};
-
-export default withLoader(Projects, true);
+export default Projects;

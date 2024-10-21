@@ -8,6 +8,8 @@ import Hash from "../services/hash";
 
 // Models
 import UserModel from "../models/user";
+import SettingsModel from "../models/settings";
+import SubscriptionModel from "../models/subscription";
 
 class UserController {
     public async get(req: Request, res: Response) {
@@ -33,12 +35,23 @@ class UserController {
         const hashPassword = await hashObj.make(password);
 
         try {
+            const userSettings = await SettingsModel.create({
+                language: "pt-br",
+                country: "Brazil",
+            });
+
+            const userSubscription = await SubscriptionModel.create({
+                last_paid: Date.now(),
+                subscription_plan_id: 1,
+            });
+
             const newUser = await UserModel.create({
                 name,
                 nickname,
                 mail,
                 password: hashPassword,
-                paid: false,
+                subscription_id: userSubscription.id,
+                settings_id: userSettings.id,
             });
 
             res.status(201).json({ newUser });
@@ -105,8 +118,6 @@ class UserController {
     public async logout(req: Request, res: Response) {}
 
     public async delete(req: Request, res: Response) {}
-
-    public async projects(req: Request, res: Response) {}
 }
 
 export default new UserController();

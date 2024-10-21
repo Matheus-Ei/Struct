@@ -4,15 +4,10 @@ import { DataTypes, Model } from "sequelize";
 // Database
 import connection from "../services/database/connection";
 
-// Models
-import UserModel from "./user";
-
 class SettingsModel extends Model {
     public id!: number;
     public language!: string;
     public country!: string;
-    public theme!: string;
-    public user_id!: number;
 }
 
 SettingsModel.init(
@@ -29,19 +24,6 @@ SettingsModel.init(
         country: {
             type: DataTypes.STRING(50),
             allowNull: false,
-        },
-        theme: {
-            type: DataTypes.STRING(50),
-            allowNull: false,
-        },
-        user_id: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            references: {
-                model: UserModel,
-                key: "id",
-            },
-            onDelete: "CASCADE",
         },
     },
     {

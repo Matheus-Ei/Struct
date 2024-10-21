@@ -6,7 +6,7 @@ import connection from "../services/database/connection";
 
 // Models
 import UserModel from "./user";
-import ProjectTypeModel from "./project_type";
+import ProjectTypeModel from "./projectType";
 
 class ProjectModel extends Model {
     public id!: number;

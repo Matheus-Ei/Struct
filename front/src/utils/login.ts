@@ -10,9 +10,7 @@ class Login {
         password: string,
         navigate: NavigateFunction
     ) {
-        const url = `${process.env.REACT_APP_BACK_URL as string}/user/login`;
-
-        const response = await Request.post(url, {
+        const response = await Request.post("user/login", {
             mail,
             password,
         });
@@ -27,9 +25,8 @@ class Login {
     }
 
     static async check(navigate: NavigateFunction) {
-        const checkTkUrl = `${process.env.REACT_APP_BACK_URL as string}/token/check`;
+        const response = await Request.get("token/check");
 
-        const response = await Request.get(checkTkUrl);
         if (response === false) {
             navigate("/login");
             return true;
