@@ -40,7 +40,7 @@ const Projects = () => {
 
     return (
         <>
-            <div className="grid grid-cols-4 w-fit h-fit gap-6 justify-items-center items-center ">
+            <div className="grid grid-cols-4 w-fit h-fit gap-6 justify-items-start items-center ">
                 {projects.map((item, index) => {
                     return (
                         <Project
