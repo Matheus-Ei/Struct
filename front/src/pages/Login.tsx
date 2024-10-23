@@ -29,7 +29,7 @@ const Login = () => {
     return (
         <div className="w-screen h-screen flex items-center justify-center">
             <Card>
-                <div className="flex flex-col items-center justify-center w-[30vw]">
+                <div className="flex flex-col items-center justify-center w-[25vw]">
                     <Logo className="text-primary w-full h-fit mb-4" />
 
                     <p className="text-primary mb-32 text-center text-lg">
