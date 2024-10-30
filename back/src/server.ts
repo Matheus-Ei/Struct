@@ -32,7 +32,8 @@ export class App {
 
         this.app.use(
             cors({
-                origin: "https://dev.struct.me",
+                // origin: true,
+                origin: ["https://dev.struct.me", "http://localhost:3000"],
                 methods: "GET,POST,PUT,DELETE,OPTIONS",
                 allowedHeaders: "Authorization, Content-Type",
                 credentials: true,
