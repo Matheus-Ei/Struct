@@ -38,7 +38,7 @@ const ProjectModal = ({ modal, setModal }: ProjectModalProps) => {
 
                 {getTab()}
 
-                <Footer />
+                <Footer id={modal.projectId} />
             </div>
         </Modal>
     );

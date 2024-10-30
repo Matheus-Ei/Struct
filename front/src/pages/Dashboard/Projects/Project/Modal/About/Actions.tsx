@@ -1,5 +1,5 @@
 import Point from "components/Point";
-import { projectsContext } from "pages/Projects";
+import { projectsContext } from "pages/Dashboard/Projects";
 import { Dispatch, SetStateAction, useContext } from "react";
 import Request from "services/Request";
 

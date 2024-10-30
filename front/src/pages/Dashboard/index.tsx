@@ -1,4 +1,4 @@
-import Projects from "pages/Projects";
+import Projects from "./Projects";
 import Header from "./Header";
 import withLoader from "HOCs/withLoader";
 

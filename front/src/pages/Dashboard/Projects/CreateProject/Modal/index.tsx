@@ -1,6 +1,6 @@
 import Button from "components/Button";
 import Modal from "components/Modal";
-import { projectsContext } from "pages/Projects";
+import { projectsContext } from "pages/Dashboard/Projects";
 import { Dispatch, SetStateAction, useContext, useState } from "react";
 import Request from "services/Request";
 import Options from "./Options";

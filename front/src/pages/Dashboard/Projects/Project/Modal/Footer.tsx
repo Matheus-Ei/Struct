@@ -1,11 +1,15 @@
 import { useNavigate } from "react-router-dom";
 import Icons from "services/Icons";
 
-const Footer = () => {
+interface FooterProps {
+    id: number;
+}
+
+const Footer = ({ id }: FooterProps) => {
     const navigate = useNavigate();
 
     const handleClick = () => {
-        navigate("/login");
+        navigate(`/projects/${id}`);
     };
 
     return (
