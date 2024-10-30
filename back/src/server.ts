@@ -32,8 +32,10 @@ export class App {
 
         this.app.use(
             cors({
+                origin: "*",
+                methods: "GET,POST,PUT,DELETE,OPTIONS",
+                allowedHeaders: "Authorization, Content-Type",
                 credentials: true,
-                origin: true,
             })
         );
 
