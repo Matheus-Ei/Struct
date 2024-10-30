@@ -1,4 +1,3 @@
-// Services
 import Icons from "services/Icons";
 
 interface PointProps {

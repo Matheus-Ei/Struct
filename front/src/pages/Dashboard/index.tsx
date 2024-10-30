@@ -1,7 +1,6 @@
-// Components
-import withLoader from "HOCs/withLoader";
 import Projects from "pages/Projects";
 import Header from "./Header";
+import withLoader from "HOCs/withLoader";
 
 const Dashboard = () => {
     return (

@@ -1,4 +1,3 @@
-// Libraries
 import { useNavigate } from "react-router-dom";
 import Icons from "services/Icons";
 

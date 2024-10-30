@@ -1,7 +1,6 @@
-// Components
-import { useEffect } from "react";
 import Navigator from "services/Navigator";
 import Theme from "services/Theme";
+import { useEffect } from "react";
 
 function App() {
     useEffect(() => {

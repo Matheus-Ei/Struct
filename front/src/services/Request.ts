@@ -1,4 +1,3 @@
-// Libraries
 import axios from "axios";
 
 class Request {
@@ -12,7 +11,7 @@ class Request {
             const data = await request.data;
             return data;
         } catch (error) {
-            console.log(error);
+            console.error(error);
             return false;
         }
     }
@@ -29,7 +28,7 @@ class Request {
             const response = await request.data;
             return response;
         } catch (error) {
-            console.log(error);
+            console.error(error);
             return false;
         }
     }
@@ -46,7 +45,7 @@ class Request {
             const response = await request.data;
             return response;
         } catch (error) {
-            console.log(error);
+            console.error(error);
             return false;
         }
     }
@@ -63,7 +62,7 @@ class Request {
             const response = await request.data;
             return response;
         } catch (error) {
-            console.log(error);
+            console.error(error);
             return false;
         }
     }

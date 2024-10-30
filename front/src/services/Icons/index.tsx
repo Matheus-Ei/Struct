@@ -1,7 +1,4 @@
-// Libraries
 import { FaQuestion } from "react-icons/fa";
-
-// Modules
 import lib from "./library";
 
 interface IconsProps {

@@ -1,7 +1,4 @@
-// Modules
 import routes from "./routes";
-
-// Components
 import { Routes, Route } from "react-router-dom";
 import React from "react";
 

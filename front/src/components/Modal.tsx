@@ -1,4 +1,3 @@
-// Components
 import Icons from "services/Icons";
 import Card from "./Card";
 

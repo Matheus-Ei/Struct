@@ -1,8 +1,5 @@
-// Components
 import { ReactComponent as Logo } from "assets/logo-1800x400-1.svg";
 import Icons from "services/Icons";
-
-// Hooks
 import { useNavigate } from "react-router-dom";
 
 const HandleButtonClick = (navigate: any) => {

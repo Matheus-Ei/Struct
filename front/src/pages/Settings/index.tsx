@@ -1,7 +1,4 @@
-// Components
 import ThemeController from "./ThemeController";
-
-// HOCs
 import withLoader from "HOCs/withLoader";
 import SettingsHeader from "./SettingsHeader";
 

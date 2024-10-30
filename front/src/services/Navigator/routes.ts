@@ -1,4 +1,3 @@
-// Pages
 import Dashboard from "pages/Dashboard";
 import Settings from "pages/Settings";
 import Landing from "../../pages/Landing";

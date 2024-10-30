@@ -1,7 +1,4 @@
-// Libraries
 import { NavigateFunction } from "react-router-dom";
-
-// Services
 import Request from "../services/Request";
 
 class Login {
@@ -29,10 +26,20 @@ class Login {
 
         if (response === false) {
             navigate("/login");
-            return true;
+            return false;
         }
 
-        return false;
+        return true;
+    }
+
+    static async refresh() {
+        const response = await Request.get("token/refresh");
+
+        if (response === false) {
+            return false;
+        }
+
+        return true;
     }
 }
 

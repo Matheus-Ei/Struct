@@ -1,7 +1,4 @@
-// Modules
 import themes from "./themes";
-
-// Services
 import { LocalStorage } from "../Storage";
 
 class Theme {

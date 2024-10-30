@@ -1,7 +1,4 @@
-// Services
 import Icons from "services/Icons";
-
-// Libraries
 import { Dispatch, SetStateAction } from "react";
 
 interface ModalType {
@@ -16,22 +13,19 @@ interface ProjectProps {
     id: number;
 }
 
-const handleModal = (
-    setModal: Dispatch<SetStateAction<ModalType>>,
-    id: number
-) => {
-    return setModal({ projectId: id, show: true });
-};
-
 const Project = ({ title, description, id, setModal }: ProjectProps) => {
+    const handleOpen = () => {
+        setModal({ projectId: id, show: true });
+    };
+
     return (
         <div className="flex flex-col w-96 h-32 border border-primary rounded-btn p-3 justify-between">
             <div>
-                <h1 className="text-lg font-bold">{title}</h1>
-                <p>{description}</p>
+                <h1 className="text-lg font-bold line-clamp-1">{title}</h1>
+                <p className="line-clamp-2">{description}</p>
             </div>
 
-            <button onClick={() => handleModal(setModal, id)} className="w-fit">
+            <button onClick={handleOpen} className="w-fit">
                 <Icons name="MdOpenInNew" library="md" size={20} />
             </button>
         </div>
