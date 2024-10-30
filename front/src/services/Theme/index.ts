@@ -18,8 +18,13 @@ class Theme {
     }
 
     public static getCurrent() {
-        const { theme } = LocalStorage.get("theme");
-        return theme ? theme : "default";
+        try {
+            const { theme } = LocalStorage.get("theme");
+            return theme;
+        } catch (e) {
+            console.error("Default theme is not set");
+            return "default";
+        }
     }
 
     public static getKeys() {

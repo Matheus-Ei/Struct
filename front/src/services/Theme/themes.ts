@@ -2,12 +2,12 @@ const themes = [
     {
         default: {
             primary: "#1c1917",
-            secondary: "#f3f3f3",
+            secondary: "#ffffff",
 
             accent: "#6b7280",
             neutral: "#6b7280",
 
-            "base-100": "#f3f3f3",
+            "base-100": "#ffffff",
 
             info: "#60a5fa",
             success: "#84cc16",

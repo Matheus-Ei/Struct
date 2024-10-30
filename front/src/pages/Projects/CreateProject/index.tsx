@@ -5,9 +5,9 @@ interface CreateProjectButtonProps {
     showModal: Dispatch<SetStateAction<boolean>>;
 }
 
-const CreateProjectButton = ({ showModal }: CreateProjectButtonProps) => {
+const CreateProject = ({ showModal }: CreateProjectButtonProps) => {
     const style =
-        "flex w-2/4 h-2/4 flex-row items-center justify-center gap-6 bg-base-200 rounded-btn border-2 border-dashed border-primary";
+        "flex w-2/4 h-16 flex-row items-center justify-center gap-6 bg-base-200 rounded-btn border-2 border-dashed border-primary";
 
     return (
         <button
@@ -22,4 +22,4 @@ const CreateProjectButton = ({ showModal }: CreateProjectButtonProps) => {
     );
 };
 
-export default CreateProjectButton;
+export default CreateProject;

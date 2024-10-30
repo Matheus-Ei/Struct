@@ -3,12 +3,12 @@ import { useEffect, useState } from "react";
 
 // Services
 import Request from "services/Request";
-import CreateProjectButton from "./CreateProjectButton";
-import CreateProjectModal from "./CreateProjectModal";
+import CreateProject from "./CreateProject";
+import CreateProjectModal from "./CreateProject/Modal";
 
 // Components
 import Project from "./Project";
-import ProjectModal from "./ProjectModal";
+import ProjectModal from "./Project/Modal";
 
 type ProjectType = Array<{
     title: string;
@@ -40,7 +40,7 @@ const Projects = () => {
 
     return (
         <>
-            <div className="grid grid-cols-4 w-fit h-fit gap-6 justify-items-start items-center ">
+            <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 w-fit h-fit gap-6 justify-items-start items-center ">
                 {projects.map((item, index) => {
                     return (
                         <Project
@@ -53,7 +53,7 @@ const Projects = () => {
                     );
                 })}
 
-                <CreateProjectButton showModal={setShowCreateProject}/>
+                <CreateProject showModal={setShowCreateProject} />
             </div>
 
             <ProjectModal modal={projectModal} setModal={setProjectModal} />
