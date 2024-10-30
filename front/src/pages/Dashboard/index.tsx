@@ -1,18 +1,12 @@
-// HOCs
-import { useState } from "react";
-import withLoader from "../../HOCs/withLoader";
-
-// Components
-import Menu from "./Menu";
-import Page from "./Page";
+import Projects from "./Projects";
+import Header from "./Header";
+import withLoader from "HOCs/withLoader";
 
 const Dashboard = () => {
-    const [selected, setSelected] = useState<string>("Home");
-
     return (
-        <div className="flex flex-row justify-between items-center px-[1vw] w-screen h-screen">
-            <Menu selected={selected} setSelected={setSelected} />
-            <Page selected={selected} />
+        <div className="flex flex-col justify-start items-center w-screen h-screen">
+            <Header />
+            <Projects />
         </div>
     );
 };

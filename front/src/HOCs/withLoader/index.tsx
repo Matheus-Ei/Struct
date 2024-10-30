@@ -1,12 +1,7 @@
-// Hooks
-import React, { useState, useEffect, ComponentType } from "react";
+import { useState, useEffect, ComponentType } from "react";
 import { useNavigate } from "react-router-dom";
-
-// Components
-import Login from "../../utils/login";
+import Login from "utils/login";
 import LoadingPage from "./LoadingPage";
-
-// Libraries
 import { motion, AnimatePresence } from "framer-motion";
 
 const withLoader = (WrappedComponent: ComponentType, checkLogin?: boolean) => {
@@ -19,7 +14,7 @@ const withLoader = (WrappedComponent: ComponentType, checkLogin?: boolean) => {
         const check = async () => {
             const response = await Login.check(navigate);
 
-            setLoading(response);
+            setLoading(!response);
         };
 
         useEffect(() => {

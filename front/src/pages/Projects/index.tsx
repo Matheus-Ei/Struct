@@ -1,8 +1,9 @@
-// HOCs
-import withLoader from "../../HOCs/withLoader";
+import { useParams } from "react-router-dom";
 
 const Projects = () => {
-    return <div className="flex items-center justify-center w-full h-full"><h1>Projects</h1></div>;
+    const { id } = useParams();
+
+    return <div>{id}</div>;
 };
 
-export default withLoader(Projects, true);
+export default Projects;

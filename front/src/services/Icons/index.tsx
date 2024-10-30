@@ -1,4 +1,4 @@
-// Modules
+import { FaQuestion } from "react-icons/fa";
 import lib from "./library";
 
 interface IconsProps {
@@ -6,22 +6,21 @@ interface IconsProps {
     name: string;
     color?: string;
     size?: number;
+    className?: string;
 }
 
-const Icons = ({ library, name, color, size }: IconsProps) => {
-    const repository: any = lib[library];
-
+const Icons = ({ library, name, color, size, className }: IconsProps) => {
     try {
+        const repository: any = lib[library];
         const RequiredIcon = repository[name];
 
-        return <RequiredIcon size={size} />;
-    } catch (error) {
-        console.error(error);
-
-        const errorRepo: any = lib["fa6"];
-        const RequiredIcon = errorRepo["FaQuestion"];
+        if (className) {
+            return <RequiredIcon className={className} />;
+        }
 
         return <RequiredIcon color={color} size={size} />;
+    } catch (error) {
+        return <FaQuestion />;
     }
 };
 

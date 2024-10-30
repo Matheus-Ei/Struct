@@ -1,7 +1,4 @@
-// Libraries
 import { NavigateFunction } from "react-router-dom";
-
-// Services
 import Request from "../services/Request";
 
 class Login {
@@ -10,9 +7,7 @@ class Login {
         password: string,
         navigate: NavigateFunction
     ) {
-        const url = `${process.env.REACT_APP_BACK_URL as string}/user/login`;
-
-        const response = await Request.post(url, {
+        const response = await Request.post("user/login", {
             mail,
             password,
         });
@@ -27,15 +22,24 @@ class Login {
     }
 
     static async check(navigate: NavigateFunction) {
-        const checkTkUrl = `${process.env.REACT_APP_BACK_URL as string}/token/check`;
+        const response = await Request.get("token/check");
 
-        const response = await Request.get(checkTkUrl);
         if (response === false) {
             navigate("/login");
-            return true;
+            return false;
         }
 
-        return false;
+        return true;
+    }
+
+    static async refresh() {
+        const response = await Request.get("token/refresh");
+
+        if (response === false) {
+            return false;
+        }
+
+        return true;
     }
 }
 

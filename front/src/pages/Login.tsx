@@ -1,17 +1,12 @@
-// Components
-import Button from "../components/Button";
-import Card from "../components/Card";
-import Input from "../components/Input";
-import { ReactComponent as Logo } from "../assets/logo-1800x400-1.svg";
-
-// Utils
-import login from "../utils/login";
-
-// Hooks
+import { ReactComponent as Logo } from "assets/logo-1800x400-1.svg";
+import Card from "components/Card";
+import Message from "components/Message";
+import Input from "components/Input";
+import Button from "components/Button";
+import login from "utils/login";
 import { useState } from "react";
 import { useNavigate } from "react-router";
-import Message from "../components/Message";
-import useToggle from "../hooks/useToggle";
+import useToggle from "hooks/useToggle";
 
 const Login = () => {
     const [mail, setMail] = useState<string>("");
@@ -29,7 +24,7 @@ const Login = () => {
     return (
         <div className="w-screen h-screen flex items-center justify-center">
             <Card>
-                <div className="flex flex-col items-center justify-center w-[30vw]">
+                <div className="flex flex-col items-center justify-center w-[25vw]">
                     <Logo className="text-primary w-full h-fit mb-4" />
 
                     <p className="text-primary mb-32 text-center text-lg">

@@ -1,4 +1,3 @@
-// Components
 const LoadingPage = ({}) => {
     return <div></div>;
 };

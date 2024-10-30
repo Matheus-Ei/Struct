@@ -4,14 +4,13 @@ import { DataTypes, Model } from "sequelize";
 // Database
 import connection from "../services/database/connection";
 
-class PageDataModel extends Model {
+class SubscriptionPlanModel extends Model {
     public id!: number;
     public name!: string;
-    public emoji!: string;
-    public description!: string;
+    public price!: number;
 }
 
-PageDataModel.init(
+SubscriptionPlanModel.init(
     {
         id: {
             type: DataTypes.INTEGER,
@@ -22,20 +21,16 @@ PageDataModel.init(
             type: DataTypes.STRING(100),
             allowNull: false,
         },
-        emoji: {
-            type: DataTypes.STRING(10),
-            allowNull: true,
-        },
-        description: {
-            type: DataTypes.TEXT,
-            allowNull: true,
+        price: {
+            type: DataTypes.DECIMAL(10, 2),
+            allowNull: false,
         },
     },
     {
         sequelize: connection,
-        tableName: "page_data",
+        tableName: "subscription_plan",
         timestamps: false,
     }
 );
 
-export default PageDataModel;
+export default SubscriptionPlanModel;
