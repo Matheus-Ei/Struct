@@ -1,10 +1,5 @@
-// Libraries
 import { DataTypes, Model } from "sequelize";
-
-// Database
 import connection from "../services/database/connection";
-
-// Models
 import ModuleModel from "./module";
 import ProjectModel from "./project";
 

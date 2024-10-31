@@ -1,33 +1,41 @@
 import { DataTypes, Model } from "sequelize";
 import connection from "../services/database/connection";
 
-class SettingsModel extends Model {
+class PageDataModel extends Model {
     public id!: number;
-    public language!: string;
-    public country!: string;
+    public name!: string;
+    public description!: string;
+    public emoji?: string;
 }
 
-SettingsModel.init(
+PageDataModel.init(
     {
         id: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
             primaryKey: true,
         },
-        language: {
-            type: DataTypes.STRING(50),
+
+        name: {
+            type: DataTypes.STRING,
             allowNull: false,
         },
-        country: {
-            type: DataTypes.STRING(50),
+
+        description: {
+            type: DataTypes.STRING,
             allowNull: false,
+        },
+
+        emoji: {
+            type: DataTypes.STRING,
+            allowNull: true,
         },
     },
     {
         sequelize: connection,
-        tableName: "settings",
+        tableName: "page_data",
         timestamps: false,
     }
 );
 
-export default SettingsModel;
+export default PageDataModel;

@@ -1,4 +1,3 @@
-// Modules
 import connection from "./connection";
 
 class Operations {

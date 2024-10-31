@@ -1,10 +1,5 @@
-// Libraries
 import { DataTypes, Model } from "sequelize";
-
-// Database
 import connection from "../services/database/connection";
-
-// Models
 import SubscriptionPlanModel from "./subscriptionPlan";
 
 class SubscriptionModel extends Model {

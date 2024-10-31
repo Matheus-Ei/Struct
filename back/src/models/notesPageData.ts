@@ -1,41 +1,42 @@
 import { DataTypes, Model } from "sequelize";
 import connection from "../services/database/connection";
+import PageDataModel from "./pageData";
 
-class FeedbackModel extends Model {
+class NotesPageDataModel extends Model {
     public id!: number;
-    public mail?: string;
-    public commentary!: string;
-    public rating!: number;
+
+    public content!: string;
+
+    public page_data_id!: number;
 }
 
-FeedbackModel.init(
+NotesPageDataModel.init(
     {
         id: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
             primaryKey: true,
         },
-        mail: {
-            type: DataTypes.STRING(200),
-        },
-        commentary: {
-            type: DataTypes.STRING(500),
+
+        content: {
+            type: DataTypes.STRING,
             allowNull: false,
         },
-        rating: {
+
+        page_data_id: {
             type: DataTypes.INTEGER,
             allowNull: false,
-            validate: {
-                min: 1,
-                max: 5,
+            references: {
+                model: PageDataModel,
+                key: "id",
             },
         },
     },
     {
         sequelize: connection,
-        tableName: "feedback",
+        tableName: "notes_page_data",
         timestamps: false,
     }
 );
 
-export default FeedbackModel;
+export default NotesPageDataModel;

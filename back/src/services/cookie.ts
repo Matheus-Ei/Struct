@@ -1,4 +1,3 @@
-// Libraries
 import { Request, Response } from "express";
 
 class Cookie {

@@ -162,8 +162,16 @@ CREATE TABLE page (
 );
 
 CREATE TABLE notes_page_data (
-    content TEXT NOT NULL
-) INHERITS (page_data);
+    id SERIAL PRIMARY KEY,
+    page_data_id INT NOT NULL,
+
+    content TEXT NOT NULL,
+
+    CONSTRAINT fk_page_data_notes
+        FOREIGN KEY(page_data_id)
+        REFERENCES page_data (id)
+        ON DELETE CASCADE
+);
 
 CREATE TABLE feedback (
     id SERIAL PRIMARY KEY,

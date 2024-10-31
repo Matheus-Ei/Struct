@@ -1,10 +1,5 @@
-// Libraries
 import { DataTypes, Model } from "sequelize";
-
-// Database
 import connection from "../services/database/connection";
-
-// Models
 import SubscriptionModel from "./subscription";
 import SettingsModel from "./settings";
 

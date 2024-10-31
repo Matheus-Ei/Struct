@@ -39,7 +39,7 @@ const Projects = () => {
     const [refRefresh, refresh] = useToggle(false);
 
     useEffect(() => {
-        Request.get("project/get-all").then((response) => {
+        Request.get("user/projects").then((response) => {
             setProjects(response);
         });
     }, [refRefresh]);
