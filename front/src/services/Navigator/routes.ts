@@ -1,5 +1,5 @@
 import Dashboard from "pages/Dashboard";
-import Projects from "pages/Projects";
+import Project from "pages/Project";
 import Settings from "pages/Settings";
 import Landing from "../../pages/Landing";
 import Login from "../../pages/Login";
@@ -11,7 +11,7 @@ const routes: RoutesType = [
     ["/login", Login],
     ["/dashboard", Dashboard],
     ["/settings", Settings],
-    ["/projects/:id", Projects],
+    ["/projects/:id", Project],
 ];
 
 export default routes;

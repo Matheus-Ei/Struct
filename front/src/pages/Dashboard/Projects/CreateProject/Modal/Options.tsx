@@ -22,6 +22,13 @@ const Options = ({ setModule, setType, type }: OptionsProps) => {
                     checked={type}
                     setChecked={setType}
                 />
+
+                <Checkbox
+                    text="Monopage"
+                    group="type"
+                    checked={type}
+                    setChecked={setType}
+                />
             </div>
         </div>
     );
