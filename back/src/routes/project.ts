@@ -1,7 +1,4 @@
-// Libraries
 import { Router } from "express";
-
-// Controllers
 import ProjectController from "../controllers/project";
 
 class ProjectRoute {
@@ -14,10 +11,10 @@ class ProjectRoute {
 
     private init() {
         this.router.get("/get/:id", ProjectController.get);
+        this.router.get("/pages/:id", ProjectController.getPages);
+        this.router.get("/shared/:id", ProjectController.getShared);
 
         this.router.post("/create", ProjectController.create);
-
-        this.router.get("/get-all", ProjectController.getAll);
 
         this.router.put("/edit/:id", ProjectController.edit);
 

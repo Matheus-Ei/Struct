@@ -1,5 +1,4 @@
 import Actions from "./Actions";
-import Points from "./Points";
 import Informations from "./Informations";
 import Request from "services/Request";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
@@ -47,8 +46,6 @@ const About = ({ id, setModal }: AboutProps) => {
                 title={project.title}
                 description={project.description}
             />
-
-            <Points type={project.type} modules={project.modules} />
 
             <Actions id={id} setModal={setModal} />
         </div>

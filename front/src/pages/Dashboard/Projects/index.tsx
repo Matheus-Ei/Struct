@@ -7,11 +7,9 @@ import Project from "./Project";
 import ProjectModal from "./Project/Modal";
 
 type ProjectType = Array<{
+    id: number;
     title: string;
     description: string;
-    type: "Singular" | "Compost" | "Monopage";
-    module: Array<string>;
-    id: number;
 }>;
 
 interface ModalType {
@@ -35,11 +33,10 @@ const Projects = () => {
     });
 
     const [showCreateProject, setShowCreateProject] = useState(false);
-
     const [refRefresh, refresh] = useToggle(false);
 
     useEffect(() => {
-        Request.get("project/get-all").then((response) => {
+        Request.get("user/projects").then((response) => {
             setProjects(response);
         });
     }, [refRefresh]);
@@ -50,9 +47,9 @@ const Projects = () => {
                 {projects.map((item, index) => {
                     return (
                         <Project
+                            id={item.id}
                             title={item.title}
                             description={item.description}
-                            id={item.id}
                             setModal={setProjectModal}
                             key={index}
                         />

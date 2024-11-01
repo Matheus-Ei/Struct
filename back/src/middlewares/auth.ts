@@ -1,8 +1,5 @@
-// Libraries
 import { Request, Response, NextFunction } from "express";
 import dotenv from "dotenv";
-
-// Services
 import Cookie from "../services/cookie";
 import Token from "../services/token";
 

@@ -1,12 +1,8 @@
-// Libraries
 import { Request, Response } from "express";
-
-// Services
 import Cookie from "../services/cookie";
 import Token from "../services/token";
 import Hash from "../services/hash";
-
-// Models
+import operations from "../services/database/operations";
 import UserModel from "../models/user";
 import SettingsModel from "../models/settings";
 import SubscriptionModel from "../models/subscription";
@@ -25,6 +21,33 @@ class UserController {
             }
         } catch (error) {
             res.status(500).json({ message: "Error fetching user", error });
+        }
+    }
+
+    public async getProjects(req: Request, res: Response) {
+        const userId = Cookie.get("id", req);
+
+        try {
+            const projects = await operations.query(
+                `SELECT id,
+	                    title,
+	                    description
+                 FROM project
+                 WHERE owner_user_id = ${userId};`
+            );
+
+            if (projects) {
+                res.status(200).json(projects[0]);
+            } else {
+                res.status(404).json({
+                    message: "No projects for this user were found",
+                });
+            }
+        } catch (error) {
+            res.status(500).json({
+                message: "Error fetching the projects",
+                error,
+            });
         }
     }
 
@@ -96,12 +119,23 @@ class UserController {
                     Cookie.generate("refresh_token", refreshTk, res);
                     Cookie.generate("id", user?.dataValues.id, res);
 
-                    res.status(201).json({ status: true });
+                    res.status(201).json({
+                        message: "The login was a success",
+                        status: true,
+                    });
                 } else {
-                    res.status(201).json({ status: false });
+                    res.status(401).json({
+                        message:
+                            "You aren'n authorized to login with these credentials",
+                        status: false,
+                    });
                 }
             } else {
-                res.status(201).json({ status: false });
+                res.status(401).json({
+                    message:
+                        "You aren'n authorized to login with these credentials",
+                    status: false,
+                });
             }
         } catch (error) {
             res.status(500).json({
@@ -115,7 +149,13 @@ class UserController {
 
     public async cancelSubscription(req: Request, res: Response) {}
 
-    public async logout(req: Request, res: Response) {}
+    public async logout(req: Request, res: Response) {
+        Cookie.delete("access_token", res);
+        Cookie.delete("refresh_token", res);
+        Cookie.delete("id", res);
+
+        res.status(200).send({ message: "Logout was made successfuly" });
+    }
 
     public async delete(req: Request, res: Response) {}
 }

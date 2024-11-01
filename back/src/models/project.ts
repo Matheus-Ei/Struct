@@ -1,12 +1,6 @@
-// Libraries
 import { DataTypes, Model } from "sequelize";
-
-// Database
 import connection from "../services/database/connection";
-
-// Models
 import UserModel from "./user";
-import ProjectTypeModel from "./projectType";
 
 class ProjectModel extends Model {
     public id!: number;
@@ -14,7 +8,6 @@ class ProjectModel extends Model {
     public title!: string;
     public description!: string;
 
-    public project_type_id!: number;
     public owner_user_id!: number;
 }
 
@@ -30,19 +23,12 @@ ProjectModel.init(
             type: DataTypes.STRING,
             allowNull: false,
         },
+
         description: {
             type: DataTypes.STRING,
             allowNull: false,
         },
 
-        project_type_id: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            references: {
-                model: ProjectTypeModel,
-                key: "id",
-            },
-        },
         owner_user_id: {
             type: DataTypes.INTEGER,
             allowNull: false,

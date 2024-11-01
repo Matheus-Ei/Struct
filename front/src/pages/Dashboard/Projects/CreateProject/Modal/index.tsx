@@ -3,7 +3,6 @@ import Modal from "components/Modal";
 import { projectsContext } from "pages/Dashboard/Projects";
 import { Dispatch, SetStateAction, useContext, useState } from "react";
 import Request from "services/Request";
-import Options from "./Options";
 import TextFields from "./TextFields";
 
 interface CreateProjectModalProps {
@@ -19,15 +18,11 @@ const CreateProjectModal = ({
 
     const [title, setTitle] = useState<string>("");
     const [description, setDescription] = useState<string>("");
-    const [module, setModule] = useState<string>("notes");
-    const [type, setType] = useState<string>("");
 
     const handleCreate = () => {
         Request.post("project/create", {
             title,
             description,
-            type: type.toLowerCase(),
-            modules: [module.toLowerCase()],
         }).then(() => {
             setModal(false);
             context?.refresh();
@@ -41,18 +36,14 @@ const CreateProjectModal = ({
     return (
         <Modal isOpen={showModal} close={handleClose}>
             <div className="flex flex-col items-center gap-10 justify-center w-full h-full">
-                <h1 className="pl-10 w-full font-bold text-2xl">New project</h1>
+                <h1 className="w-full font-bold text-2xl text-center my-5">
+                    New project
+                </h1>
 
                 <div className="flex flex-row items-center justify-center w-full h-3/5">
                     <TextFields
                         setTitle={setTitle}
                         setDescription={setDescription}
-                    />
-
-                    <Options
-                        setModule={setModule}
-                        setType={setType}
-                        type={type}
                     />
                 </div>
 

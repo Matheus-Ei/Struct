@@ -1,7 +1,4 @@
-// Libraries
 import { Router } from "express";
-
-// Controllers
 import TokenController from "../controllers/token";
 
 class TokenRoute {

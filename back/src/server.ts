@@ -1,13 +1,8 @@
-// Libraries
 import express from "express";
 import dotenv from "dotenv";
 import auth from "./middlewares/auth";
-
-// Middlewares
 import cors from "cors";
 import cookieParser from "cookie-parser";
-
-// Routes
 import mainRoutes from "./system/routes";
 
 export class App {
@@ -45,6 +40,7 @@ export class App {
 
     public listen(port: number) {
         this.app.listen(port, () => {
+            console.clear();
             console.log("Running the server in the port " + port);
         });
     }
@@ -54,4 +50,5 @@ const app = new App();
 
 dotenv.config();
 const port = Number(process.env.PORT);
+
 app.listen(port);
