@@ -40,6 +40,7 @@ export class App {
 
     public listen(port: number) {
         this.app.listen(port, () => {
+            console.clear();
             console.log("Running the server in the port " + port);
         });
     }
