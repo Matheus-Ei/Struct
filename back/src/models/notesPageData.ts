@@ -1,13 +1,13 @@
 import { DataTypes, Model } from "sequelize";
 import connection from "../services/database/connection";
-import PageDataModel from "./pageData";
+import PageModel from "./page";
 
 class NotesPageDataModel extends Model {
     public id!: number;
 
     public content!: string;
 
-    public page_data_id!: number;
+    public page_id!: number;
 }
 
 NotesPageDataModel.init(
@@ -23,11 +23,11 @@ NotesPageDataModel.init(
             allowNull: false,
         },
 
-        page_data_id: {
+        page_id: {
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
-                model: PageDataModel,
+                model: PageModel,
                 key: "id",
             },
         },

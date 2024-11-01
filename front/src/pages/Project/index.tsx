@@ -1,47 +1,27 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Request from "services/Request";
-import Compost from "./Types/Compost";
-import Monopage from "./Types/Monopage";
-import Singular from "./Types/Singular";
 
-interface ProjectRequestType {
+type PagesRequestType = Array<{
     id: number;
-    title: string;
+    name: string;
     description: string;
-    type: string;
-    module: Array<string>;
-}
+    emoji: string;
+    parentPage: number | null;
+    module: string;
+}>;
 
 const Project = () => {
     const { id } = useParams();
-    const [project, setProject] = useState<ProjectRequestType>({
-        id: 0,
-        title: "project",
-        description: "project",
-        type: "Singular",
-        module: ["Notes"],
-    });
+    const [pages, setPages] = useState<PagesRequestType>({});
 
     useEffect(() => {
-        Request.get(`project/get/${id}`).then((response) =>
-            setProject(response)
+        Request.get(`project/pages/${id}`).then((response) =>
+            setPages(response)
         );
     }, [id]);
 
-    switch (project.type) {
-        case "Singular":
-            return <Singular projectId={project.id} module={project.module[0]} />;
-
-        case "Monopage":
-            return <Monopage projectId={project.id} module={project.module[0]} />;
-
-        case "Compost":
-            return <Compost projectId={project.id} modules={project.module} />;
-
-        default:
-            return <div>ERROR . . .</div>;
-    }
+    return <div></div>;
 };
 
 export default Project;

@@ -29,17 +29,11 @@ class UserController {
 
         try {
             const projects = await operations.query(
-                `SELECT project.id AS id,
-	                    project.title AS title,
-	                    project.description AS description,
-	                    MAX(INITCAP(project_type.name)) as type,
-	                    ARRAY_AGG(INITCAP(module.name)) AS module
-                 FROM relationship_project_module
-                 JOIN project ON relationship_project_module.project_id = project.id
-                 JOIN module ON relationship_project_module.module_id = module.id
-                 JOIN project_type ON project.project_type_id = project_type.id
-                 WHERE owner_user_id = ${userId}
-                 GROUP BY project.id;`
+                `SELECT id,
+	                    title,
+	                    description
+                 FROM project
+                 WHERE owner_user_id = ${userId};`
             );
 
             if (projects) {
@@ -156,9 +150,9 @@ class UserController {
     public async cancelSubscription(req: Request, res: Response) {}
 
     public async logout(req: Request, res: Response) {
-        res.clearCookie("access_token");
-        res.clearCookie("refresh_token");
-        res.clearCookie("id");
+        Cookie.delete("access_token", res);
+        Cookie.delete("refresh_token", res);
+        Cookie.delete("id", res);
 
         res.status(200).send({ message: "Logout was made successfuly" });
     }

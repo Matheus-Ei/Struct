@@ -1,7 +1,7 @@
 import UserRoute from "../routes/user";
 import TokenRoute from "../routes/token";
 import ProjectRoute from "../routes/project";
-import NotesPageRouter from "../routes/notesPage";
+import NotesPageRouter from "../routes/page/notes";
 
 type MainRoutesType = Array<[String, Object]>;
 

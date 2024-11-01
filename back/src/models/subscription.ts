@@ -4,8 +4,10 @@ import SubscriptionPlanModel from "./subscriptionPlan";
 
 class SubscriptionModel extends Model {
     public id!: number;
+
     public last_paid!: Date;
     public status?: string;
+
     public subscription_plan_id!: number;
 }
 
@@ -16,13 +18,16 @@ SubscriptionModel.init(
             autoIncrement: true,
             primaryKey: true,
         },
+
         last_paid: {
             type: DataTypes.DATE,
         },
+
         status: {
             type: DataTypes.ENUM("Active", "Inactive", "Suspended", "Canceled"),
             defaultValue: "Active",
         },
+
         subscription_plan_id: {
             type: DataTypes.INTEGER,
             allowNull: false,

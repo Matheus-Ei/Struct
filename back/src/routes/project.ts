@@ -11,8 +11,8 @@ class ProjectRoute {
 
     private init() {
         this.router.get("/get/:id", ProjectController.get);
-        this.router.get("/get-pages/:id", ProjectController.getPages);
-        this.router.get("/get-shared/:id", ProjectController.getShared);
+        this.router.get("/pages/:id", ProjectController.getPages);
+        this.router.get("/shared/:id", ProjectController.getShared);
 
         this.router.post("/create", ProjectController.create);
 

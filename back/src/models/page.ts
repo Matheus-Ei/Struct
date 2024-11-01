@@ -2,15 +2,16 @@ import { DataTypes, Model } from "sequelize";
 import connection from "../services/database/connection";
 import ModuleModel from "./module";
 import ProjectModel from "./project";
-import PageDataModel from "./pageData";
 
 class PageModel extends Model {
     public id!: number;
 
+    public name!: string;
+    public description!: string;
+    public emoji?: string;
+
     public project_id!: number;
     public module_id!: number;
-    public page_data_id!: number;
-
     public parent_page_id?: number;
 }
 
@@ -20,6 +21,21 @@ PageModel.init(
             type: DataTypes.INTEGER,
             autoIncrement: true,
             primaryKey: true,
+        },
+
+        name: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+
+        description: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+
+        emoji: {
+            type: DataTypes.STRING,
+            allowNull: true,
         },
 
         project_id: {
@@ -36,15 +52,6 @@ PageModel.init(
             allowNull: true,
             references: {
                 model: PageModel,
-                key: "id",
-            },
-        },
-
-        page_data_id: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            references: {
-                model: PageDataModel,
                 key: "id",
             },
         },

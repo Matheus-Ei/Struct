@@ -48,11 +48,11 @@ CREATE TABLE users (
     name VARCHAR(100) NOT NULL,
     about TEXT,
     mail VARCHAR(100) NOT NULL UNIQUE,
-    nickname VARCHAR(50),
+    nickname VARCHAR(50) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
     photo VARCHAR(400), -- Saves only the image URL
-    subscription_id INT,
-    settings_id INT,
+    subscription_id INT NOT NULL,
+    settings_id INT NOT NULL,
 
     CONSTRAINT fk_subscription
         FOREIGN KEY(subscription_id) 
@@ -62,11 +62,6 @@ CREATE TABLE users (
         FOREIGN KEY(settings_id) 
         REFERENCES settings (id)
         ON DELETE CASCADE
-);
-
-CREATE TABLE project_type (
-    id SERIAL PRIMARY KEY,
-    name VARCHAR(100) NOT NULL
 );
 
 CREATE TABLE permission_level (
@@ -79,12 +74,8 @@ CREATE TABLE project (
     id SERIAL PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
     description TEXT,
-    project_type_id INT NOT NULL,
     owner_user_id INT NOT NULL,
 
-    CONSTRAINT fk_project_type
-        FOREIGN KEY(project_type_id)
-        REFERENCES project_type (id),
     CONSTRAINT fk_owner_user
         FOREIGN KEY(owner_user_id)
         REFERENCES users (id)
@@ -116,38 +107,15 @@ CREATE TABLE module (
     description TEXT
 );
 
-CREATE TABLE relationship_project_module (
-    id SERIAL PRIMARY KEY,
-    module_id INT NOT NULL,
-    project_id INT NOT NULL,
-
-    CONSTRAINT fk_module
-        FOREIGN KEY(module_id)
-        REFERENCES module (id),
-    CONSTRAINT fk_project
-        FOREIGN KEY(project_id)
-        REFERENCES project (id)
-        ON DELETE CASCADE
-);
-
-CREATE TABLE page_data (
+CREATE TABLE page (
     id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     emoji VARCHAR(10),
-    description TEXT
-);
-
-CREATE TABLE page (
-    id SERIAL PRIMARY KEY,
-    page_data_id INT NOT NULL,
+    description TEXT,
     parent_page_id INT NULL,
     project_id INT NOT NULL,
     module_id INT NOT NULL,
 
-    CONSTRAINT fk_page_data
-        FOREIGN KEY(page_data_id)
-        REFERENCES page_data (id)
-        ON DELETE CASCADE,
     CONSTRAINT fk_parent_page
         FOREIGN KEY(parent_page_id)
         REFERENCES page (id)
@@ -163,13 +131,13 @@ CREATE TABLE page (
 
 CREATE TABLE notes_page_data (
     id SERIAL PRIMARY KEY,
-    page_data_id INT NOT NULL,
+    page_id INT NOT NULL,
 
     content TEXT NOT NULL,
 
-    CONSTRAINT fk_page_data_notes
-        FOREIGN KEY(page_data_id)
-        REFERENCES page_data (id)
+    CONSTRAINT fk_notes_page
+        FOREIGN KEY(page_id)
+        REFERENCES page (id)
         ON DELETE CASCADE
 );
 
@@ -182,7 +150,7 @@ CREATE TABLE feedback (
 
 CREATE TABLE tool (
     id SERIAL PRIMARY KEY,
-    link VARCHAR(200) NOT NULL,
+    endpoint VARCHAR(200) NOT NULL,
     name VARCHAR(50),
     description VARCHAR(500)
 );

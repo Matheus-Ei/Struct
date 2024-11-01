@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
-import operations from "../services/database/operations";
-import PageDataModel from "../models/pageData";
-import NotesPageDataModel from "../models/notesPageData";
-import PageModel from "../models/page";
+import operations from "../../services/database/operations";
+import NotesPageDataModel from "../../models/notesPageData";
+import PageModel from "../../models/page";
+import ModuleModel from "../../models/module";
 
 class NotesPageController {
     public async get(req: Request, res: Response) {
@@ -11,13 +11,14 @@ class NotesPageController {
         const query = `
             SELECT 
                 page.id,
-                page_data.name,
-                page_data.description,
+                page.name,
+                page.emoji as emoji,
+                page.description,
+                page.parent_page_id AS parent,
                 notes_page_data.content AS content,
-                module.name AS name
+                module.name AS module
             FROM page
-            JOIN page_data ON page.page_data_id = page_data.id
-            JOIN notes_page_data ON page_data.id = notes_page_data.page_data_id
+            JOIN notes_page_data ON page.id = notes_page_data.page_id
             JOIN module ON page.module_id = module.id
             WHERE page.id = ${id};
         `;
@@ -35,25 +36,21 @@ class NotesPageController {
         const { projectId, name, description } = req.body;
 
         try {
-            const pageData = await PageDataModel.create({ name, description });
-            const pageDataId: number = pageData.id;
-
-            await NotesPageDataModel.create({
-                page_data_id: pageDataId,
-                content: "Where your imagination leaves you. . .",
+            const moduleNotes = await ModuleModel.findAll({
+                where: { name: "notes" },
             });
-
-            const moduleNotes: any = await operations.query(`
-                SELECT id
-                FROM module
-                WHERE name='notes';
-        `);
-            const moduleNotesId: number = moduleNotes[0][0].id;
+            const moduleNotesId: number = moduleNotes[0].id;
 
             const page = await PageModel.create({
-                page_data_id: pageDataId,
+                name,
+                description,
                 project_id: projectId,
                 module_id: moduleNotesId,
+            });
+
+            await NotesPageDataModel.create({
+                page_id: page.id,
+                content: "Where your imagination leaves you. . .",
             });
 
             res.status(201).send(page);

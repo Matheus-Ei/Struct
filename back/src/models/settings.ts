@@ -3,6 +3,7 @@ import connection from "../services/database/connection";
 
 class SettingsModel extends Model {
     public id!: number;
+
     public language!: string;
     public country!: string;
 }
@@ -14,10 +15,12 @@ SettingsModel.init(
             autoIncrement: true,
             primaryKey: true,
         },
+
         language: {
             type: DataTypes.STRING(50),
             allowNull: false,
         },
+
         country: {
             type: DataTypes.STRING(50),
             allowNull: false,

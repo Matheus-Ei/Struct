@@ -1,9 +1,3 @@
--- INSERT INTO TYPE TABLE
-INSERT INTO project_type (name) 
-VALUES ('singular'),
-	   ('compost'),
-	   ('monopage');
-
 -- INSERT INTO MODULE TABLE
 INSERT INTO module (name, description) 
 VALUES ('notes', 'This module helps you to keep track of your learning, keep note of everything'),
