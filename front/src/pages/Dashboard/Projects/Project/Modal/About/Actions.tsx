@@ -19,7 +19,7 @@ const Actions = ({ id, setModal }: ActionsProps) => {
     const deleteProject = () => {
         Request.delete(`project/delete/${id}`).then(() => {
             setModal({ projectId: 1, show: false });
-            context?.refresh();
+            context?.refetch();
         });
     };
 

@@ -21,22 +21,29 @@ class Login {
         }
     }
 
-    static async check(navigate: NavigateFunction) {
-        const response = await Request.get("token/check");
+    static async refresh() {
+        const response = await Request.get("token/refresh");
 
         if (response === false) {
-            navigate("/login");
             return false;
         }
 
         return true;
     }
 
-    static async refresh() {
-        const response = await Request.get("token/refresh");
+    static async check(navigate: NavigateFunction) {
+        const response = await Request.get("token/check");
 
-        if (response === false) {
-            return false;
+        if (!response) {
+            const isRefreshed = await Login.refresh();
+
+            if (!isRefreshed) {
+                navigate("/login");
+                return false;
+            }
+
+            console.log("Refreshed session");
+            return true;
         }
 
         return true;

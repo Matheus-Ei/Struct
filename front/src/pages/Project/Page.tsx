@@ -11,15 +11,15 @@ type PagesRequestType = Array<{
 }>;
 
 interface PageProps {
-    pages: PagesRequestType;
+    pages?: PagesRequestType | null;
     selectedPageId: number;
 }
 
-const getModule = (module: string, id: number) => {
+const getModule = (module: string, id: number, index: number) => {
     return router.map((item) => {
         const page =
             module == item.name
-                ? React.createElement(item.endpoint, { pageId: id })
+                ? React.createElement(item.endpoint, { pageId: id, key: index })
                 : null;
 
         return page;
@@ -27,18 +27,16 @@ const getModule = (module: string, id: number) => {
 };
 
 const Page = ({ pages, selectedPageId }: PageProps) => {
-    return (
-        <div className="w-10/12 h-screen">
-            {pages.map((item, index) => {
-                const page =
-                    item.id == selectedPageId
-                        ? getModule(item.module, item.id)
-                        : null;
+    const renderPages = (item: any, index: number) => {
+        const page =
+            item.id == selectedPageId
+                ? getModule(item.module, item.id, index)
+                : null;
 
-                return page;
-            })}
-        </div>
-    );
+        return page;
+    };
+
+    return <div className="w-10/12 h-screen">{pages?.map(renderPages)}</div>;
 };
 
 export default Page;

@@ -1,6 +1,6 @@
 interface InformationsProps {
-    title: string;
-    description: string;
+    title: string | undefined;
+    description: string | undefined;
 }
 
 const Informations = ({ title, description }: InformationsProps) => {

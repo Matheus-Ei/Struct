@@ -25,7 +25,7 @@ const CreateProjectModal = ({
             description,
         }).then(() => {
             setModal(false);
-            context?.refresh();
+            context?.refetch();
         });
     };
 

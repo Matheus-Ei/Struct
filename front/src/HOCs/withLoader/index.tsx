@@ -24,7 +24,7 @@ const withLoader = (WrappedComponent: ComponentType, checkLogin?: boolean) => {
                 }
 
                 setLoading(false);
-            }, 200);
+            }, 50);
         }, [loading]);
 
         return (

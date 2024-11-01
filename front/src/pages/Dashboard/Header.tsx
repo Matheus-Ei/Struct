@@ -20,27 +20,25 @@ const Header = ({ tab, setTab }: HeaderProps) => {
     const selectedStyle = "font-bold cursor-pointer select-none text-xl";
     const notSelectedStyle = "cursor-pointer select-none text-lg";
 
+    const renderTabs = (item: any, index: number) => {
+        return (
+            <h1
+                className={item == tab ? selectedStyle : notSelectedStyle}
+                onClick={() => setTab(item)}
+                key={index}
+            >
+                {item}
+            </h1>
+        );
+    };
+
     return (
         <div className="flex flex-row w-screen h-32 items-center justify-between px-12">
             <div className="flex flex-row w-fit h-full items-center justify-start gap-12">
                 <Logo className="text-primary w-64 h-full" />
 
                 <div className="flex flex-row gap-6">
-                    {allTabs.map((item, index) => {
-                        return (
-                            <h1
-                                className={
-                                    item == tab
-                                        ? selectedStyle
-                                        : notSelectedStyle
-                                }
-                                onClick={() => setTab(item)}
-                                key={index}
-                            >
-                                {item}
-                            </h1>
-                        );
-                    })}
+                    {allTabs.map(renderTabs)}
                 </div>
             </div>
 
