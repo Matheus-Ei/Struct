@@ -5,26 +5,26 @@ import { useParams } from "react-router-dom";
 import Menu from "./Menu";
 import Page from "./Page";
 
-type PagesRequestType = Array<{
+interface PagesRequestType {
     id: number;
     name: string;
     description: string;
-    emoji: string;
+    emoji: number;
     parentPage: number | null;
     module: string;
-}>;
+}
 
 const Project = () => {
     const { id } = useParams();
     const [selectedPageId, setSelectedPageId] = useState<number>(0);
 
-    const { response: pages } = useRequest<PagesRequestType>(
+    const { response: pages } = useRequest<Array<PagesRequestType>>(
         `project/pages/${id}`,
         id
     );
 
     return (
-        <div className="flex flex-row items-center w-screen h-screen gap-10 px-4">
+        <div className="flex flex-row items-center w-screen h-screen gap-10">
             <Menu
                 pages={pages}
                 selectedPageId={selectedPageId}

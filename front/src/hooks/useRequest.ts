@@ -17,7 +17,7 @@ function useRequest<T>(url: string, updater?: any): UseRequestResult<T> {
         loading: true,
         error: null,
     });
-
+    
     const fetchData = () => {
         setState((prev) => ({ ...prev, loading: true }));
 

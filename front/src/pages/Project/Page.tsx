@@ -1,17 +1,17 @@
 import React from "react";
 import router from "./router";
 
-type PagesRequestType = Array<{
+interface PagesRequestType {
     id: number;
     name: string;
     description: string;
-    emoji: string;
+    emoji: number;
     parentPage: number | null;
     module: string;
-}>;
+}
 
 interface PageProps {
-    pages?: PagesRequestType | null;
+    pages: Array<PagesRequestType> | null;
     selectedPageId: number;
 }
 

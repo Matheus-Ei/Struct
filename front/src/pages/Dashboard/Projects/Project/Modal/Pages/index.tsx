@@ -9,7 +9,7 @@ interface PageRequestType {
     id: number;
     name: string;
     description: string;
-    emoji: string;
+    emoji: number;
     module: string;
 }
 
@@ -32,7 +32,7 @@ const Pages = ({ projectId }: PagesProps) => {
 
     return (
         <div className="w-full h-full flex justify-center">
-            <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-7 content-start items-start mt-6 overflow-y-scroll gap-y-4 h-4/5 w-[95%] overflow-x-hidden">
+            <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-7 content-start items-start mt-6 overflow-y-scroll gap-x-6 gap-y-4 h-4/5 w-[95%] overflow-x-hidden">
                 {pages?.map(renderPages)}
             </div>
         </div>
