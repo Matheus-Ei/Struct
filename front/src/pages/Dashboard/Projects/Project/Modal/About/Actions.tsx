@@ -17,6 +17,14 @@ const Actions = ({ id, setModal }: ActionsProps) => {
     const context = useContext(projectsContext);
 
     const deleteProject = () => {
+        const wantDelete = window.confirm(
+            "Are you sure that you want to delete this project?"
+        );
+
+        if (!wantDelete) {
+            return;
+        }
+
         Request.delete(`project/delete/${id}`).then(() => {
             setModal({ projectId: 1, show: false });
             context?.refetch();

@@ -60,8 +60,6 @@ class NotesPageController {
     }
 
     public async update(req: Request, res: Response) {}
-
-    public async delete(req: Request, res: Response) {}
 }
 
 export default new NotesPageController();

@@ -150,9 +150,7 @@ class UserController {
     public async cancelSubscription(req: Request, res: Response) {}
 
     public async logout(req: Request, res: Response) {
-        Cookie.delete("access_token", res);
-        Cookie.delete("refresh_token", res);
-        Cookie.delete("id", res);
+        Cookie.delete(["access_token", "id", "refresh_token"], res);
 
         res.status(200).send({ message: "Logout was made successfuly" });
     }

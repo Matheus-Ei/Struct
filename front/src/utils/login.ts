@@ -24,7 +24,7 @@ class Login {
     static async refresh() {
         const response = await Request.get("token/refresh");
 
-        if (response === false) {
+        if (!response) {
             return false;
         }
 
@@ -46,6 +46,13 @@ class Login {
             return true;
         }
 
+        return true;
+    }
+
+    static async logout(navigate: NavigateFunction) {
+        await Request.post("user/logout", {});
+
+        navigate("/");
         return true;
     }
 }

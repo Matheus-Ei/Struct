@@ -42,9 +42,14 @@ class Cookie {
         }
     }
 
-    public static delete(name: string, res: Response) {
+    public static delete(name: Array<string>, res: Response) {
         try {
-            res.clearCookie(name);
+            const cookies = name.map((item) => {
+                return `${item}=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT; HttpOnly; Secure; SameSite=Strict`;
+            });
+
+            res.setHeader("Set-Cookie", cookies);
+            name.forEach((item) => res.clearCookie(item));
         } catch (error) {
             console.error(error);
         }

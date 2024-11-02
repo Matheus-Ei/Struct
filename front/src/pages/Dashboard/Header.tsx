@@ -15,7 +15,7 @@ const handleGoSettings = (navigate: any) => {
 const Header = ({ tab, setTab }: HeaderProps) => {
     const navigate = useNavigate();
 
-    const allTabs = ["Projects", "Tools"];
+    const allTabs = ["Projects", "Tools", "Workflow"];
 
     const selectedStyle = "font-bold cursor-pointer select-none text-xl";
     const notSelectedStyle = "cursor-pointer select-none text-lg";

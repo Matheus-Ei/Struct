@@ -28,7 +28,7 @@ const ThemeController = () => {
     };
 
     return (
-        <div className="dropdown mb-72">
+        <div className="dropdown">
             <div tabIndex={0} role="button" className="btn m-1">
                 <p className="w-20 text-start">{theme}</p>
                 <Icons name="MdExpandMore" library="md" />
