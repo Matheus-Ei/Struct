@@ -24,7 +24,7 @@ const Project = () => {
     );
 
     return (
-        <div className="flex flex-row items-center w-screen h-screen gap-10">
+        <div className="flex flex-row pr-10 items-center w-screen h-screen gap-10">
             <Menu
                 pages={pages}
                 selectedPageId={selectedPageId}

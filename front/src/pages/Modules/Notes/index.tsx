@@ -1,4 +1,5 @@
 import useRequest from "hooks/useRequest";
+import Body from "./Body";
 import Header from "./Header";
 
 interface NotesProps {
@@ -27,6 +28,7 @@ const Notes = ({ pageId }: NotesProps) => {
                 emoji={page?.emoji}
                 description={page?.description}
             />
+            <Body />
         </div>
     );
 };

@@ -38,7 +38,7 @@ const Menu = ({ pages, selectedPageId, setSelectedPageId }: MenuProps) => {
     };
 
     return (
-        <div className="flex flex-col w-[200px] items-center h-screen border-r border-neutral gap-4 px-1">
+        <div className="flex flex-col w-[300px] items-center h-screen border-r border-neutral gap-4 px-1">
             <div className="flex flex-col items-center justify-center w-full h-32">
                 <h1>Header</h1>
             </div>

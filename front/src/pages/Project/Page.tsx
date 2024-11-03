@@ -36,7 +36,11 @@ const Page = ({ pages, selectedPageId }: PageProps) => {
         return page;
     };
 
-    return <div className="w-10/12 h-screen">{pages?.map(renderPages)}</div>;
+    return (
+        <div className="w-full h-screen flex justify-center">
+            <div className="w-6/12 h-screen">{pages?.map(renderPages)}</div>
+        </div>
+    );
 };
 
 export default Page;
