@@ -1,5 +1,5 @@
 import useRequest from "hooks/useRequest";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import CreateProject from "./CreateProject";
 import CreateProjectModal from "./CreateProject/Modal";
 import Project from "./Project";

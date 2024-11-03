@@ -18,7 +18,7 @@ const ThemeController = () => {
                 type="radio"
                 name="theme-buttons"
                 className="btn theme-controller text-[0.8vw]"
-                checked={item == theme ? true : false}
+                checked={item === theme ? true : false}
                 aria-label={item}
                 value={item}
                 key={index}

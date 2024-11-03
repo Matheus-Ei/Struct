@@ -23,7 +23,7 @@ const Header = ({ tab, setTab }: HeaderProps) => {
     const renderTabs = (item: any, index: number) => {
         return (
             <h1
-                className={item == tab ? selectedStyle : notSelectedStyle}
+                className={item === tab ? selectedStyle : notSelectedStyle}
                 onClick={() => setTab(item)}
                 key={index}
             >

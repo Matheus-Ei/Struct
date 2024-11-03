@@ -3,10 +3,16 @@ interface ButtonProps {
     inverse?: boolean;
     text?: string;
     onClick?: () => any;
-    style?: string;
+    className?: string;
 }
 
-const Button = ({ children, inverse, text, onClick, style }: ButtonProps) => {
+const Button = ({
+    children,
+    inverse,
+    text,
+    onClick,
+    className,
+}: ButtonProps) => {
     const size = "border w-fit h-fit px-16 py-4 rounded-btn";
 
     const color = inverse
@@ -25,7 +31,10 @@ const Button = ({ children, inverse, text, onClick, style }: ButtonProps) => {
     };
 
     return (
-        <button className={style ? style : buttonStyle} onClick={handdleClick}>
+        <button
+            className={className ? className : buttonStyle}
+            onClick={handdleClick}
+        >
             {children ? children : <h1 className={textStyle}>{text}</h1>}
         </button>
     );

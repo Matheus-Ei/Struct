@@ -23,13 +23,13 @@ const Header = () => {
             <div className="flex gap-4">
                 <Button
                     text="LOGIN"
-                    style="border w-fit h-fit px-10 py-1 rounded-btn bg-base-100 border-primary"
+                    className="border w-fit h-fit px-10 py-1 rounded-btn bg-base-100 border-primary"
                     onClick={onLogin}
                 />
 
                 <Button
                     text="SIGN-UP"
-                    style="border w-fit h-fit px-10 py-1 rounded-btn bg-base-100 border-primary"
+                    className="border w-fit h-fit px-10 py-1 rounded-btn bg-base-100 border-primary"
                     onClick={onSignup}
                 />
             </div>

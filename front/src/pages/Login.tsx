@@ -34,7 +34,7 @@ const Login = () => {
                     <Message
                         text="Mail or password incorrect, please, try again..."
                         type="error"
-                        style="text"
+                        box="text"
                         isVisible={error}
                     />
                     <Input text="Mail" setValue={setMail} />

@@ -36,7 +36,7 @@ const PriceEmulation = () => {
                     newItem = prevItem;
                 }
 
-                if (newItem.isChecked == true) {
+                if (newItem.isChecked === true) {
                     newPrice += newItem.price;
                 }
 

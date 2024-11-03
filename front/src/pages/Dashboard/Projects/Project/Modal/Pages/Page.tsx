@@ -1,7 +1,7 @@
 import Emoji from "components/Emoji";
 import useToggle from "hooks/useToggle";
 import Icons from "services/Icons";
-import Request from "services/Request";
+// import Request from "services/Request";
 
 interface PageProps {
     id: number;
@@ -12,12 +12,12 @@ interface PageProps {
 
 const Page = ({ id, name, emoji, refetch }: PageProps) => {
     const [showMore, toggleShowMore] = useToggle(false);
-
+/* 
     const deletePage = () => {
         Request.delete(`page/geral/${id}`);
         refetch();
     };
-
+ */
     return (
         <div
             className="flex text-lg w-full h-12 items-center justify-between"

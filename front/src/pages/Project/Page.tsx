@@ -18,7 +18,7 @@ interface PageProps {
 const getModule = (module: string, id: number, index: number) => {
     return router.map((item) => {
         const page =
-            module == item.name
+            module === item.name
                 ? React.createElement(item.endpoint, { pageId: id, key: index })
                 : null;
 
@@ -29,7 +29,7 @@ const getModule = (module: string, id: number, index: number) => {
 const Page = ({ pages, selectedPageId }: PageProps) => {
     const renderPages = (item: any, index: number) => {
         const page =
-            item.id == selectedPageId
+            item.id === selectedPageId
                 ? getModule(item.module, item.id, index)
                 : null;
 

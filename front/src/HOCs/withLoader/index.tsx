@@ -11,21 +11,18 @@ const withLoader = (WrappedComponent: ComponentType, checkLogin?: boolean) => {
 
         const navigate = useNavigate();
 
-        const check = async () => {
-            const response = await Login.check(navigate);
-
-            setLoading(!response);
-        };
-
-        useEffect(() => {
-            setTimeout(() => {
+        const check = () => {
+            setTimeout(async () => {
                 if (checkLogin) {
-                    check();
+                    const response = await Login.check(navigate);
+                    setLoading(!response);
                 }
 
                 setLoading(false);
             }, 50);
-        }, [loading]);
+        };
+
+        useEffect(check, [loading, navigate]);
 
         return (
             <AnimatePresence

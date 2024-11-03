@@ -14,7 +14,7 @@ const TextFields = ({ setTitle, setDescription }: TextFieldsProps) => {
             <Input
                 text="Description"
                 type="textarea"
-                style="border rounded-btn h-96 w-[95%] pl-4 border-base-content mb-3 bg-base-100 text-base-content pt-4 resize-none"
+                className="border rounded-btn h-96 w-[95%] pl-4 border-base-content mb-3 bg-base-100 text-base-content pt-4 resize-none"
                 setValue={setDescription}
             />
         </div>

@@ -1,4 +1,4 @@
-const LoadingPage = ({}) => {
+const LoadingPage = () => {
     return <div></div>;
 };
 

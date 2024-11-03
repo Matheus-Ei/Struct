@@ -13,7 +13,7 @@ const Logout = () => {
         <Button
             text="EXIT"
             onClick={handleLogout}
-            style="flex bg-base-200 px-4 py-2 rounded-btn"
+            className="flex bg-base-200 px-4 py-2 rounded-btn"
         />
     );
 };
