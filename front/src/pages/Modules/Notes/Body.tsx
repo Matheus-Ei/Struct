@@ -1,87 +1,60 @@
-import { useEffect, useRef, useState } from "react";
-import { Text, TextCategory } from "./Text";
+import { useState } from "react";
+import Paragraph from "./TextAreas/Paragraph";
+import Title from "./TextAreas/Title";
 
-const getCursorPosition = (divRef: any) => {
-    const selection = window.getSelection();
-    if (selection && selection.rangeCount > 0) {
-        const range = selection.getRangeAt(0);
-        const preRange = range.cloneRange();
-        preRange.selectNodeContents(divRef.current!);
-        preRange.setEnd(range.endContainer, range.endOffset);
-        return preRange.toString().length;
-    }
-    return 0;
-};
-
-const setCursorPosition = (divRef: any, pos: number) => {
-    const selection = window.getSelection();
-    if (!selection || !divRef.current) return;
-
-    const nodeStack = [divRef.current];
-    let node;
-    let charCount = 0;
-    let found = false;
-
-    while (nodeStack.length > 0 && !found) {
-        node = nodeStack.pop();
-        if (!node) continue;
-
-        if (node.nodeType === 3) {
-            const textLength = node.textContent?.length || 0;
-            if (charCount + textLength >= pos) {
-                const range = document.createRange();
-                range.setStart(node, pos - charCount);
-                range.collapse(true);
-                selection.removeAllRanges();
-                selection.addRange(range);
-                found = true;
-            } else {
-                charCount += textLength;
-            }
-        } else {
-            for (let i = node.childNodes.length - 1; i >= 0; i--) {
-                nodeStack.push(node.childNodes[i]);
-            }
-        }
-    }
-};
+interface NotesTextType {
+    note: string;
+    type: string;
+}
 
 const Body = () => {
-    const divRef = useRef<HTMLDivElement | null>(null);
-    const [text, setText] = useState("");
+    const [notes, setNotes] = useState<Array<NotesTextType>>([
+        { note: "", type: "paragraph" },
+    ]);
 
-    const textHandler = new Text();
-    const textClassifierHandler = new TextCategory();
+    const sendFocus = (event: any) => {
+        if (event.target === event.currentTarget) {
+            const parentDiv = document.getElementById("notesDiv");
+            const divs = parentDiv ? parentDiv.querySelectorAll("div") : [];
+            const divsArray = Array.from(divs);
 
-    useEffect(() => {
-        if (divRef.current) {
-            const cursorPosition = getCursorPosition(divRef);
-
-            const typesArray = textClassifierHandler.set(text.split("\n"));
-            const newHTML = textHandler.render(typesArray);
-
-            divRef.current.innerHTML = newHTML;
-
-            setCursorPosition(divRef, cursorPosition);
+            const preDiv = divsArray[0] as HTMLDivElement;
+            preDiv.focus();
         }
-    }, [text]);
+    };
 
-    let typingTimer: any;
-    const handleChange = (event: any) => {
-        setText(event.target.innerText);
-
-        typingTimer = setTimeout(() => {
-            console.log("Usuário parou de editar, atualizar o banco de dados");
-        }, 5000);
+    const renderNotes = (item: NotesTextType, index: number) => {
+        if (item.type === "title") {
+            return (
+                <Title
+                    note={item.note}
+                    index={index}
+                    key={index}
+                    setNotes={setNotes}
+                />
+            );
+        } else if (item.type === "link") {
+            return;
+        } else {
+            return (
+                <Paragraph
+                    note={item.note}
+                    index={index}
+                    key={index}
+                    setNotes={setNotes}
+                />
+            );
+        }
     };
 
     return (
         <div
-            ref={divRef}
-            contentEditable
-            className="w-full h-fit outline-none"
-            onInput={handleChange}
-        />
+            id="notesDiv"
+            className="flex flex-col gap-1 w-full h-3/4"
+            onClick={sendFocus}
+        >
+            {notes.map(renderNotes)}
+        </div>
     );
 };
 

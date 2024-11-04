@@ -1,58 +1,94 @@
-export class TextCategory {
-    private readLines(item: string, index: number) {
-        const titleRegex = /^# (.+)/;
-        const paragraphRegex = /^#p\s+(.+)/;
+import { Dispatch, SetStateAction } from "react";
 
-        /*         if (titleRegex.test(item)) {
-            return this.getTitle(item);
-        } else if (paragraphRegex.test(item)) {
-            return this.getParagraph(item);
-        } */
-
-        return `<p>${item}<p>`;
-    }
-
-    set(values: Array<string>) {
-        return values;
-    }
+interface NotesTextType {
+    note: string;
+    type: string;
 }
 
 export class Text {
-    private endblock: string;
+    private setNotes: Dispatch<SetStateAction<Array<NotesTextType>>>;
 
-    constructor() {
-        this.endblock = ";;;";
+    constructor(setNotes: Dispatch<SetStateAction<Array<NotesTextType>>>) {
+        this.setNotes = setNotes;
     }
 
-    private getTitle(text: string) {
-        return `<h1 class="text-4xl font-bold">${text}</h1>`;
+    public setType(index: number, type: string) {
+        this.setNotes((prev) => {
+            const newNotes = [...prev];
+            const { note } = newNotes[index];
+            newNotes[index] = { note, type };
+            return newNotes;
+        });
     }
 
-    private getParagraph(text: string) {
-        return `<p class="text-lg">${text}</p>`;
-    }
+    private checkRe(item: string) {
+        const title = /^#\s/;
 
-    private readLines(item: string, index: number) {
-        const titleRegex = /^# (.+)/;
-        const paragraphRegex = /^#p\s+(.+)/;
-
-        if (titleRegex.test(item)) {
-            return this.getTitle(item);
-        } else if (paragraphRegex.test(item)) {
-            return this.getParagraph(item);
+        if (title.test(item)) {
+            return "title";
         }
 
-        return `<p>${item}<p>`;
+        return false;
     }
 
-    public render(value: Array<string>) {
-        let processed: string = "";
+    private removeRe(item: string) {
+        const title = /^#\s/;
 
-        value.forEach(
-            (item: string, index: number) =>
-                (processed = processed + this.readLines(item, index))
-        );
+        if (title.test(item)) {
+            return item.replace(title, "");
+        }
 
-        return processed;
+        return item;
     }
+
+    public setFocus(index: number) {
+        setTimeout(() => {
+            const parentDiv = document.getElementById("notesDiv");
+            const divs = parentDiv ? parentDiv.querySelectorAll("div") : [];
+            const divsArray = Array.from(divs);
+
+            const div = divsArray[index] as HTMLDivElement;
+            div.focus();
+        }, 10);
+    }
+
+    public setNote(index: number, note: string) {
+        this.setNotes((prev) => {
+            const newNotes = [...prev];
+            const { type } = newNotes[index];
+            newNotes[index] = { note, type };
+
+            return newNotes;
+        });
+    }
+
+    public handleSet(index: number, text: string) {
+        const type = this.checkRe(text);
+        const newText = this.removeRe(text);
+
+        this.setNote(index, newText);
+
+        if (type) {
+            this.setType(index, type);
+            this.setFocus(index);
+        }
+    }
+
+    public addNote(index: number) {
+        this.setNotes((prev) => {
+            const newNotes = [...prev];
+            newNotes.splice(index + 1, 0, { note: "", type: "paragraph" });
+            return newNotes;
+        });
+    }
+
+    public removeNote(index: number) {
+        this.setNotes((prev) => {
+            const newNotes = [...prev];
+            newNotes.splice(index, 1);
+            return newNotes;
+        });
+    }
+
+    public setDefaultType(index: number) {}
 }
