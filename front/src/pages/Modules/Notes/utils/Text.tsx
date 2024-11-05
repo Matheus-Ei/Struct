@@ -22,20 +22,32 @@ export class Text {
     }
 
     private checkReType(item: string) {
-        const title = /^#\s/;
+        const title1 = /^#\s/;
+        const title2 = /^##\s/;
+        const title3 = /^###\s/;
 
-        if (title.test(item)) {
-            return "title";
+        if (title1.test(item)) {
+            return "title1";
+        } else if (title2.test(item)) {
+            return "title2";
+        } else if (title3.test(item)) {
+            return "title3";
         }
 
         return false;
     }
 
     private removeReType(item: string) {
-        const title = /^#\s/;
+        const title1 = /^#\s/;
+        const title2 = /^##\s/;
+        const title3 = /^###\s/;
 
-        if (title.test(item)) {
-            return item.replace(title, "");
+        if (title1.test(item)) {
+            return item.replace(title1, "");
+        } else if (title2.test(item)) {
+            return item.replace(title2, "");
+        } else if (title3.test(item)) {
+            return item.replace(title3, "");
         }
 
         return item;
@@ -49,6 +61,21 @@ export class Text {
         }
 
         return item;
+    }
+
+    moveCursor(div: HTMLDivElement, direction: "end" | "start") {
+        if (div) {
+            const range = document.createRange();
+            const selection = window.getSelection();
+            if (!selection || !range) {
+                return;
+            }
+
+            range.selectNodeContents(div);
+            range.collapse(direction === "start");
+            selection.removeAllRanges();
+            selection.addRange(range);
+        }
     }
 
     public setFocus(index: number) {
@@ -89,11 +116,9 @@ export class Text {
     }
 
     public handleSetText(index: number, text: string) {
-        const secureText = this.replaceEscapeHTML(text);
-        console.log("SecureText", secureText);
-        const type = this.checkReType(secureText);
+        const type = this.checkReType(text);
 
-        const styledText = this.replaceReStyle(secureText);
+        const styledText = this.replaceReStyle(text);
         const returnText = this.removeReType(styledText);
 
         this.setNote(index, returnText);
@@ -108,6 +133,16 @@ export class Text {
         this.setNotes((prev) => {
             const newNotes = [...prev];
             newNotes.splice(index + 1, 0, { note: "", type: "paragraph" });
+            return newNotes;
+        });
+    }
+
+    public addLine(index: number) {
+        this.setNotes((prev) => {
+            const newNotes = [...prev];
+            const { type, note } = newNotes[index];
+
+            newNotes[index] = { note: `${note}<br>`, type };
             return newNotes;
         });
     }

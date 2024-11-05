@@ -5,20 +5,20 @@ export const handleKeyDown = (event: any, index: number, textObg: any) => {
         textObg.addNote(index);
 
         // Handle Focus
-        const parentDiv = document.getElementById("notesDiv");
-        if (!parentDiv) {
-            return;
-        }
+        setTimeout(() => {
+            const parentDiv = document.getElementById("notesDiv");
+            if (!parentDiv) {
+                return;
+            }
 
-        const divs = parentDiv.querySelectorAll("div");
-        const divsArray = Array.from(divs);
+            const divs = parentDiv.querySelectorAll("div");
+            const divsArray = Array.from(divs);
 
-        if (index < divsArray.length - 1) {
-            const nextDiv = divsArray[index + 1] as HTMLDivElement;
-            setTimeout(() => {
+            if (index < divsArray.length - 1) {
+                const nextDiv = divsArray[index + 1] as HTMLDivElement;
                 nextDiv.focus();
-            }, 10);
-        }
+            }
+        }, 10);
     }
 
     // Delete textArea
@@ -41,6 +41,8 @@ export const handleKeyDown = (event: any, index: number, textObg: any) => {
 
         const preDiv = divsArray[index - 1] as HTMLDivElement;
         preDiv.focus();
+
+        textObg.moveCursor(preDiv, "end");
     }
 
     // Arrow down
@@ -55,6 +57,8 @@ export const handleKeyDown = (event: any, index: number, textObg: any) => {
         if (index < divsArray.length - 1) {
             const nextDiv = divsArray[index + 1] as HTMLDivElement;
             nextDiv.focus();
+
+            textObg.moveCursor(nextDiv, "end");
         }
     }
 
@@ -68,15 +72,19 @@ export const handleKeyDown = (event: any, index: number, textObg: any) => {
 
         // Move focous
         const parentDiv = document.getElementById("notesDiv");
+
         const divs = parentDiv ? parentDiv.querySelectorAll("div") : [];
         const divsArray = Array.from(divs);
 
         const preDiv = divsArray[index - 1] as HTMLDivElement;
         preDiv.focus();
+
+        textObg.moveCursor(preDiv, "end");
     }
 
     // Make the textarea bigger
     if (event.key === "Enter" && event.shiftKey) {
+        textObg.addLine(index);
         event.preventDefault();
     }
 };

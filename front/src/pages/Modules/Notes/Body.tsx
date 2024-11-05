@@ -8,7 +8,7 @@ interface NotesTextType {
 
 const Body = () => {
     const [notes, setNotes] = useState<Array<NotesTextType>>([
-        { note: "", type: "paragraph" },
+        { note: "0", type: "paragraph" },
     ]);
 
     const sendFocus = (event: any) => {
