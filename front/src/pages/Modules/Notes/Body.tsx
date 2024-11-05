@@ -1,6 +1,5 @@
 import { useState } from "react";
-import Paragraph from "./TextAreas/Paragraph";
-import Title from "./TextAreas/Title";
+import Textareas from "./Textareas";
 
 interface NotesTextType {
     note: string;
@@ -24,27 +23,15 @@ const Body = () => {
     };
 
     const renderNotes = (item: NotesTextType, index: number) => {
-        if (item.type === "title") {
-            return (
-                <Title
-                    note={item.note}
-                    index={index}
-                    key={index}
-                    setNotes={setNotes}
-                />
-            );
-        } else if (item.type === "link") {
-            return;
-        } else {
-            return (
-                <Paragraph
-                    note={item.note}
-                    index={index}
-                    key={index}
-                    setNotes={setNotes}
-                />
-            );
-        }
+        return (
+            <Textareas
+                note={item.note}
+                type={item.type}
+                index={index}
+                key={index}
+                setNotes={setNotes}
+            />
+        );
     };
 
     return (

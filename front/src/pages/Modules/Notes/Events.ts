@@ -1,11 +1,3 @@
-import { Dispatch, SetStateAction } from "react";
-import { Text } from "./Text";
-
-interface NotesTextType {
-    note: string;
-    type: string;
-}
-
 export const handleKeyDown = (event: any, index: number, textObg: any) => {
     // Add textArea
     if (event.key === "Enter" && !event.shiftKey) {
@@ -23,7 +15,9 @@ export const handleKeyDown = (event: any, index: number, textObg: any) => {
 
         if (index < divsArray.length - 1) {
             const nextDiv = divsArray[index + 1] as HTMLDivElement;
-            nextDiv.focus();
+            setTimeout(() => {
+                nextDiv.focus();
+            }, 10);
         }
     }
 
@@ -80,16 +74,9 @@ export const handleKeyDown = (event: any, index: number, textObg: any) => {
         const preDiv = divsArray[index - 1] as HTMLDivElement;
         preDiv.focus();
     }
-};
 
-export const handleChange = (
-    divRef: React.RefObject<HTMLDivElement>,
-    setNotes: Dispatch<SetStateAction<Array<NotesTextType>>>,
-    index: number
-) => {
-    const textObj = new Text(setNotes);
-
-    if (divRef.current) {
-        textObj.handleSet(index, divRef.current.innerText);
+    // Make the textarea bigger
+    if (event.key === "Enter" && event.shiftKey) {
+        event.preventDefault();
     }
 };
