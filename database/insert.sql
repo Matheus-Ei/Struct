@@ -27,3 +27,25 @@ VALUES (1, 1),
 	   (3, 3),
 	   (3, 4),
 	   (3, 5);
+
+-- Funcion to select childrens recursivaly in the pages table
+CREATE OR REPLACE FUNCTION get_children(parent_id INT)
+RETURNS JSONB LANGUAGE SQL AS $$
+    SELECT COALESCE(
+        JSONB_AGG(
+            JSONB_BUILD_OBJECT(
+                'id', child.id,
+                'name', child.name,
+                'emoji', child.emoji,
+                'order', child.order,
+                'description', child.description,
+                'children_pages', get_children(child.id)
+            )
+            ORDER BY child.order, child.id
+        ),
+        '[]'::JSONB
+    )
+    FROM page AS child
+    WHERE child.parent_page_id = parent_id;
+$$;
+

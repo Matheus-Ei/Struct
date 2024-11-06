@@ -112,6 +112,7 @@ CREATE TABLE page (
     name VARCHAR(100) NOT NULL,
     emoji VARCHAR(10),
     description TEXT,
+    order INT DEFAULT 0,
     parent_page_id INT NULL,
     project_id INT NOT NULL,
     module_id INT NOT NULL,

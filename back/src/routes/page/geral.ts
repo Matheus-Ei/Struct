@@ -11,6 +11,8 @@ class PageGeralRoute {
 
     private init() {
         this.router.delete("/:id", PageGeralController.delete);
+        this.router.get("/:id", PageGeralController.getPage);
+        this.router.get("/children/:id", PageGeralController.getChildren);
     }
 }
 

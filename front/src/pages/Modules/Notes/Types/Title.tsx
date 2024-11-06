@@ -1,4 +1,11 @@
-import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
+import {
+    Dispatch,
+    SetStateAction,
+    useEffect,
+    useMemo,
+    useRef,
+    useState,
+} from "react";
 import { handleKeyDown } from "../utils/Events";
 import { Text } from "../utils/Text";
 import Cursor from "../utils/Cursor";
@@ -20,11 +27,11 @@ const Title = ({ note, index, setNotes, titleType }: TitleProps) => {
 
     const divRef = useRef<HTMLDivElement | null>(null);
     const textObj = new Text(setNotes);
-    const cursorObj = new Cursor(divRef);
+    const cursorObj = useMemo(() => new Cursor(divRef), [divRef]);
 
     useEffect(() => {
         cursorObj.setCursorPosition(position);
-    }, [position]);
+    }, [position, cursorObj]);
 
     const onChange = () => {
         setPosition(cursorObj.getCursorPosition());

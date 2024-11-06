@@ -33,7 +33,7 @@ class NotesPageController {
     }
 
     public async create(req: Request, res: Response) {
-        const { projectId, name, description } = req.body;
+        const { projectId, name, description, parentPage = null } = req.body;
 
         try {
             const moduleNotes = await ModuleModel.findAll({
@@ -46,6 +46,7 @@ class NotesPageController {
                 description,
                 project_id: projectId,
                 module_id: moduleNotesId,
+                parent_page_id: parentPage,
             });
 
             await NotesPageDataModel.create({
