@@ -5,7 +5,7 @@ export interface PagesRequestType {
     name: string;
     description: string;
     children_pages: Array<PagesRequestType> | null;
-    emoji: number | null;
+    emoji: string | null;
     module: string;
 }
 

@@ -1,24 +1,25 @@
-import React, { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction } from "react";
 import EmojiPicker, { EmojiClickData } from "emoji-picker-react";
 
 interface EmojiSelectorProps {
-    emoji: EmojiClickData;
-    setEmoji: Dispatch<SetStateAction<EmojiClickData>>;
+    setEmoji: Dispatch<SetStateAction<EmojiClickData | undefined>>;
+    toggleShow: (value: boolean | undefined) => void;
+    show: boolean;
 }
 
-const EmojiSelector = ({ emoji, setEmoji }: EmojiSelectorProps) => {
+const EmojiSelector = ({ setEmoji, show, toggleShow }: EmojiSelectorProps) => {
     const onEmojiClick = (emojiObject: EmojiClickData) => {
         setEmoji(emojiObject);
+        toggleShow(false);
     };
 
+    if (!show) {
+        return null;
+    }
+
     return (
-        <div>
-            <EmojiPicker onEmojiClick={onEmojiClick} />
-            {emoji && (
-                <div>
-                    <p>Emoji selecionado: {emoji.emoji}</p>
-                </div>
-            )}
+        <div className="absolute z-50">
+            <EmojiPicker onEmojiClick={onEmojiClick} />;
         </div>
     );
 };

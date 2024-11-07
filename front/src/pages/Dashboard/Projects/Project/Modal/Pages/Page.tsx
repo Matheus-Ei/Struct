@@ -6,13 +6,13 @@ import Icons from "services/Icons";
 interface PageProps {
     id: number;
     name: string;
-    emoji: number;
+    emoji: string;
     refetch: () => void;
 }
 
 const Page = ({ id, name, emoji, refetch }: PageProps) => {
     const [showMore, toggleShowMore] = useToggle(false);
-/* 
+    /* 
     const deletePage = () => {
         Request.delete(`page/geral/${id}`);
         refetch();
@@ -25,7 +25,7 @@ const Page = ({ id, name, emoji, refetch }: PageProps) => {
             onMouseLeave={() => toggleShowMore(false)}
         >
             <div className="flex gap-4 items-center">
-                {emoji ? <Emoji symbol={emoji} /> : <p>&#x2753;</p>}
+                <Emoji symbol={emoji} />
                 <h1 className="line-clamp-1 cursor-default select-none">
                     {name}
                 </h1>

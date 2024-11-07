@@ -17,7 +17,9 @@ const Menu = () => {
             <PageTab item={item} index={index} key={index} />
         );
 
-        return React.createElement(renderPage, {});
+        return React.createElement(renderPage, {
+            key: index,
+        });
     };
 
     return (

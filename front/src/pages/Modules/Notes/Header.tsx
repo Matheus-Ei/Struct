@@ -2,7 +2,7 @@ import Emoji from "components/Emoji";
 
 interface HeaderProps {
     name?: string;
-    emoji?: number | null;
+    emoji?: string | null;
     description?: string;
 }
 

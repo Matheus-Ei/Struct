@@ -29,7 +29,7 @@ const Content = ({ item, onContextMenu }: ContentProps) => {
             onContextMenu={onContextMenu}
             onClick={() => context?.setSelectedPageId(item.id)}
         >
-            {item.emoji ? <Emoji symbol={item.emoji} /> : <p>&#x2753;</p>}
+            <Emoji symbol={item.emoji} />
 
             <h1 className="line-clamp-1 w-full text-sm">{item.name}</h1>
         </div>
