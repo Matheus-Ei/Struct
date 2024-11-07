@@ -1,16 +1,8 @@
-import { useContext } from "react";
+import React, { useContext } from "react";
 import { PagesContext } from "..";
+import { PagesRequestType } from "../util/types";
 import NewPageTab from "./NewPageTab";
 import PageTab from "./PageTab";
-
-interface PagesRequestType {
-    id: number;
-    name: string;
-    description: string;
-    children_pages: Array<PagesRequestType> | null;
-    emoji: number | null;
-    module: string;
-}
 
 const Menu = () => {
     const context = useContext(PagesContext);
@@ -21,18 +13,23 @@ const Menu = () => {
     const { pages } = context;
 
     const renderPages = (item: PagesRequestType, index: number) => {
-        return <PageTab item={item} index={index} key={index} />;
+        const renderPage = () => (
+            <PageTab item={item} index={index} key={index} />
+        );
+
+        return React.createElement(renderPage, {});
     };
 
     return (
         <div className="flex flex-col w-[300px] items-center h-screen border-r border-neutral gap-4 px-1">
             <div className="flex flex-col items-center justify-center w-full h-32">
+                <h1>Dashboard</h1>
                 <h1>Shared</h1>
             </div>
 
             <div className="flex flex-col justify-start items-start w-full h-full overflow-y-scroll">
                 {pages?.map(renderPages)}
-                <NewPageTab parentPageId={null} />
+                <NewPageTab />
             </div>
 
             <div className="flex flex-col w-full items-center justify-center h-32">

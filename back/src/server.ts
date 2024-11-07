@@ -29,7 +29,7 @@ export class App {
             cors({
                 // origin: true,
                 origin: ["https://dev.struct.me", "http://localhost:3000"],
-                methods: "GET,POST,PUT,DELETE,OPTIONS",
+                methods: "GET,POST,PUT,PATCH,DELETE,OPTIONS",
                 allowedHeaders: "Authorization, Content-Type",
                 credentials: true,
             })

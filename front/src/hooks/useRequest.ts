@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import Request from "services/Request";
 
 type RequestState<T> = {
@@ -8,6 +8,7 @@ type RequestState<T> = {
 };
 
 type UseRequestResult<T> = RequestState<T> & {
+    setState: Dispatch<SetStateAction<RequestState<T>>>;
     refetch: () => void;
 };
 
@@ -36,7 +37,7 @@ function useRequest<T>(url: string, updater?: any): UseRequestResult<T> {
 
     useEffect(fetchData, [url, updater]);
 
-    return { ...state, refetch: fetchData };
+    return { ...state, setState, refetch: fetchData };
 }
 
 export default useRequest;

@@ -17,12 +17,12 @@ interface PageResponseType {
 
 const Notes = ({ pageId }: NotesProps) => {
     const { response: page } = useRequest<PageResponseType>(
-        `page/notes/get/${pageId}`,
+        `page/notes/${pageId}`,
         pageId
     );
 
     return (
-        <div className="w-full h-full py-16">
+        <div className="w-7/12 h-full py-16">
             <Header
                 name={page?.name}
                 emoji={page?.emoji}

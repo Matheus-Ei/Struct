@@ -66,6 +66,23 @@ class Request {
             return false;
         }
     }
+
+    static async patch(route: string, data: Object, base?: string) {
+        const backendBase = process.env.REACT_APP_BACK_URL as string;
+        const baseUrl = base ? base : backendBase;
+        const url = `${baseUrl}/${route}`;
+
+        try {
+            const request = await axios.patch(url, data, {
+                withCredentials: true,
+            });
+            const response = await request.data;
+            return response;
+        } catch (error) {
+            console.error(error);
+            return false;
+        }
+    }
 }
 
 export default Request;

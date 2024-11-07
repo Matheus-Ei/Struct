@@ -1,14 +1,5 @@
+import { PagesRequestType } from "pages/Project/util/types";
 import PageTab from ".";
-import NewPageTab from "../NewPageTab";
-
-interface PagesRequestType {
-    id: number;
-    name: string;
-    description: string;
-    children_pages: Array<PagesRequestType> | null;
-    emoji: number | null;
-    module: string;
-}
 
 interface ChildrensProps {
     items: Array<PagesRequestType> | null;
@@ -16,7 +7,7 @@ interface ChildrensProps {
     show: boolean;
 }
 
-const Childrens = ({ show, items, parentPageId }: ChildrensProps) => {
+const Childrens = ({ show, items }: ChildrensProps) => {
     const renderChildrens = (item: PagesRequestType, index: number) => {
         return <PageTab item={item} index={index} key={index} />;
     };
@@ -26,10 +17,7 @@ const Childrens = ({ show, items, parentPageId }: ChildrensProps) => {
     }
 
     return (
-        <div className="flex flex-col pl-4">
-            {items?.map(renderChildrens)}
-            <NewPageTab parentPageId={parentPageId} />
-        </div>
+        <div className="flex flex-col pl-4">{items?.map(renderChildrens)}</div>
     );
 };
 

@@ -115,7 +115,7 @@ CREATE TABLE page (
     order INT DEFAULT 0,
     parent_page_id INT NULL,
     project_id INT NOT NULL,
-    module_id INT NOT NULL,
+    module_id INT NULL,
 
     CONSTRAINT fk_parent_page
         FOREIGN KEY(parent_page_id)

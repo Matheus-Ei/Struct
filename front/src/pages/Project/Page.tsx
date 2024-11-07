@@ -1,48 +1,44 @@
 import useRequest from "hooks/useRequest";
+import Undefined from "pages/Modules/Undefined";
 import React, { useContext } from "react";
 import { PagesContext } from ".";
-import router from "./router";
+import router from "./util/router";
+import { PagesRequestType } from "./util/types";
 
-interface PagesRequestType {
-    id: number;
-    name: string;
-    description: string;
-    parentPages: Array<PagesRequestType> | null;
-    emoji: number | null;
-    module: string;
-}
-
-const getModule = (module: string, id: number) => {
-    return router.map((item, index) => {
-        const page =
-            module === item.name
-                ? React.createElement(item.endpoint, { pageId: id, key: index })
-                : null;
-
-        return page;
+const getModule = (response: PagesRequestType, refetchPage: () => void) => {
+    const element = router.filter((item) => {
+        return response.module === item.name;
     });
+
+    const undefinedFunction = () => {
+        return <Undefined pageId={response.id} refetchPage={refetchPage} />;
+    };
+
+    if (!module || !element[0]) {
+        return React.createElement(undefinedFunction);
+    }
+
+    return React.createElement(element[0].endpoint, { pageId: response.id });
 };
 
 const Page = () => {
     const context = useContext(PagesContext);
 
-    const { response } = useRequest<PagesRequestType>(
+    const { response, refetch: refetchPage } = useRequest<PagesRequestType>(
         `page/geral/${context?.selectedPageId}`
     );
 
     const renderPages = () => {
-        if (!response) {
-            return;
-        }
-
-        const page = getModule(response.module, response?.id);
+        const page = response && getModule(response, refetchPage);
 
         return page;
     };
 
     return (
         <div className="w-full h-screen flex justify-center">
-            <div className="w-6/12 h-screen">{renderPages()}</div>
+            <div className="w-11/12 h-screen flex justify-center">
+                {renderPages()}
+            </div>
         </div>
     );
 };

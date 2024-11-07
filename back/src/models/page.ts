@@ -11,7 +11,7 @@ class PageModel extends Model {
     public emoji?: string;
 
     public project_id!: number;
-    public module_id!: number;
+    public module_id?: number;
     public parent_page_id?: number;
 }
 
@@ -58,7 +58,7 @@ PageModel.init(
 
         module_id: {
             type: DataTypes.INTEGER,
-            allowNull: false,
+            allowNull: true,
             references: {
                 model: ModuleModel,
                 key: "id",

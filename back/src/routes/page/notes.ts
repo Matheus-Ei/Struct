@@ -10,8 +10,8 @@ class NotesPageRoute {
     }
 
     private init() {
-        this.router.get("/get/:id", NotesPageController.get);
-        this.router.post("/create", NotesPageController.create);
+        this.router.get("/:id", NotesPageController.get);
+        this.router.patch("/set-module/:id", NotesPageController.setModule);
     }
 }
 

@@ -23,7 +23,7 @@ class PageGeralController {
                 emoji: page.emoji,
                 project_id: page.project_id,
                 parent_page_id: page.parent_page_id,
-                module: module?.name,
+                module: module ? module.name : null,
             };
 
             res.status(200).send(returnInfo);
@@ -66,6 +66,30 @@ class PageGeralController {
             res.status(200).json(pages);
         } catch (error) {
             res.status(500).json({ error });
+        }
+    }
+
+    public async create(req: Request, res: Response) {
+        const {
+            name,
+            description,
+            projectId,
+            parentPage = null,
+            moduleId = null,
+        } = req.body;
+
+        try {
+            const page = await PageModel.create({
+                name,
+                description,
+                project_id: projectId,
+                module_id: moduleId,
+                parent_page_id: parentPage,
+            });
+
+            res.status(201).send(page);
+        } catch (error) {
+            res.status(500).send({ error });
         }
     }
 }

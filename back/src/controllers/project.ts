@@ -116,11 +116,9 @@ class ProjectController {
                     root.emoji,
                     root.description,
                     root.order,
-                    MAX(module.name) AS module,
                     get_children(root.id) AS children_pages
                 FROM project
                 JOIN page AS root ON root.project_id = project.id
-                JOIN module ON root.module_id = module.id
                 WHERE project.id = ${id}
                     AND root.parent_page_id IS NULL
                 GROUP BY root.id
