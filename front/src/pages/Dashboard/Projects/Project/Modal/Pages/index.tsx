@@ -1,4 +1,5 @@
-import useRequest from "hooks/useRequest";
+import { useQuery } from "react-query";
+import Request from "services/Request";
 import Page from "./Page";
 
 interface PagesProps {
@@ -9,14 +10,13 @@ interface PageRequestType {
     id: number;
     name: string;
     description: string;
-    emoji: number;
+    emoji: string;
     module: string;
 }
 
 const Pages = ({ projectId }: PagesProps) => {
-    const { response: pages, refetch } = useRequest<Array<PageRequestType>>(
-        `project/pages/${projectId}`
-    );
+    const getPages = () => Request.get(`project/pages/${projectId}`);
+    const { data: pages, refetch } = useQuery("project-pages-tab", getPages);
 
     const renderPages = (item: PageRequestType, index: number) => {
         return (

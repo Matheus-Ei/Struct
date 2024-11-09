@@ -10,9 +10,12 @@ export interface PagesRequestType {
 }
 
 export interface ReactProjectContext {
-    pages: Array<PagesRequestType> | null;
+    page: PagesRequestType | null;
+    refetchPage: () => void;
+    menuTabs: Array<PagesRequestType> | null;
+    setMenuTabs: (newMenuTabs: Array<PagesRequestType>) => void;
+    refetchMenuTabs: () => void;
     selectedPageId: number | null;
     setSelectedPageId: Dispatch<SetStateAction<number | null>>;
-    refetch: () => void;
     projectId: string | undefined;
 }

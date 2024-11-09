@@ -15,7 +15,7 @@ const handleGoSettings = (navigate: any) => {
 const Header = ({ tab, setTab }: HeaderProps) => {
     const navigate = useNavigate();
 
-    const allTabs = ["Projects", "Tools", "Workflow"];
+    const allTabs = ["Projects", "Tools"];
 
     const selectedStyle = "font-bold cursor-pointer select-none text-xl";
     const notSelectedStyle = "cursor-pointer select-none text-lg";
@@ -32,6 +32,8 @@ const Header = ({ tab, setTab }: HeaderProps) => {
         );
     };
 
+    const onClick = () => handleGoSettings(navigate);
+
     return (
         <div className="flex flex-row w-screen h-32 items-center justify-between px-12">
             <div className="flex flex-row w-fit h-full items-center justify-start gap-12">
@@ -43,7 +45,7 @@ const Header = ({ tab, setTab }: HeaderProps) => {
             </div>
 
             <div className="flex flex-row w-fit h-full items-center justify-end">
-                <button onClick={() => handleGoSettings(navigate)}>
+                <button onClick={onClick}>
                     <Icons name="IoIosSettings" library="io" size={35} />
                 </button>
             </div>

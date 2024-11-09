@@ -14,7 +14,7 @@ const Content = ({ item, onContextMenu }: ContentProps) => {
         return null;
     }
 
-    const isSelected = item.id === context?.selectedPageId;
+    const isSelected = item.id === context.selectedPageId;
 
     // Style
     const commonStyle = `flex flex-row gap-x-2 rounded-btn py-1 items-center text-start 
@@ -23,14 +23,17 @@ const Content = ({ item, onContextMenu }: ContentProps) => {
         ? `${commonStyle}  bg-primary text-primary-content`
         : commonStyle;
 
+    const onClick = () => {
+        context.setSelectedPageId(item.id);
+    };
+
     return (
         <div
             className={className}
             onContextMenu={onContextMenu}
-            onClick={() => context?.setSelectedPageId(item.id)}
+            onClick={onClick}
         >
             <Emoji symbol={item.emoji} />
-
             <h1 className="line-clamp-1 w-full text-sm">{item.name}</h1>
         </div>
     );

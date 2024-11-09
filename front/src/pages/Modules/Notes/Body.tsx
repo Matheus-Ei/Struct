@@ -1,24 +1,21 @@
-import { useState } from "react";
+import { createContext, MouseEvent, useRef, useState } from "react";
 import Textareas from "./Textareas";
+import { NotesPageContextType, NotesTextType } from "./utils/types";
 
-interface NotesTextType {
-    note: string;
-    type: string;
-}
+export const NotesPageContext = createContext<NotesPageContextType | null>(
+    null
+);
 
 const Body = () => {
     const [notes, setNotes] = useState<Array<NotesTextType>>([
-        { note: "0", type: "paragraph" },
+        { note: "", type: "paragraph", element: null },
     ]);
+    const divBodyRef = useRef<HTMLDivElement>(null);
 
-    const sendFocus = (event: any) => {
+    const sendFocus = (event: MouseEvent) => {
         if (event.target === event.currentTarget) {
-            const parentDiv = document.getElementById("notesDiv");
-            const divs = parentDiv ? parentDiv.querySelectorAll("div") : [];
-            const divsArray = Array.from(divs);
-
-            const preDiv = divsArray[0] as HTMLDivElement;
-            preDiv.focus();
+            const firstElement = divBodyRef.current?.children[0] as HTMLElement;
+            firstElement.focus();
         }
     };
 
@@ -29,19 +26,26 @@ const Body = () => {
                 type={item.type}
                 index={index}
                 key={index}
-                setNotes={setNotes}
             />
         );
     };
 
     return (
-        <div
-            id="notesDiv"
-            className="flex flex-col gap-1 w-full h-3/4"
-            onClick={sendFocus}
+        <NotesPageContext.Provider
+            value={{
+                notes,
+                setNotes,
+                divBodyRef,
+            }}
         >
-            {notes.map(renderNotes)}
-        </div>
+            <div
+                ref={divBodyRef}
+                className="flex flex-col gap-1 w-full h-3/4"
+                onClick={sendFocus}
+            >
+                {notes.map(renderNotes)}
+            </div>
+        </NotesPageContext.Provider>
     );
 };
 

@@ -1,24 +1,17 @@
-import useRequest from "hooks/useRequest";
+import { PagesContext } from "pages/Project";
+import { useContext } from "react";
+import { useQuery } from "react-query";
+import Request from "services/Request";
 import Body from "./Body";
 import Header from "./Header";
 
-interface NotesProps {
-    pageId: number;
-}
+const Notes = () => {
+    const context = useContext(PagesContext);
 
-interface PageResponseType {
-    id: number;
-    name: string;
-    description: string;
-    emoji: number | null;
-    parent: number | null;
-    content: string;
-}
-
-const Notes = ({ pageId }: NotesProps) => {
-    const { response: page } = useRequest<PageResponseType>(
-        `page/notes/${pageId}`,
-        pageId
+    const getPage = () => Request.get(`page/notes/${context?.page?.id}`);
+    const { data: page } = useQuery(
+        ["get-notes-page", context?.page?.id],
+        getPage
     );
 
     return (
@@ -28,6 +21,7 @@ const Notes = ({ pageId }: NotesProps) => {
                 emoji={page?.emoji}
                 description={page?.description}
             />
+
             <Body />
         </div>
     );

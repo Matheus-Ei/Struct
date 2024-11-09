@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from "react";
+import { ChangeEvent, Dispatch, SetStateAction } from "react";
 
 interface SelectorProps {
     options: Array<string>;
@@ -6,7 +6,7 @@ interface SelectorProps {
 }
 
 const Selector = ({ options, setCurrent }: SelectorProps) => {
-    const handleChange = (event: any) => {
+    const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
         setCurrent(event.target.value);
     };
 

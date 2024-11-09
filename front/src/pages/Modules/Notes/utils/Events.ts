@@ -1,24 +1,18 @@
-export const handleKeyDown = (event: any, index: number, textObg: any) => {
+import { Text } from "./Text";
+import { NotesPageContextType } from "./types";
+
+export const handleKeyDown = (
+    event: any,
+    index: number,
+    textObj: Text,
+    context: NotesPageContextType
+) => {
     // Add textArea
     if (event.key === "Enter" && !event.shiftKey) {
         event.preventDefault();
-        textObg.addNote(index);
+        textObj.addNote(index);
 
-        // Handle Focus
-        setTimeout(() => {
-            const parentDiv = document.getElementById("notesDiv");
-            if (!parentDiv) {
-                return;
-            }
-
-            const divs = parentDiv.querySelectorAll("div");
-            const divsArray = Array.from(divs);
-
-            if (index < divsArray.length - 1) {
-                const nextDiv = divsArray[index + 1] as HTMLDivElement;
-                nextDiv.focus();
-            }
-        }, 10);
+        textObj.setFocus(index + 1);
     }
 
     // Delete textArea
@@ -28,38 +22,16 @@ export const handleKeyDown = (event: any, index: number, textObg: any) => {
         }
 
         event.preventDefault();
-        textObg.removeNote(index);
+        textObj.removeNote(index);
 
-        // Handle Focus
-        const parentDiv = document.getElementById("notesDiv");
-        if (!parentDiv) {
-            return;
-        }
-
-        const divs = parentDiv.querySelectorAll("div");
-        const divsArray = Array.from(divs);
-
-        const preDiv = divsArray[index - 1] as HTMLDivElement;
-        preDiv.focus();
-
-        textObg.moveCursor(preDiv, "end");
+        textObj.setFocus(index - 1);
     }
 
     // Arrow down
     if (event.key === "ArrowDown") {
         event.preventDefault();
 
-        // Move focous
-        const parentDiv = document.getElementById("notesDiv");
-        const divs = parentDiv ? parentDiv.querySelectorAll("div") : [];
-        const divsArray = Array.from(divs);
-
-        if (index < divsArray.length - 1) {
-            const nextDiv = divsArray[index + 1] as HTMLDivElement;
-            nextDiv.focus();
-
-            textObg.moveCursor(nextDiv, "end");
-        }
+        textObj.setFocus(index + 1);
     }
 
     // Arrow up
@@ -70,21 +42,12 @@ export const handleKeyDown = (event: any, index: number, textObg: any) => {
 
         event.preventDefault();
 
-        // Move focous
-        const parentDiv = document.getElementById("notesDiv");
-
-        const divs = parentDiv ? parentDiv.querySelectorAll("div") : [];
-        const divsArray = Array.from(divs);
-
-        const preDiv = divsArray[index - 1] as HTMLDivElement;
-        preDiv.focus();
-
-        textObg.moveCursor(preDiv, "end");
+        textObj.setFocus(index - 1);
     }
 
     // Make the textarea bigger
     if (event.key === "Enter" && event.shiftKey) {
-        textObg.addLine(index);
+        textObj.addLine(index);
         event.preventDefault();
     }
 };

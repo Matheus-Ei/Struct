@@ -1,37 +1,32 @@
-import {
-    Dispatch,
-    SetStateAction,
-    useEffect,
-    useMemo,
-    useRef,
-    useState,
-} from "react";
+import { useContext, useEffect, useMemo, useRef, useState } from "react";
 import { handleKeyDown } from "../utils/Events";
 import { Text } from "../utils/Text";
 import Cursor from "../utils/Cursor";
-
-interface NotesTextType {
-    note: string;
-    type: string;
-}
+import { NotesPageContext } from "../Body";
 
 interface TitleProps {
     note: string;
     index: number;
-    setNotes: Dispatch<SetStateAction<Array<NotesTextType>>>;
     titleType: 1 | 2 | 3;
 }
 
-const Title = ({ note, index, setNotes, titleType }: TitleProps) => {
+const Title = ({ note, index, titleType }: TitleProps) => {
     const [position, setPosition] = useState<number>(0);
 
+    const context = useContext(NotesPageContext);
+
     const divRef = useRef<HTMLDivElement | null>(null);
-    const textObj = new Text(setNotes);
     const cursorObj = useMemo(() => new Cursor(divRef), [divRef]);
 
     useEffect(() => {
         cursorObj.setCursorPosition(position);
     }, [position, cursorObj]);
+
+    if (!context) {
+        return null;
+    }
+
+    const textObj = new Text(context);
 
     const onChange = () => {
         setPosition(cursorObj.getCursorPosition());
@@ -50,7 +45,9 @@ const Title = ({ note, index, setNotes, titleType }: TitleProps) => {
                     }}
                     ref={divRef}
                     className="w-full h-auto bg-base-100 resize-none outline-none font-bold text-4xl"
-                    onKeyDown={(event) => handleKeyDown(event, index, textObj)}
+                    onKeyDown={(event) =>
+                        handleKeyDown(event, index, textObj, context)
+                    }
                     onInput={onChange}
                 ></div>
             );
@@ -64,7 +61,9 @@ const Title = ({ note, index, setNotes, titleType }: TitleProps) => {
                     }}
                     ref={divRef}
                     className="w-full h-auto bg-base-100 resize-none outline-none font-bold text-2xl"
-                    onKeyDown={(event) => handleKeyDown(event, index, textObj)}
+                    onKeyDown={(event) =>
+                        handleKeyDown(event, index, textObj, context)
+                    }
                     onInput={onChange}
                 ></div>
             );
@@ -78,7 +77,9 @@ const Title = ({ note, index, setNotes, titleType }: TitleProps) => {
                     }}
                     ref={divRef}
                     className="w-full h-auto bg-base-100 resize-none outline-none font-bold text-xl"
-                    onKeyDown={(event) => handleKeyDown(event, index, textObj)}
+                    onKeyDown={(event) =>
+                        handleKeyDown(event, index, textObj, context)
+                    }
                     onInput={onChange}
                 ></div>
             );

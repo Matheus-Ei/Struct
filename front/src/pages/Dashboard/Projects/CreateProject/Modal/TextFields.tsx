@@ -8,7 +8,7 @@ interface TextFieldsProps {
 
 const TextFields = ({ setTitle, setDescription }: TextFieldsProps) => {
     return (
-        <div className="flex flex-col items-center justify-center w-3/4 h-full">
+        <div className="flex flex-col items-center justify-center w-11/12 h-full">
             <Input text="Title" type="textarea" setValue={setTitle} />
 
             <Input

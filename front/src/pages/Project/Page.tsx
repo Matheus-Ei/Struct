@@ -1,35 +1,37 @@
-import useRequest from "hooks/useRequest";
 import Undefined from "pages/Modules/Undefined";
 import React, { useContext } from "react";
 import { PagesContext } from ".";
 import router from "./util/router";
-import { PagesRequestType } from "./util/types";
 
-const getModule = (response: PagesRequestType, refetchPage: () => void) => {
-    const element = router.filter((item) => {
-        return response.module === item.name;
-    });
+interface RouterType {
+    endpoint: () => JSX.Element;
+    name: string;
+}
 
-    const undefinedFunction = () => {
-        return <Undefined pageId={response.id} refetchPage={refetchPage} />;
-    };
-
-    if (!module || !element[0]) {
-        return React.createElement(undefinedFunction);
+const getModule = (element: RouterType) => {
+    if (!module || !element) {
+        return <Undefined />;
     }
 
-    return React.createElement(element[0].endpoint, { pageId: response.id });
+    return React.createElement(element.endpoint, {});
 };
 
 const Page = () => {
     const context = useContext(PagesContext);
+    if (!context) {
+        return null;
+    }
 
-    const { response, refetch: refetchPage } = useRequest<PagesRequestType>(
-        `page/geral/${context?.selectedPageId}`
-    );
+    const module: Array<RouterType> = router.filter((item) => {
+        if (!context.page) {
+            return false;
+        }
+
+        return context.page.module === item.name;
+    });
 
     const renderPages = () => {
-        const page = response && getModule(response, refetchPage);
+        const page = getModule(module[0]);
 
         return page;
     };

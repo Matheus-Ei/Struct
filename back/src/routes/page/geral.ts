@@ -14,10 +14,7 @@ class PageGeralRoute {
         this.router.get("/children/:id", PageGeralController.getChildren);
         this.router.post("/create", PageGeralController.create);
         this.router.delete("/:id", PageGeralController.delete);
-
-        this.router.patch("/edit/name/:id", PageGeralController.editName);
-        this.router.patch("/edit/description/:id", PageGeralController.editDescription);
-        this.router.patch("/edit/emoji/:id", PageGeralController.editEmoji);
+        this.router.patch("/edit/:id", PageGeralController.edit);
     }
 }
 

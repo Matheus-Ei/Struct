@@ -4,8 +4,8 @@ import Request from "services/Request";
 
 interface EditableFieldProps {
     defaultValue: string | undefined;
-    pageId: number;
-    type: "description" | "name";
+    pageId?: number;
+    field: "description" | "name";
     className?: string;
 }
 
@@ -13,25 +13,19 @@ const EditableField = ({
     defaultValue,
     className,
     pageId,
-    type,
+    field,
 }: EditableFieldProps) => {
     const [isEditable, toggleIsEditable] = useToggle(false);
     const divRef = useRef<HTMLDivElement>(null);
-
-    const editionUrl =
-        type === "name"
-            ? `page/geral/edit/name/${pageId}`
-            : `page/geral/edit/description/${pageId}`;
 
     const pressEnter = (event: any) => {
         if (event.key === "Enter") {
             event.preventDefault();
 
             const data: any = {};
-            data[type] = divRef.current?.innerText;
+            data[field] = divRef.current?.innerText;
 
-            console.log(data);
-            Request.patch(editionUrl, data).then(() => {
+            Request.patch(`page/geral/edit/${pageId}`, data).then(() => {
                 toggleIsEditable(false);
             });
         }

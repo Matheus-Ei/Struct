@@ -16,7 +16,7 @@ const Login = () => {
     const navigate = useNavigate();
 
     const handleLogin = () => {
-        login.make(mail, password, navigate).then((response) => {
+        login.make(mail, password, navigate).then(() => {
             toggleError(true);
         });
     };

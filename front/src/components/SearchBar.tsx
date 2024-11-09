@@ -1,28 +1,25 @@
-import { Dispatch, SetStateAction } from "react";
+import { ChangeEvent, Dispatch, SetStateAction } from "react";
 import Icons from "services/Icons";
 
 interface SearchBarProps {
-    allItems: Array<string>;
-    setSearchItems: Dispatch<SetStateAction<Array<string>>>;
+    searchPlace: Array<string>;
+    setResult: Dispatch<SetStateAction<Array<string>>>;
     placeholder?: string;
 }
 
-const SearchBar = ({
-    allItems,
-    setSearchItems,
-    placeholder,
-}: SearchBarProps) => {
-    const onChange = (event: any) => {
-        const searchValue = event.target.value as string;
-        if (searchValue === "") {
-            setSearchItems(allItems);
+const SearchBar = ({ searchPlace, setResult, placeholder }: SearchBarProps) => {
+    const onChange = (event: ChangeEvent<HTMLInputElement>) => {
+        const search = event.target.value as string;
+
+        if (search === "") {
+            setResult(searchPlace);
         }
 
-        const newItems = allItems.filter((item) => {
-            return item.toLowerCase().includes(searchValue.toLowerCase());
+        const result = searchPlace.filter((item) => {
+            return item.toLowerCase().includes(search.toLowerCase());
         });
 
-        setSearchItems(newItems);
+        setResult(result);
     };
 
     return (

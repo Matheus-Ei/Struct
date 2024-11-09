@@ -1,15 +1,10 @@
-import useRequest from "hooks/useRequest";
 import React, { useState } from "react";
+import { useQuery } from "react-query";
+import Request from "services/Request";
 import CreateProject from "./CreateProject";
 import CreateProjectModal from "./CreateProject/Modal";
 import Project from "./Project";
 import ProjectModal from "./Project/Modal";
-
-type ProjectType = Array<{
-    id: number;
-    title: string;
-    description: string;
-}>;
 
 interface ModalType {
     show: boolean;
@@ -38,8 +33,9 @@ const Projects = () => {
 
     const [showCreateProject, setShowCreateProject] = useState(false);
 
-    const { response: projects, refetch } =
-        useRequest<ProjectType>("user/projects");
+    const { data: projects, refetch } = useQuery("dashboard-projects", () =>
+        Request.get("user/projects")
+    );
 
     return (
         <projectsContext.Provider value={{ refetch }}>

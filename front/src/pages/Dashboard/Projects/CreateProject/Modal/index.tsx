@@ -34,8 +34,12 @@ const CreateProjectModal = ({
     };
 
     return (
-        <Modal isOpen={showModal} close={handleClose}>
-            <div className="flex flex-col items-center gap-10 justify-center w-full h-full">
+        <Modal
+            isOpen={showModal}
+            close={handleClose}
+            className="relative w-[65vw] h-[60vh] flex flex-col items-start justify-start"
+        >
+            <div className="flex flex-col items-center gap-4 justify-center w-full h-full">
                 <h1 className="w-full font-bold text-2xl text-center my-5">
                     New project
                 </h1>

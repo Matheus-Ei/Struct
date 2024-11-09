@@ -1,5 +1,9 @@
 import { Dispatch, SetStateAction } from "react";
-import EmojiPicker, { EmojiClickData } from "emoji-picker-react";
+import EmojiPicker, {
+    EmojiClickData,
+    EmojiStyle,
+    Theme,
+} from "emoji-picker-react";
 
 interface EmojiSelectorProps {
     setEmoji: Dispatch<SetStateAction<EmojiClickData | undefined>>;
@@ -19,7 +23,11 @@ const EmojiSelector = ({ setEmoji, show, toggleShow }: EmojiSelectorProps) => {
 
     return (
         <div className="absolute z-50">
-            <EmojiPicker onEmojiClick={onEmojiClick} />;
+            <EmojiPicker
+                onEmojiClick={onEmojiClick}
+                theme={Theme.AUTO}
+                emojiStyle={EmojiStyle.NATIVE}
+            />
         </div>
     );
 };

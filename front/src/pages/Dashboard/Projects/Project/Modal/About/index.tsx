@@ -1,7 +1,8 @@
 import Actions from "./Actions";
 import Informations from "./Informations";
 import { Dispatch, SetStateAction } from "react";
-import useRequest from "hooks/useRequest";
+import { useQuery } from "react-query";
+import Request from "services/Request";
 
 interface ModalType {
     show: boolean;
@@ -13,13 +14,9 @@ interface AboutProps {
     setModal: Dispatch<SetStateAction<ModalType>>;
 }
 
-interface ProjectType {
-    title: string;
-    description: string;
-}
-
 const About = ({ id, setModal }: AboutProps) => {
-    const { response: project } = useRequest<ProjectType>(`project/get/${id}`);
+    const getProjectInfo = () => Request.get(`project/get/${id}`);
+    const { data: project } = useQuery("project-info-about", getProjectInfo);
 
     return (
         <div className="flex flex-col w-full h-fit gap-8 mt-8 ml-8">

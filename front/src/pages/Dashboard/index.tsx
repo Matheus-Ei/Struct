@@ -12,8 +12,6 @@ const Dashboard = () => {
                 return <Projects />;
             case "Tools":
                 return <div>Tools</div>;
-            case "Workflow":
-                return <div>Workflow</div>;
 
             default:
                 return <div>ERROR...</div>;

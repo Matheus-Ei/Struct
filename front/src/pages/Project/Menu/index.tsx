@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { PagesContext } from "..";
 import { PagesRequestType } from "../util/types";
 import NewPageTab from "./NewPageTab";
@@ -10,16 +10,10 @@ const Menu = () => {
         return null;
     }
 
-    const { pages } = context;
+    const { menuTabs } = context;
 
     const renderPages = (item: PagesRequestType, index: number) => {
-        const renderPage = () => (
-            <PageTab item={item} index={index} key={index} />
-        );
-
-        return React.createElement(renderPage, {
-            key: index,
-        });
+        return <PageTab item={item} index={index} key={index} />;
     };
 
     return (
@@ -30,7 +24,7 @@ const Menu = () => {
             </div>
 
             <div className="flex flex-col justify-start items-start w-full h-full overflow-y-scroll">
-                {pages?.map(renderPages)}
+                {menuTabs && menuTabs.map(renderPages)}
                 <NewPageTab />
             </div>
 

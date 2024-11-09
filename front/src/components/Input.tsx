@@ -1,3 +1,5 @@
+import { ChangeEvent } from "react";
+
 interface InputProps {
     text?: string;
     setValue?: (arg0: any) => any;
@@ -6,8 +8,10 @@ interface InputProps {
     className?: string;
 }
 
+type EventType = ChangeEvent<HTMLTextAreaElement | HTMLInputElement>;
+
 const Input = ({ text, setValue, isPassword, type, className }: InputProps) => {
-    const handleChange = (event: any) => {
+    const handleChange = (event: EventType) => {
         setValue && setValue(event.target.value);
     };
 

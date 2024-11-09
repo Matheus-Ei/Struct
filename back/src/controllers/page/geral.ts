@@ -93,10 +93,8 @@ class PageGeralController {
         }
     }
 
-    public async editName(req: Request, res: Response) {
+    public async edit(req: Request, res: Response) {
         const { id } = req.params;
-
-        const { name } = req.body;
 
         try {
             const page = await PageModel.findByPk(id);
@@ -105,52 +103,16 @@ class PageGeralController {
                 res.status(404).send({ message: "Page not found" });
                 return;
             }
+            const {
+                name = page.name,
+                description = page.description,
+                emoji = page.emoji,
+            } = req.body;
 
             page.name = name;
-            page.save();
-
-            res.status(201).send(page);
-        } catch (error) {
-            res.status(500).send({ error });
-        }
-    }
-
-    public async editDescription(req: Request, res: Response) {
-        const { id } = req.params;
-
-        const { description } = req.body;
-
-        try {
-            const page = await PageModel.findByPk(id);
-
-            if (!page) {
-                res.status(404).send({ message: "Page not found" });
-                return;
-            }
-
             page.description = description;
-            page.save();
-
-            res.status(201).send(page);
-        } catch (error) {
-            res.status(500).send({ error });
-        }
-    }
-
-    public async editEmoji(req: Request, res: Response) {
-        const { id } = req.params;
-
-        const { emoji } = req.body;
-
-        try {
-            const page = await PageModel.findByPk(id);
-
-            if (!page) {
-                res.status(404).send({ message: "Page not found" });
-                return;
-            }
-
             page.emoji = emoji;
+
             page.save();
 
             res.status(201).send(page);

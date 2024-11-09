@@ -1,22 +1,22 @@
 import { Dispatch, SetStateAction } from "react";
-
-interface NotesTextType {
-    note: string;
-    type: string;
-}
+import { NotesPageContextType, NotesTextType } from "./types";
 
 export class Text {
     private setNotes: Dispatch<SetStateAction<Array<NotesTextType>>>;
+    private notes: Array<NotesTextType>;
+    private context: NotesPageContextType;
 
-    constructor(setNotes: Dispatch<SetStateAction<Array<NotesTextType>>>) {
-        this.setNotes = setNotes;
+    constructor(context: NotesPageContextType) {
+        this.setNotes = context.setNotes;
+        this.notes = context.notes;
+        this.context = context;
     }
 
     public setType(index: number, type: string) {
         this.setNotes((prev) => {
             const newNotes = [...prev];
-            const { note } = newNotes[index];
-            newNotes[index] = { note, type };
+            const { note, element } = newNotes[index];
+            newNotes[index] = { note, type, element };
             return newNotes;
         });
     }
@@ -63,7 +63,7 @@ export class Text {
         return item;
     }
 
-    moveCursor(div: HTMLDivElement, direction: "end" | "start") {
+    moveCursor(div: HTMLElement, direction: "end" | "start") {
         if (div) {
             const range = document.createRange();
             const selection = window.getSelection();
@@ -79,45 +79,33 @@ export class Text {
     }
 
     public setFocus(index: number) {
-        setTimeout(() => {
-            const parentDiv = document.getElementById("notesDiv");
-            const divs = parentDiv ? parentDiv.querySelectorAll("div") : [];
-            const divsArray = Array.from(divs);
+        if (!this.notes[index]) {
+            return null;
+        }
 
-            const div = divsArray[index] as HTMLDivElement;
-            div.focus();
-        }, 10);
+        const element = this.notes[index].element;
+
+        if (!element) {
+            return null;
+        }
+
+        element.focus();
+        this.moveCursor(element, "end");
     }
 
     public setNote(index: number, note: string) {
         this.setNotes((prev) => {
             const newNotes = [...prev];
-            const { type } = newNotes[index];
-            newNotes[index] = { note, type };
+            const { type, element } = newNotes[index];
+            newNotes[index] = { note, type, element };
 
             return newNotes;
         });
     }
 
-    private replaceEscapeHTML(str: string | null) {
-        if (!str) {
-            return "";
-        }
-
-        return str
-            .replace(/&/g, "&amp;")
-            .replace(/</g, "&lt;")
-            .replace(/>/g, "&gt;")
-            .replace(/"/g, "&quot;")
-            .replace(/'/g, "&#039;")
-            .replace(/`/g, "&#x60;")
-            .replace(/\//g, "&#x2F;")
-            .replace(/\\/g, "&#x5C;");
-    }
-
     public handleSetText(index: number, text: string) {
+        // Regular expressions operations
         const type = this.checkReType(text);
-
         const styledText = this.replaceReStyle(text);
         const returnText = this.removeReType(styledText);
 
@@ -125,24 +113,28 @@ export class Text {
 
         if (type) {
             this.setType(index, type);
-            this.setFocus(index);
+            this.setFocus(index + 1);
         }
-    }
-
-    public addNote(index: number) {
-        this.setNotes((prev) => {
-            const newNotes = [...prev];
-            newNotes.splice(index + 1, 0, { note: "", type: "paragraph" });
-            return newNotes;
-        });
     }
 
     public addLine(index: number) {
         this.setNotes((prev) => {
             const newNotes = [...prev];
-            const { type, note } = newNotes[index];
+            const { type, note, element } = newNotes[index];
 
-            newNotes[index] = { note: `${note}<br>`, type };
+            newNotes[index] = { note: `${note}<br>`, type, element };
+            return newNotes;
+        });
+    }
+
+    public addNote(index: number) {
+        this.setNotes((prev) => {
+            const newNotes = [...prev];
+            newNotes.splice(index + 1, 0, {
+                note: "",
+                type: "paragraph",
+                element: null,
+            });
             return newNotes;
         });
     }
