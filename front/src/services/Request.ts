@@ -11,8 +11,7 @@ class Request {
             const data = await request.data;
             return data;
         } catch (error) {
-            console.error(error);
-            return false;
+            throw new Error(`Get method, url ${url}, error: ${error}`);
         }
     }
 
@@ -28,8 +27,7 @@ class Request {
             const response = await request.data;
             return response;
         } catch (error) {
-            console.error(error);
-            return false;
+            throw new Error(`Post method, url ${url}, error: ${error}`);
         }
     }
 
@@ -45,8 +43,7 @@ class Request {
             const response = await request.data;
             return response;
         } catch (error) {
-            console.error(error);
-            return false;
+            throw new Error(`Delete method, url ${url}, error: ${error}`);
         }
     }
 
@@ -62,8 +59,7 @@ class Request {
             const response = await request.data;
             return response;
         } catch (error) {
-            console.error(error);
-            return false;
+            throw new Error(`Put method, url ${url}, error: ${error}`);
         }
     }
 
@@ -79,8 +75,7 @@ class Request {
             const response = await request.data;
             return response;
         } catch (error) {
-            console.error(error);
-            return false;
+            throw new Error(`Patch method, url ${url}, error: ${error}`);
         }
     }
 }

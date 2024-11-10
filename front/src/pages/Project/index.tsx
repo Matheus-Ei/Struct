@@ -36,6 +36,7 @@ const Project = () => {
         if (!selectedPageId) {
             return null;
         }
+
         return Request.get(`page/geral/${selectedPageId}`);
     };
     const { data: page, refetch: refetchPage } = useQuery(

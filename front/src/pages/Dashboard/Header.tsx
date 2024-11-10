@@ -15,7 +15,7 @@ const handleGoSettings = (navigate: any) => {
 const Header = ({ tab, setTab }: HeaderProps) => {
     const navigate = useNavigate();
 
-    const allTabs = ["Projects", "Tools"];
+    const dashboardTabs = ["Projects", "Tools"];
 
     const selectedStyle = "font-bold cursor-pointer select-none text-xl";
     const notSelectedStyle = "cursor-pointer select-none text-lg";
@@ -40,7 +40,7 @@ const Header = ({ tab, setTab }: HeaderProps) => {
                 <Logo className="text-primary w-64 h-full" />
 
                 <div className="flex flex-row gap-6">
-                    {allTabs.map(renderTabs)}
+                    {dashboardTabs.map(renderTabs)}
                 </div>
             </div>
 

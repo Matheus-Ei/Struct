@@ -7,34 +7,34 @@ class Login {
         password: string,
         navigate: NavigateFunction
     ) {
-        const response = await Request.post("user/login", {
-            mail,
-            password,
-        });
+        try {
+            await Request.post("user/login", {
+                mail,
+                password,
+            });
 
-        if (response.status === true) {
             navigate("/dashboard");
             return true;
-        } else {
-            console.error("Login wasn't sucessfull");
+        } catch {
             return false;
         }
     }
 
     static async refresh() {
-        const response = await Request.get("token/refresh");
+        try {
+            await Request.get("token/refresh");
 
-        if (!response) {
+            console.log("Refreshed session");
+            return true;
+        } catch {
             return false;
         }
-
-        return true;
     }
 
     static async check(navigate: NavigateFunction) {
-        const response = await Request.get("token/check");
+        try {
+            await Request.get("token/check");
 
-        if (!response) {
             const isRefreshed = await Login.refresh();
 
             if (!isRefreshed) {
@@ -42,18 +42,22 @@ class Login {
                 return false;
             }
 
-            console.log("Refreshed session");
             return true;
+        } catch {
+            navigate("/login");
+            return false;
         }
-
-        return true;
     }
 
     static async logout(navigate: NavigateFunction) {
-        await Request.post("user/logout", {});
+        try {
+            await Request.post("user/logout", {});
 
-        navigate("/");
-        return true;
+            navigate("/");
+            return true;
+        } catch {
+            return false;
+        }
     }
 }
 
