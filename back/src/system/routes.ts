@@ -1,8 +1,8 @@
-import UserRoute from "../routes/user";
-import TokenRoute from "../routes/token";
-import ProjectRoute from "../routes/project";
-import NotesPageRoute from "../routes/page/notes";
-import PageGeralRoute from "../routes/page/geral";
+import UserRoute from "../routes/user.js";
+import TokenRoute from "../routes/token.js";
+import ProjectRoute from "../routes/project.js";
+import NotesPageRoute from "../routes/page/notes.js";
+import PageGeralRoute from "../routes/page/geral.js";
 
 type MainRoutesType = Array<[String, Object]>;
 

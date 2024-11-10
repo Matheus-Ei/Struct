@@ -1,5 +1,5 @@
 import { Router } from "express";
-import NotesPageController from "../../controllers/page/notes";
+import NotesPageController from "../../controllers/page/notes.js";
 
 class NotesPageRoute {
     public router: Router;

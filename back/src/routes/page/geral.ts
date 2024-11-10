@@ -1,5 +1,5 @@
 import { Router } from "express";
-import PageGeralController from "../../controllers/page/geral";
+import PageGeralController from "../../controllers/page/geral.js";
 
 class PageGeralRoute {
     public router: Router;

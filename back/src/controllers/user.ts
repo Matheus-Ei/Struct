@@ -1,11 +1,11 @@
 import { Request, Response } from "express";
-import Cookie from "../services/cookie";
-import Token from "../services/token";
-import Hash from "../services/hash";
-import operations from "../services/database/operations";
-import UserModel from "../models/user";
-import SettingsModel from "../models/settings";
-import SubscriptionModel from "../models/subscription";
+import Cookie from "../services/cookie.js";
+import Token from "../services/token.js";
+import Hash from "../services/hash.js";
+import operations from "../services/database/operations.js";
+import UserModel from "../models/user.js";
+import SettingsModel from "../models/settings.js";
+import SubscriptionModel from "../models/subscription.js";
 
 class UserController {
     public async get(req: Request, res: Response) {

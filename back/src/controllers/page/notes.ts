@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
-import operations from "../../services/database/operations";
-import NotesPageDataModel from "../../models/notesPageData";
-import PageModel from "../../models/page";
-import ModuleModel from "../../models/module";
+import operations from "../../services/database/operations.js";
+import NotesPageDataModel from "../../models/notesPageData.js";
+import PageModel from "../../models/page.js";
+import ModuleModel from "../../models/module.js";
 
 class NotesPageController {
     public async get(req: Request, res: Response) {

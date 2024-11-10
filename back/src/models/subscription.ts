@@ -1,6 +1,6 @@
 import { DataTypes, Model } from "sequelize";
-import connection from "../services/database/connection";
-import SubscriptionPlanModel from "./subscriptionPlan";
+import connection from "../services/database/connection.js";
+import SubscriptionPlanModel from "./subscriptionPlan.js";
 
 class SubscriptionModel extends Model {
     public id!: number;

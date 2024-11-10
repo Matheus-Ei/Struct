@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import PageModel from "../../models/page";
-import ModuleModel from "../../models/module";
+import PageModel from "../../models/page.js";
+import ModuleModel from "../../models/module.js";
 
 class PageGeralController {
     public async getPage(req: Request, res: Response) {

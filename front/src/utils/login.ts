@@ -34,7 +34,8 @@ class Login {
     static async check(navigate: NavigateFunction) {
         try {
             await Request.get("token/check");
-
+            return true;
+        } catch {
             const isRefreshed = await Login.refresh();
 
             if (!isRefreshed) {
@@ -43,9 +44,6 @@ class Login {
             }
 
             return true;
-        } catch {
-            navigate("/login");
-            return false;
         }
     }
 

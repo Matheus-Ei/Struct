@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
-import Cookie from "../services/cookie";
-import operations from "../services/database/operations";
-import ProjectModel from "../models/project";
+import Cookie from "../services/cookie.js";
+import operations from "../services/database/operations.js";
+import ProjectModel from "../models/project.js";
 
 class ProjectController {
     public async get(req: Request, res: Response) {

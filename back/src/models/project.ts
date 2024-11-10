@@ -1,6 +1,6 @@
 import { DataTypes, Model } from "sequelize";
-import connection from "../services/database/connection";
-import UserModel from "./user";
+import connection from "../services/database/connection.js";
+import UserModel from "./user.js";
 
 class ProjectModel extends Model {
     public id!: number;
