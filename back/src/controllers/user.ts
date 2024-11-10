@@ -1,11 +1,11 @@
 import { Request, Response } from "express";
-import Cookie from "../services/cookie";
-import Token from "../services/token";
-import Hash from "../services/hash";
-import operations from "../services/database/operations";
-import UserModel from "../models/user";
-import SettingsModel from "../models/settings";
-import SubscriptionModel from "../models/subscription";
+import Cookie from "../services/cookie.js";
+import Token from "../services/token.js";
+import Hash from "../services/hash.js";
+import operations from "../services/database/operations.js";
+import UserModel from "../models/user.js";
+import SettingsModel from "../models/settings.js";
+import SubscriptionModel from "../models/subscription.js";
 
 class UserController {
     public async get(req: Request, res: Response) {
@@ -150,9 +150,7 @@ class UserController {
     public async cancelSubscription(req: Request, res: Response) {}
 
     public async logout(req: Request, res: Response) {
-        Cookie.delete("access_token", res);
-        Cookie.delete("refresh_token", res);
-        Cookie.delete("id", res);
+        Cookie.delete(["access_token", "id", "refresh_token"], res);
 
         res.status(200).send({ message: "Logout was made successfuly" });
     }

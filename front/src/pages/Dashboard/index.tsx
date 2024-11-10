@@ -12,6 +12,7 @@ const Dashboard = () => {
                 return <Projects />;
             case "Tools":
                 return <div>Tools</div>;
+
             default:
                 return <div>ERROR...</div>;
         }

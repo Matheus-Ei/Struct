@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
-import operations from "../../services/database/operations";
-import NotesPageDataModel from "../../models/notesPageData";
-import PageModel from "../../models/page";
-import ModuleModel from "../../models/module";
+import operations from "../../services/database/operations.js";
+import NotesPageDataModel from "../../models/notesPageData.js";
+import PageModel from "../../models/page.js";
+import ModuleModel from "../../models/module.js";
 
 class NotesPageController {
     public async get(req: Request, res: Response) {
@@ -32,22 +32,37 @@ class NotesPageController {
         }
     }
 
-    public async create(req: Request, res: Response) {
-        const { projectId, name, description } = req.body;
+    public async setModule(req: Request, res: Response) {
+        const { id } = req.params;
 
         try {
+            // Gets the module id
             const moduleNotes = await ModuleModel.findAll({
                 where: { name: "notes" },
             });
+
+            if (!moduleNotes) {
+                res.status(404).send({ error: "Module 'notes' not found" });
+                return;
+            }
+
             const moduleNotesId: number = moduleNotes[0].id;
 
-            const page = await PageModel.create({
-                name,
-                description,
-                project_id: projectId,
-                module_id: moduleNotesId,
+            // Gets the page
+            const page = await PageModel.findOne({
+                where: { id: id },
             });
 
+            if (!page) {
+                res.status(404).send({ error: "Page not found" });
+                return;
+            }
+
+            // Saves the new module id
+            page.module_id = moduleNotesId;
+            await page.save();
+
+            // Creates the page data
             await NotesPageDataModel.create({
                 page_id: page.id,
                 content: "Where your imagination leaves you. . .",
@@ -58,10 +73,6 @@ class NotesPageController {
             res.status(500).send({ error });
         }
     }
-
-    public async update(req: Request, res: Response) {}
-
-    public async delete(req: Request, res: Response) {}
 }
 
 export default new NotesPageController();

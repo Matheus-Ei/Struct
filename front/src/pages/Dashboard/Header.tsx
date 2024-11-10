@@ -15,10 +15,24 @@ const handleGoSettings = (navigate: any) => {
 const Header = ({ tab, setTab }: HeaderProps) => {
     const navigate = useNavigate();
 
-    const allTabs = ["Projects", "Tools"];
+    const dashboardTabs = ["Projects", "Tools"];
 
     const selectedStyle = "font-bold cursor-pointer select-none text-xl";
     const notSelectedStyle = "cursor-pointer select-none text-lg";
+
+    const renderTabs = (item: any, index: number) => {
+        return (
+            <h1
+                className={item === tab ? selectedStyle : notSelectedStyle}
+                onClick={() => setTab(item)}
+                key={index}
+            >
+                {item}
+            </h1>
+        );
+    };
+
+    const onClick = () => handleGoSettings(navigate);
 
     return (
         <div className="flex flex-row w-screen h-32 items-center justify-between px-12">
@@ -26,26 +40,12 @@ const Header = ({ tab, setTab }: HeaderProps) => {
                 <Logo className="text-primary w-64 h-full" />
 
                 <div className="flex flex-row gap-6">
-                    {allTabs.map((item, index) => {
-                        return (
-                            <h1
-                                className={
-                                    item == tab
-                                        ? selectedStyle
-                                        : notSelectedStyle
-                                }
-                                onClick={() => setTab(item)}
-                                key={index}
-                            >
-                                {item}
-                            </h1>
-                        );
-                    })}
+                    {dashboardTabs.map(renderTabs)}
                 </div>
             </div>
 
             <div className="flex flex-row w-fit h-full items-center justify-end">
-                <button onClick={() => handleGoSettings(navigate)}>
+                <button onClick={onClick}>
                     <Icons name="IoIosSettings" library="io" size={35} />
                 </button>
             </div>

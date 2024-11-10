@@ -1,42 +1,46 @@
-import React from "react";
-import router from "./router";
+import Undefined from "pages/Modules/Undefined";
+import React, { useContext } from "react";
+import { PagesContext } from ".";
+import router from "./util/router";
 
-type PagesRequestType = Array<{
-    id: number;
+interface RouterType {
+    endpoint: () => JSX.Element;
     name: string;
-    description: string;
-    emoji: string;
-    parentPage: number | null;
-    module: string;
-}>;
-
-interface PageProps {
-    pages: PagesRequestType;
-    selectedPageId: number;
 }
 
-const getModule = (module: string, id: number) => {
-    return router.map((item) => {
-        const page =
-            module == item.name
-                ? React.createElement(item.endpoint, { pageId: id })
-                : null;
+const getModule = (element: RouterType) => {
+    if (!module || !element) {
+        return <Undefined />;
+    }
 
-        return page;
-    });
+    return React.createElement(element.endpoint, {});
 };
 
-const Page = ({ pages, selectedPageId }: PageProps) => {
-    return (
-        <div className="w-10/12 h-screen">
-            {pages.map((item, index) => {
-                const page =
-                    item.id == selectedPageId
-                        ? getModule(item.module, item.id)
-                        : null;
+const Page = () => {
+    const context = useContext(PagesContext);
+    if (!context) {
+        return null;
+    }
 
-                return page;
-            })}
+    const module: Array<RouterType> = router.filter((item) => {
+        if (!context.page) {
+            return false;
+        }
+
+        return context.page.module === item.name;
+    });
+
+    const renderPages = () => {
+        const page = getModule(module[0]);
+
+        return page;
+    };
+
+    return (
+        <div className="w-full h-screen flex justify-center">
+            <div className="w-11/12 h-screen flex justify-center">
+                {renderPages()}
+            </div>
         </div>
     );
 };

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import TokenController from "../controllers/token";
+import TokenController from "../controllers/token.js";
 
 class TokenRoute {
     public router: Router;

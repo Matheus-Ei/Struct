@@ -1,7 +1,7 @@
 import { DataTypes, Model } from "sequelize";
-import connection from "../services/database/connection";
-import ModuleModel from "./module";
-import ProjectModel from "./project";
+import connection from "../services/database/connection.js";
+import ModuleModel from "./module.js";
+import ProjectModel from "./project.js";
 
 class PageModel extends Model {
     public id!: number;
@@ -11,7 +11,7 @@ class PageModel extends Model {
     public emoji?: string;
 
     public project_id!: number;
-    public module_id!: number;
+    public module_id?: number;
     public parent_page_id?: number;
 }
 
@@ -58,7 +58,7 @@ PageModel.init(
 
         module_id: {
             type: DataTypes.INTEGER,
-            allowNull: false,
+            allowNull: true,
             references: {
                 model: ModuleModel,
                 key: "id",

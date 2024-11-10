@@ -1,7 +1,7 @@
 import { DataTypes, Model } from "sequelize";
-import connection from "../services/database/connection";
-import SubscriptionModel from "./subscription";
-import SettingsModel from "./settings";
+import connection from "../services/database/connection.js";
+import SubscriptionModel from "./subscription.js";
+import SettingsModel from "./settings.js";
 
 class UserModel extends Model {
     public id!: number;

@@ -7,39 +7,55 @@ class Login {
         password: string,
         navigate: NavigateFunction
     ) {
-        const response = await Request.post("user/login", {
-            mail,
-            password,
-        });
+        try {
+            await Request.post("user/login", {
+                mail,
+                password,
+            });
 
-        if (response.status === true) {
             navigate("/dashboard");
             return true;
-        } else {
-            console.error("Login wasn't sucessfull");
+        } catch {
+            return false;
+        }
+    }
+
+    static async refresh() {
+        try {
+            await Request.get("token/refresh");
+
+            console.log("Refreshed session");
+            return true;
+        } catch {
             return false;
         }
     }
 
     static async check(navigate: NavigateFunction) {
-        const response = await Request.get("token/check");
+        try {
+            await Request.get("token/check");
+            return true;
+        } catch {
+            const isRefreshed = await Login.refresh();
 
-        if (response === false) {
-            navigate("/login");
-            return false;
+            if (!isRefreshed) {
+                navigate("/login");
+                return false;
+            }
+
+            return true;
         }
-
-        return true;
     }
 
-    static async refresh() {
-        const response = await Request.get("token/refresh");
+    static async logout(navigate: NavigateFunction) {
+        try {
+            await Request.post("user/logout", {});
 
-        if (response === false) {
+            navigate("/");
+            return true;
+        } catch {
             return false;
         }
-
-        return true;
     }
 }
 

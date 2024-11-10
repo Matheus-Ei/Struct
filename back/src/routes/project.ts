@@ -1,5 +1,5 @@
 import { Router } from "express";
-import ProjectController from "../controllers/project";
+import ProjectController from "../controllers/project.js";
 
 class ProjectRoute {
     public router: Router;

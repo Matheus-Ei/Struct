@@ -1,40 +1,69 @@
-import { useEffect, useState } from "react";
+import withLoader from "HOCs/withLoader";
+import { createContext, useState } from "react";
 import { useParams } from "react-router-dom";
-import Request from "services/Request";
 import Menu from "./Menu";
+import Dashboard from "./Dashboard";
 import Page from "./Page";
+import { PagesRequestType, ReactProjectContext } from "./util/types";
+import { useQuery } from "react-query";
+import Request from "services/Request";
 
-type PagesRequestType = Array<{
-    id: number;
-    name: string;
-    description: string;
-    emoji: string;
-    parentPage: number | null;
-    module: string;
-}>;
+export const PagesContext = createContext<ReactProjectContext | undefined>(
+    undefined
+);
+
+type PagesRequestTypeArray = Array<PagesRequestType> | null;
 
 const Project = () => {
     const { id } = useParams();
-    const [pages, setPages] = useState<PagesRequestType>([]);
-    const [selectedPageId, setSelectedPageId] = useState<number>(0);
+    const [selectedPageId, setSelectedPageId] = useState<number | null>(null);
 
-    useEffect(() => {
-        Request.get(`project/pages/${id}`).then((response) =>
-            setPages(response)
+    // Menu tabs request
+    const [menuTabs, setMenuTabs] = useState<PagesRequestTypeArray>(null);
+    const getMenuTabs = () => {
+        const response = Request.get(`project/pages/${id}`).then((res) =>
+            setMenuTabs(res)
         );
-    }, [id]);
+        return response;
+    };
+    const { refetch: refetchMenuTabs } = useQuery(
+        ["project-basic", id],
+        getMenuTabs
+    );
+
+    // Page content request
+    const getPageData = () => {
+        if (!selectedPageId) {
+            return null;
+        }
+
+        return Request.get(`page/geral/${selectedPageId}`);
+    };
+    const { data: page, refetch: refetchPage } = useQuery(
+        ["page-geral", selectedPageId],
+        getPageData
+    );
 
     return (
-        <div className="flex flex-row items-center w-screen h-screen gap-10 px-4">
-            <Menu
-                pages={pages}
-                selectedPageId={selectedPageId}
-                setSelectedPageId={setSelectedPageId}
-            />
+        <PagesContext.Provider
+            value={{
+                page,
+                refetchPage,
+                menuTabs,
+                refetchMenuTabs,
+                setMenuTabs,
+                selectedPageId,
+                setSelectedPageId,
+                projectId: id,
+            }}
+        >
+            <div className="flex flex-row pr-10 items-center w-screen h-screen gap-10">
+                <Menu />
 
-            <Page pages={pages} selectedPageId={selectedPageId} />
-        </div>
+                {selectedPageId ? <Page /> : <Dashboard />}
+            </div>
+        </PagesContext.Provider>
     );
 };
 
-export default Project;
+export default withLoader(Project, true);

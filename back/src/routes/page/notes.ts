@@ -1,5 +1,5 @@
 import { Router } from "express";
-import NotesPageController from "../../controllers/page/notes";
+import NotesPageController from "../../controllers/page/notes.js";
 
 class NotesPageRoute {
     public router: Router;
@@ -10,8 +10,8 @@ class NotesPageRoute {
     }
 
     private init() {
-        this.router.get("/get/:id", NotesPageController.get);
-        this.router.post("/create", NotesPageController.create);
+        this.router.get("/:id", NotesPageController.get);
+        this.router.patch("/set-module/:id", NotesPageController.setModule);
     }
 }
 

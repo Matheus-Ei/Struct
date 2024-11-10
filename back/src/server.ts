@@ -1,9 +1,10 @@
 import express from "express";
 import dotenv from "dotenv";
-import auth from "./middlewares/auth";
+import auth from "./middlewares/auth.js";
+import mainRoutes from "./system/routes.js";
 import cors from "cors";
 import cookieParser from "cookie-parser";
-import mainRoutes from "./system/routes";
+import compression from "compression";
 
 export class App {
     private app: any;
@@ -24,12 +25,13 @@ export class App {
     private middlewares(): void {
         this.app.use(cookieParser());
         this.app.use(express.json());
+        this.app.use(compression());
 
         this.app.use(
             cors({
                 // origin: true,
                 origin: ["https://dev.struct.me", "http://localhost:3000"],
-                methods: "GET,POST,PUT,DELETE,OPTIONS",
+                methods: "GET,POST,PUT,PATCH,DELETE,OPTIONS",
                 allowedHeaders: "Authorization, Content-Type",
                 credentials: true,
             })

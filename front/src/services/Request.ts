@@ -11,8 +11,7 @@ class Request {
             const data = await request.data;
             return data;
         } catch (error) {
-            console.error(error);
-            return false;
+            throw new Error(`Get method, url ${url}, error: ${error}`);
         }
     }
 
@@ -28,8 +27,7 @@ class Request {
             const response = await request.data;
             return response;
         } catch (error) {
-            console.error(error);
-            return false;
+            throw new Error(`Post method, url ${url}, error: ${error}`);
         }
     }
 
@@ -45,8 +43,7 @@ class Request {
             const response = await request.data;
             return response;
         } catch (error) {
-            console.error(error);
-            return false;
+            throw new Error(`Delete method, url ${url}, error: ${error}`);
         }
     }
 
@@ -62,8 +59,23 @@ class Request {
             const response = await request.data;
             return response;
         } catch (error) {
-            console.error(error);
-            return false;
+            throw new Error(`Put method, url ${url}, error: ${error}`);
+        }
+    }
+
+    static async patch(route: string, data: Object, base?: string) {
+        const backendBase = process.env.REACT_APP_BACK_URL as string;
+        const baseUrl = base ? base : backendBase;
+        const url = `${baseUrl}/${route}`;
+
+        try {
+            const request = await axios.patch(url, data, {
+                withCredentials: true,
+            });
+            const response = await request.data;
+            return response;
+        } catch (error) {
+            throw new Error(`Patch method, url ${url}, error: ${error}`);
         }
     }
 }

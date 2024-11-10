@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
-import Cookie from "../services/cookie";
-import operations from "../services/database/operations";
-import ProjectModel from "../models/project";
+import Cookie from "../services/cookie.js";
+import operations from "../services/database/operations.js";
+import ProjectModel from "../models/project.js";
 
 class ProjectController {
     public async get(req: Request, res: Response) {
@@ -86,17 +86,43 @@ class ProjectController {
 
         try {
             const pages = await operations.query(`
+                WITH RECURSIVE page_hierarchy AS (
+                    SELECT 
+                        page.id,
+                        page.name,
+                        page.emoji,
+                        page.description,
+                        page.order,
+                        page.parent_page_id
+                    FROM page
+                    WHERE project_id = ${id}
+                        AND parent_page_id IS NULL
+                
+                    UNION ALL
+                
+                    SELECT 
+                        child.id,
+                        child.name,
+                        child.emoji,
+                        child.description,
+                        child.order,
+                        child.parent_page_id
+                    FROM page AS child
+                    JOIN page_hierarchy AS parent ON child.parent_page_id = parent.id
+                )
                 SELECT 
-	                page.id AS id,
-	                page.name AS name,
-                    page.emoji as emoji,
-	                page.description AS description,
-                    page.parent_page_id AS parent_page_id,
-                    module.name AS module
+                    root.id,
+                    root.name,
+                    root.emoji,
+                    root.description,
+                    root.order,
+                    get_children(root.id) AS children_pages
                 FROM project
-                JOIN page ON page.project_id = project.id
-                JOIN module ON page.module_id = module.id
-                where project.id = ${id};
+                JOIN page AS root ON root.project_id = project.id
+                WHERE project.id = ${id}
+                    AND root.parent_page_id IS NULL
+                GROUP BY root.id
+                ORDER BY root.order, root.id;
             `);
 
             res.status(200).send(pages[0]);

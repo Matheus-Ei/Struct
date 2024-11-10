@@ -27,7 +27,7 @@ const ProjectModal = ({ modal, setModal }: ProjectModalProps) => {
             case "About":
                 return <About id={modal.projectId} setModal={setModal} />;
             case "Pages":
-                return <Pages />;
+                return <Pages projectId={modal.projectId}/>;
         }
     };
 

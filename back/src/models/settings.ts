@@ -1,5 +1,5 @@
 import { DataTypes, Model } from "sequelize";
-import connection from "../services/database/connection";
+import connection from "../services/database/connection.js";
 
 class SettingsModel extends Model {
     public id!: number;

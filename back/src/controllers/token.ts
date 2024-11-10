@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import dotenv from "dotenv";
-import Token from "../services/token";
-import Cookie from "../services/cookie";
+import Token from "../services/token.js";
+import Cookie from "../services/cookie.js";
 
 dotenv.config();
 

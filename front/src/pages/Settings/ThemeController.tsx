@@ -12,8 +12,23 @@ const ThemeController = () => {
         setTheme(newTheme);
     };
 
+    const renderThemes = (item: any, index: number) => {
+        return (
+            <li key={index}>
+                <input
+                    type="radio"
+                    name="theme-dropdown"
+                    className="theme-controller btn btn-sm btn-block btn-ghost justify-start"
+                    aria-label={item}
+                    value={item}
+                    onChange={handleThemeChange}
+                />
+            </li>
+        );
+    };
+
     return (
-        <div className="dropdown mb-72">
+        <div className="dropdown">
             <div tabIndex={0} role="button" className="btn m-1">
                 <p className="w-20 text-start">{theme}</p>
                 <Icons name="MdExpandMore" library="md" />
@@ -23,20 +38,7 @@ const ThemeController = () => {
                 tabIndex={0}
                 className="dropdown-content bg-base-300 rounded-box z-[1] w-52 p-2 shadow-2xl overflow-y-scroll overflow-x-hidden h-56 pr-3"
             >
-                {themes.map((item: any, index: number) => {
-                    return (
-                        <li key={index}>
-                            <input
-                                type="radio"
-                                name="theme-dropdown"
-                                className="theme-controller btn btn-sm btn-block btn-ghost justify-start"
-                                aria-label={item}
-                                value={item}
-                                onChange={handleThemeChange}
-                            />
-                        </li>
-                    );
-                })}
+                {themes.map(renderThemes)}
             </ul>
         </div>
     );
