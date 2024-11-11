@@ -6,7 +6,10 @@
     "scripts": {
         "start": "nodemon -I --exec node --experimental-specifier-resolution=node --loader ts-node/esm ./src/server.ts",
         "build": "tsc",
-        "serve": "node dist/server.js"
+        "serve": "node dist/server.js",
+        "pm2:serve": "pm2 start dist/server.js -p 5000 --name 'struct-backend'",
+        "pm2:stop": "pm2 stop struct-backend",
+        "pm2:delete": "pm2 delete struct-backend"
     },
     "author": "",
     "license": "ISC",

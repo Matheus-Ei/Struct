@@ -51,6 +51,26 @@ class UserController {
         }
     }
 
+    public async nicknameIsAvailable(req: Request, res: Response) {
+        const { nickname } = req.body;
+
+        try {
+            const user = await UserModel.findOne({
+                where: {
+                    nickname,
+                },
+            });
+
+            if (user) {
+                res.status(200).json({ isAvailable: false });
+            } else {
+                res.status(200).json({ isAvailable: true });
+            }
+        } catch (error) {
+            res.status(500).json({ message: "Error checking nickname", error });
+        }
+    }
+
     public async register(req: Request, res: Response) {
         const { name, nickname, mail, password } = req.body;
 
@@ -76,6 +96,24 @@ class UserController {
                 subscription_id: userSubscription.id,
                 settings_id: userSettings.id,
             });
+
+            const refresh = new Token(process.env.REFRESH_SECRET as string);
+            const access = new Token(process.env.JWT_SECRET as string);
+
+            if (newUser) {
+                const accessTk = access.generate(
+                    { id: newUser.dataValues.id },
+                    "1h"
+                );
+                const refreshTk = refresh.generate(
+                    { id: newUser.dataValues.id },
+                    "7d"
+                );
+
+                Cookie.generate("access_token", accessTk, res);
+                Cookie.generate("refresh_token", refreshTk, res);
+                Cookie.generate("id", newUser.dataValues.id, res);
+            }
 
             res.status(201).json({ newUser });
         } catch (error) {
