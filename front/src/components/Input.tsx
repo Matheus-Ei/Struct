@@ -1,4 +1,4 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent, KeyboardEvent } from "react";
 
 interface InputProps {
     text?: string;
@@ -7,6 +7,8 @@ interface InputProps {
     type?: "textarea" | "input";
     className?: string;
     onEnter?: () => void;
+    maxLength?: number;
+    defaultValue?: string | null;
 }
 
 type EventType = ChangeEvent<HTMLTextAreaElement | HTMLInputElement>;
@@ -18,9 +20,15 @@ const Input = ({
     type,
     className,
     onEnter,
+    maxLength,
+    defaultValue,
 }: InputProps) => {
     const handleChange = (event: EventType) => {
         setValue && setValue(event.target.value);
+    };
+
+    const onKeyDown = (e: KeyboardEvent) => {
+        onEnter && e.key === "Enter" && onEnter();
     };
 
     if (type === "textarea") {
@@ -36,6 +44,7 @@ const Input = ({
                 onKeyDown={(e) => {
                     onEnter && e.key === "Enter" && onEnter();
                 }}
+                defaultValue={defaultValue ? defaultValue : ""}
             ></textarea>
         );
     }
@@ -50,9 +59,9 @@ const Input = ({
             placeholder={text}
             onChange={handleChange}
             type={!isPassword ? "text" : "password"}
-            onKeyDown={(e) => {
-                onEnter && e.key === "Enter" && onEnter();
-            }}
+            defaultValue={defaultValue ? defaultValue : ""}
+            onKeyDown={onKeyDown}
+            maxLength={maxLength}
         ></input>
     );
 };
