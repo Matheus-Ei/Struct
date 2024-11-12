@@ -38,11 +38,17 @@ const Login = () => {
                         isVisible={error}
                     />
 
-                    <Input text="Mail" setValue={setMail} />
+                    <Input
+                        text="Mail"
+                        setValue={setMail}
+                        onEnter={handleLogin}
+                    />
+
                     <Input
                         text="Password"
                         setValue={setPassword}
                         isPassword={true}
+                        onEnter={handleLogin}
                     />
 
                     <Button text="Login" inverse={true} onClick={handleLogin} />
