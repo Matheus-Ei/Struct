@@ -51,7 +51,7 @@ class UserController {
         }
     }
 
-    public async nicknameIsAvailable(req: Request, res: Response) {
+    public async nicknameIsAvalaible(req: Request, res: Response) {
         const { nickname } = req.body;
 
         try {
@@ -68,6 +68,26 @@ class UserController {
             }
         } catch (error) {
             res.status(500).json({ message: "Error checking nickname", error });
+        }
+    }
+
+    public async mailIsAvalaible(req: Request, res: Response) {
+        const { mail } = req.body;
+
+        try {
+            const user = await UserModel.findOne({
+                where: {
+                    mail,
+                },
+            });
+
+            if (user) {
+                res.status(200).json({ isAvailable: false });
+            } else {
+                res.status(200).json({ isAvailable: true });
+            }
+        } catch (error) {
+            res.status(500).json({ message: "Error checking mail", error });
         }
     }
 

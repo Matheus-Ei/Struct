@@ -1,35 +1,47 @@
 import Button from "components/Button";
-
-import { Dispatch, SetStateAction } from "react";
 import Input from "components/Input";
 import Message from "components/Message";
+import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { SignUpContext } from ".";
+import { makeSignUp } from "./functions";
 
-interface PasswordStepProps {
-    setPassword: Dispatch<SetStateAction<string | null>>;
-    makeSignUp: () => void;
-    isError: boolean;
-    toggleError: (value: boolean) => void;
-}
+const PasswordStep = () => {
+    const context = useContext(SignUpContext);
+    const navigate = useNavigate();
 
-const PasswordStep = ({
-    setPassword,
-    makeSignUp,
-    isError,
-    toggleError,
-}: PasswordStepProps) => {
+    if (!context) return null;
+    const { setPassword, setRePassword, isError, errorMessage } = context;
+
+    const signUp = () => {
+        makeSignUp(context, navigate);
+    };
+
     return (
         <div className="w-2/4 h-full flex flex-col items-center justify-center">
-            <Input text="Password..." setValue={setPassword} />
-            <Input text="Retype password..." setValue={setPassword} />
+            <Input
+                text="password..."
+                setValue={setPassword}
+                isPassword={true}
+                maxLength={80}
+                onEnter={signUp}
+            />
+            <Input
+                text="re-type password..."
+                setValue={setRePassword}
+                isPassword={true}
+                maxLength={80}
+                onEnter={signUp}
+            />
 
             <Message
-                text="Error making sign-up"
+                text={errorMessage}
                 box="text"
                 type="error"
                 isVisible={isError}
             />
 
-            <Button inverse={true} text="Sign-up" onClick={makeSignUp} />
+            <Button inverse={true} text="Sign-up" onClick={signUp} />
         </div>
     );
 };

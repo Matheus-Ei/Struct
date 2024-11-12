@@ -1,5 +1,5 @@
 interface MessageProps {
-    text: string;
+    text: string | null;
     type: "error" | "success";
     box: "text" | "block";
     isVisible: boolean;

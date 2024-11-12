@@ -1,21 +1,22 @@
 import Card from "components/Card";
-import { Dispatch, SetStateAction } from "react";
 import Icons from "services/Icons";
 import { ReactComponent as Logo } from "assets/logo-500x500-3.svg";
+import { useContext } from "react";
+import { SignUpContext } from ".";
+import { goPrevStep } from "./functions";
 
 interface WrapperSignUpProps {
     children: JSX.Element;
-    setStep: Dispatch<SetStateAction<number>>;
-    step: number;
 }
 
-const WrapperSignUp = ({ children, setStep, step }: WrapperSignUpProps) => {
-    const prevStep = () => {
-        setStep((prev) => {
-            if (prev === 0) return prev;
+const WrapperSignUp = ({ children }: WrapperSignUpProps) => {
+    const context = useContext(SignUpContext);
 
-            return prev - 1;
-        });
+    if (!context) return null;
+    const { step, setStep } = context;
+
+    const prevStep = () => {
+        goPrevStep(setStep);
     };
 
     return (

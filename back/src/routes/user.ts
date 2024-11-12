@@ -19,6 +19,9 @@ class UserRoute {
         this.router.post("/login", UserController.login);
 
         this.router.post("/logout", UserController.logout);
+
+        this.router.post("/check/nickname", UserController.nicknameIsAvalaible);
+        this.router.post("/check/mail", UserController.mailIsAvalaible);
     }
 }
 

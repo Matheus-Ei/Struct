@@ -7,6 +7,8 @@ dotenv.config();
 
 const auth = (req: Request, res: Response, next: NextFunction) => {
     if (
+        req.path === "/user/check/nickname" ||
+        req.path === "/user/check/mail" ||
         req.path === "/user/login" ||
         req.path === "/user/register" ||
         req.path === "/token/check" ||
