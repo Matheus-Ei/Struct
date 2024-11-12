@@ -13,7 +13,7 @@ const Button = ({
     onClick,
     className,
 }: ButtonProps) => {
-    const size = "border w-fit h-fit px-16 py-4 rounded-btn";
+    const size = "border w-fit h-fit px-14 py-2 rounded-btn";
 
     const color = inverse
         ? `bg-primary border-primary`

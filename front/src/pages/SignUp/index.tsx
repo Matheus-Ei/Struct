@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Request from "services/Request";
 import MainStep from "./MainStep";
 import PasswordStep from "./PasswordsStep";
+import WrapperSignUp from "./WrapperSignUp";
 
 const SignUp = () => {
     const [step, setStep] = useState<number>(0);
@@ -43,22 +44,29 @@ const SignUp = () => {
 
     return (
         <div className="flex justify-center items-center w-screen h-screen">
-            {step === 0 && (
-                <MainStep
-                    setStep={setStep}
-                    setName={setName}
-                    setNickname={setNickname}
-                    setMail={setMail}
-                    isError={isError}
-                />
-            )}
-            {step === 1 && (
-                <PasswordStep
-                    setPassword={setPassword}
-                    makeSignUp={makeSignUp}
-                    isError={isError}
-                />
-            )}
+            <WrapperSignUp setStep={setStep} step={step}>
+                <>
+                    {step === 0 && (
+                        <MainStep
+                            setName={setName}
+                            setNickname={setNickname}
+                            setMail={setMail}
+                            setStep={setStep}
+                            isError={isError}
+                            toggleError={toggleError}
+                        />
+                    )}
+
+                    {step === 1 && (
+                        <PasswordStep
+                            setPassword={setPassword}
+                            makeSignUp={makeSignUp}
+                            isError={isError}
+                            toggleError={toggleError}
+                        />
+                    )}
+                </>
+            </WrapperSignUp>
         </div>
     );
 };
