@@ -7,7 +7,9 @@ class Request {
         const url = `${baseUrl}/${route}`;
 
         try {
-            const request = await axios.get(url, { withCredentials: true });
+            const request = await axios.get(url, {
+                withCredentials: true,
+            });
             const data = await request.data;
             return data;
         } catch (error) {

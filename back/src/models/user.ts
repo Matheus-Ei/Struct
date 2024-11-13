@@ -9,9 +9,11 @@ class UserModel extends Model {
     public name?: string;
     public about?: string;
     public mail!: string;
+    public verified!: boolean;
+    public autenticator!: "Default" | "Auth";
     public nickname?: string;
     public password!: string;
-    public photo?: any;
+    public photo?: string;
 
     public subscription_id!: number;
     public settings_id!: number;
@@ -37,6 +39,17 @@ UserModel.init(
             type: DataTypes.STRING(100),
             allowNull: false,
             unique: true,
+        },
+
+        autenticator: {
+            type: DataTypes.STRING(50),
+            allowNull: false,
+            defaultValue: "Default",
+        },
+
+        verified: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: false,
         },
 
         nickname: {

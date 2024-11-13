@@ -17,8 +17,9 @@ class UserRoute {
         this.router.post("/register", UserController.register);
 
         this.router.post("/login", UserController.login);
-
         this.router.post("/logout", UserController.logout);
+
+        this.router.post("/auth/google", UserController.authGoogle);
 
         this.router.post("/check/nickname", UserController.nicknameIsAvalaible);
         this.router.post("/check/mail", UserController.mailIsAvalaible);

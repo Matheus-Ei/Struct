@@ -7,6 +7,7 @@ import login from "utils/login";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import useToggle from "hooks/useToggle";
+import GoogleLoginButton from "./GoogleLoginButton";
 
 const Login = () => {
     const [mail, setMail] = useState<string>("");
@@ -16,13 +17,13 @@ const Login = () => {
     const navigate = useNavigate();
 
     const handleLogin = () => {
-        login.make(mail, password, navigate).then(() => {
+        login.make(mail, password, "Default", navigate).then(() => {
             toggleError(true);
         });
     };
 
     return (
-        <div className="w-screen h-screen flex items-center justify-center">
+        <div className="w-screen h-[97vh] flex items-center justify-center">
             <Card>
                 <div className="flex flex-col items-center justify-center w-[25vw] py-6 px-4">
                     <Logo className="text-primary w-full h-fit mb-4" />
@@ -52,6 +53,10 @@ const Login = () => {
                     />
 
                     <Button text="Login" inverse={true} onClick={handleLogin} />
+
+                    <div className="divider">Or login with</div>
+
+                    <GoogleLoginButton toggleError={toggleError} />
                 </div>
             </Card>
         </div>

@@ -19,7 +19,7 @@ const Dashboard = () => {
     };
 
     return (
-        <div className="flex flex-col justify-start items-center w-screen h-screen">
+        <div className="flex flex-col justify-start items-center w-screen h-[97vh]">
             <Header tab={tab} setTab={setTab} />
 
             {getTab()}

@@ -4,26 +4,6 @@ CREATE TABLE subscription_plan (
     price NUMERIC(10, 2) NOT NULL
 );
 
-CREATE TABLE subscription_benefits (
-    id SERIAL PRIMARY KEY,
-    name VARCHAR(100) NOT NULL
-);
-
-CREATE TABLE relationship_plan_benefits (
-    id SERIAL PRIMARY KEY,
-    subscription_plan_id INT NOT NULL,
-    subscription_benefits_id INT NOT NULL,
-
-    CONSTRAINT fk_subscription_plan
-        FOREIGN KEY(subscription_plan_id) 
-        REFERENCES subscription_plan (id)
-        ON DELETE CASCADE,
-    CONSTRAINT fk_subscription_benefits
-        FOREIGN KEY(subscription_benefits_id) 
-        REFERENCES subscription_benefits (id)
-        ON DELETE CASCADE
-);
-
 CREATE TYPE subscription_status AS ENUM ('Active', 'Inactive', 'Suspended', 'Canceled');
 CREATE TABLE subscription (
     id SERIAL PRIMARY KEY,
@@ -43,11 +23,14 @@ CREATE TABLE settings (
     country VARCHAR(50) NOT NULL
 );
 
+CREATE TYPE autenticator_type AS ENUM ('Default', 'Auth');
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     about TEXT,
     mail VARCHAR(100) NOT NULL UNIQUE,
+    verified BOOLEAN NOT NULL DEFAULT FALSE,
+    autenticator autenticator_type NOT NULL DEFAULT 'Default',
     nickname VARCHAR(50) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
     photo VARCHAR(400), -- Saves only the image URL
@@ -112,7 +95,7 @@ CREATE TABLE page (
     name VARCHAR(100) NOT NULL,
     emoji VARCHAR(10),
     description TEXT,
-    order INT DEFAULT 0,
+    position INT DEFAULT 0,
     parent_page_id INT NULL,
     project_id INT NOT NULL,
     module_id INT NULL,

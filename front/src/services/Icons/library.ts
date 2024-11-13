@@ -14,6 +14,7 @@ import * as tb from "react-icons/tb";
 import * as md from "react-icons/md";
 import * as io from "react-icons/io";
 import * as ri from "react-icons/ri";
+import * as fc from "react-icons/fc";
 
 interface LibType {
     [keys: string]: Object;
@@ -36,6 +37,7 @@ const lib: LibType = {
     ri,
     gr,
     ci,
+    fc,
 };
 
 export default lib;

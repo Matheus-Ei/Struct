@@ -1,8 +1,8 @@
 import axios from "axios";
 
 class Request {
-    static async get(url: string) {
-        const request = await axios.get(url);
+    static async get(url: string, headers?: Object) {
+        const request = await axios.get(url, headers);
         const data = await request.data;
         return data;
     }
@@ -15,4 +15,3 @@ class Request {
 }
 
 export default Request;
-

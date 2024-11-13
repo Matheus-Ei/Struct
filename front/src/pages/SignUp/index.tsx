@@ -40,7 +40,7 @@ const SignUp = () => {
                 setErrorMessage,
             }}
         >
-            <div className="flex justify-center items-center w-screen h-screen">
+            <div className="flex justify-center items-center w-screen h-[97vh]">
                 <WrapperSignUp>
                     <>
                         {step === 0 && <MainStep />}
