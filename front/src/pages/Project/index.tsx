@@ -1,12 +1,15 @@
-import withLoader from "HOCs/withLoader";
+// Libraries
 import { createContext, useState } from "react";
 import { useParams } from "react-router-dom";
-import Menu from "./Menu";
-import Dashboard from "./Dashboard";
-import Page from "./Page";
-import { PagesRequestType, ReactProjectContext } from "./util/types";
 import { useQuery } from "react-query";
+
+// Local
+import { PagesRequestType, ReactProjectContext } from "./util/types";
+import withLoader from "HOCs/withLoader";
 import Request from "services/Request";
+import Dashboard from "./Dashboard";
+import Menu from "./Menu";
+import Page from "./Page";
 
 export const PagesContext = createContext<ReactProjectContext | undefined>(
     undefined

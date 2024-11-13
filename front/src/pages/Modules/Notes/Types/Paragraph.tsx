@@ -1,8 +1,11 @@
+// Libraries
 import { useContext, useEffect, useMemo, useRef, useState } from "react";
+
+// Local
 import { handleKeyDown } from "../utils/Events";
-import { Text } from "../utils/Text";
-import Cursor from "../utils/Cursor";
 import { NotesPageContext } from "../Body";
+import Cursor from "../utils/Cursor";
+import { Text } from "../utils/Text";
 
 interface ParagraphProps {
     note: string;

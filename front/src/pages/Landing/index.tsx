@@ -1,7 +1,7 @@
-// Components
+// Local
+import PriceEmulation from "./PriceEmulation";
 import Customization from "./Customization";
 import Header from "./Header";
-import PriceEmulation from "./PriceEmulation";
 
 const Integration = () => {
     return (

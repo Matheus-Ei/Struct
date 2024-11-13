@@ -19,10 +19,10 @@ const Button = ({
         ? `bg-primary border-primary`
         : `bg-base-100 border-primary`;
 
-    const buttonStyle = `${size} ${color}`;
     const textStyle = inverse
         ? `text-primary-content font-bold`
         : `text-primary font-bold`;
+    const buttonStyle = `${size} ${color} ${textStyle}`;
 
     const handdleClick = () => {
         if (onClick) {
@@ -35,7 +35,7 @@ const Button = ({
             className={className ? className : buttonStyle}
             onClick={handdleClick}
         >
-            {children ? children : <h1 className={textStyle}>{text}</h1>}
+            {children ? children : <h1>{text}</h1>}
         </button>
     );
 };

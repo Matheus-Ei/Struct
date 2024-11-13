@@ -1,11 +1,17 @@
+// Libraries
 import { Request, Response } from "express";
+
+// Local
+import operations from "../services/database/operations.js";
 import Cookie from "../services/cookie.js";
 import Token from "../services/token.js";
 import Hash from "../services/hash.js";
-import operations from "../services/database/operations.js";
-import UserModel from "../models/user.js";
-import SettingsModel from "../models/settings.js";
+
+// Models
 import SubscriptionModel from "../models/subscription.js";
+import RequestService from "../services/request.js";
+import SettingsModel from "../models/settings.js";
+import UserModel from "../models/user.js";
 
 class UserController {
     public async get(req: Request, res: Response) {
@@ -92,7 +98,15 @@ class UserController {
     }
 
     public async register(req: Request, res: Response) {
-        const { name, nickname, mail, password } = req.body;
+        const {
+            name,
+            nickname,
+            mail,
+            password = " ",
+            verified = false,
+            autenticator = "Default",
+            photo = "",
+        } = req.body;
 
         const hashObj = new Hash();
         const hashPassword = await hashObj.make(password);
@@ -112,6 +126,9 @@ class UserController {
                 name,
                 nickname,
                 mail,
+                verified,
+                autenticator,
+                photo,
                 password: hashPassword,
                 subscription_id: userSubscription.id,
                 settings_id: userSettings.id,
@@ -120,6 +137,7 @@ class UserController {
             const refresh = new Token(process.env.REFRESH_SECRET as string);
             const access = new Token(process.env.JWT_SECRET as string);
 
+            // Generate the tokens and set them as cookies to make user logged in
             if (newUser) {
                 const accessTk = access.generate(
                     { id: newUser.dataValues.id },
@@ -142,7 +160,7 @@ class UserController {
     }
 
     public async login(req: Request, res: Response) {
-        const { mail, password } = req.body;
+        const { mail, password = " ", autenticator = "Default" } = req.body;
 
         try {
             const user = await UserModel.findOne({
@@ -151,6 +169,7 @@ class UserController {
                 },
             });
 
+            // Verify the password
             const hashObj = new Hash();
             const isMatchPass = await hashObj.compare(
                 password,
@@ -158,7 +177,17 @@ class UserController {
             );
 
             if (user) {
-                if (isMatchPass) {
+                // Verify if the user is trying to login with the correct autenticator
+                if (user.dataValues.autenticator !== autenticator) {
+                    res.status(401).send({
+                        message:
+                            "You aren't authorized to login with these credentials",
+                    });
+                    return;
+                }
+
+                if (isMatchPass || autenticator === "Auth") {
+                    // Generate the tokens
                     const refresh = new Token(
                         process.env.REFRESH_SECRET as string
                     );
@@ -173,6 +202,7 @@ class UserController {
                         "7d"
                     );
 
+                    // Set the tokens as cookies to make user logged in
                     Cookie.generate("access_token", accessTk, res);
                     Cookie.generate("refresh_token", refreshTk, res);
                     Cookie.generate("id", user?.dataValues.id, res);
@@ -214,6 +244,55 @@ class UserController {
     }
 
     public async delete(req: Request, res: Response) {}
+
+    public async authGoogle(req: Request, res: Response) {
+        const { access_token } = req.body;
+
+        if (!access_token) {
+            res.status(400).send({ message: "Missing access_token" });
+            return;
+        }
+
+        try {
+            const userData = await RequestService.get(
+                `https://www.googleapis.com/oauth2/v1/userinfo?access_token=${access_token}`
+            );
+
+            // Create a unique nickname
+            let nickname = userData.name.split(" ")[0].toLowerCase();
+            let nicknameExists = true;
+            let i = 0;
+            while (nicknameExists) {
+                const user = await UserModel.findOne({
+                    where: {
+                        nickname,
+                    },
+                });
+
+                if (user) {
+                    i++;
+                    nicknameExists = true;
+                    nickname = `${nickname}${i}`;
+                } else {
+                    nicknameExists = false;
+                }
+            }
+
+            res.status(200).send({
+                mail: userData.email,
+                name: userData.name,
+                photo: userData.picture,
+                verified: userData.verified_email,
+                autenticator: "Google",
+                nickname,
+            });
+        } catch (error) {
+            res.status(500).send({
+                message: "Error authenticating with Google",
+                error,
+            });
+        }
+    }
 }
 
 export default new UserController();

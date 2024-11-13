@@ -1,5 +1,7 @@
-// Services
+// Libraries
 import { useState } from "react";
+
+// Local
 import Theme from "services/Theme";
 
 const ThemeController = () => {

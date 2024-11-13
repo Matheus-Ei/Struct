@@ -1,6 +1,9 @@
-import routes from "./routes";
+// Libraries
 import { Routes, Route } from "react-router-dom";
 import React from "react";
+
+// Local
+import routes from "./routes";
 
 class Navigator {
     addRoute(path: string, element: () => JSX.Element, key: number) {

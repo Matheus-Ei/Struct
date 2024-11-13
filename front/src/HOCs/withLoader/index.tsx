@@ -1,7 +1,10 @@
+// Libraries
 import { useEffect, ComponentType } from "react";
 import { useNavigate } from "react-router-dom";
-import Login from "utils/login";
 import { motion } from "framer-motion";
+
+// Local
+import Login from "utils/login";
 
 const withLoader = (WrappedComponent: ComponentType, checkLogin?: boolean) => {
     return function WithLoader() {

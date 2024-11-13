@@ -1,9 +1,13 @@
-import Card from "components/Card";
-import Icons from "services/Icons";
-import { ReactComponent as Logo } from "assets/logo-500x500-3.svg";
+// Libraries
 import { useContext } from "react";
-import { SignUpContext } from ".";
+
+// Local
+import { ReactComponent as Logo } from "assets/logo-500x500-3.svg";
+import GoogleSignUpButton from "./GoogleSignUpButton";
 import { goPrevStep } from "./functions";
+import Card from "components/Card";
+import { SignUpContext } from ".";
+import Icons from "services/Icons";
 
 interface WrapperSignUpProps {
     children: JSX.Element;
@@ -13,7 +17,7 @@ const WrapperSignUp = ({ children }: WrapperSignUpProps) => {
     const context = useContext(SignUpContext);
 
     if (!context) return null;
-    const { step, setStep } = context;
+    const { step, setStep, toggleError } = context;
 
     const prevStep = () => {
         goPrevStep(setStep);
@@ -21,7 +25,7 @@ const WrapperSignUp = ({ children }: WrapperSignUpProps) => {
 
     return (
         <Card>
-            <div className="relative w-[55vw] h-[400px] flex items-center justify-center">
+            <div className="relative w-[55vw] h-[450px] p-4 flex flex-col items-center justify-center">
                 {step !== 0 && (
                     <button
                         className="absolute flex top-4 left-4 gap-2 items-center justify-center text-neutral"
@@ -43,6 +47,9 @@ const WrapperSignUp = ({ children }: WrapperSignUpProps) => {
 
                     {children}
                 </div>
+
+                <div className="divider px-40">Or sign-up with</div>
+                <GoogleSignUpButton toggleError={toggleError} />
             </div>
         </Card>
     );

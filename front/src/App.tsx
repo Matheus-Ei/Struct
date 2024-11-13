@@ -1,6 +1,9 @@
+// Libraries
+import { useEffect } from "react";
+
+// Local
 import Navigator from "services/Navigator";
 import Theme from "services/Theme";
-import { useEffect } from "react";
 
 function App() {
     useEffect(() => {

@@ -1,7 +1,10 @@
+// Libraries
 import { useContext } from "react";
-import { PagesContext } from "..";
+
+// Local
 import { PagesRequestType } from "../util/types";
 import NewPageTab from "./NewPageTab";
+import { PagesContext } from "..";
 import PageTab from "./PageTab";
 
 const Menu = () => {

@@ -1,3 +1,4 @@
+// Libraries
 import jwt from "jsonwebtoken";
 
 class Token {

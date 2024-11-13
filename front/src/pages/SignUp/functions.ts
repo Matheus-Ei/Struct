@@ -1,6 +1,9 @@
+// Libraries
 import { Dispatch, SetStateAction } from "react";
-import Request from "services/Request";
+
+// Local
 import { SignUpContextType } from "./types";
+import Request from "services/Request";
 
 export const makeSignUp = async (
     context: SignUpContextType | null,

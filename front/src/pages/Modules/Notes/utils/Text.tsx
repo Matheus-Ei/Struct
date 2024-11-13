@@ -1,4 +1,7 @@
+// Libraries
 import { Dispatch, SetStateAction } from "react";
+
+// Local
 import { NotesPageContextType, NotesTextType } from "./types";
 
 export class Text {

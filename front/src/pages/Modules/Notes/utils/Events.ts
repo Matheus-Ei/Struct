@@ -1,5 +1,6 @@
-import { Text } from "./Text";
+// Local
 import { NotesPageContextType } from "./types";
+import { Text } from "./Text";
 
 export const handleKeyDown = (
     event: any,

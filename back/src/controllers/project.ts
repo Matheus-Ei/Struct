@@ -1,6 +1,11 @@
+// Libraries
 import { Request, Response } from "express";
-import Cookie from "../services/cookie.js";
+
+// Local
 import operations from "../services/database/operations.js";
+import Cookie from "../services/cookie.js";
+
+// Models
 import ProjectModel from "../models/project.js";
 
 class ProjectController {
@@ -92,7 +97,7 @@ class ProjectController {
                         page.name,
                         page.emoji,
                         page.description,
-                        page.order,
+                        page.position,
                         page.parent_page_id
                     FROM page
                     WHERE project_id = ${id}
@@ -105,7 +110,7 @@ class ProjectController {
                         child.name,
                         child.emoji,
                         child.description,
-                        child.order,
+                        child.position,
                         child.parent_page_id
                     FROM page AS child
                     JOIN page_hierarchy AS parent ON child.parent_page_id = parent.id
@@ -115,14 +120,14 @@ class ProjectController {
                     root.name,
                     root.emoji,
                     root.description,
-                    root.order,
+                    root.position,
                     get_children(root.id) AS children_pages
                 FROM project
                 JOIN page AS root ON root.project_id = project.id
                 WHERE project.id = ${id}
                     AND root.parent_page_id IS NULL
                 GROUP BY root.id
-                ORDER BY root.order, root.id;
+                ORDER BY root.position, root.id;
             `);
 
             res.status(200).send(pages[0]);

@@ -1,5 +1,10 @@
+// Libraries
 import { DataTypes, Model } from "sequelize";
+
+// Local
 import connection from "../services/database/connection.js";
+
+// Models
 import PageModel from "./page.js";
 
 class NotesPageDataModel extends Model {

@@ -1,4 +1,7 @@
+// Libraries
 import { Router } from "express";
+
+// Local
 import TokenController from "../controllers/token.js";
 
 class TokenRoute {

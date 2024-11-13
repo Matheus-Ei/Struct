@@ -1,7 +1,10 @@
+// Libraries
+import { useContext } from "react";
+
+// Local
+import { deletePage } from "pages/Project/util/events";
 import ContextMenu from "components/ContextMenu";
 import { PagesContext } from "pages/Project";
-import { deletePage } from "pages/Project/util/events";
-import { useContext } from "react";
 import Icons from "services/Icons";
 
 interface ContextPageMenuProps {

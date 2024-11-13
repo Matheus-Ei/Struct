@@ -1,6 +1,9 @@
+// Libraries
+import { useState } from "react";
+
+// Local
 import Icons from "services/Icons";
 import Theme from "services/Theme";
-import { useState } from "react";
 
 const ThemeController = () => {
     const [theme, setTheme] = useState(Theme.getCurrent());

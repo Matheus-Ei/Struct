@@ -9,25 +9,6 @@ VALUES ('free', 0.00),
 	   ('popular', 10.00),
 	   ('premium', 40.00);
 
--- INSERT INTO SUBSCRIPTION_BENEFITS TABLE
-INSERT INTO subscription_benefits (name) 
-VALUES ('basic modules'),
-	   ('advanced modules'),
-	   ('unlimited collaboration'),
-	   ('integration between modules'),
-	   ('integration between tools');
-
--- INSERT INTO RELATIONSHIP_PLAN_BENEFITS TABLE
-INSERT INTO relationship_plan_benefits (subscription_plan_id, subscription_benefits_id) 
-VALUES (1, 1),
-	   (2, 1),
-	   (2, 4),
-	   (3, 1),
-	   (3, 2),
-	   (3, 3),
-	   (3, 4),
-	   (3, 5);
-
 -- Funcion to select childrens recursivaly in the pages table
 CREATE OR REPLACE FUNCTION get_children(parent_id INT)
 RETURNS JSONB LANGUAGE SQL AS $$
@@ -37,11 +18,11 @@ RETURNS JSONB LANGUAGE SQL AS $$
                 'id', child.id,
                 'name', child.name,
                 'emoji', child.emoji,
-                'order', child.order,
+                'position', child.position,
                 'description', child.description,
                 'children_pages', get_children(child.id)
             )
-            ORDER BY child.order, child.id
+            ORDER BY child.position, child.id
         ),
         '[]'::JSONB
     )

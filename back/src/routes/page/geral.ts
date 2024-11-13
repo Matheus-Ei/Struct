@@ -1,4 +1,7 @@
+// Libraries
 import { Router } from "express";
+
+// Local
 import PageGeralController from "../../controllers/page/geral.js";
 
 class PageGeralRoute {

@@ -1,9 +1,12 @@
-import { PagesContext } from "pages/Project";
-import { useContext } from "react";
+// Libraries
 import { useQuery } from "react-query";
+import { useContext } from "react";
+
+// Local
+import { PagesContext } from "pages/Project";
 import Request from "services/Request";
-import Body from "./Body";
 import Header from "./Header";
+import Body from "./Body";
 
 const Notes = () => {
     const context = useContext(PagesContext);

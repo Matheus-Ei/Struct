@@ -1,7 +1,10 @@
+// Libraries
+import { useState } from "react";
+
+// Local
+import withLoader from "HOCs/withLoader";
 import Projects from "./Projects";
 import Header from "./Header";
-import withLoader from "HOCs/withLoader";
-import { useState } from "react";
 
 const Dashboard = () => {
     const [tab, setTab] = useState<string>("Projects");
@@ -19,7 +22,7 @@ const Dashboard = () => {
     };
 
     return (
-        <div className="flex flex-col justify-start items-center w-screen h-screen">
+        <div className="flex flex-col justify-start items-center w-screen h-[97vh]">
             <Header tab={tab} setTab={setTab} />
 
             {getTab()}

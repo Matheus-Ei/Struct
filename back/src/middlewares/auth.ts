@@ -1,5 +1,8 @@
+// Libraries
 import { Request, Response, NextFunction } from "express";
 import dotenv from "dotenv";
+
+// Local
 import Cookie from "../services/cookie.js";
 import Token from "../services/token.js";
 
@@ -9,6 +12,7 @@ const auth = (req: Request, res: Response, next: NextFunction) => {
     if (
         req.path === "/user/check/nickname" ||
         req.path === "/user/check/mail" ||
+        req.path === "/user/auth/google" ||
         req.path === "/user/login" ||
         req.path === "/user/register" ||
         req.path === "/token/check" ||

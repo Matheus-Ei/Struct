@@ -1,19 +1,25 @@
+// Libraries
 import { NavigateFunction } from "react-router-dom";
+
+// Local
 import Request from "../services/Request";
 
 class Login {
     static async make(
         mail: string,
         password: string,
+        autenticator: "Default" | "Auth",
         navigate: NavigateFunction
     ) {
         try {
             await Request.post("user/login", {
                 mail,
                 password,
+                autenticator,
             });
 
             navigate("/dashboard");
+
             return true;
         } catch {
             return false;

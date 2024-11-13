@@ -1,11 +1,14 @@
-import Button from "components/Button";
-import Input from "components/Input";
-import Message from "components/Message";
-import useToggle from "hooks/useToggle";
+// Libraries
 import { useContext, useState } from "react";
-import { SignUpContext } from ".";
+
+// Local
+import Message from "components/Message";
 import { goNextStep } from "./functions";
 import Validations from "./validations";
+import useToggle from "hooks/useToggle";
+import Button from "components/Button";
+import Input from "components/Input";
+import { SignUpContext } from ".";
 
 const MainStep = () => {
     const [nicknameError, toggleNicknameError] = useToggle(false);
