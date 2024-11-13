@@ -1,9 +1,12 @@
+// Libraries
 import { useGoogleLogin } from "@react-oauth/google";
-import Button from "components/Button";
-import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Icons from "services/Icons";
+import { useEffect, useState } from "react";
+
+// Local
+import Button from "components/Button";
 import Request from "services/Request";
+import Icons from "services/Icons";
 import Login from "utils/login";
 
 interface GoogleLoginButtonProps {

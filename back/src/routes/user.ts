@@ -1,4 +1,7 @@
+// Librareis
 import { Router } from "express";
+
+// Local
 import UserController from "../controllers/user.js";
 
 class UserRoute {

@@ -1,3 +1,4 @@
+// Libraries
 import bcrypt from "bcrypt";
 
 class Hash {

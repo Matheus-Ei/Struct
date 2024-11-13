@@ -1,10 +1,13 @@
+// Libraries
 import React, { useState } from "react";
 import { useQuery } from "react-query";
-import Request from "services/Request";
-import CreateProject from "./CreateProject";
+
+// Local
 import CreateProjectModal from "./CreateProject/Modal";
-import Project from "./Project";
+import CreateProject from "./CreateProject";
 import ProjectModal from "./Project/Modal";
+import Request from "services/Request";
+import Project from "./Project";
 
 interface ModalType {
     show: boolean;

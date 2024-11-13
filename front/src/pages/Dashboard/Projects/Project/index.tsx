@@ -1,5 +1,8 @@
-import Icons from "services/Icons";
+// Libraries
 import { Dispatch, SetStateAction } from "react";
+
+// Local
+import Icons from "services/Icons";
 
 interface ModalType {
     show: boolean;

@@ -1,7 +1,10 @@
+// Libraries
+import { useState } from "react";
+
+// Local
+import withLoader from "HOCs/withLoader";
 import Projects from "./Projects";
 import Header from "./Header";
-import withLoader from "HOCs/withLoader";
-import { useState } from "react";
 
 const Dashboard = () => {
     const [tab, setTab] = useState<string>("Projects");

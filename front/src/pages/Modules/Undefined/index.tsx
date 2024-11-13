@@ -1,12 +1,15 @@
-import Emoji from "components/Emoji";
-import EmojiSelector from "components/EmojiSelector";
-import { EmojiClickData } from "emoji-picker-react";
-import useToggle from "hooks/useToggle";
-import { PagesContext } from "pages/Project";
+// Libraries
 import { useContext, useEffect, useState } from "react";
-import Request from "services/Request";
-import EditableField from "./EditableField";
+import { EmojiClickData } from "emoji-picker-react";
+
+// Local
+import EmojiSelector from "components/EmojiSelector";
+import { PagesContext } from "pages/Project";
 import SearchElement from "./SearchElement";
+import EditableField from "./EditableField";
+import useToggle from "hooks/useToggle";
+import Request from "services/Request";
+import Emoji from "components/Emoji";
 
 const Undefined = () => {
     const [emoji, setEmoji] = useState<EmojiClickData | undefined>();

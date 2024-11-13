@@ -1,12 +1,17 @@
+// Libraries
 import { Request, Response } from "express";
+
+// Local
+import operations from "../services/database/operations.js";
 import Cookie from "../services/cookie.js";
 import Token from "../services/token.js";
 import Hash from "../services/hash.js";
-import operations from "../services/database/operations.js";
-import UserModel from "../models/user.js";
-import SettingsModel from "../models/settings.js";
+
+// Models
 import SubscriptionModel from "../models/subscription.js";
 import RequestService from "../services/request.js";
+import SettingsModel from "../models/settings.js";
+import UserModel from "../models/user.js";
 
 class UserController {
     public async get(req: Request, res: Response) {

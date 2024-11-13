@@ -1,9 +1,12 @@
+// Libraries
+import { Dispatch, SetStateAction, useState } from "react";
+
+// Local
 import Modal from "components/Modal";
-import About from "./About";
 import Footer from "./Footer";
 import Header from "./Header";
+import About from "./About";
 import Pages from "./Pages";
-import { Dispatch, SetStateAction, useState } from "react";
 
 interface ModalType {
     show: boolean;
@@ -27,7 +30,7 @@ const ProjectModal = ({ modal, setModal }: ProjectModalProps) => {
             case "About":
                 return <About id={modal.projectId} setModal={setModal} />;
             case "Pages":
-                return <Pages projectId={modal.projectId}/>;
+                return <Pages projectId={modal.projectId} />;
         }
     };
 

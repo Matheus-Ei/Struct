@@ -1,6 +1,9 @@
+// Libraries
 import { createContext, MouseEvent, useRef, useState } from "react";
-import Textareas from "./Textareas";
+
+// Local
 import { NotesPageContextType, NotesTextType } from "./utils/types";
+import Textareas from "./Textareas";
 
 export const NotesPageContext = createContext<NotesPageContextType | null>(
     null

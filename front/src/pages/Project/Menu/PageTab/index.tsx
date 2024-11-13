@@ -1,10 +1,13 @@
-import useToggle from "hooks/useToggle";
-import { PagesRequestType } from "pages/Project/util/types";
+// Libraries
 import { useState } from "react";
-import Childrens from "./Childrens";
-import Content from "./Content";
+
+// Local
+import { PagesRequestType } from "pages/Project/util/types";
 import ContextPageMenu from "./ContextPageMenu";
 import HoverButtons from "./HoverButtons";
+import useToggle from "hooks/useToggle";
+import Childrens from "./Childrens";
+import Content from "./Content";
 
 interface PageTabProps {
     item: PagesRequestType;

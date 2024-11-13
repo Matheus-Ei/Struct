@@ -1,7 +1,10 @@
+// Libraries
 import { useGoogleLogin } from "@react-oauth/google";
-import Button from "components/Button";
-import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+
+// Local
+import Button from "components/Button";
 import Icons from "services/Icons";
 import Request from "services/Request";
 

@@ -1,4 +1,7 @@
+// Libraries
 import { useContext, useEffect } from "react";
+
+// Local
 import { NotesPageContext } from "./Body";
 import Paragraph from "./Types/Paragraph";
 import Title from "./Types/Title";

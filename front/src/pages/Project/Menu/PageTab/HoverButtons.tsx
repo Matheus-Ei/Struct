@@ -1,7 +1,10 @@
-import { PagesContext } from "pages/Project";
-import { addPage } from "pages/Project/util/events";
-import { PagesRequestType } from "pages/Project/util/types";
+// Libraries
 import { useContext } from "react";
+
+// Local
+import { PagesRequestType } from "pages/Project/util/types";
+import { addPage } from "pages/Project/util/events";
+import { PagesContext } from "pages/Project";
 import Icons from "services/Icons";
 
 interface HoverButtonsProps {

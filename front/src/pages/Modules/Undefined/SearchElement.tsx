@@ -1,7 +1,10 @@
-import SearchBar from "components/SearchBar";
+// Libraries
 import { useState } from "react";
-import Module from "./Module";
+
+// Local
+import SearchBar from "components/SearchBar";
 import modules from "./modules";
+import Module from "./Module";
 
 interface SearchElementProps {
     pageId?: number;

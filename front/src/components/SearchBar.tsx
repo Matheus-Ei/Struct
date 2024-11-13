@@ -1,4 +1,7 @@
+// Libraries
 import { ChangeEvent, Dispatch, SetStateAction } from "react";
+
+// Local
 import Icons from "services/Icons";
 
 interface SearchBarProps {

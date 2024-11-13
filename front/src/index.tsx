@@ -1,6 +1,9 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
+// Libraries
 import Providers from "utils/Providers";
+import ReactDOM from "react-dom/client";
+import React from "react";
+
+// Local
 import App from "./App";
 import "./global.css";
 

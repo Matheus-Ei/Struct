@@ -1,7 +1,10 @@
-import Undefined from "pages/Modules/Undefined";
+// Libraries
 import React, { useContext } from "react";
-import { PagesContext } from ".";
+
+// Libraries
+import Undefined from "pages/Modules/Undefined";
 import router from "./util/router";
+import { PagesContext } from ".";
 
 interface RouterType {
     endpoint: () => JSX.Element;

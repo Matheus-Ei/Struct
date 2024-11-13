@@ -1,9 +1,12 @@
-import Button from "components/Button";
-import Modal from "components/Modal";
-import { projectsContext } from "pages/Dashboard/Projects";
+// Libraries
 import { Dispatch, SetStateAction, useContext, useState } from "react";
+
+// Local
+import { projectsContext } from "pages/Dashboard/Projects";
 import Request from "services/Request";
+import Button from "components/Button";
 import TextFields from "./TextFields";
+import Modal from "components/Modal";
 
 interface CreateProjectModalProps {
     showModal: boolean;

@@ -1,10 +1,13 @@
-import express from "express";
-import dotenv from "dotenv";
-import auth from "./middlewares/auth.js";
-import mainRoutes from "./system/routes.js";
-import cors from "cors";
+// Libraries
 import cookieParser from "cookie-parser";
 import compression from "compression";
+import express from "express";
+import dotenv from "dotenv";
+import cors from "cors";
+
+// Local
+import mainRoutes from "./system/routes.js";
+import auth from "./middlewares/auth.js";
 
 export class App {
     private app: any;

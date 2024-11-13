@@ -1,14 +1,15 @@
+// Local
 import Icons from "services/Icons";
 import Card from "./Card";
 
-interface ProjectModalProps {
+interface ModalProps {
     children: JSX.Element;
     isOpen: boolean;
     close: () => any;
     className?: string;
 }
 
-const Modal = ({ children, isOpen, close, className }: ProjectModalProps) => {
+const Modal = ({ children, isOpen, close, className }: ModalProps) => {
     if (!isOpen) return null;
 
     const styleName = className

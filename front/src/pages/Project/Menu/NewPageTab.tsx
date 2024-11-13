@@ -1,7 +1,10 @@
+// Libraries
 import { useContext } from "react";
+
+// Local
+import { addPage } from "../util/events";
 import Icons from "services/Icons";
 import { PagesContext } from "..";
-import { addPage } from "../util/events";
 
 const NewPageTab = () => {
     const context = useContext(PagesContext);

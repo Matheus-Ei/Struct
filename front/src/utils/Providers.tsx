@@ -1,6 +1,7 @@
-import { BrowserRouter } from "react-router-dom";
+// Libraries
 import { QueryClient, QueryClientProvider } from "react-query";
 import { GoogleOAuthProvider } from "@react-oauth/google";
+import { BrowserRouter } from "react-router-dom";
 
 interface ProvidersProps {
     children: JSX.Element;

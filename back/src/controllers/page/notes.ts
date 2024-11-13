@@ -1,8 +1,13 @@
+// Libraries
 import { Request, Response } from "express";
+
+// Local
 import operations from "../../services/database/operations.js";
+
+// Models
 import NotesPageDataModel from "../../models/notesPageData.js";
-import PageModel from "../../models/page.js";
 import ModuleModel from "../../models/module.js";
+import PageModel from "../../models/page.js";
 
 class NotesPageController {
     public async get(req: Request, res: Response) {

@@ -1,6 +1,11 @@
+// Libraries
 import { Request, Response } from "express";
-import Cookie from "../services/cookie.js";
+
+// Local
 import operations from "../services/database/operations.js";
+import Cookie from "../services/cookie.js";
+
+// Models
 import ProjectModel from "../models/project.js";
 
 class ProjectController {

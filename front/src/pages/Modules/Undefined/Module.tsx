@@ -1,5 +1,8 @@
-import { PagesContext } from "pages/Project";
+// Libraries
 import { useContext } from "react";
+
+// Local
+import { PagesContext } from "pages/Project";
 import Request from "services/Request";
 
 interface ModuleProps {

@@ -1,4 +1,7 @@
+// Libraries
 import { NavigateFunction } from "react-router-dom";
+
+// Local
 import Request from "../services/Request";
 
 class Login {

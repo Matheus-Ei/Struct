@@ -1,4 +1,7 @@
+// Libraries
 import { Router } from "express";
+
+// Local
 import NotesPageController from "../../controllers/page/notes.js";
 
 class NotesPageRoute {

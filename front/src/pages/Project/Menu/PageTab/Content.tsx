@@ -1,7 +1,10 @@
-import Emoji from "components/Emoji";
-import { PagesContext } from "pages/Project";
-import { PagesRequestType } from "pages/Project/util/types";
+// Libraries
 import { useContext } from "react";
+
+// Local
+import { PagesRequestType } from "pages/Project/util/types";
+import { PagesContext } from "pages/Project";
+import Emoji from "components/Emoji";
 
 interface ContentProps {
     item: PagesRequestType;

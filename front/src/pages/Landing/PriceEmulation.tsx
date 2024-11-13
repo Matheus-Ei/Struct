@@ -1,4 +1,4 @@
-// Hooks
+// Libraries
 import { useState } from "react";
 
 interface ItemInterface {

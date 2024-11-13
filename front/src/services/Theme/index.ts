@@ -1,5 +1,6 @@
-import themes from "./themes";
+// Local
 import { LocalStorage } from "../Storage";
+import themes from "./themes";
 
 class Theme {
     public static set(newTheme?: string) {

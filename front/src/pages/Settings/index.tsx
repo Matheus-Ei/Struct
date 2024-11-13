@@ -1,6 +1,7 @@
+// Local
 import ThemeController from "./ThemeController";
-import withLoader from "HOCs/withLoader";
 import SettingsHeader from "./SettingsHeader";
+import withLoader from "HOCs/withLoader";
 import Logout from "./Logout";
 
 const Settings = () => {

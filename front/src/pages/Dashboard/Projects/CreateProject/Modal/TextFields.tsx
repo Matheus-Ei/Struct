@@ -1,5 +1,8 @@
-import Input from "components/Input";
+// Libraries
 import { Dispatch, SetStateAction } from "react";
+
+// Local
+import Input from "components/Input";
 
 interface TextFieldsProps {
     setTitle: Dispatch<SetStateAction<string>>;

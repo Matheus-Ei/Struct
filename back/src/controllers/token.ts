@@ -1,5 +1,8 @@
+// Libraries
 import { Request, Response } from "express";
 import dotenv from "dotenv";
+
+// Local
 import Token from "../services/token.js";
 import Cookie from "../services/cookie.js";
 

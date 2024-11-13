@@ -1,9 +1,12 @@
-import useToggle from "hooks/useToggle";
+// Libraries
 import { createContext, useState } from "react";
-import MainStep from "./MainStep";
-import PasswordStep from "./PasswordsStep";
+
+// Local
 import { SignUpContextType } from "./types";
 import WrapperSignUp from "./WrapperSignUp";
+import PasswordStep from "./PasswordsStep";
+import useToggle from "hooks/useToggle";
+import MainStep from "./MainStep";
 
 export const SignUpContext = createContext<SignUpContextType | null>(null);
 

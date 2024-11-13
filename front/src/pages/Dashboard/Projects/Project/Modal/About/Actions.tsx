@@ -1,7 +1,10 @@
-import Point from "components/Point";
-import { projectsContext } from "pages/Dashboard/Projects";
+// Libraries
 import { Dispatch, SetStateAction, useContext } from "react";
+
+// Local
+import { projectsContext } from "pages/Dashboard/Projects";
 import Request from "services/Request";
+import Point from "components/Point";
 
 interface ModalType {
     show: boolean;

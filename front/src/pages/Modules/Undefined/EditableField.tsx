@@ -1,5 +1,8 @@
-import useToggle from "hooks/useToggle";
+// LIbraries
 import { useRef } from "react";
+
+// Local
+import useToggle from "hooks/useToggle";
 import Request from "services/Request";
 
 interface EditableFieldProps {

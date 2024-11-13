@@ -1,10 +1,13 @@
+// Libraries
+import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+
+// Local
+import { makeSignUp } from "./functions";
+import Message from "components/Message";
 import Button from "components/Button";
 import Input from "components/Input";
-import Message from "components/Message";
-import { useContext } from "react";
-import { useNavigate } from "react-router-dom";
 import { SignUpContext } from ".";
-import { makeSignUp } from "./functions";
 
 const PasswordStep = () => {
     const context = useContext(SignUpContext);

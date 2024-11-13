@@ -1,5 +1,8 @@
-import Button from "components/Button";
+// Libraries
 import { useNavigate } from "react-router-dom";
+
+// Local
+import Button from "components/Button";
 import Login from "utils/login";
 
 const Logout = () => {

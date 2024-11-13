@@ -1,7 +1,10 @@
-import Actions from "./Actions";
-import Informations from "./Informations";
+// Libraries
 import { Dispatch, SetStateAction } from "react";
 import { useQuery } from "react-query";
+
+// Local
+import Actions from "./Actions";
+import Informations from "./Informations";
 import Request from "services/Request";
 
 interface ModalType {
