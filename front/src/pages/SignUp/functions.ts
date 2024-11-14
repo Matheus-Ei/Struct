@@ -1,13 +1,14 @@
 // Libraries
+import { NavigateFunction } from "react-router-dom";
 import { Dispatch, SetStateAction } from "react";
 
 // Local
 import { SignUpContextType } from "./types";
-import Request from "services/Request";
+import User from "utils/user";
 
 export const makeSignUp = async (
     context: SignUpContextType | null,
-    navigate: (path: string) => void
+    navigate: NavigateFunction
 ) => {
     if (!context) return null;
     const {
@@ -21,12 +22,7 @@ export const makeSignUp = async (
     } = context;
 
     try {
-        if (
-            password === null ||
-            nickname === null ||
-            mail === null ||
-            name === null
-        ) {
+        if (!password || !nickname || !mail || !name) {
             setErrorMessage("Please fill all fields");
             toggleError(true);
             return;
@@ -38,14 +34,14 @@ export const makeSignUp = async (
             return;
         }
 
-        await Request.post("user/register", {
+        User.signUp(
             name,
-            nickname: nickname.toLowerCase(),
-            mail: mail.toLowerCase(),
+            nickname.toLowerCase(),
+            mail.toLowerCase(),
             password,
-        });
-
-        navigate("/dashboard");
+            "Default",
+            navigate
+        );
     } catch {
         setErrorMessage("An error occurred, please try again");
         toggleError(true);

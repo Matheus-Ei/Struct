@@ -10,7 +10,7 @@ import useToggle from "hooks/useToggle";
 import Button from "components/Button";
 import Input from "components/Input";
 import Card from "components/Card";
-import login from "utils/login";
+import User from "utils/user";
 
 const Login = () => {
     const [mail, setMail] = useState<string>("");
@@ -20,7 +20,7 @@ const Login = () => {
     const navigate = useNavigate();
 
     const handleLogin = () => {
-        login.make(mail, password, "Default", navigate).then(() => {
+        User.login(mail, password, "Default", navigate).then(() => {
             toggleError(true);
         });
     };

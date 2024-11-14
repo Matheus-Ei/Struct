@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 
 // Local
-import Login from "utils/login";
+import User from "utils/user";
 
 const withLoader = (WrappedComponent: ComponentType, checkLogin?: boolean) => {
     return function WithLoader() {
@@ -12,7 +12,7 @@ const withLoader = (WrappedComponent: ComponentType, checkLogin?: boolean) => {
 
         const check = () => {
             if (checkLogin) {
-                Login.check(navigate);
+                User.verifyLogin(navigate);
             }
         };
 

@@ -263,17 +263,19 @@ class UserController {
             let nicknameExists = true;
             let i = 0;
             while (nicknameExists) {
+                const checkNickname = i === 0 ? nickname : `${nickname}${i}`;
+
                 const user = await UserModel.findOne({
                     where: {
-                        nickname,
+                        nickname: checkNickname,
                     },
                 });
 
                 if (user) {
                     i++;
                     nicknameExists = true;
-                    nickname = `${nickname}${i}`;
                 } else {
+                    nickname = checkNickname;
                     nicknameExists = false;
                 }
             }

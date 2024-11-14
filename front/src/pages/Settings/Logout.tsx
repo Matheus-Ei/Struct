@@ -3,13 +3,13 @@ import { useNavigate } from "react-router-dom";
 
 // Local
 import Button from "components/Button";
-import Login from "utils/login";
+import User from "utils/user";
 
 const Logout = () => {
     const navigate = useNavigate();
 
     const handleLogout = () => {
-        Login.logout(navigate);
+        User.logout(navigate);
     };
 
     return (

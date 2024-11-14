@@ -1,13 +1,13 @@
 // Libraries
 import { useGoogleLogin } from "@react-oauth/google";
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 // Local
 import Button from "components/Button";
 import Request from "services/Request";
 import Icons from "services/Icons";
-import Login from "utils/login";
+import User from "utils/user";
 
 interface GoogleLoginButtonProps {
     toggleError: (value: boolean) => void;
@@ -19,6 +19,7 @@ const GoogleLoginButton = ({ toggleError }: GoogleLoginButtonProps) => {
     );
     const navigate = useNavigate();
 
+    // Gets the access_token from the google login
     const googleLogin = useGoogleLogin({
         onSuccess: (codeResponse) =>
             setGoogleAccessToken(codeResponse.access_token),
@@ -34,7 +35,7 @@ const GoogleLoginButton = ({ toggleError }: GoogleLoginButtonProps) => {
                 });
 
                 // Make the login using the Auth autenticator
-                const isLogged = await Login.make(
+                const isLogged = await User.login(
                     response.mail,
                     "",
                     "Auth",
@@ -50,13 +51,19 @@ const GoogleLoginButton = ({ toggleError }: GoogleLoginButtonProps) => {
         }
     };
 
+    const memoizedLogin = useCallback(login, [
+        googleAccessToken,
+        navigate,
+        toggleError,
+    ]);
+
     useEffect(() => {
-        login();
-    }, [googleAccessToken]);
+        memoizedLogin();
+    }, [memoizedLogin]);
 
     return (
         <Button
-            className="border-2 w-fit h-fit px-6 py-2 rounded-btn bg-white border-red-400 text-red-400 font-bold text-2xl"
+            className="border-2 w-fit h-fit p-2 rounded-btn bg-white border-red-400 text-red-400 font-bold text-2xl"
             inverse={true}
             onClick={googleLogin}
         >

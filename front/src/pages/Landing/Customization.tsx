@@ -19,7 +19,7 @@ const ThemeController = () => {
             <input
                 type="radio"
                 name="theme-buttons"
-                className="btn theme-controller text-[0.8vw]"
+                className="btn theme-controller px-12"
                 checked={item === theme ? true : false}
                 aria-label={item}
                 value={item}
@@ -32,7 +32,7 @@ const ThemeController = () => {
     return (
         <div className="flex flex-row items-center justify-center w-full border rounded-box p-2 border-secondary bg-primary">
             <div className="flex flex-row items-center justify-between w-full border rounded-box py-5 px-10 border-secondary bg-primary">
-                <div className="grid grid-cols-7 gap-4 w-[48%]">
+                <div className="grid grid-cols-6 gap-y-4 gap-x-10 w-[48%]">
                     {themes.map(renderThemes)}
                 </div>
 

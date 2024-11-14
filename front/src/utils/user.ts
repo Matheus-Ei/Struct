@@ -4,8 +4,8 @@ import { NavigateFunction } from "react-router-dom";
 // Local
 import Request from "../services/Request";
 
-class Login {
-    static async make(
+class User {
+    static async login(
         mail: string,
         password: string,
         autenticator: "Default" | "Auth",
@@ -26,7 +26,7 @@ class Login {
         }
     }
 
-    static async refresh() {
+    static async refreshAccess() {
         try {
             await Request.get("token/refresh");
 
@@ -37,12 +37,12 @@ class Login {
         }
     }
 
-    static async check(navigate: NavigateFunction) {
+    static async verifyLogin(navigate: NavigateFunction) {
         try {
             await Request.get("token/check");
             return true;
         } catch {
-            const isRefreshed = await Login.refresh();
+            const isRefreshed = await User.refreshAccess();
 
             if (!isRefreshed) {
                 navigate("/login");
@@ -63,6 +63,30 @@ class Login {
             return false;
         }
     }
+
+    static async signUp(
+        name: string,
+        nickname: string,
+        mail: string,
+        password: string | undefined,
+        autenticator: "Default" | "Auth",
+        navigate: NavigateFunction
+    ) {
+        try {
+            await Request.post("user/register", {
+                name,
+                nickname,
+                password,
+                mail,
+                autenticator,
+            });
+
+            navigate("/dashboard");
+            return true;
+        } catch {
+            return false;
+        }
+    }
 }
 
-export default Login;
+export default User;

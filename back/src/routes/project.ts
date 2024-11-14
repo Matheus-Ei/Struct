@@ -19,7 +19,7 @@ class ProjectRoute {
 
         this.router.post("/create", ProjectController.create);
 
-        this.router.put("/edit/:id", ProjectController.edit);
+        this.router.patch("/edit/:id", ProjectController.edit);
 
         this.router.delete("/delete/:id", ProjectController.delete);
     }
