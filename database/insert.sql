@@ -30,3 +30,10 @@ RETURNS JSONB LANGUAGE SQL AS $$
     WHERE child.parent_page_id = parent_id;
 $$;
 
+INSERT INTO permission_level (name, description)
+VALUES ('owner', 'The owner of the project, can do anything'),
+       ('admin', 'The admin of the project, can do anything except delete the project'),
+       ('editor', 'The editor of the project, can edit everything except the project itself'),
+       ('commenter', 'The commenter of the project, can only comment on the project'),
+       ('filler', 'The filler of the project, can only fill forms and informations in the project, withou editing'),
+       ('viewer', 'The viewer of the project, can only view the project');

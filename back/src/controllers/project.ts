@@ -142,7 +142,29 @@ class ProjectController {
         const { id } = req.params;
 
         try {
-        } catch (error) {}
+            const response = await operations.query(`
+                SELECT relationship_shared_project.project_id as project_id,
+	                permission_level_id,
+	                permission_level.name,
+	                permission_level.description,
+	                users.id as user_id,
+	                users.name as user_name,
+	                users.nickname as user_nickname,
+	                users.mail as user_mail,
+	                users.photo as user_photo
+                FROM relationship_shared_project
+                JOIN permission_level ON relationship_shared_project.permission_level_id = permission_level.id
+                JOIN users ON relationship_shared_project.user_shared_id = users.id
+                WHERE relationship_shared_project.project_id = 3;
+            `);
+
+            res.status(200).send(response[0]);
+        } catch (error) {
+            res.status(500).send({
+                message: "Error fetching shared users",
+                error,
+            });
+        }
     }
 }
 
