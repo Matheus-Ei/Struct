@@ -106,17 +106,18 @@ class PageGeralController {
                 res.status(404).send({ message: "Page not found" });
                 return;
             }
+            
             const {
                 name = page.name,
                 description = page.description,
                 emoji = page.emoji,
             } = req.body;
 
-            page.name = name;
-            page.description = description;
-            page.emoji = emoji;
-
-            page.save();
+            page.update({
+                name,
+                description,
+                emoji,
+            });
 
             res.status(201).send(page);
         } catch (error) {
