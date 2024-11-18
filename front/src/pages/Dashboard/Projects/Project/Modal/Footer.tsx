@@ -18,7 +18,7 @@ const Footer = ({ id }: FooterProps) => {
     return (
         <div
             onClick={handleClick}
-            className="flex cursor-pointer select-none flex-row gap-4 items-center justify-center absolute bottom-3 right-5 bg-base-100 border border-primary rounded-btn p-4"
+            className="flex cursor-pointer select-none flex-row gap-4 items-center justify-center absolute bottom-3 right-5 bg-base-100 border border-primary rounded-btn p-4 z-0"
         >
             <Icons name="FaRegFolderOpen" library="fa6" />
 

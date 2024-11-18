@@ -14,14 +14,14 @@ const Modal = ({ children, isOpen, close, className }: ModalProps) => {
 
     const styleName = className
         ? className
-        : "relative w-[85vw] h-[75vh] flex flex-col items-start justify-start";
+        : "relative w-[85vw] h-[75vh] flex flex-col items-start justify-start z-30";
 
     const onClick = () => {
         close();
     };
 
     return (
-        <div className="flex fixed top-0 right-0 w-screen h-screen bg-[rgba(0,0,0,0.3)] items-center justify-center">
+        <div className="flex fixed top-0 right-0 w-screen h-screen bg-[rgba(0,0,0,0.3)] items-center justify-center z-20">
             <Card>
                 <div className={styleName}>
                     <button

@@ -24,6 +24,7 @@ const About = ({ id, setModal }: AboutProps) => {
     return (
         <div className="flex flex-col w-full h-fit gap-8 mt-8 ml-8">
             <Informations
+                projectId={id}
                 title={project?.title}
                 description={project?.description}
             />
