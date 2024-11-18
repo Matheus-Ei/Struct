@@ -82,8 +82,26 @@ class ProjectController {
     public async edit(req: Request, res: Response) {
         const { id } = req.params;
 
+        const project = await ProjectModel.findByPk(id);
+
+        if (!project) {
+            res.status(404).send({ message: "Project not found" });
+            return;
+        }
+
+        const { title = project.title, description = project.description } =
+            req.body;
+
         try {
-        } catch (error) {}
+            await project.update({
+                title,
+                description,
+            });
+
+            res.status(200).send({ message: "Project updated", project });
+        } catch (error) {
+            res.status(500).send({ message: "Error updating the project" });
+        }
     }
 
     public async getPages(req: Request, res: Response) {
