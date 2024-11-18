@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 interface EditableFieldProps {
     defaultValue: string | undefined;
@@ -15,6 +15,7 @@ const EditableField = ({
 }: EditableFieldProps) => {
     const [isEditing, setIsEditing] = useState<boolean>(false);
     const [preValue, setPreValue] = useState<string>("");
+    const divRef = useRef<HTMLDivElement>(null);
 
     const onKeyDown = async (event: any) => {
         if (event.key === "Enter") {
@@ -46,8 +47,28 @@ const EditableField = ({
     };
 
     const onClick = (event: any) => {
+        if (isEditing) return;
+
         setIsEditing(true);
         setPreValue(event.target.innerText);
+        setTimeout(() => {
+            if (!divRef.current) return;
+
+            // Focus on the div
+            divRef.current.focus();
+
+            // Move cursor to the end
+            const range = document.createRange();
+            const selection = window.getSelection();
+            if (!selection || !range) {
+                return;
+            }
+
+            range.selectNodeContents(divRef.current);
+            range.collapse(false);
+            selection.removeAllRanges();
+            selection.addRange(range);
+        }, 0);
     };
 
     const onBlur = (event: any) => {
@@ -69,6 +90,7 @@ const EditableField = ({
             dangerouslySetInnerHTML={{
                 __html: defaultValue ? defaultValue : "",
             }}
+            ref={divRef}
             onClick={onClick}
             onBlur={onBlur}
             onKeyDown={onKeyDown}

@@ -1,12 +1,10 @@
 // Libraries
 import { Dispatch, SetStateAction } from "react";
+import { ErrorType } from "types/global";
 
 export interface SignUpContextType {
     step: number;
     setStep: Dispatch<SetStateAction<number>>;
-
-    isError: boolean;
-    toggleError: (value?: boolean) => void;
 
     name: string | null;
     setName: Dispatch<SetStateAction<string | null>>;
@@ -23,6 +21,6 @@ export interface SignUpContextType {
     rePassword: string | null;
     setRePassword: Dispatch<SetStateAction<string | null>>;
 
-    errorMessage: string | null;
-    setErrorMessage: Dispatch<SetStateAction<string | null>>;
+    error: ErrorType;
+    setError: Dispatch<SetStateAction<ErrorType>>;
 }

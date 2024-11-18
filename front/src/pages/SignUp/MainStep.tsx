@@ -5,17 +5,25 @@ import { useContext, useState } from "react";
 import Message from "components/Message";
 import { goNextStep } from "./functions";
 import Validations from "./validations";
-import useToggle from "hooks/useToggle";
 import Button from "components/Button";
 import Input from "components/Input";
 import { SignUpContext } from ".";
 
-const MainStep = () => {
-    const [nicknameError, toggleNicknameError] = useToggle(false);
-    const [nicknameErrorType, setNicknameErrorType] = useState<string>("");
+interface ErrorType {
+    message: string;
+    isError: boolean;
+}
 
-    const [mailError, toggleMailError] = useToggle(false);
-    const [mailErrorType, setMailError] = useState<string>("");
+const MainStep = () => {
+    const [nickError, setNickError] = useState<ErrorType>({
+        message: "",
+        isError: false,
+    });
+
+    const [mailError, setMailError] = useState<ErrorType>({
+        message: "",
+        isError: false,
+    });
 
     const context = useContext(SignUpContext);
 
@@ -28,16 +36,13 @@ const MainStep = () => {
         setMail,
         mail,
         setStep,
-        isError,
-        errorMessage,
+        error,
     } = context;
 
     const nextStep = async () => {
         const validations = new Validations(
             context,
-            toggleNicknameError,
-            setNicknameErrorType,
-            toggleMailError,
+            setNickError,
             setMailError
         );
 
@@ -55,51 +60,38 @@ const MainStep = () => {
             />
 
             <div className="relative flex flex-col w-full h-fit items-center justify-center">
-                {nicknameError && (
-                    <p className="text-error text-sm w-full px-4">
-                        {nicknameErrorType}
-                    </p>
-                )}
                 <Input
                     text="nickname..."
                     setValue={setNickname}
                     onEnter={nextStep}
                     maxLength={35}
-                    className={
-                        nicknameError
-                            ? "border outline-none border-error rounded-btn h-14 w-[95%] pl-4 mb-3 bg-base-100 text-base-content lowercase"
-                            : "border outline-none border-neutral rounded-btn h-14 w-[95%] pl-4 mb-3 bg-base-100 text-base-content lowercase"
-                    }
                     defaultValue={nickname}
+                    error={{
+                        isError: nickError.isError,
+                        message: nickError.message,
+                    }}
                 />
             </div>
 
             <div className="relative flex flex-col w-full h-fit items-center justify-center">
-                {mailError && (
-                    <p className="text-error text-sm w-full px-4">
-                        {mailErrorType}
-                    </p>
-                )}
-
                 <Input
                     text="mail..."
                     setValue={setMail}
                     onEnter={nextStep}
                     maxLength={120}
-                    className={
-                        mailError
-                            ? "border outline-none border-error rounded-btn h-14 w-[95%] pl-4 mb-3 bg-base-100 text-base-content lowercase"
-                            : "border outline-none border-neutral rounded-btn h-14 w-[95%] pl-4 mb-3 bg-base-100 text-base-content lowercase"
-                    }
                     defaultValue={mail}
+                    error={{
+                        isError: mailError.isError,
+                        message: mailError.message,
+                    }}
                 />
             </div>
 
             <Message
                 type="error"
                 box="text"
-                text={errorMessage}
-                isVisible={isError}
+                text={error.message}
+                isVisible={error.isError}
             />
 
             <Button inverse={true} text="Next" onClick={nextStep} />

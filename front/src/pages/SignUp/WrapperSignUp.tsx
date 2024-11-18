@@ -17,7 +17,7 @@ const WrapperSignUp = ({ children }: WrapperSignUpProps) => {
     const context = useContext(SignUpContext);
 
     if (!context) return null;
-    const { step, setStep, toggleError, setErrorMessage } = context;
+    const { step, setStep } = context;
 
     const prevStep = () => {
         goPrevStep(setStep);
@@ -49,10 +49,7 @@ const WrapperSignUp = ({ children }: WrapperSignUpProps) => {
                 </div>
 
                 <div className="divider px-40">Or sign-up with</div>
-                <GoogleSignUpButton
-                    toggleError={toggleError}
-                    setErrorMessage={setErrorMessage}
-                />
+                <GoogleSignUpButton />
             </div>
         </Card>
     );

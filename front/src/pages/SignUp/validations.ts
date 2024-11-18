@@ -4,34 +4,31 @@ import { Dispatch, SetStateAction } from "react";
 // Local
 import { SignUpContextType } from "./types";
 import Request from "services/Request";
+import { ErrorType } from "types/global";
 
 class Validations {
     private context: SignUpContextType;
-    private toggleNicknameError: (value: boolean) => void;
-    private setNickErrorType: Dispatch<SetStateAction<string>>;
-    private toggleMailError: (value: boolean) => void;
-    private setMailError: Dispatch<SetStateAction<string>>;
+    private setNickError: Dispatch<SetStateAction<ErrorType>>;
+    private setMailError: Dispatch<SetStateAction<ErrorType>>;
 
     constructor(
         context: SignUpContextType,
-        toggleNicknameError: (value: boolean) => void,
-        setNickErrorType: Dispatch<SetStateAction<string>>,
-        toggleMailError: (value: boolean) => void,
-        setMailError: Dispatch<SetStateAction<string>>
+        setNickError: Dispatch<SetStateAction<ErrorType>>,
+        setMailError: Dispatch<SetStateAction<ErrorType>>
     ) {
         this.context = context;
-        this.toggleNicknameError = toggleNicknameError;
-        this.setNickErrorType = setNickErrorType;
-        this.toggleMailError = toggleMailError;
         this.setMailError = setMailError;
+        this.setNickError = setNickError;
     }
 
     private emptyFields() {
         const { name, nickname, mail } = this.context;
 
         if (!name || !nickname || !mail) {
-            this.context.toggleError(true);
-            this.context.setErrorMessage("Please fill all fields");
+            this.context.setError({
+                isError: true,
+                message: "Please fill all fields",
+            });
             return false;
         }
 
@@ -44,8 +41,7 @@ class Validations {
 
         // Nickname validation
         if (nickname.length < 3 || nickname.search(" ") >= 1) {
-            this.setNickErrorType("Invalid nickname");
-            this.toggleNicknameError(true);
+            this.setNickError({ message: "Invalid nickname", isError: true });
             return false;
         }
 
@@ -54,8 +50,10 @@ class Validations {
             nickname: nickname,
         });
         if (response.isAvailable === false) {
-            this.setNickErrorType("This nickname is not avaliable");
-            this.toggleNicknameError(true);
+            this.setNickError({
+                message: "This nickname is not avaliable",
+                isError: true,
+            });
             return false;
         }
 
@@ -71,8 +69,10 @@ class Validations {
             mail: mail,
         });
         if (response.isAvailable === false) {
-            this.setMailError("This mail is already in use");
-            this.toggleMailError(true);
+            this.setMailError({
+                message: "This mail is already in use",
+                isError: true,
+            });
             return false;
         }
 
@@ -86,8 +86,7 @@ class Validations {
             mailDomain.search(" ") >= 1 ||
             mail.search(" ") >= 1
         ) {
-            this.setMailError("Invalid mail");
-            this.toggleMailError(true);
+            this.setMailError({ message: "Invalid mail", isError: true });
             return false;
         }
 
@@ -95,9 +94,9 @@ class Validations {
     }
 
     private resetErrors() {
-        this.context.toggleError(false);
-        this.toggleNicknameError(false);
-        this.toggleMailError(false);
+        this.context.setError({ message: "", isError: false });
+        this.setNickError({ message: "", isError: false });
+        this.setMailError({ message: "", isError: false });
     }
 
     async verify() {

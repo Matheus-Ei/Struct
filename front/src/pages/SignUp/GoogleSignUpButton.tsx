@@ -1,35 +1,25 @@
 // Libraries
 import { useGoogleLogin } from "@react-oauth/google";
 import { useNavigate } from "react-router-dom";
-import {
-    Dispatch,
-    SetStateAction,
-    useCallback,
-    useEffect,
-    useState,
-} from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 
 // Local
 import Button from "components/Button";
 import Icons from "services/Icons";
 import Request from "services/Request";
 import User from "utils/user";
+import { SignUpContext } from ".";
 
-interface GoogleSignUpButtonProps {
-    toggleError: (value: boolean) => void;
-    setErrorMessage: Dispatch<SetStateAction<string | null>>;
-}
-
-const GoogleSignUpButton = ({
-    toggleError,
-    setErrorMessage,
-}: GoogleSignUpButtonProps) => {
+const GoogleSignUpButton = () => {
     const [accessToken, setAccessToken] = useState<string | null>(null);
     const navigate = useNavigate();
 
+    const context = useContext(SignUpContext);
+
     const googleLogin = useGoogleLogin({
         onSuccess: (codeResponse) => setAccessToken(codeResponse.access_token),
-        onError: () => toggleError(true),
+        onError: () =>
+            context?.setError({ message: "An error occurred", isError: true }),
     });
 
     const signUp = async () => {
@@ -50,8 +40,10 @@ const GoogleSignUpButton = ({
                 );
 
                 if (!isSignedUp) {
-                    setErrorMessage("An error occurred, please try again");
-                    toggleError(true);
+                    context?.setError({
+                        message: "An error occurred",
+                        isError: true,
+                    });
                 }
             } catch (error) {
                 console.error(error);
@@ -59,7 +51,7 @@ const GoogleSignUpButton = ({
         }
     };
 
-    const memoizedSignUp = useCallback(signUp, [accessToken, navigate, toggleError, setErrorMessage]);
+    const memoizedSignUp = useCallback(signUp, [accessToken, navigate]);
 
     useEffect(() => {
         memoizedSignUp();

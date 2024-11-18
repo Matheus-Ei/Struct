@@ -14,7 +14,7 @@ const PasswordStep = () => {
     const navigate = useNavigate();
 
     if (!context) return null;
-    const { setPassword, setRePassword, isError, errorMessage } = context;
+    const { setPassword, setRePassword, error } = context;
 
     const signUp = () => {
         makeSignUp(context, navigate);
@@ -38,10 +38,10 @@ const PasswordStep = () => {
             />
 
             <Message
-                text={errorMessage}
+                text={error.message}
                 box="text"
                 type="error"
-                isVisible={isError}
+                isVisible={error.isError}
             />
 
             <Button inverse={true} text="Sign-up" onClick={signUp} />

@@ -26,7 +26,7 @@ const Informations = ({ projectId, title, description }: InformationsProps) => {
 
     return (
         <>
-            <div>
+            <div className="w-3/4">
                 <h3 className="text-xl font-bold italic">Title</h3>
                 <EditableField
                     defaultValue={title}
@@ -38,12 +38,12 @@ const Informations = ({ projectId, title, description }: InformationsProps) => {
                             refetch
                         )
                     }
-                    classNameEditing="cursor-text select-none bg-base-200 rounded-btn py-1 px-2 w-fit text-2xl font-bold outline-none"
-                    classNameNotEditing="cursor-pointer select-none w-fit text-3xl font-bold outline-none"
+                    classNameEditing="cursor-text select-none bg-base-200 rounded-btn py-1 px-2 w-fit w-max-full text-2xl font-bold outline-none break-all"
+                    classNameNotEditing="cursor-pointer select-none w-fit w-max-full text-3xl font-bold outline-none break-all"
                 />
             </div>
 
-            <div>
+            <div className="w-3/4">
                 <h3 className="text-xl font-bold italic">Description</h3>
                 <EditableField
                     defaultValue={description}
@@ -55,8 +55,8 @@ const Informations = ({ projectId, title, description }: InformationsProps) => {
                             refetch
                         )
                     }
-                    classNameEditing="cursor-text select-none bg-base-200 rounded-btn py-1 px-2 w-11/12 text-md outline-none"
-                    classNameNotEditing="cursor-pointer select-none w-11/12 text-lg outline-none"
+                    classNameEditing="cursor-text select-none bg-base-200 w-max-full rounded-btn py-1 px-2 w-fit text-md outline-none break-all"
+                    classNameNotEditing="cursor-pointer select-none w-fit w-max-full text-lg outline-none break-all"
                 />
             </div>
         </>

@@ -11,26 +11,16 @@ export const makeSignUp = async (
     navigate: NavigateFunction
 ) => {
     if (!context) return null;
-    const {
-        password,
-        rePassword,
-        nickname,
-        mail,
-        name,
-        toggleError,
-        setErrorMessage,
-    } = context;
+    const { password, rePassword, nickname, mail, name, setError } = context;
 
     try {
         if (!password || !nickname || !mail || !name) {
-            setErrorMessage("Please fill all fields");
-            toggleError(true);
+            setError({ isError: true, message: "Please fill all fields" });
             return;
         }
 
         if (password !== rePassword) {
-            setErrorMessage("Passwords do not match");
-            toggleError(true);
+            setError({ isError: true, message: "Passwords do not match" });
             return;
         }
 
@@ -43,8 +33,10 @@ export const makeSignUp = async (
             navigate
         );
     } catch {
-        setErrorMessage("An error occurred, please try again");
-        toggleError(true);
+        setError({
+            isError: true,
+            message: "An error occurred, please try again",
+        });
     }
 };
 
