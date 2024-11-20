@@ -24,9 +24,7 @@ const Paragraph = ({ note, index }: ParagraphProps) => {
         cursorObj.setCursorPosition(position);
     }, [position, cursorObj]);
 
-    if (!context) {
-        return null;
-    }
+    if (!context) return null;
 
     const textObj = new Text(context);
 

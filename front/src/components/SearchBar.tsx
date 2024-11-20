@@ -1,4 +1,5 @@
 // Libraries
+import clsx from "clsx";
 import { ChangeEvent, Dispatch, SetStateAction } from "react";
 
 // Local
@@ -14,16 +15,21 @@ const SearchBar = ({ searchPlace, setResult, placeholder }: SearchBarProps) => {
     const onChange = (event: ChangeEvent<HTMLInputElement>) => {
         const search = event.target.value as string;
 
-        if (search === "") {
-            setResult(searchPlace);
-        }
+        if (search === "") setResult(searchPlace);
 
-        const result = searchPlace.filter((item) => {
-            return item.toLowerCase().includes(search.toLowerCase());
-        });
+        const result = searchPlace.filter((item) =>
+            item.toLowerCase().includes(search.toLowerCase())
+        );
 
         setResult(result);
     };
+
+    const cssInput = clsx(
+        "w-full",
+        "py-2 pl-12 pr-4",
+        "bg-base-200 placeholder:text-base-content",
+        "border border-primary rounded-btn outline-none"
+    );
 
     return (
         <div className="relative flex text-xl text-base-content w-full">
@@ -32,7 +38,7 @@ const SearchBar = ({ searchPlace, setResult, placeholder }: SearchBarProps) => {
             </button>
 
             <input
-                className="py-2 pl-12 pr-4 bg-base-200 border border-primary rounded-btn placeholder:text-base-content w-full outline-none"
+                className={cssInput}
                 placeholder={placeholder ? placeholder : "Search. . . "}
                 onChange={onChange}
             />

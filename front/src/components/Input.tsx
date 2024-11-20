@@ -1,4 +1,5 @@
 // Libraries
+import clsx from "clsx";
 import { ChangeEvent, KeyboardEvent } from "react";
 import { ErrorType } from "types/global";
 
@@ -27,15 +28,24 @@ const Input = ({
     defaultValue,
     error,
 }: InputProps) => {
-    const handleChange = (event: EventType) => {
+    const handleChange = (event: EventType) =>
         setValue && setValue(event.target.value);
-    };
 
-    const onKeyDown = (e: KeyboardEvent) => {
+    const onKeyDown = (e: KeyboardEvent) =>
         onEnter && e.key === "Enter" && onEnter();
-    };
 
-    const errorStyle = error?.isError ? "border-error" : "border-neutral";
+    const defaultCss = clsx(
+        "w-[95%] h-14 pl-4 mb-3",
+        "bg-base-100 text-base-content",
+        "border outline-none rounded-btn",
+        {
+            "border-error": error?.isError,
+            "border-neutral": !error?.isError,
+            "resize-none pt-4": type === "textarea",
+        }
+    );
+    const css = className ? className : defaultCss;
+
     if (type === "textarea") {
         return (
             <>
@@ -46,17 +56,10 @@ const Input = ({
                 )}
 
                 <textarea
-                    className={
-                        className
-                            ? className
-                            : "border rounded-btn outline-none h-14 w-[95%] pl-4 mb-3 bg-base-100 text-base-content pt-4 resize-none " +
-                              errorStyle
-                    }
+                    className={css}
                     placeholder={text}
                     onChange={handleChange}
-                    onKeyDown={(e) => {
-                        onEnter && e.key === "Enter" && onEnter();
-                    }}
+                    onKeyDown={onKeyDown}
                     defaultValue={defaultValue ? defaultValue : ""}
                 ></textarea>
             </>
@@ -72,12 +75,7 @@ const Input = ({
             )}
 
             <input
-                className={
-                    className
-                        ? className
-                        : "border outline-none rounded-btn h-14 w-[95%] pl-4 mb-3 bg-base-100 text-base-content " +
-                          errorStyle
-                }
+                className={css}
                 placeholder={text}
                 onChange={handleChange}
                 type={!isPassword ? "text" : "password"}

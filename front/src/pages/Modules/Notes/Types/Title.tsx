@@ -16,8 +16,6 @@ interface TitleProps {
 const Title = ({ note, index, titleType }: TitleProps) => {
     const [position, setPosition] = useState<number>(0);
 
-    const context = useContext(NotesPageContext);
-
     const divRef = useRef<HTMLDivElement | null>(null);
     const cursorObj = useMemo(() => new Cursor(divRef), [divRef]);
 
@@ -25,9 +23,8 @@ const Title = ({ note, index, titleType }: TitleProps) => {
         cursorObj.setCursorPosition(position);
     }, [position, cursorObj]);
 
-    if (!context) {
-        return null;
-    }
+    const context = useContext(NotesPageContext);
+    if (!context) return null;
 
     const textObj = new Text(context);
 

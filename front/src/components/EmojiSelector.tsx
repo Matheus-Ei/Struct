@@ -18,9 +18,7 @@ const EmojiSelector = ({ setEmoji, show, toggleShow }: EmojiSelectorProps) => {
         toggleShow(false);
     };
 
-    if (!show) {
-        return null;
-    }
+    if (!show) return null;
 
     return (
         <div className="absolute z-50">

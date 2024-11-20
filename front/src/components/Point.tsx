@@ -1,4 +1,5 @@
 // Local
+import clsx from "clsx";
 import Icons from "services/Icons";
 
 interface PointProps {
@@ -10,15 +11,16 @@ interface PointProps {
 }
 
 const Point = ({ text, icon, library, isSelected, onClick }: PointProps) => {
-    const handleClick = () => {
-        onClick && onClick();
-    };
+    const handleClick = () => onClick && onClick();
+
+    const css = clsx("flex justify-center items-center", "rounded-btn", {
+        "gap-4 py-2 px-4": text,
+        "p-1": !text,
+        "bg-primary text-primary-content": isSelected,
+    });
 
     return (
-        <div
-            onClick={handleClick}
-            className={`flex ${text ? "gap-4 py-2 px-4" : "p-1"} justify-center items-center rounded-btn ${isSelected && "bg-primary text-primary-content"}`}
-        >
+        <div onClick={handleClick} className={css}>
             <Icons library={library} name={icon} size={24} />
             {text && <p className="cursor-default">{text}</p>}
         </div>

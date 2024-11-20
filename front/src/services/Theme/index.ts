@@ -20,16 +20,13 @@ class Theme {
             const { theme } = LocalStorage.get("theme");
             return theme;
         } catch (e) {
-            console.error("Default theme is not set");
             return "default";
         }
     }
 
     public static getKeys() {
         return themes.map((item) => {
-            if (typeof item === "object") {
-                return Object.keys(item);
-            }
+            if (typeof item === "object") return Object.keys(item);
 
             return item;
         });

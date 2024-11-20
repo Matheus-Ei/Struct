@@ -51,7 +51,11 @@ const GoogleSignUpButton = () => {
         }
     };
 
-    const memoizedSignUp = useCallback(signUp, [accessToken, navigate]);
+    const memoizedSignUp = useCallback(signUp, [
+        accessToken,
+        navigate,
+        context,
+    ]);
 
     useEffect(() => {
         memoizedSignUp();

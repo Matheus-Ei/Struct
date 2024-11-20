@@ -6,6 +6,7 @@ import { PagesRequestType } from "pages/Project/util/types";
 import { addPage } from "pages/Project/util/events";
 import { PagesContext } from "pages/Project";
 import Icons from "services/Icons";
+import clsx from "clsx";
 
 interface HoverButtonsProps {
     toggleShowChildren: (value?: boolean) => void;
@@ -25,26 +26,27 @@ const HoverButtons = ({
     const context = useContext(PagesContext);
     const isSelected = context?.selectedPageId === pageId;
 
-    if (!isHover || !context) {
-        return null;
-    }
+    if (!isHover || !context) return null;
 
     const childrenButton = () => {
-        if (childrens?.length === 0) {
-            return null;
+        if (childrens?.length === 0) return null;
+
+        if (showChildren) {
+            return (
+                <Icons name="MdExpandLess" library="md" className="h-full" />
+            );
         }
 
-        return showChildren ? (
-            <Icons name="MdExpandLess" library="md" className="h-full" />
-        ) : (
-            <Icons name="MdExpandMore" library="md" className="h-full" />
-        );
+        return <Icons name="MdExpandMore" library="md" className="h-full" />;
     };
 
+    const bodyCss = clsx("flex flex-row absolute gap-x-2 right-2 top-2", {
+        "text-primary-content": isSelected,
+        "text-base-content": !isSelected,
+    });
+
     return (
-        <div
-            className={`flex flex-row absolute gap-x-2 right-2 top-2 ${isSelected ? "text-primary-content" : "text-base-content"}`}
-        >
+        <div className={bodyCss}>
             <div onClick={() => addPage(context, toggleShowChildren, pageId)}>
                 <Icons name="IoAddOutline" library="io5" className="h-full" />
             </div>

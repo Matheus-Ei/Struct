@@ -36,9 +36,7 @@ const Project = () => {
 
     // Page content request
     const getPageData = () => {
-        if (!selectedPageId) {
-            return null;
-        }
+        if (!selectedPageId) return null;
 
         return Request.get(`page/geral/${selectedPageId}`);
     };

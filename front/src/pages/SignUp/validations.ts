@@ -108,9 +108,7 @@ class Validations {
 
         const nickValid = await this.nickname();
 
-        if (!isNotEmpty || !mailValid || !nickValid) {
-            return false;
-        }
+        if (!isNotEmpty || !mailValid || !nickValid) return false;
 
         this.resetErrors();
         return true;

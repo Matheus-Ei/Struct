@@ -8,9 +8,7 @@ const removePageById = (
     targetPageId: number
 ): PagesRequestType[] => {
     function removePage(page: PagesRequestType): boolean {
-        if (page.id === targetPageId) {
-            return true;
-        }
+        if (page.id === targetPageId) return true;
 
         if (page.children_pages) {
             const indexToRemove = page.children_pages.findIndex((child) =>
@@ -27,9 +25,7 @@ const removePageById = (
     }
 
     const rootIndexToRemove = rootPages.findIndex((page) => removePage(page));
-    if (rootIndexToRemove !== -1) {
-        rootPages.splice(rootIndexToRemove, 1);
-    }
+    if (rootIndexToRemove !== -1) rootPages.splice(rootIndexToRemove, 1);
 
     return rootPages;
 };
@@ -39,9 +35,7 @@ export const addPage = (
     toggleShowChildren: ((value: boolean) => void) | null,
     pageId: number | null
 ) => {
-    if (!pageId && !context) {
-        return null;
-    }
+    if (!pageId && !context) return null;
 
     const defaultData = {
         name: "New page",
@@ -65,22 +59,16 @@ export const deletePage = async (
     pageId: number,
     context: ReactProjectContext
 ) => {
-    if (!pageId && !context) {
-        return null;
-    }
+    if (!pageId && !context) return null;
 
     toggleShowMenu && toggleShowMenu(false);
     await Request.delete(`page/geral/${pageId}`);
 
-    if (pageId === context.selectedPageId) {
-        context.setSelectedPageId(null);
-    }
+    if (pageId === context.selectedPageId) context.setSelectedPageId(null);
 
     // Updates the list on menu
     const prevMenuTabs = context.menuTabs;
-    if (!prevMenuTabs) {
-        return;
-    }
+    if (!prevMenuTabs) return;
 
     const newPages = removePageById(prevMenuTabs, pageId);
     context.setMenuTabs(newPages);

@@ -13,9 +13,7 @@ const Childrens = ({ show, items }: ChildrensProps) => {
         return <PageTab item={item} index={index} key={index} />;
     };
 
-    if (!show) {
-        return null;
-    }
+    if (!show) return null;
 
     return (
         <div className="flex flex-col pl-4">{items?.map(renderChildrens)}</div>

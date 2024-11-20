@@ -1,4 +1,5 @@
 // Libraries
+import clsx from "clsx";
 import { useEffect, useRef } from "react";
 
 interface ContextMenuProps {
@@ -11,22 +12,16 @@ interface ContextMenuProps {
 
 const ContextMenu = ({
     children,
+    show,
     onClose,
     position,
-    show,
     className,
 }: ContextMenuProps) => {
     const menuRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        const handleClickOutside = (event: MouseEvent) => {
-            if (
-                menuRef.current &&
-                !menuRef.current.contains(event.target as Node)
-            ) {
-                onClose();
-            }
-        };
+        const handleClickOutside = (event: MouseEvent) =>
+            menuRef?.current?.contains(event.target as Node) && onClose();
 
         document.addEventListener("mousedown", handleClickOutside);
 
@@ -35,18 +30,19 @@ const ContextMenu = ({
         };
     }, [onClose]);
 
-    if (!show) {
-        return null;
-    }
+    if (!show) return null;
+
+    const defaultCss = clsx(
+        "fixed p-[10px] z-50",
+        "flex flex-col items-center justify-center",
+        "bg-base-100 border rounded-btn border-primary"
+    );
+    const css = className ? className : defaultCss;
 
     return (
         <div
             ref={menuRef}
-            className={
-                className
-                    ? className
-                    : "flex flex-col items-center justify-center fixed p-[10px] bg-base-100 border rounded-btn border-primary z-50"
-            }
+            className={css}
             style={{
                 top: position.y,
                 left: position.x,

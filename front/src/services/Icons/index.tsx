@@ -13,13 +13,13 @@ interface IconsProps {
 }
 
 const Icons = ({ library, name, color, size, className }: IconsProps) => {
+    if (!library || !name) return <FaQuestion />;
+
     try {
         const repository: any = lib[library];
         const RequiredIcon = repository[name];
 
-        if (className) {
-            return <RequiredIcon className={className} />;
-        }
+        if (className) return <RequiredIcon className={className} />;
 
         return <RequiredIcon color={color} size={size} />;
     } catch (error) {

@@ -1,4 +1,6 @@
+// Libraries
 import { useRef, useState } from "react";
+import clsx from "clsx";
 
 interface EditableFieldProps {
     defaultValue: string | undefined;
@@ -60,9 +62,7 @@ const EditableField = ({
             // Move cursor to the end
             const range = document.createRange();
             const selection = window.getSelection();
-            if (!selection || !range) {
-                return;
-            }
+            if (!selection || !range) return;
 
             range.selectNodeContents(divRef.current);
             range.collapse(false);
@@ -76,25 +76,27 @@ const EditableField = ({
         event.target.innerText = preValue;
     };
 
-    const styleNotEditing =
-        "cursor-pointer select-none w-fit h-fit text-xl outline-none";
-    const styleEditing =
-        "cursor-text select-none w-fit h-fit text-xl outline-none border border-primary rounded-btn p-1";
+    const defaultCss = clsx("w-fit h-fit text-xl outline-none", {
+        "border border-primary rounded-btn p-1": isEditing,
+        "cursor-pointer select-none": !isEditing,
+    });
 
-    const defaultStyle = isEditing ? styleEditing : styleNotEditing;
-    const className = isEditing ? classNameEditing : classNameNotEditing;
+    const className = clsx({
+        [classNameEditing as string]: isEditing,
+        [classNameNotEditing as string]: !isEditing,
+    });
+
+    const innerHTML = { __html: defaultValue ? defaultValue : "" };
 
     return (
         <div
             contentEditable={isEditing}
-            dangerouslySetInnerHTML={{
-                __html: defaultValue ? defaultValue : "",
-            }}
+            dangerouslySetInnerHTML={innerHTML}
             ref={divRef}
             onClick={onClick}
             onBlur={onBlur}
             onKeyDown={onKeyDown}
-            className={className ? className : defaultStyle}
+            className={className ? className : defaultCss}
         ></div>
     );
 };

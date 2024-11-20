@@ -21,10 +21,7 @@ const ContextPageMenu = ({
     pageId,
 }: ContextPageMenuProps) => {
     const context = useContext(PagesContext);
-
-    if (!context) {
-        return null;
-    }
+    if (!context) return null;
 
     return (
         <ContextMenu

@@ -11,9 +11,7 @@ const withLoader = (WrappedComponent: ComponentType, checkLogin?: boolean) => {
         const navigate = useNavigate();
 
         const check = () => {
-            if (checkLogin) {
-                User.verifyLogin(navigate);
-            }
+            if (checkLogin) User.verifyLogin(navigate);
         };
 
         useEffect(check, [navigate]);

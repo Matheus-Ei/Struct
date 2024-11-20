@@ -1,4 +1,5 @@
 // Libraries
+import clsx from "clsx";
 import { useQuery } from "react-query";
 
 // Local
@@ -33,11 +34,17 @@ const Pages = ({ projectId }: PagesProps) => {
         );
     };
 
+    const pagesDivCss = clsx(
+        "grid items-start content-start",
+        "overflow-y-scroll overflow-x-hidden",
+        "w-[95%] h-4/5",
+        "gap-x-6 gap-y-4",
+        "grid-cols-2 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-7"
+    );
+
     return (
         <div className="w-full h-full flex justify-center">
-            <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-7 content-start items-start mt-6 overflow-y-scroll gap-x-6 gap-y-4 h-4/5 w-[95%] overflow-x-hidden">
-                {pages?.map(renderPages)}
-            </div>
+            <div className={pagesDivCss}>{pages?.map(renderPages)}</div>
         </div>
     );
 };

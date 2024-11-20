@@ -1,4 +1,5 @@
 // Libraries
+import clsx from "clsx";
 import { useState } from "react";
 
 // Local
@@ -30,6 +31,14 @@ const ThemeController = () => {
         );
     };
 
+    const themeListCss = clsx(
+        "dropdown-content",
+        "w-52 h-56",
+        "overflow-y-scroll overflow-x-hidden",
+        "bg-base-300 rounded-box shadow-2xl",
+        "z-1 pr-3 p-2"
+    );
+
     return (
         <div className="dropdown">
             <div tabIndex={0} role="button" className="btn m-1">
@@ -37,10 +46,7 @@ const ThemeController = () => {
                 <Icons name="MdExpandMore" library="md" />
             </div>
 
-            <ul
-                tabIndex={0}
-                className="dropdown-content bg-base-300 rounded-box z-[1] w-52 p-2 shadow-2xl overflow-y-scroll overflow-x-hidden h-56 pr-3"
-            >
+            <ul tabIndex={0} className={themeListCss}>
                 {themes.map(renderThemes)}
             </ul>
         </div>

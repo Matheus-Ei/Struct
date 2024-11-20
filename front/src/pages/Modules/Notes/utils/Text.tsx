@@ -29,13 +29,9 @@ export class Text {
         const title2 = /^##\s/;
         const title3 = /^###\s/;
 
-        if (title1.test(item)) {
-            return "title1";
-        } else if (title2.test(item)) {
-            return "title2";
-        } else if (title3.test(item)) {
-            return "title3";
-        }
+        if (title1.test(item)) return "title1";
+        else if (title2.test(item)) return "title2";
+        else if (title3.test(item)) return "title3";
 
         return false;
     }
@@ -45,13 +41,9 @@ export class Text {
         const title2 = /^##\s/;
         const title3 = /^###\s/;
 
-        if (title1.test(item)) {
-            return item.replace(title1, "");
-        } else if (title2.test(item)) {
-            return item.replace(title2, "");
-        } else if (title3.test(item)) {
-            return item.replace(title3, "");
-        }
+        if (title1.test(item)) return item.replace(title1, "");
+        else if (title2.test(item)) return item.replace(title2, "");
+        else if (title3.test(item)) return item.replace(title3, "");
 
         return item;
     }
@@ -59,9 +51,7 @@ export class Text {
     private replaceReStyle(item: string) {
         const bold = /\*\*(.*?)\*\*/g;
 
-        if (bold.test(item)) {
-            return item.replace(bold, "<strong>$1</strong>");
-        }
+        if (bold.test(item)) return item.replace(bold, "<strong>$1</strong>");
 
         return item;
     }
@@ -70,9 +60,7 @@ export class Text {
         if (div) {
             const range = document.createRange();
             const selection = window.getSelection();
-            if (!selection || !range) {
-                return;
-            }
+            if (!selection || !range) return;
 
             range.selectNodeContents(div);
             range.collapse(direction === "start");
@@ -82,15 +70,11 @@ export class Text {
     }
 
     public setFocus(index: number) {
-        if (!this.notes[index]) {
-            return null;
-        }
+        if (!this.notes[index]) return null;
 
         const element = this.notes[index].element;
 
-        if (!element) {
-            return null;
-        }
+        if (!element) return null;
 
         element.focus();
         this.moveCursor(element, "end");

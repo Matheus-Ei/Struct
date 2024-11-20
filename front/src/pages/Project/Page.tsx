@@ -12,33 +12,22 @@ interface RouterType {
 }
 
 const getModule = (element: RouterType) => {
-    if (!module || !element) {
-        return <Undefined />;
-    }
+    if (!module || !element) return <Undefined />;
 
     return React.createElement(element.endpoint, {});
 };
 
 const Page = () => {
     const context = useContext(PagesContext);
-    if (!context) {
-        return null;
-    }
+    if (!context) return null;
 
     const module: Array<RouterType> = router.filter((item) => {
-        if (!context.page) {
-            return false;
-        }
+        if (!context.page) return false;
 
         return context.page.module === item.name;
     });
 
-    const renderPages = () => {
-        const page = getModule(module[0]);
-
-        return page;
-    };
-
+    const renderPages = () => getModule(module[0]);
     return (
         <div className="w-full h-screen flex justify-center">
             <div className="w-11/12 h-screen flex justify-center">

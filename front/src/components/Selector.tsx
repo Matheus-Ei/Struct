@@ -7,18 +7,17 @@ interface SelectorProps {
 }
 
 const Selector = ({ options, setCurrent }: SelectorProps) => {
-    const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
+    const handleChange = (event: ChangeEvent<HTMLSelectElement>) =>
         setCurrent(event.target.value);
-    };
 
     return (
         <select
             onChange={handleChange}
             className="select select-primary w-full max-w-xs"
         >
-            {options.map((item, index) => {
-                return <option key={index}>{item}</option>;
-            })}
+            {options.map((item, index) => (
+                <option key={index}>{item}</option>
+            ))}
         </select>
     );
 };

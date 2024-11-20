@@ -8,6 +8,7 @@ import CreateProject from "./CreateProject";
 import ProjectModal from "./Project/Modal";
 import Request from "services/Request";
 import Project from "./Project";
+import clsx from "clsx";
 
 interface ModalType {
     show: boolean;
@@ -40,9 +41,14 @@ const Projects = () => {
         Request.get("user/projects")
     );
 
+    const projectsDivCss = clsx(
+        "grid items-center justify-items-start gap-6",
+        "grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4"
+    );
+
     return (
         <projectsContext.Provider value={{ refetch }}>
-            <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 w-fit h-fit gap-6 justify-items-start items-center">
+            <div className={projectsDivCss}>
                 {projects?.map(renderProject)}
 
                 <CreateProject showModal={setShowCreateProject} />

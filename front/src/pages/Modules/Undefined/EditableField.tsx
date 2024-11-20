@@ -34,9 +34,7 @@ const EditableField = ({
         }
     };
 
-    const onClick = () => {
-        toggleIsEditable(true);
-    };
+    const onClick = () => toggleIsEditable(true);
 
     return (
         <div

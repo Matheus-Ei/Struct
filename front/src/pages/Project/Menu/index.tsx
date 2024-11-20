@@ -9,9 +9,7 @@ import PageTab from "./PageTab";
 
 const Menu = () => {
     const context = useContext(PagesContext);
-    if (!context) {
-        return null;
-    }
+    if (!context) return null;
 
     const { menuTabs } = context;
 

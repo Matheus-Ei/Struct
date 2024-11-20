@@ -25,9 +25,7 @@ const Actions = ({ id, setModal }: ActionsProps) => {
 
     // Delete project when user confirms
     useEffect(() => {
-        if (!wantDelete) {
-            return;
-        }
+        if (!wantDelete) return;
 
         Request.delete(`project/delete/${id}`).then(() => {
             setModal({ projectId: 1, show: false });
@@ -43,9 +41,7 @@ const Actions = ({ id, setModal }: ActionsProps) => {
                 message="Are you sure you want to delete?"
                 isOpen={showConfirmDelete}
                 close={() => toggleShowConfirmDelete(false)}
-                onConfirm={() => {
-                    toggleWantDelete(true);
-                }}
+                onConfirm={() => toggleWantDelete(true)}
             />
             <Point
                 icon="MdDelete"

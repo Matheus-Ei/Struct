@@ -1,4 +1,5 @@
 // Libraries
+import clsx from "clsx";
 import { useNavigate } from "react-router-dom";
 
 // Local
@@ -15,11 +16,15 @@ const Footer = ({ id }: FooterProps) => {
         navigate(`/projects/${id}`);
     };
 
+    const bodyCss = clsx(
+        "flex items-center justify-center gap-4",
+        "absolute bottom-3 right-5 z-0",
+        "bg-base-100 border border-primary rounded-btn p-4",
+        "cursor-pointer select-none"
+    );
+
     return (
-        <div
-            onClick={handleClick}
-            className="flex cursor-pointer select-none flex-row gap-4 items-center justify-center absolute bottom-3 right-5 bg-base-100 border border-primary rounded-btn p-4 z-0"
-        >
+        <div onClick={handleClick} className={bodyCss}>
             <Icons name="FaRegFolderOpen" library="fa6" />
 
             <h1 className="font-bold text-base-content">Go to the project</h1>

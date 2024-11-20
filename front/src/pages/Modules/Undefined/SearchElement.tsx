@@ -13,9 +13,9 @@ interface SearchElementProps {
 const SearchElement = ({ pageId }: SearchElementProps) => {
     const [searchModules, setSearchModules] = useState<Array<string>>(modules);
 
-    const renderModules = (item: string, index: number) => {
-        return <Module pageId={pageId} module={item} key={index} />;
-    };
+    const renderModules = (item: string, index: number) => (
+        <Module pageId={pageId} module={item} key={index} />
+    );
 
     return (
         <div className="flex flex-col w-full h-[500px] items-center justify-start">

@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 // Local
 import { ReactComponent as Logo } from "assets/logo-1800x400-1.svg";
 import Icons from "services/Icons";
+import clsx from "clsx";
 
 interface HeaderProps {
     tab: string;
@@ -20,16 +21,14 @@ const Header = ({ tab, setTab }: HeaderProps) => {
 
     const dashboardTabs = ["Projects", "Tools"];
 
-    const selectedStyle = "font-bold cursor-pointer select-none text-xl";
-    const notSelectedStyle = "cursor-pointer select-none text-lg";
+    const renderTabs = (item: string, index: number) => {
+        const tabCss = clsx({
+            "font-bold cursor-pointer select-none text-xl": tab === item,
+            "cursor-pointer select-none text-lg": tab !== item,
+        });
 
-    const renderTabs = (item: any, index: number) => {
         return (
-            <h1
-                className={item === tab ? selectedStyle : notSelectedStyle}
-                onClick={() => setTab(item)}
-                key={index}
-            >
+            <h1 className={tabCss} onClick={() => setTab(item)} key={index}>
                 {item}
             </h1>
         );

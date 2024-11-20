@@ -18,9 +18,7 @@ export const handleKeyDown = (
 
     // Delete textArea
     if (event.key === "Backspace" && event.target.innerText.trim() === "") {
-        if (index === 0) {
-            return;
-        }
+        if (index === 0) return;
 
         event.preventDefault();
         textObj.removeNote(index);
@@ -37,9 +35,7 @@ export const handleKeyDown = (
 
     // Arrow up
     if (event.key === "ArrowUp") {
-        if (index === 0) {
-            return;
-        }
+        if (index === 0) return;
 
         event.preventDefault();
 

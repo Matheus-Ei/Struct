@@ -9,11 +9,7 @@ interface CheckboxProps {
 }
 
 const Checkbox = ({ text, group, setChecked, checked }: CheckboxProps) => {
-    const handleCheck = () => {
-        if (text !== checked) {
-            setChecked(text);
-        }
-    };
+    const handleCheck = () => text !== checked && setChecked(text);
 
     return (
         <div className="form-control">

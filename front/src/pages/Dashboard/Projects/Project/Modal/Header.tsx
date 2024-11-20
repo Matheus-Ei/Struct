@@ -1,4 +1,5 @@
 // Libraries
+import clsx from "clsx";
 import { Dispatch, SetStateAction } from "react";
 
 interface HeaderProps {
@@ -7,16 +8,14 @@ interface HeaderProps {
 }
 
 const Header = ({ tab, setTab }: HeaderProps) => {
-    const selectedStyle = "font-bold cursor-pointer select-none text-xl";
-    const notSelectedStyle = "cursor-pointer select-none text-lg";
-
     const renderTabs = (item: any, index: number) => {
+        const tabCss = clsx("", {
+            "font-bold cursor-pointer select-none text-xl": tab === item,
+            "cursor-pointer select-none text-lg": tab !== item,
+        });
+
         return (
-            <h1
-                key={index}
-                className={tab === item ? selectedStyle : notSelectedStyle}
-                onClick={() => setTab(item)}
-            >
+            <h1 key={index} className={tabCss} onClick={() => setTab(item)}>
                 {item}
             </h1>
         );

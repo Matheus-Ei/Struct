@@ -1,3 +1,7 @@
+// Libraries
+import clsx from "clsx";
+
+// Local
 import Button from "./Button";
 import Modal from "./Modal";
 
@@ -18,20 +22,24 @@ const ConfirmModal = ({
     confirmText = "Yes",
     cancelText = "No",
 }: ConfirmModalProps) => {
+    const css = clsx(
+        "relative w-96 h-24",
+        "flex flex-col items-center justify-center",
+        "rounded-btn"
+    );
+
     return (
-        <Modal
-            isOpen={isOpen}
-            close={close}
-            className="relative rounded-btn w-96 h-32 flex flex-col items-center justify-center"
-        >
+        <Modal isOpen={isOpen} close={close} className={css}>
             <>
                 <h1 className="mb-5">{message}</h1>
+
                 <div className="flex gap-4">
                     <Button
                         text={confirmText}
                         onClick={onConfirm}
                         inverse={true}
                     />
+
                     <Button text={cancelText} onClick={close} />
                 </div>
             </>

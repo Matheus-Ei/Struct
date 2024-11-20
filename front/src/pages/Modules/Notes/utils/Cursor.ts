@@ -8,9 +8,7 @@ class Cursor {
     goNextLine() {
         const selection = window.getSelection();
         const range = selection?.getRangeAt(0);
-        if (!selection || !range) {
-            return;
-        }
+        if (!selection || !range) return;
 
         let currentNode = range.startContainer;
 
