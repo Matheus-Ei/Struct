@@ -13,11 +13,15 @@ interface PointProps {
 const Point = ({ text, icon, library, isSelected, onClick }: PointProps) => {
     const handleClick = () => onClick && onClick();
 
-    const css = clsx("flex justify-center items-center", "rounded-btn", {
-        "gap-4 py-2 px-4": text,
-        "p-1": !text,
-        "bg-primary text-primary-content": isSelected,
-    });
+    const css = clsx(
+        "flex justify-center items-center",
+        "rounded-btn cursor-pointer",
+        {
+            "gap-4 py-2 px-4": text,
+            "p-1": !text,
+            "bg-primary text-primary-content": isSelected,
+        }
+    );
 
     return (
         <div onClick={handleClick} className={css}>

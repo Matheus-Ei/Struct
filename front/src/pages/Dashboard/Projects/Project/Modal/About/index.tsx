@@ -1,4 +1,5 @@
 // Libraries
+import Point from "components/Point";
 import { projectsContext } from "pages/Dashboard/Projects";
 import { useContext } from "react";
 import { useQuery } from "react-query";
@@ -26,7 +27,7 @@ const About = ({ projectId }: TabProps) => {
     if (!context) return null;
 
     return (
-        <div className="flex flex-col w-full h-fit gap-8 mt-8 ml-8">
+        <div className="flex flex-col w-[96%] h-[75%] overflow-y-scroll overflow-x-hidden gap-8 mt-8 ml-8">
             <Field
                 title="Title"
                 value={project?.title}
@@ -47,13 +48,27 @@ const About = ({ projectId }: TabProps) => {
                 type="description"
                 onUpdate={async (newValue) =>
                     await updateProject(
-                        newValue,
                         undefined,
+                        newValue,
                         projectId,
                         context.refetch
                     )
                 }
             />
+
+            <div className="relative flex flex-col items-start justify-center w-full right-4">
+                <Point
+                    text={`Users: ${project?.number_shared}`}
+                    icon="FaUsers"
+                    library="fa6"
+                />
+
+                <Point
+                    text={`Pages: ${project?.number_pages}`}
+                    icon="GoPaperclip"
+                    library="go"
+                />
+            </div>
         </div>
     );
 };

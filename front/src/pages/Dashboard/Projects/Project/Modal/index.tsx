@@ -50,7 +50,7 @@ const ProjectModal = ({ modal, setModal }: ProjectModalProps) => {
 
     return (
         <Modal isOpen={modal.show} close={handleClose}>
-            <div className="relative w-full h-full">
+            <div className="w-full h-full">
                 <Header tab={tab} setTab={setTab} />
 
                 {getTab()}

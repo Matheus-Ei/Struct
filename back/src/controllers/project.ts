@@ -13,10 +13,30 @@ class ProjectController {
         const { id } = req.params;
 
         try {
-            const project = await ProjectModel.findByPk(id);
+            const project = await operations.query(`
+                SELECT project.id AS id,
+	                project.title AS title,
+	                project.description AS description,
+	                owner_user_id,
+	                COUNT(relationship_shared_project) AS number_shared,
+	                COUNT(page) AS number_pages
+                FROM project
+                JOIN page ON project.id = page.project_id
+                LEFT JOIN relationship_shared_project ON project.id = relationship_shared_project.project_id
+                WHERE project.id = ${id}
+                GROUP BY project.id;
+            `);
 
-            if (project) {
-                res.status(200).json(project);
+            const resProject: any = project[0][0];
+            if (project[0].length > 0) {
+                res.status(200).json({
+                    id: resProject.id,
+                    title: resProject.title,
+                    description: resProject.description,
+                    owner_user_id: resProject.owner_user_id,
+                    number_shared: Number(resProject.number_shared),
+                    number_pages: Number(resProject.number_pages),
+                });
             } else {
                 res.status(404).json({
                     message: "No projects were found with this id",

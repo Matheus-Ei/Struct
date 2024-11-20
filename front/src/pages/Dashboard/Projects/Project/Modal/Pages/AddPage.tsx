@@ -1,4 +1,3 @@
-import Button from "components/Button";
 import Emoji from "components/Emoji";
 import EmojiSelector from "components/EmojiSelector";
 import Input from "components/Input";
@@ -6,6 +5,7 @@ import { useState } from "react";
 import { EmojiClickData } from "emoji-picker-react";
 import useToggle from "hooks/useToggle";
 import Request from "services/Request";
+import Point from "components/Point";
 
 interface AddPageProps {
     projectId: number;
@@ -20,6 +20,7 @@ const AddPage = ({ projectId, refetch }: AddPageProps) => {
 
     const createPage = async () => {
         if (!title) return;
+
         const defaultData = {
             name: title,
             emoji: emoji?.emoji,
@@ -36,7 +37,7 @@ const AddPage = ({ projectId, refetch }: AddPageProps) => {
             <div className="flex items-center justify-center gap-x-4 mr-8">
                 <Input
                     text="Title"
-                    className="border border-neutral rounded-btn px-2 py-2 outline-none bg-base-100"
+                    className="border-b border-neutral px-2 pb-1 outline-none bg-base-100"
                     setValue={setTitle}
                     onEnter={createPage}
                 />
@@ -44,20 +45,17 @@ const AddPage = ({ projectId, refetch }: AddPageProps) => {
                 <Emoji
                     symbol={emoji?.emoji}
                     onClick={() => toggleShowEmoji()}
-                    className="cursor-pointer select-none scale-150"
+                    className="cursor-pointer select-none scale-125 py-1 px-2"
                 />
             </div>
 
-            <Button
-                text="Add"
-                className="bg-primary rounded-btn text-primary-content font-bold py-2 px-4"
-                onClick={createPage}
-            />
+            <Point icon="FaPlus" library="fa6" onClick={createPage} />
 
             <EmojiSelector
                 show={showEmoji}
                 setEmoji={setEmoji}
                 toggleShow={toggleShowEmoji}
+                position={{ x: 80, y: -470 }}
             />
         </div>
     );
