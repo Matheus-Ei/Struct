@@ -1,35 +1,59 @@
 // Libraries
-import { Dispatch, SetStateAction } from "react";
+import { projectsContext } from "pages/Dashboard/Projects";
+import { useContext } from "react";
 import { useQuery } from "react-query";
 
 // Local
-import Actions from "./Actions";
-import Informations from "./Informations";
 import Request from "services/Request";
+import { TabProps } from "../types";
+import Field from "./Field";
 
-interface ModalType {
-    show: boolean;
-    projectId: number;
-}
+const updateProject = async (
+    title: string | undefined,
+    description: string | undefined,
+    projectId: number,
+    refetch: () => void
+) => {
+    await Request.patch(`project/edit/${projectId}`, { title, description });
+    refetch();
+};
 
-interface AboutProps {
-    id: number;
-    setModal: Dispatch<SetStateAction<ModalType>>;
-}
-
-const About = ({ id, setModal }: AboutProps) => {
-    const getProjectInfo = () => Request.get(`project/get/${id}`);
+const About = ({ projectId }: TabProps) => {
+    const getProjectInfo = () => Request.get(`project/get/${projectId}`);
     const { data: project } = useQuery("project-info-about", getProjectInfo);
+
+    const context = useContext(projectsContext);
+    if (!context) return null;
 
     return (
         <div className="flex flex-col w-full h-fit gap-8 mt-8 ml-8">
-            <Informations
-                projectId={id}
-                title={project?.title}
-                description={project?.description}
+            <Field
+                title="Title"
+                value={project?.title}
+                type="title"
+                onUpdate={async (newValue) =>
+                    await updateProject(
+                        newValue,
+                        undefined,
+                        projectId,
+                        context.refetch
+                    )
+                }
             />
 
-            <Actions id={id} setModal={setModal} />
+            <Field
+                title="Description"
+                value={project?.description}
+                type="description"
+                onUpdate={async (newValue) =>
+                    await updateProject(
+                        newValue,
+                        undefined,
+                        projectId,
+                        context.refetch
+                    )
+                }
+            />
         </div>
     );
 };

@@ -8,17 +8,12 @@ import Point from "components/Point";
 import useToggle from "hooks/useToggle";
 import ConfirmModal from "components/ConfirmModal";
 
-interface ModalType {
-    show: boolean;
+interface DeleteProps {
     projectId: number;
+    setModal: Dispatch<SetStateAction<{ projectId: number; show: boolean }>>;
 }
 
-interface ActionsProps {
-    id: number;
-    setModal: Dispatch<SetStateAction<ModalType>>;
-}
-
-const Actions = ({ id, setModal }: ActionsProps) => {
+const Delete = ({ projectId, setModal }: DeleteProps) => {
     const context = useContext(projectsContext);
     const [wantDelete, toggleWantDelete] = useToggle(false);
     const [showConfirmDelete, toggleShowConfirmDelete] = useToggle(false);
@@ -27,22 +22,21 @@ const Actions = ({ id, setModal }: ActionsProps) => {
     useEffect(() => {
         if (!wantDelete) return;
 
-        Request.delete(`project/delete/${id}`).then(() => {
+        Request.delete(`project/delete/${projectId}`).then(() => {
             setModal({ projectId: 1, show: false });
             context?.refetch();
         });
-    }, [wantDelete, context, id, setModal]);
+    }, [wantDelete, context, projectId, setModal]);
 
     return (
-        <div className="flex w-full flex-col items-start">
-            <div className="divider divider-primary w-2/6">Actions</div>
-
+        <div className="flex w-fit flex-col items-start">
             <ConfirmModal
                 message="Are you sure you want to delete?"
                 isOpen={showConfirmDelete}
                 close={() => toggleShowConfirmDelete(false)}
                 onConfirm={() => toggleWantDelete(true)}
             />
+
             <Point
                 icon="MdDelete"
                 library="md"
@@ -53,4 +47,4 @@ const Actions = ({ id, setModal }: ActionsProps) => {
     );
 };
 
-export default Actions;
+export default Delete;

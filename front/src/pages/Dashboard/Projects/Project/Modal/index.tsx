@@ -7,6 +7,8 @@ import Footer from "./Footer";
 import Header from "./Header";
 import About from "./About";
 import Pages from "./Pages";
+import Shared from "./Shared";
+import Settings from "./Settings";
 
 interface ModalType {
     show: boolean;
@@ -28,15 +30,27 @@ const ProjectModal = ({ modal, setModal }: ProjectModalProps) => {
     const getTab = () => {
         switch (tab) {
             case "About":
-                return <About id={modal.projectId} setModal={setModal} />;
+                return (
+                    <About projectId={modal.projectId} setModal={setModal} />
+                );
             case "Pages":
-                return <Pages projectId={modal.projectId} />;
+                return (
+                    <Pages projectId={modal.projectId} setModal={setModal} />
+                );
+            case "Shared":
+                return (
+                    <Shared projectId={modal.projectId} setModal={setModal} />
+                );
+            case "Settings":
+                return (
+                    <Settings projectId={modal.projectId} setModal={setModal} />
+                );
         }
     };
 
     return (
         <Modal isOpen={modal.show} close={handleClose}>
-            <div className="w-full h-full">
+            <div className="relative w-full h-full">
                 <Header tab={tab} setTab={setTab} />
 
                 {getTab()}

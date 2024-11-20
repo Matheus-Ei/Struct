@@ -21,10 +21,10 @@ const Header = ({ tab, setTab }: HeaderProps) => {
         );
     };
 
-    const allTabs = ["About", "Pages"];
+    const allTabs = ["About", "Pages", "Shared", "Settings"];
 
     return (
-        <div className="flex flex-row gap-8 mt-5 ml-8">
+        <div className="flex flex-row gap-x-8 p-2 ml-8">
             {allTabs.map(renderTabs)}
         </div>
     );

@@ -1,8 +1,5 @@
 // Local
-import useToggle from "hooks/useToggle";
 import Emoji from "components/Emoji";
-import Icons from "services/Icons";
-// import Request from "services/Request";
 
 interface PageProps {
     id: number;
@@ -12,27 +9,14 @@ interface PageProps {
 }
 
 const Page = ({ id, name, emoji, refetch }: PageProps) => {
-    const [showMore, toggleShowMore] = useToggle(false);
-    /* 
-    const deletePage = () => {
-        Request.delete(`page/geral/${id}`);
-        refetch();
-    };
- */
     return (
-        <div
-            className="flex text-lg w-full h-12 items-center justify-between"
-            onMouseOver={() => toggleShowMore(true)}
-            onMouseLeave={() => toggleShowMore(false)}
-        >
+        <div className="flex text-lg w-full h-12 items-center justify-between">
             <div className="flex gap-4 items-center">
                 <Emoji symbol={emoji} />
                 <h1 className="line-clamp-1 cursor-default select-none">
                     {name}
                 </h1>
             </div>
-
-            {showMore && <Icons name="IoIosMore" library="io" />}
         </div>
     );
 };

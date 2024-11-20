@@ -4,11 +4,9 @@ import { useQuery } from "react-query";
 
 // Local
 import Request from "services/Request";
+import { TabProps } from "../types";
+import AddPage from "./AddPage";
 import Page from "./Page";
-
-interface PagesProps {
-    projectId: number;
-}
 
 interface PageRequestType {
     id: number;
@@ -18,7 +16,7 @@ interface PageRequestType {
     module: string;
 }
 
-const Pages = ({ projectId }: PagesProps) => {
+const Pages = ({ projectId }: TabProps) => {
     const getPages = () => Request.get(`project/pages/${projectId}`);
     const { data: pages, refetch } = useQuery("project-pages-tab", getPages);
 
@@ -43,8 +41,9 @@ const Pages = ({ projectId }: PagesProps) => {
     );
 
     return (
-        <div className="w-full h-full flex justify-center">
+        <div className="w-full h-5/6 flex justify-center">
             <div className={pagesDivCss}>{pages?.map(renderPages)}</div>
+            <AddPage projectId={projectId} refetch={refetch} />
         </div>
     );
 };
