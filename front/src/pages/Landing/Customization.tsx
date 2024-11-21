@@ -2,7 +2,7 @@
 import { useState } from "react";
 
 // Local
-import Theme from "services/Theme";
+import Theme from "modules/Theme";
 
 const ThemeController = () => {
     const [theme, setTheme] = useState(Theme.getCurrent());

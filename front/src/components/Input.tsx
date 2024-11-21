@@ -1,11 +1,11 @@
 // Libraries
 import clsx from "clsx";
-import { ChangeEvent, Dispatch, KeyboardEvent, SetStateAction } from "react";
-import { ErrorType } from "types/global";
+import { ChangeEvent, KeyboardEvent } from "react";
+import { ErrorType, SetStateType } from "types/global";
 
 interface InputProps {
     text?: string;
-    setValue?: Dispatch<SetStateAction<string>>;
+    setValue?: SetStateType<string>;
     isPassword?: boolean;
     type?: "textarea" | "input";
     className?: string;

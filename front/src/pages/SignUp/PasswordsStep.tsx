@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 
 // Local
-import { makeSignUp } from "./functions";
+import { makeSignUp } from "./utils/functions";
 import Message from "components/Message";
 import Button from "components/Button";
 import Input from "components/Input";

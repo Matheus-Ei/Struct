@@ -1,9 +1,10 @@
 // Libraries
-import { ChangeEvent, Dispatch, SetStateAction } from "react";
+import { ChangeEvent } from "react";
+import { SetStateType } from "types/global";
 
 interface SelectorProps {
     options: Array<string>;
-    setCurrent: Dispatch<SetStateAction<string>>;
+    setCurrent: SetStateType<string>;
 }
 
 const Selector = ({ options, setCurrent }: SelectorProps) => {

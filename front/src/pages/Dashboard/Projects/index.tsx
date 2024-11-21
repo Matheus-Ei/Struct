@@ -1,23 +1,19 @@
 // Libraries
 import React, { useState } from "react";
-import { useQuery } from "react-query";
 
 // Local
 import CreateProjectModal from "./CreateProject/Modal";
 import CreateProject from "./CreateProject";
 import ProjectModal from "./Project/Modal";
-import Request from "services/Request";
 import Project from "./Project";
 import clsx from "clsx";
-
-interface ModalType {
-    show: boolean;
-    projectId: number;
-}
+import { ModalType } from "./Project/Modal/utils/types";
+import { useAllProjects } from "services/project/useProject";
 
 export const projectsContext = React.createContext<any>(undefined);
 
 const Projects = () => {
+    const [showCreateProject, setShowCreateProject] = useState(false);
     const [projectModal, setProjectModal] = useState<ModalType>({
         show: false,
         projectId: 1,
@@ -35,11 +31,7 @@ const Projects = () => {
         );
     };
 
-    const [showCreateProject, setShowCreateProject] = useState(false);
-
-    const { data: projects, refetch } = useQuery("dashboard-projects", () =>
-        Request.get("user/projects")
-    );
+    const { data: projects, refetch } = useAllProjects();
 
     const projectsDivCss = clsx(
         "grid items-center justify-items-start gap-6",

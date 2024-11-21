@@ -3,8 +3,8 @@ import { useContext, useState } from "react";
 
 // Local
 import Message from "components/Message";
-import { goNextStep } from "./functions";
-import Validations from "./validations";
+import { goNextStep } from "./utils/functions";
+import Validations from "./utils/validations";
 import Button from "components/Button";
 import Input from "components/Input";
 import { SignUpContext } from ".";

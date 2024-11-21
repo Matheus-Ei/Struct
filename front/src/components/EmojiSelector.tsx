@@ -1,19 +1,16 @@
 // Libraries
-import {
-    Dispatch,
-    SetStateAction,
-    useCallback,
-    useEffect,
-    useRef,
-} from "react";
+import { useCallback, useEffect, useRef } from "react";
 import EmojiPicker, {
     EmojiClickData,
     EmojiStyle,
     Theme,
 } from "emoji-picker-react";
 
+// Local
+import { SetStateType } from "types/global";
+
 interface EmojiSelectorProps {
-    setEmoji: Dispatch<SetStateAction<EmojiClickData | undefined>>;
+    setEmoji: SetStateType<EmojiClickData | undefined>;
     toggleShow: (value: boolean | undefined) => void;
     show: boolean;
     position?: { x: number; y: number };

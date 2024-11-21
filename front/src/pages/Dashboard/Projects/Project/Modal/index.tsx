@@ -1,23 +1,18 @@
 // Libraries
-import { Dispatch, SetStateAction, useState } from "react";
+import { createElement, useState } from "react";
 
 // Local
 import Modal from "components/Modal";
 import Footer from "./Footer";
 import Header from "./Header";
-import About from "./About";
-import Pages from "./Pages";
-import Shared from "./Shared";
-import Settings from "./Settings";
-
-interface ModalType {
-    show: boolean;
-    projectId: number;
-}
+import { ModalType } from "./utils/types";
+import { SetStateType } from "types/global";
+import router from "./utils/router";
+import { TabProps } from "./utils/types";
 
 interface ProjectModalProps {
     modal: ModalType;
-    setModal: Dispatch<SetStateAction<ModalType>>;
+    setModal: SetStateType<ModalType>;
 }
 
 const ProjectModal = ({ modal, setModal }: ProjectModalProps) => {
@@ -25,27 +20,20 @@ const ProjectModal = ({ modal, setModal }: ProjectModalProps) => {
 
     const handleClose = () => {
         setModal({ show: false, projectId: 1 });
+        setTab("About");
     };
 
-    const getTab = () => {
-        switch (tab) {
-            case "About":
-                return (
-                    <About projectId={modal.projectId} setModal={setModal} />
-                );
-            case "Pages":
-                return (
-                    <Pages projectId={modal.projectId} setModal={setModal} />
-                );
-            case "Shared":
-                return (
-                    <Shared projectId={modal.projectId} setModal={setModal} />
-                );
-            case "Settings":
-                return (
-                    <Settings projectId={modal.projectId} setModal={setModal} />
-                );
-        }
+    const renderTab = (
+        item: [string, (arg0: TabProps) => JSX.Element | null],
+        index: number
+    ) => {
+        if (tab !== item[0]) return null;
+
+        return createElement(item[1], {
+            key: index,
+            projectId: modal.projectId,
+            setModal,
+        });
     };
 
     return (
@@ -53,7 +41,7 @@ const ProjectModal = ({ modal, setModal }: ProjectModalProps) => {
             <div className="w-full h-full">
                 <Header tab={tab} setTab={setTab} />
 
-                {getTab()}
+                {router.map(renderTab)}
 
                 <Footer id={modal.projectId} />
             </div>

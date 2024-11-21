@@ -2,7 +2,7 @@
 import { createContext, useState } from "react";
 
 // Local
-import { SignUpContextType } from "./types";
+import { SignUpContextType } from "./utils/types";
 import { ErrorType } from "types/global";
 import WrapperSignUp from "./WrapperSignUp";
 import PasswordStep from "./PasswordsStep";
@@ -13,12 +13,12 @@ export const SignUpContext = createContext<SignUpContextType | null>(null);
 const SignUp = () => {
     const [step, setStep] = useState<number>(0);
 
-    const [name, setName] = useState<string | null>(null);
-    const [mail, setMail] = useState<string | null>(null);
-    const [nickname, setNickname] = useState<string | null>(null);
+    const [name, setName] = useState<string | undefined>();
+    const [mail, setMail] = useState<string | undefined>();
+    const [nickname, setNickname] = useState<string | undefined>();
 
-    const [password, setPassword] = useState<string | null>(null);
-    const [rePassword, setRePassword] = useState<string | null>(null);
+    const [password, setPassword] = useState<string | undefined>();
+    const [rePassword, setRePassword] = useState<string | undefined>();
 
     const [error, setError] = useState<ErrorType>({
         message: "",

@@ -5,9 +5,9 @@ import { useCallback, useContext, useEffect, useState } from "react";
 
 // Local
 import Button from "components/Button";
-import Icons from "services/Icons";
-import Request from "services/Request";
-import User from "utils/user";
+import Icons from "modules/Icons";
+import Request from "modules/Request";
+import User from "services/user";
 import { SignUpContext } from ".";
 
 const GoogleSignUpButton = () => {

@@ -5,9 +5,9 @@ import { useCallback, useEffect, useState } from "react";
 
 // Local
 import Button from "components/Button";
-import Request from "services/Request";
-import Icons from "services/Icons";
-import User from "utils/user";
+import Request from "modules/Request";
+import Icons from "modules/Icons";
+import User from "services/user";
 
 interface GoogleLoginButtonProps {
     toggleError: (value: boolean) => void;

@@ -1,5 +1,5 @@
 // Services
-import Theme from "./src/services/Theme";
+import Theme from "./src/modules/Theme";
 
 /** @type {import('tailwindcss').Config} */
 export default  {

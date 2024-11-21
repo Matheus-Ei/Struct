@@ -1,12 +1,12 @@
 // Libraries
 import clsx from "clsx";
-import { Dispatch, SetStateAction } from "react";
 
 // Local
-import Icons from "services/Icons";
+import Icons from "modules/Icons";
+import { SetStateType } from "types/global";
 
 interface CreateProjectButtonProps {
-    showModal: Dispatch<SetStateAction<boolean>>;
+    showModal: SetStateType<boolean>;
 }
 
 const CreateProject = ({ showModal }: CreateProjectButtonProps) => {
@@ -24,7 +24,7 @@ const CreateProject = ({ showModal }: CreateProjectButtonProps) => {
     return (
         <div className="flex w-96 h-32 p-3 justify-start items-center">
             <button onClick={handleOpen} className={buttonCss}>
-                <Icons name="IoAdd" library="io5" size={25} />
+                <Icons name="IoAdd" library="io5" className="text-2xl" />
                 <h1>New project</h1>
             </button>
         </div>

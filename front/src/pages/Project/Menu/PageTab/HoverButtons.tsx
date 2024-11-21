@@ -5,7 +5,7 @@ import { useContext } from "react";
 import { PagesRequestType } from "pages/Project/util/types";
 import { addPage } from "pages/Project/util/events";
 import { PagesContext } from "pages/Project";
-import Icons from "services/Icons";
+import Icons from "modules/Icons";
 import clsx from "clsx";
 
 interface HoverButtonsProps {

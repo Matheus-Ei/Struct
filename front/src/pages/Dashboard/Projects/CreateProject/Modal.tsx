@@ -1,24 +1,18 @@
 // Libraries
-import {
-    Dispatch,
-    SetStateAction,
-    useContext,
-    useEffect,
-    useState,
-} from "react";
+import { useContext, useEffect, useState } from "react";
 
 // Local
 import { projectsContext } from "pages/Dashboard/Projects";
-import Request from "services/Request";
 import Button from "components/Button";
 import Modal from "components/Modal";
 import Input from "components/Input";
-import { ErrorType } from "types/global";
+import { ErrorType, SetStateType } from "types/global";
 import clsx from "clsx";
+import Project from "services/project";
 
 interface CreateProjectModalProps {
     showModal: boolean;
-    setModal: Dispatch<SetStateAction<boolean>>;
+    setModal: SetStateType<boolean>;
 }
 
 const CreateProjectModal = ({
@@ -48,7 +42,7 @@ const CreateProjectModal = ({
         setDescError({ message: "", isError: false });
     }, [showModal]);
 
-    const handleCreate = () => {
+    const handleCreate = async () => {
         if (!title) {
             setTitleError({ message: "The title is required", isError: true });
             return;
@@ -64,10 +58,7 @@ const CreateProjectModal = ({
         }
         setDescError({ message: "", isError: false });
 
-        Request.post("project/create", {
-            title,
-            description,
-        }).then(() => {
+        await Project.create(title, description, () => {
             setModal(false);
             context?.refetch();
         });

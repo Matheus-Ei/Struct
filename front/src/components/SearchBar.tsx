@@ -1,13 +1,14 @@
 // Libraries
 import clsx from "clsx";
-import { ChangeEvent, Dispatch, SetStateAction } from "react";
+import { ChangeEvent } from "react";
 
 // Local
-import Icons from "services/Icons";
+import Icons from "modules/Icons";
+import { SetStateType } from "types/global";
 
 interface SearchBarProps {
     searchPlace: Array<string>;
-    setResult: Dispatch<SetStateAction<Array<string>>>;
+    setResult: SetStateType<Array<string>>;
     placeholder?: string;
 }
 

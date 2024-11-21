@@ -9,15 +9,15 @@ const Emoji = ({ symbol, className, onClick }: EmojiProps) => {
 
     if (!symbol)
         return (
-            <button className={css} onClick={onClick}>
+            <div className={css} onClick={onClick}>
                 &#x2753;
-            </button>
+            </div>
         );
 
     return (
-        <button role="img" aria-label="emoji" className={css} onClick={onClick}>
+        <div aria-label="emoji" className={css} onClick={onClick}>
             {symbol}
-        </button>
+        </div>
     );
 };
 

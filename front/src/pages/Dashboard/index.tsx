@@ -1,31 +1,25 @@
 // Libraries
-import { useState } from "react";
+import { createElement, useState } from "react";
 
 // Local
 import withLoader from "HOCs/withLoader";
-import Projects from "./Projects";
 import Header from "./Header";
+import router from "./router";
 
 const Dashboard = () => {
     const [tab, setTab] = useState<string>("Projects");
 
-    const getTab = () => {
-        switch (tab) {
-            case "Projects":
-                return <Projects />;
-            case "Tools":
-                return <div>Tools</div>;
+    const renderTab = (item: [string, () => JSX.Element], index: number) => {
+        if (tab !== item[0]) return null;
 
-            default:
-                return <div>ERROR...</div>;
-        }
+        return createElement(item[1], { key: index });
     };
 
     return (
         <div className="flex flex-col justify-start items-center w-screen h-[97vh]">
             <Header tab={tab} setTab={setTab} />
 
-            {getTab()}
+            {router.map(renderTab)}
         </div>
     );
 };

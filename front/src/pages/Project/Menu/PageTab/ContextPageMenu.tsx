@@ -5,7 +5,7 @@ import { useContext } from "react";
 import { deletePage } from "pages/Project/util/events";
 import ContextMenu from "components/ContextMenu";
 import { PagesContext } from "pages/Project";
-import Icons from "services/Icons";
+import Icons from "modules/Icons";
 
 interface ContextPageMenuProps {
     showMenu: boolean;

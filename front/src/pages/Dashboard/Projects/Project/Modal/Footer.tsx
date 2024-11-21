@@ -3,7 +3,7 @@ import clsx from "clsx";
 import { useNavigate } from "react-router-dom";
 
 // Local
-import Icons from "services/Icons";
+import Icons from "modules/Icons";
 
 interface FooterProps {
     id: number;
