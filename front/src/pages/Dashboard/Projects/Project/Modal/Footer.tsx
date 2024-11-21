@@ -27,7 +27,7 @@ const Footer = ({ id }: FooterProps) => {
         <div onClick={handleClick} className={bodyCss}>
             <Icons name="FaRegFolderOpen" library="fa6" />
 
-            <h1 className="font-bold text-base-content">Go to the project</h1>
+            <h1 className="font-bold text-base-content">Open project</h1>
         </div>
     );
 };

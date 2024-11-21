@@ -5,7 +5,7 @@ interface EmojiProps {
 }
 
 const Emoji = ({ symbol, className, onClick }: EmojiProps) => {
-    const css = className ? className : "cursor-pointer select-none scale-100";
+    const css = className ? className : "cursor-pointer select-none text-lg";
 
     if (!symbol)
         return (
@@ -15,7 +15,7 @@ const Emoji = ({ symbol, className, onClick }: EmojiProps) => {
         );
 
     return (
-        <div aria-label="emoji" className={css} onClick={onClick}>
+        <div className={css} onClick={onClick}>
             {symbol}
         </div>
     );

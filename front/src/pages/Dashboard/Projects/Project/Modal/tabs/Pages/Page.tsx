@@ -66,7 +66,7 @@ const Page = ({ id, name, emoji, refetch }: PageProps) => {
         >
             <Emoji
                 symbol={defaultEmoji}
-                className="cursor-pointer select-none scale-125"
+                className="cursor-pointer select-none text-xl"
                 onClick={() => toggleEmojiSelector()}
             />
             <EditableField
