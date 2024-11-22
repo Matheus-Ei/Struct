@@ -184,7 +184,7 @@ class ProjectController {
                 FROM relationship_shared_project
                 JOIN permission_level ON relationship_shared_project.permission_level_id = permission_level.id
                 JOIN users ON relationship_shared_project.user_shared_id = users.id
-                WHERE relationship_shared_project.project_id = 3;
+                WHERE relationship_shared_project.project_id = ${id};
             `);
 
             res.status(200).send(response[0]);
@@ -193,6 +193,35 @@ class ProjectController {
                 message: "Error fetching shared users",
                 error,
             });
+        }
+    }
+
+    public async share(req: Request, res: Response) {
+        const { id } = req.params;
+        const { userId, permissionLevelId } = req.body;
+
+        try {
+            const project = await ProjectModel.findByPk(id);
+
+            if (!project) {
+                res.status(404).json({ message: "Project not found" });
+                return;
+            }
+
+            await operations.query(`
+                INSERT INTO relationship_shared_project (project_id, user_shared_id, permission_level_id)
+                VALUES (${id}, ${userId}, ${permissionLevelId});
+            `);
+
+            res.status(201).json({ message: "User shared" });
+            return;
+        } catch (error) {
+            res.status(500).json({
+                message: "Error sharing the project",
+                error,
+            });
+
+            return;
         }
     }
 }
