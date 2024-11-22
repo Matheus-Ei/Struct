@@ -1,11 +1,12 @@
 // Libraries
 import { DataTypes, Model } from "sequelize";
 
-// Database
+// Local
 import connection from "../services/database/connection.js";
 
 class ModuleModel extends Model {
     public id!: number;
+
     public name!: string;
     public description!: string;
 }
@@ -17,10 +18,12 @@ ModuleModel.init(
             autoIncrement: true,
             primaryKey: true,
         },
+
         name: {
             type: DataTypes.STRING(100),
             allowNull: false,
         },
+
         description: {
             type: DataTypes.TEXT,
             allowNull: false,

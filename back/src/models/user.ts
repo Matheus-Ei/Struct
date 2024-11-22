@@ -1,18 +1,27 @@
 // Libraries
 import { DataTypes, Model } from "sequelize";
 
-// Database
+// Local
 import connection from "../services/database/connection.js";
+
+// Models
+import SubscriptionModel from "./subscription.js";
+import SettingsModel from "./settings.js";
 
 class UserModel extends Model {
     public id!: number;
-    public name!: string;
+
+    public name?: string;
+    public about?: string;
     public mail!: string;
+    public verified!: boolean;
+    public autenticator!: "Default" | "Auth";
     public nickname?: string;
     public password!: string;
-    public photo?: any;
-    public paid!: boolean;
-    public last_paid_date?: any;
+    public photo?: string;
+
+    public subscription_id!: number;
+    public settings_id!: number;
 }
 
 UserModel.init(
@@ -24,33 +33,59 @@ UserModel.init(
         },
 
         name: {
-            type: DataTypes.STRING,
-            allowNull: false,
+            type: DataTypes.STRING(100),
         },
+
+        about: {
+            type: DataTypes.TEXT,
+        },
+
         mail: {
-            type: DataTypes.STRING,
+            type: DataTypes.STRING(100),
             allowNull: false,
             unique: true,
         },
-        nickname: {
-            type: DataTypes.STRING,
-            allowNull: true,
-        },
-        password: {
-            type: DataTypes.STRING,
+
+        autenticator: {
+            type: DataTypes.STRING(50),
             allowNull: false,
+            defaultValue: "Default",
         },
-        photo: {
-            type: DataTypes.UUID,
-            allowNull: true,
-        },
-        paid: {
+
+        verified: {
             type: DataTypes.BOOLEAN,
+            defaultValue: false,
+        },
+
+        nickname: {
+            type: DataTypes.STRING(50),
+        },
+
+        password: {
+            type: DataTypes.STRING(255),
             allowNull: false,
         },
-        last_paid_date: {
-            type: DataTypes.DATE,
-            allowNull: true,
+
+        photo: {
+            type: DataTypes.BLOB,
+        },
+
+        subscription_id: {
+            type: DataTypes.INTEGER,
+            references: {
+                model: SubscriptionModel,
+                key: "id",
+            },
+            onDelete: "CASCADE",
+        },
+
+        settings_id: {
+            type: DataTypes.INTEGER,
+            references: {
+                model: SettingsModel,
+                key: "id",
+            },
+            onDelete: "CASCADE",
         },
     },
     {

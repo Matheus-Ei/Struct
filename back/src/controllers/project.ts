@@ -1,51 +1,200 @@
 // Libraries
 import { Request, Response } from "express";
 
-// Services
+// Local
+import operations from "../services/database/operations.js";
 import Cookie from "../services/cookie.js";
 
-// Services
-import operations from "../services/database/operations.js";
+// Models
+import ProjectModel from "../models/project.js";
 
 class ProjectController {
-    public async getAll(req: Request, res: Response) {
-        const userId = Cookie.get("id", req);
+    public async get(req: Request, res: Response) {
+        const { id } = req.params;
 
         try {
-            const projects = await operations.query(
-                `SELECT project.id AS id,
-	                    project.title AS title,
-	                    project.description AS description,
-	                    MAX(project_type.name) as type,
-	                    ARRAY_AGG(INITCAP(module.name)) AS module
-                 FROM relationship_project_module
-                 JOIN project ON relationship_project_module.project_id = project.id
-                 JOIN module ON relationship_project_module.module_id = module.id
-                 JOIN project_type ON project.project_type_id = project_type.id
-                 WHERE owner_user_id = ${userId}
-                 GROUP BY project.id;`
-            );
+            const project = await operations.query(`
+                SELECT project.id AS id,
+	                project.title AS title,
+	                project.description AS description,
+	                owner_user_id,
+	                COUNT(relationship_shared_project) AS number_shared,
+	                COUNT(page) AS number_pages
+                FROM project
+                LEFT JOIN page ON project.id = page.project_id
+                LEFT JOIN relationship_shared_project ON project.id = relationship_shared_project.project_id
+                WHERE project.id = ${id}
+                GROUP BY project.id;
+            `);
 
-            if (projects) {
-                res.status(200).json(projects[0]);
-            } else {
-                res.status(404).json({
-                    message: "No projects for this user were found",
-                });
+            if (project[0].length === 0) {
+                res.status(404).json({ message: "Project not found" });
+                return;
             }
+
+            res.status(200).json(project[0][0]);
         } catch (error) {
             res.status(500).json({
-                message: "Error fetching the projects",
+                message: "Error fetching this project",
                 error,
             });
         }
     }
 
-    public async create() {}
+    public async create(req: Request, res: Response) {
+        const { title, description } = req.body;
+        const ownerUserId = Cookie.get("id", req);
 
-    public async delete() {}
+        try {
+            const project = await ProjectModel.create({
+                title,
+                description,
 
-    public async edit() {}
+                owner_user_id: ownerUserId,
+            });
+
+            res.status(201).json({
+                message: "Project created",
+                id: project.id,
+            });
+
+            return;
+        } catch (error) {
+            res.status(500).json({
+                message: "Error creating the project",
+                error,
+            });
+
+            return;
+        }
+    }
+
+    public async delete(req: Request, res: Response) {
+        const { id } = req.params;
+
+        try {
+            const project = await ProjectModel.findByPk(id);
+
+            if (!project) {
+                res.status(404).json({ message: "Project not found" });
+                return;
+            }
+
+            await project.destroy();
+            res.status(200).json({ message: "Project deleted" });
+            return;
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ message: "Error deleting the project" });
+            return;
+        }
+    }
+
+    public async edit(req: Request, res: Response) {
+        const { id } = req.params;
+
+        const project = await ProjectModel.findByPk(id);
+
+        if (!project) {
+            res.status(404).send({ message: "Project not found" });
+            return;
+        }
+
+        const { title = project.title, description = project.description } =
+            req.body;
+
+        try {
+            await project.update({
+                title,
+                description,
+            });
+
+            res.status(200).send({ message: "Project updated", project });
+        } catch (error) {
+            res.status(500).send({ message: "Error updating the project" });
+        }
+    }
+
+    public async getPages(req: Request, res: Response) {
+        const { id } = req.params;
+
+        try {
+            const pages = await operations.query(`
+                WITH RECURSIVE page_hierarchy AS (
+                    SELECT 
+                        page.id,
+                        page.name,
+                        page.emoji,
+                        page.description,
+                        page.position,
+                        page.parent_page_id
+                    FROM page
+                    WHERE project_id = ${id}
+                        AND parent_page_id IS NULL
+                
+                    UNION ALL
+                
+                    SELECT 
+                        child.id,
+                        child.name,
+                        child.emoji,
+                        child.description,
+                        child.position,
+                        child.parent_page_id
+                    FROM page AS child
+                    JOIN page_hierarchy AS parent ON child.parent_page_id = parent.id
+                )
+                SELECT 
+                    root.id,
+                    root.name,
+                    root.emoji,
+                    root.description,
+                    root.position,
+                    get_children(root.id) AS children_pages
+                FROM project
+                JOIN page AS root ON root.project_id = project.id
+                WHERE project.id = ${id}
+                    AND root.parent_page_id IS NULL
+                GROUP BY root.id
+                ORDER BY root.position, root.id;
+            `);
+
+            res.status(200).send(pages[0]);
+            return;
+        } catch (error) {
+            res.status(500).send(error);
+            return;
+        }
+    }
+
+    public async getShared(req: Request, res: Response) {
+        const { id } = req.params;
+
+        try {
+            const response = await operations.query(`
+                SELECT relationship_shared_project.project_id as project_id,
+	                permission_level_id,
+	                permission_level.name,
+	                permission_level.description,
+	                users.id as user_id,
+	                users.name as user_name,
+	                users.nickname as user_nickname,
+	                users.mail as user_mail,
+	                users.photo as user_photo
+                FROM relationship_shared_project
+                JOIN permission_level ON relationship_shared_project.permission_level_id = permission_level.id
+                JOIN users ON relationship_shared_project.user_shared_id = users.id
+                WHERE relationship_shared_project.project_id = 3;
+            `);
+
+            res.status(200).send(response[0]);
+        } catch (error) {
+            res.status(500).send({
+                message: "Error fetching shared users",
+                error,
+            });
+        }
+    }
 }
 
 export default new ProjectController();

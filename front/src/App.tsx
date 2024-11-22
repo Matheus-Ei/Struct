@@ -1,18 +1,14 @@
-// Components
-import Navigator from "./services/Navigator";
+// Libraries
+import { useEffect } from "react";
 
-// Hooks
-import { useTheme } from "./hooks/useTheme";
+// Local
+import Navigator from "modules/Navigator";
+import Theme from "modules/Theme";
 
 function App() {
-    const theme = useTheme();
-
-    if (theme.primary) {
-        const body = document.querySelector("body");
-        if (body) {
-            body.style.backgroundColor = theme.primary;
-        }
-    }
+    useEffect(() => {
+        Theme.set();
+    }, []);
 
     const navigate = new Navigator();
     return navigate.setup();

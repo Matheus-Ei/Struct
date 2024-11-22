@@ -1,14 +1,11 @@
-// React
-import React from "react";
+// Libraries
+import Providers from "utils/Providers";
 import ReactDOM from "react-dom/client";
+import React from "react";
+
+// Local
 import App from "./App";
-
-// Modules
-import "./utils/global.css";
-
-// Components
-import { BrowserRouter } from "react-router-dom";
-import { ThemeProvider } from "./hooks/useTheme";
+import "./global.css";
 
 const root = ReactDOM.createRoot(
     document.getElementById("root") as HTMLElement
@@ -16,10 +13,8 @@ const root = ReactDOM.createRoot(
 
 root.render(
     <React.StrictMode>
-        <ThemeProvider>
-            <BrowserRouter>
-                <App />
-            </BrowserRouter>
-        </ThemeProvider>
+        <Providers>
+            <App />
+        </Providers>
     </React.StrictMode>
 );

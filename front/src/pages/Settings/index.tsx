@@ -1,8 +1,17 @@
-// Modules
-import * as S from "./styles";
+// Local
+import ThemeController from "./ThemeController";
+import SettingsHeader from "./SettingsHeader";
+import withLoader from "HOCs/withLoader";
+import Logout from "./Logout";
 
 const Settings = () => {
-    return <S.Body>Settings</S.Body>;
+    return (
+        <div className="flex flex-col items-center justify-center h-[90vh] w-full gap-4">
+            <SettingsHeader />
+            <ThemeController />
+            <Logout />
+        </div>
+    );
 };
 
-export default Settings;
+export default withLoader(Settings, true);

@@ -1,11 +1,19 @@
-import * as S from "./styles";
+// Local
+import PriceEmulation from "./PriceEmulation";
+import Customization from "./Customization";
+import Header from "./Header";
 
-const Landing = () => {
+const Integration = () => {
     return (
-        <S.Body>
-            <h1>LANDING PAGE</h1>
-        </S.Body>
+        <div className="flex flex-col items-center w-screen h-screen">
+            <Header />
+
+            <div className="flex flex-col w-3/4 items-start justify-start gap-14 mt-10">
+                <Customization />
+                <PriceEmulation />
+            </div>
+        </div>
     );
 };
 
-export default Landing;
+export default Integration;

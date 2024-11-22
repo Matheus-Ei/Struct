@@ -1,14 +1,13 @@
 // Libraries
+import cookieParser from "cookie-parser";
+import compression from "compression";
 import express from "express";
 import dotenv from "dotenv";
-import auth from "./middlewares/auth.js";
-
-// Middlewares
 import cors from "cors";
-import cookieParser from "cookie-parser";
 
-// Routes
+// Local
 import mainRoutes from "./system/routes.js";
+import auth from "./middlewares/auth.js";
 
 export class App {
     private app: any;
@@ -29,11 +28,14 @@ export class App {
     private middlewares(): void {
         this.app.use(cookieParser());
         this.app.use(express.json());
+        this.app.use(compression());
 
         this.app.use(
             cors({
+                origin: ["https://dev.struct.me", "http://localhost:3000"],
+                methods: "GET,POST,PUT,PATCH,DELETE,OPTIONS",
+                allowedHeaders: "Authorization, Content-Type",
                 credentials: true,
-                origin: true,
             })
         );
 
@@ -42,6 +44,7 @@ export class App {
 
     public listen(port: number) {
         this.app.listen(port, () => {
+            console.clear();
             console.log("Running the server in the port " + port);
         });
     }
@@ -50,5 +53,6 @@ export class App {
 const app = new App();
 
 dotenv.config();
-const port = Number(process.env.PORT);
+const port = Number(process.env.BACKEND_PORT);
+
 app.listen(port);

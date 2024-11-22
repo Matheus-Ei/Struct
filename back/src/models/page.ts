@@ -1,20 +1,23 @@
 // Libraries
 import { DataTypes, Model } from "sequelize";
 
-// Database
+// Local
 import connection from "../services/database/connection.js";
 
 // Models
-import PageDataModel from "./pageData";
-import ProjectModel from "./project";
-import ModuleModel from "./module";
+import ProjectModel from "./project.js";
+import ModuleModel from "./module.js";
 
 class PageModel extends Model {
     public id!: number;
-    public pageDataId!: number;
-    public parentPageId!: number | null;
-    public projectId!: number;
-    public moduleId!: number;
+
+    public name!: string;
+    public description!: string;
+    public emoji?: string;
+
+    public project_id!: number;
+    public module_id?: number;
+    public parent_page_id?: number;
 }
 
 PageModel.init(
@@ -24,23 +27,23 @@ PageModel.init(
             autoIncrement: true,
             primaryKey: true,
         },
-        pageDataId: {
-            type: DataTypes.INTEGER,
+
+        name: {
+            type: DataTypes.STRING,
             allowNull: false,
-            references: {
-                model: PageDataModel,
-                key: "id",
-            },
         },
-        parentPageId: {
-            type: DataTypes.INTEGER,
+
+        description: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+
+        emoji: {
+            type: DataTypes.STRING,
             allowNull: true,
-            references: {
-                model: PageModel,
-                key: "id",
-            },
         },
-        projectId: {
+
+        project_id: {
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
@@ -48,9 +51,19 @@ PageModel.init(
                 key: "id",
             },
         },
-        moduleId: {
+
+        parent_page_id: {
             type: DataTypes.INTEGER,
-            allowNull: false,
+            allowNull: true,
+            references: {
+                model: PageModel,
+                key: "id",
+            },
+        },
+
+        module_id: {
+            type: DataTypes.INTEGER,
+            allowNull: true,
             references: {
                 model: ModuleModel,
                 key: "id",

@@ -1,0 +1,84 @@
+class Cursor {
+    private divRef: React.RefObject<HTMLElement>;
+
+    constructor(divRef: React.RefObject<HTMLElement>) {
+        this.divRef = divRef;
+    }
+
+    goNextLine() {
+        const selection = window.getSelection();
+        const range = selection?.getRangeAt(0);
+        if (!selection || !range) return;
+
+        let currentNode = range.startContainer;
+
+        while (currentNode) {
+            if (currentNode.nextSibling) {
+                currentNode = currentNode.nextSibling;
+
+                if (currentNode.nodeType === Node.ELEMENT_NODE) {
+                    if (["BR", "P", "DIV"].includes(currentNode.nodeName)) {
+                        range.setStart(currentNode, 0);
+                        range.collapse(true);
+                        selection.removeAllRanges();
+                        selection.addRange(range);
+                        break;
+                    }
+                } else if (currentNode.nodeType === Node.TEXT_NODE) {
+                    range.setStart(currentNode, 0);
+                    range.collapse(true);
+                    selection.removeAllRanges();
+                    selection.addRange(range);
+                    break;
+                }
+            }
+        }
+    }
+
+    getCursorPosition() {
+        const selection = window.getSelection();
+        if (selection && selection.rangeCount > 0) {
+            const range = selection.getRangeAt(0);
+            const preRange = range.cloneRange();
+            preRange.selectNodeContents(this.divRef.current!);
+            preRange.setEnd(range.endContainer, range.endOffset);
+            return preRange.toString().length;
+        }
+        return 0;
+    }
+
+    setCursorPosition(pos: number) {
+        const selection = window.getSelection();
+        if (!selection || !this.divRef.current) return;
+
+        const nodeStack = [this.divRef.current];
+        let node;
+        let charCount = 0;
+        let found = false;
+
+        while (nodeStack.length > 0 && !found) {
+            node = nodeStack.pop();
+            if (!node) continue;
+
+            if (node.nodeType === 3) {
+                const textLength = node.textContent?.length || 0;
+                if (charCount + textLength >= pos) {
+                    const range = document.createRange();
+                    range.setStart(node, pos - charCount);
+                    range.collapse(true);
+                    selection.removeAllRanges();
+                    selection.addRange(range);
+                    found = true;
+                } else {
+                    charCount += textLength;
+                }
+            } else {
+                for (let i = node.childNodes.length - 1; i >= 0; i--) {
+                    nodeStack.push(node.childNodes[i] as HTMLElement);
+                }
+            }
+        }
+    }
+}
+
+export default Cursor;

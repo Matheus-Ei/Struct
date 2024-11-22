@@ -1,73 +1,69 @@
-// Modules
-import * as S from "./styles";
-
-// Components
-import Card from "../../components/common/Card";
-import Logo from "../../components/layout/Logo";
-import Form from "../../components/layout/Form";
-
-// Hooks
+// Libraries
+import GoogleLoginButton from "./GoogleLoginButton";
+import { useNavigate } from "react-router";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 
-// Utils
-import LoginClass from "../../utils/login";
-import File from "../../utils/file";
-import Message from "../../components/common/Message";
-import BlankSeparator from "../../components/common/BlankSeparator";
-import { useTheme } from "../../hooks/useTheme";
-import PageLoader from "../../HOCs/PageLoader";
+// Local
+import { ReactComponent as Logo } from "assets/logo-1800x400-1.svg";
+import Message from "components/Message";
+import useToggle from "hooks/useToggle";
+import Button from "components/Button";
+import Input from "components/Input";
+import Card from "components/Card";
+import User from "services/user";
 
 const Login = () => {
     const [mail, setMail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
-
-    const theme = useTheme();
-    const [error, setError] = useState<boolean>(false);
+    const [error, toggleError] = useToggle(false);
 
     const navigate = useNavigate();
 
-    const makeLogin = () => {
-        LoginClass.make(mail, password, navigate).then((response) => {
-            setError(!response);
+    const handleLogin = () => {
+        User.login(mail, password, "Default", navigate).then(() => {
+            toggleError(true);
         });
     };
 
     return (
-        <S.Body>
-            <Card width={30} flexDirection="column" justifyContent="center">
-                <>
-                    <Logo
-                        src={File.get(
-                            `images/logo-1920x1080-1-${theme.style}.png`
-                        )}
-                        text="Venha fazer parte de um mundo mais organizado."
-                        flexDirection="column"
-                    />
+        <div className="w-screen h-[97vh] flex items-center justify-center">
+            <Card>
+                <div className="flex flex-col items-center justify-center w-[25vw] py-6 px-4">
+                    <Logo className="text-primary w-full h-fit mb-4" />
 
-                    <BlankSeparator size={60} direction="vertical" />
+                    <p className="text-primary mb-32 text-center text-lg">
+                        Venha fazer parte de um mundo mais organizado.
+                    </p>
 
                     <Message
-                        text="Mail or password is incorrect, try again..."
+                        text="Mail or password incorrect, please, try again..."
                         type="error"
-                        style="text"
+                        box="text"
                         isVisible={error}
                     />
 
-                    <Form
-                        src={[
-                            ["Mail...", setMail, false],
-                            ["Password...", setPassword, true],
-                        ]}
-                        action={makeLogin}
-                        sendText="LOGIN"
+                    <Input
+                        text="Mail"
+                        setValue={setMail}
+                        onEnter={handleLogin}
                     />
 
-                    <BlankSeparator size={20} direction="vertical" />
-                </>
+                    <Input
+                        text="Password"
+                        setValue={setPassword}
+                        isPassword={true}
+                        onEnter={handleLogin}
+                    />
+
+                    <Button text="Login" inverse={true} onClick={handleLogin} />
+
+                    <div className="divider">Or login with</div>
+
+                    <GoogleLoginButton toggleError={toggleError} />
+                </div>
             </Card>
-        </S.Body>
+        </div>
     );
 };
 
-export default PageLoader(Login);
+export default Login;

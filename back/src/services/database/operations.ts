@@ -1,4 +1,4 @@
-// Modules
+// Libraries
 import connection from "./connection.js";
 
 class Operations {

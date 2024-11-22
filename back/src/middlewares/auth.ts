@@ -2,19 +2,24 @@
 import { Request, Response, NextFunction } from "express";
 import dotenv from "dotenv";
 
-// Services
+// Local
 import Cookie from "../services/cookie.js";
 import Token from "../services/token.js";
 
 dotenv.config();
 
+const autorizedPaths = [
+    "/user/check/nickname",
+    "/user/check/mail",
+    "/user/auth/google",
+    "/user/login",
+    "/user/register",
+    "/token/check",
+    "/token/refresh",
+];
+
 const auth = (req: Request, res: Response, next: NextFunction) => {
-    if (
-        req.path === "/user/login" ||
-        req.path === "/user/register" ||
-        req.path === "/token/check" ||
-        req.path === "/token/refresh"
-    ) {
+    if (autorizedPaths.includes(req.path)) {
         return next();
     }
 

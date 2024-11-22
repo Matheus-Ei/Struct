@@ -1,30 +1,40 @@
 // Libraries
 import { DataTypes, Model } from "sequelize";
 
-// Models
+// Local
 import connection from "../services/database/connection.js";
 
-// Database
-import PageDataModel from "./pageData";
+// Models
+import PageModel from "./page.js";
 
 class NotesPageDataModel extends Model {
-    public pageDataId!: number;
+    public id!: number;
+
     public content!: string;
+
+    public page_id!: number;
 }
 
 NotesPageDataModel.init(
     {
-        pageDataId: {
+        id: {
             type: DataTypes.INTEGER,
+            autoIncrement: true,
             primaryKey: true,
+        },
+
+        content: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+
+        page_id: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
             references: {
-                model: PageDataModel,
+                model: PageModel,
                 key: "id",
             },
-        },
-        content: {
-            type: DataTypes.TEXT,
-            allowNull: false,
         },
     },
     {

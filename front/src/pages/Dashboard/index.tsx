@@ -1,27 +1,27 @@
-// Modules
-import * as S from "./styles";
+// Libraries
+import { createElement, useState } from "react";
 
-// HOCs
-import PageLoader from "../../HOCs/PageLoader";
-
-// Hooks
-import { useState } from "react";
-
-// Components
-import Menu from "./components/Menu";
-import Page from "./components/Page";
+// Local
+import withLoader from "HOCs/withLoader";
+import Header from "./Header";
+import router from "./router";
 
 const Dashboard = () => {
-    const [selectedName, setSelected] = useState<string>("Home");
+    const [tab, setTab] = useState<string>("Projects");
+
+    const renderTab = (item: [string, () => JSX.Element], index: number) => {
+        if (tab !== item[0]) return null;
+
+        return createElement(item[1], { key: index });
+    };
 
     return (
-        <S.Body>
-            <S.Content>
-                <Menu selectedName={selectedName} setSelected={setSelected} />
-                <Page selectedName={selectedName} />
-            </S.Content>
-        </S.Body>
+        <div className="flex flex-col justify-start items-center w-screen h-[97vh]">
+            <Header tab={tab} setTab={setTab} />
+
+            {router.map(renderTab)}
+        </div>
     );
 };
 
-export default PageLoader(Dashboard, true);
+export default withLoader(Dashboard, true);
