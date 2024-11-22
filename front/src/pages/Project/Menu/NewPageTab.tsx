@@ -3,7 +3,7 @@ import { useContext } from "react";
 
 // Local
 import { addPage } from "../util/events";
-import Icons from "services/Icons";
+import Icons from "modules/Icons";
 import { PagesContext } from "..";
 import clsx from "clsx";
 

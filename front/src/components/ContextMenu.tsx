@@ -1,6 +1,6 @@
 // Libraries
 import clsx from "clsx";
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 
 interface ContextMenuProps {
     children: JSX.Element;
@@ -19,16 +19,25 @@ const ContextMenu = ({
 }: ContextMenuProps) => {
     const menuRef = useRef<HTMLDivElement>(null);
 
-    useEffect(() => {
-        const handleClickOutside = (event: MouseEvent) =>
-            menuRef?.current?.contains(event.target as Node) && onClose();
+    const handleClickOutside = useCallback(
+        (event: MouseEvent) => {
+            if (
+                menuRef.current &&
+                !menuRef.current.contains(event.target as Node)
+            ) {
+                onClose();
+            }
+        },
+        [onClose]
+    );
 
+    useEffect(() => {
         document.addEventListener("mousedown", handleClickOutside);
 
         return () => {
             document.removeEventListener("mousedown", handleClickOutside);
         };
-    }, [onClose]);
+    }, [onClose, handleClickOutside]);
 
     if (!show) return null;
 

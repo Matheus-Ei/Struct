@@ -10,7 +10,7 @@ import useToggle from "hooks/useToggle";
 import Button from "components/Button";
 import Input from "components/Input";
 import Card from "components/Card";
-import User from "utils/user";
+import User from "services/user";
 
 const Login = () => {
     const [mail, setMail] = useState<string>("");

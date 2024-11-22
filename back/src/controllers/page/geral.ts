@@ -76,6 +76,7 @@ class PageGeralController {
         const {
             name,
             description,
+            emoji,
             projectId,
             parentPage = null,
             moduleId = null,
@@ -85,6 +86,7 @@ class PageGeralController {
             const page = await PageModel.create({
                 name,
                 description,
+                emoji,
                 project_id: projectId,
                 module_id: moduleId,
                 parent_page_id: parentPage,
@@ -106,7 +108,7 @@ class PageGeralController {
                 res.status(404).send({ message: "Page not found" });
                 return;
             }
-            
+
             const {
                 name = page.name,
                 description = page.description,

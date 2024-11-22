@@ -2,8 +2,8 @@
 import { useEffect } from "react";
 
 // Local
-import Navigator from "services/Navigator";
-import Theme from "services/Theme";
+import Navigator from "modules/Navigator";
+import Theme from "modules/Theme";
 
 function App() {
     useEffect(() => {

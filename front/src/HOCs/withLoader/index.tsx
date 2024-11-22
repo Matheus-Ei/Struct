@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 
 // Local
-import User from "utils/user";
+import User from "services/user";
 
 const withLoader = (WrappedComponent: ComponentType, checkLogin?: boolean) => {
     return function WithLoader() {

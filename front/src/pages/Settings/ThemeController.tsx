@@ -3,8 +3,8 @@ import clsx from "clsx";
 import { useState } from "react";
 
 // Local
-import Icons from "services/Icons";
-import Theme from "services/Theme";
+import Icons from "modules/Icons";
+import Theme from "modules/Theme";
 
 const ThemeController = () => {
     const [theme, setTheme] = useState(Theme.getCurrent());

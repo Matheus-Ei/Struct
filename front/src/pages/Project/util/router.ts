@@ -1,5 +1,5 @@
 // Local
-import Notes from "pages/Modules/Notes";
+import Notes from "../modules/Notes";
 
 const router = [{ endpoint: Notes, name: "notes" }];
 

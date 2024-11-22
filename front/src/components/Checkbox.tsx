@@ -1,10 +1,10 @@
-// Libraries
-import { Dispatch, SetStateAction } from "react";
+// Local
+import { SetStateType } from "types/global";
 
 interface CheckboxProps {
     text: string;
     group: string;
-    setChecked: Dispatch<SetStateAction<string>>;
+    setChecked: SetStateType<string>;
     checked: string;
 }
 

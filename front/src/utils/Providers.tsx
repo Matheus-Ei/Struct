@@ -14,7 +14,7 @@ const Providers = ({ children }: ProvidersProps) => {
         <BrowserRouter>
             <QueryClientProvider client={queryClient}>
                 <GoogleOAuthProvider clientId="768820001639-h43kibiqvvbvhhhu179sfdukgppkd276.apps.googleusercontent.com">
-                    {children};
+                    {children}
                 </GoogleOAuthProvider>
             </QueryClientProvider>
         </BrowserRouter>

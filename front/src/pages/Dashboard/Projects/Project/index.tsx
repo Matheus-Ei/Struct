@@ -1,19 +1,15 @@
 // Libraries
 import clsx from "clsx";
-import { Dispatch, SetStateAction } from "react";
 
 // Local
-import Icons from "services/Icons";
-
-interface ModalType {
-    show: boolean;
-    projectId: number;
-}
+import Icons from "modules/Icons";
+import { SetStateType } from "types/global";
+import { ModalType } from "./Modal//utils/types";
 
 interface ProjectProps {
     title: string;
     description: string;
-    setModal: Dispatch<SetStateAction<ModalType>>;
+    setModal: SetStateType<ModalType>;
     id: number;
 }
 
@@ -36,7 +32,7 @@ const Project = ({ title, description, id, setModal }: ProjectProps) => {
             </div>
 
             <button onClick={handleOpen} className="w-fit">
-                <Icons name="MdOpenInNew" library="md" size={20} />
+                <Icons name="MdOpenInNew" library="md" className="text-xl" />
             </button>
         </div>
     );

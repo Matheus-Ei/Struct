@@ -1,5 +1,5 @@
 // Local
-import Request from "services/Request";
+import Page from "services/page";
 import { ReactProjectContext } from "./types";
 import { PagesRequestType } from "./types";
 
@@ -30,28 +30,24 @@ const removePageById = (
     return rootPages;
 };
 
-export const addPage = (
+export const addPage = async (
     context: ReactProjectContext,
     toggleShowChildren: ((value: boolean) => void) | null,
     pageId: number | null
 ) => {
     if (!pageId && !context) return null;
 
-    const defaultData = {
-        name: "New page",
-        description: "Page description...",
-        projectId: context.projectId,
-        parentPage: pageId,
-    };
-
-    Request.post("page/geral/create", defaultData)
-        .then((response) => {
+    await Page.create(
+        "New page",
+        undefined,
+        Number(context.projectId),
+        pageId,
+        (response) => {
             context.setSelectedPageId(response.id);
             toggleShowChildren && toggleShowChildren(true);
-        })
-        .finally(() => {
             context.refetchMenuTabs();
-        });
+        }
+    );
 };
 
 export const deletePage = async (
@@ -62,7 +58,7 @@ export const deletePage = async (
     if (!pageId && !context) return null;
 
     toggleShowMenu && toggleShowMenu(false);
-    await Request.delete(`page/geral/${pageId}`);
+    await Page.delete(pageId, () => {});
 
     if (pageId === context.selectedPageId) context.setSelectedPageId(null);
 

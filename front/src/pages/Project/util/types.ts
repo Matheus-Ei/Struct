@@ -1,6 +1,6 @@
-// Libraries
-import { Dispatch, SetStateAction } from "react";
+import { SetStateType } from "types/global";
 
+// Libraries
 export interface PagesRequestType {
     id: number;
     name: string;
@@ -17,6 +17,6 @@ export interface ReactProjectContext {
     setMenuTabs: (newMenuTabs: Array<PagesRequestType>) => void;
     refetchMenuTabs: () => void;
     selectedPageId: number | null;
-    setSelectedPageId: Dispatch<SetStateAction<number | null>>;
+    setSelectedPageId: SetStateType<number | null>;
     projectId: string | undefined;
 }

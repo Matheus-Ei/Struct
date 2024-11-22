@@ -1,21 +1,41 @@
 // Libraries
 import clsx from "clsx";
-import { ChangeEvent, Dispatch, SetStateAction } from "react";
+import { ChangeEvent, useEffect, useRef } from "react";
 
 // Local
-import Icons from "services/Icons";
+import Icons from "modules/Icons";
+import { SetStateType } from "types/global";
 
 interface SearchBarProps {
     searchPlace: Array<string>;
-    setResult: Dispatch<SetStateAction<Array<string>>>;
+    setResult: SetStateType<Array<string>>;
     placeholder?: string;
+    className?: string;
 }
 
-const SearchBar = ({ searchPlace, setResult, placeholder }: SearchBarProps) => {
+const defaultCss = clsx(
+    "w-full shadow-sm shadow-neutral",
+    "py-2 pl-16 pr-4",
+    "bg-base-200 placeholder:text-base-content",
+    "rounded-badge outline-none"
+);
+
+const SearchBar = ({
+    searchPlace,
+    setResult,
+    placeholder,
+    className,
+}: SearchBarProps) => {
+    const initialSearchPlace = useRef(searchPlace);
+
+    // Set the result to the search place when the component is mounted
+    useEffect(() => {
+        setResult(initialSearchPlace.current);
+    }, [setResult]);
+
     const onChange = (event: ChangeEvent<HTMLInputElement>) => {
         const search = event.target.value as string;
-
-        if (search === "") setResult(searchPlace);
+        if (!search) return setResult(searchPlace);
 
         const result = searchPlace.filter((item) =>
             item.toLowerCase().includes(search.toLowerCase())
@@ -24,23 +44,20 @@ const SearchBar = ({ searchPlace, setResult, placeholder }: SearchBarProps) => {
         setResult(result);
     };
 
-    const cssInput = clsx(
-        "w-full",
-        "py-2 pl-12 pr-4",
-        "bg-base-200 placeholder:text-base-content",
-        "border border-primary rounded-btn outline-none"
-    );
-
+    const css = className ? className : defaultCss;
     return (
         <div className="relative flex text-xl text-base-content w-full">
-            <button className="flex items-center h-full absolute left-3">
-                <Icons name="IoSearchOutline" library="io5" />
-            </button>
+            <Icons
+                name="IoSearchOutline"
+                library="io5"
+                className="flex items-center h-full absolute left-6 text-primary"
+            />
 
             <input
-                className={cssInput}
+                className={css}
                 placeholder={placeholder ? placeholder : "Search. . . "}
                 onChange={onChange}
+                defaultValue=""
             />
         </div>
     );

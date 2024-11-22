@@ -2,7 +2,7 @@
 import { useNavigate } from "react-router-dom";
 
 // Local
-import Icons from "services/Icons";
+import Icons from "modules/Icons";
 
 const goDashboard = (navigator: any) => {
     navigator("/dashboard");

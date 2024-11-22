@@ -4,10 +4,10 @@ import { useContext } from "react";
 // Local
 import { ReactComponent as Logo } from "assets/logo-500x500-3.svg";
 import GoogleSignUpButton from "./GoogleSignUpButton";
-import { goPrevStep } from "./functions";
+import { goPrevStep } from "./utils/functions";
 import Card from "components/Card";
 import { SignUpContext } from ".";
-import Icons from "services/Icons";
+import Icons from "modules/Icons";
 
 interface WrapperSignUpProps {
     children: JSX.Element;
