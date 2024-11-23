@@ -8,20 +8,22 @@ interface IconsProps {
     library: string;
     name: string;
     className?: string;
+    onClick?: (event?: any) => void;
 }
 
-const Icons = ({ library, name, className }: IconsProps) => {
-    if (!library || !name) return <FaQuestion />;
+const Icons = ({ library, name, className, onClick }: IconsProps) => {
+    if (!library || !name) return <FaQuestion onClick={onClick} />;
 
     try {
         const repository: any = lib[library];
         const RequiredIcon = repository[name];
 
-        if (className) return <RequiredIcon className={className} />;
+        if (className)
+            return <RequiredIcon className={className} onClick={onClick} />;
 
-        return <RequiredIcon />;
+        return <RequiredIcon onClick={onClick} />;
     } catch (error) {
-        return <FaQuestion />;
+        return <FaQuestion onClick={onClick} />;
     }
 };
 

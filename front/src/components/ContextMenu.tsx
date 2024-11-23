@@ -7,6 +7,7 @@ interface ContextMenuProps {
     onClose: () => void;
     position: { x: number; y: number };
     show: boolean;
+    translateY?: boolean;
     className?: string;
 }
 
@@ -15,6 +16,7 @@ const ContextMenu = ({
     show,
     onClose,
     position,
+    translateY,
     className,
 }: ContextMenuProps) => {
     const menuRef = useRef<HTMLDivElement>(null);
@@ -47,6 +49,9 @@ const ContextMenu = ({
         "bg-base-100 border rounded-btn border-primary"
     );
     const css = className ? className : defaultCss;
+    const translation = translateY
+        ? "translate(0%, -100%)"
+        : "translate(0%, 0%)";
 
     return (
         <div
@@ -55,7 +60,7 @@ const ContextMenu = ({
             style={{
                 top: position.y,
                 left: position.x,
-                transform: "translate(0%, -100%)",
+                transform: translation,
             }}
         >
             {children}
