@@ -10,6 +10,18 @@ assignees: ''
 ## Describe the bug
 A clear and concise description of what the bug is.
 
+## Type
+- [ ] Security
+- [ ] Performance
+- [ ] Usability
+- [ ] Other
+
+## Field
+- [ ] Front-end
+- [ ] Back-end
+- [ ] Database
+- [ ] Other
+
 ## To Reproduce
 Steps to reproduce the behavior:
 1. Go to
