@@ -2,7 +2,7 @@
 import { Router } from "express";
 
 // Local
-import UserController from "../controllers/user.js";
+import userController from "../controllers/user.js";
 
 class UserRoute {
     public router: Router;
@@ -13,19 +13,19 @@ class UserRoute {
     }
 
     private init() {
-        this.router.get("/get", UserController.get);
+        this.router.post("/", userController.register);
+        this.router.get("/", userController.get);
 
-        this.router.get("/projects", UserController.getProjects);
+        // Access
+        this.router.post("/login", userController.login);
+        this.router.post("/logout", userController.logout);
 
-        this.router.post("/register", UserController.register);
+        // Auth
+        this.router.post("/auth/google", userController.authGoogle);
 
-        this.router.post("/login", UserController.login);
-        this.router.post("/logout", UserController.logout);
-
-        this.router.post("/auth/google", UserController.authGoogle);
-
-        this.router.post("/check/nickname", UserController.nicknameIsAvalaible);
-        this.router.post("/check/mail", UserController.mailIsAvalaible);
+        // Check availability
+        this.router.post("/check/nickname", userController.nicknameIsAvalaible);
+        this.router.post("/check/mail", userController.mailIsAvalaible);
     }
 }
 

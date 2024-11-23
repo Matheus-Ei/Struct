@@ -2,7 +2,6 @@
 import { Request, Response } from "express";
 
 // Local
-import operations from "../services/database/operations.js";
 import Cookie from "../services/cookie.js";
 import Token from "../services/token.js";
 import Hash from "../services/hash.js";
@@ -21,7 +20,18 @@ class UserController {
             const user = await UserModel.findByPk(id);
 
             if (user) {
-                res.status(200).json(user);
+                res.status(200).json({
+                    message: "User found",
+                    data: {
+                        id: user.id,
+                        name: user.name,
+                        nickname: user.nickname,
+                        mail: user.mail,
+                        verified: user.verified,
+                        autenticator: user.autenticator,
+                        photo: user.photo,
+                    },
+                });
             } else {
                 res.status(404).json({ message: "User not found" });
             }
@@ -30,35 +40,14 @@ class UserController {
         }
     }
 
-    public async getProjects(req: Request, res: Response) {
-        const userId = Cookie.get("id", req);
-
-        try {
-            const projects = await operations.query(
-                `SELECT id,
-	                    title,
-	                    description
-                 FROM project
-                 WHERE owner_user_id = ${userId};`
-            );
-
-            if (projects) {
-                res.status(200).json(projects[0]);
-            } else {
-                res.status(404).json({
-                    message: "No projects for this user were found",
-                });
-            }
-        } catch (error) {
-            res.status(500).json({
-                message: "Error fetching the projects",
-                error,
-            });
-        }
-    }
-
     public async nicknameIsAvalaible(req: Request, res: Response) {
         const { nickname } = req.body;
+
+        // Check if the nickname is missing
+        if (!nickname) {
+            res.status(400).json({ message: "Missing nickname" });
+            return;
+        }
 
         try {
             const user = await UserModel.findOne({
@@ -68,9 +57,15 @@ class UserController {
             });
 
             if (user) {
-                res.status(200).json({ isAvailable: false });
+                res.status(200).json({
+                    message: "The nickname is not avalaible",
+                    isAvailable: false,
+                });
             } else {
-                res.status(200).json({ isAvailable: true });
+                res.status(200).json({
+                    message: "The nickname is avalaible",
+                    isAvailable: true,
+                });
             }
         } catch (error) {
             res.status(500).json({ message: "Error checking nickname", error });
@@ -80,6 +75,12 @@ class UserController {
     public async mailIsAvalaible(req: Request, res: Response) {
         const { mail } = req.body;
 
+        // Check if the mail is missing
+        if (!mail) {
+            res.status(400).json({ message: "Missing mail" });
+            return;
+        }
+
         try {
             const user = await UserModel.findOne({
                 where: {
@@ -88,9 +89,15 @@ class UserController {
             });
 
             if (user) {
-                res.status(200).json({ isAvailable: false });
+                res.status(200).json({
+                    message: "The mail is not avalaible",
+                    isAvailable: false,
+                });
             } else {
-                res.status(200).json({ isAvailable: true });
+                res.status(200).json({
+                    message: "The mail is avalaible",
+                    isAvailable: true,
+                });
             }
         } catch (error) {
             res.status(500).json({ message: "Error checking mail", error });
@@ -108,6 +115,13 @@ class UserController {
             photo = "",
         } = req.body;
 
+        // Check if the fields are missing
+        if (!name || !nickname || !mail) {
+            res.status(400).json({ message: "Missing fields" });
+            return;
+        }
+
+        // Generate the hash for the password
         const hashObj = new Hash();
         const hashPassword = await hashObj.make(password);
 
@@ -134,11 +148,11 @@ class UserController {
                 settings_id: userSettings.id,
             });
 
-            const refresh = new Token(process.env.REFRESH_SECRET as string);
-            const access = new Token(process.env.JWT_SECRET as string);
-
             // Generate the tokens and set them as cookies to make user logged in
             if (newUser) {
+                const refresh = new Token(process.env.REFRESH_SECRET as string);
+                const access = new Token(process.env.JWT_SECRET as string);
+
                 const accessTk = access.generate(
                     { id: newUser.dataValues.id },
                     "1h"
@@ -153,7 +167,19 @@ class UserController {
                 Cookie.generate("id", newUser.dataValues.id, res);
             }
 
-            res.status(201).json({ newUser });
+            res.status(201).json({
+                message: "User created",
+                status: true,
+                data: {
+                    id: newUser.dataValues.id,
+                    name: newUser.dataValues.name,
+                    nickname: newUser.dataValues.nickname,
+                    mail: newUser.dataValues.mail,
+                    verified: newUser.dataValues.verified,
+                    autenticator: newUser.dataValues.autenticator,
+                    photo: newUser.dataValues,
+                },
+            });
         } catch (error) {
             res.status(500).json({ message: "Error creating the user", error });
         }
@@ -161,6 +187,12 @@ class UserController {
 
     public async login(req: Request, res: Response) {
         const { mail, password = " ", autenticator = "Default" } = req.body;
+
+        // Check if the fields are missing
+        if (!mail) {
+            res.status(400).json({ message: "Missing mail" });
+            return;
+        }
 
         try {
             const user = await UserModel.findOne({
@@ -180,25 +212,24 @@ class UserController {
                 // Verify if the user is trying to login with the correct autenticator
                 if (user.dataValues.autenticator !== autenticator) {
                     res.status(401).send({
-                        message:
-                            "You aren't authorized to login with these credentials",
+                        message: "The autenticator is not correct",
                     });
                     return;
                 }
 
+                // If the password is correct or the autenticator is "Auth" generate the tokens
                 if (isMatchPass || autenticator === "Auth") {
-                    // Generate the tokens
                     const refresh = new Token(
                         process.env.REFRESH_SECRET as string
                     );
                     const access = new Token(process.env.JWT_SECRET as string);
 
                     const accessTk = access.generate(
-                        { id: user?.dataValues.id },
+                        { id: user.dataValues.id },
                         "1h"
                     );
                     const refreshTk = refresh.generate(
-                        { id: user?.dataValues.id },
+                        { id: user.dataValues.id },
                         "7d"
                     );
 
@@ -207,22 +238,17 @@ class UserController {
                     Cookie.generate("refresh_token", refreshTk, res);
                     Cookie.generate("id", user?.dataValues.id, res);
 
-                    res.status(201).json({
+                    res.status(200).json({
                         message: "The login was a success",
-                        status: true,
                     });
                 } else {
                     res.status(401).json({
-                        message:
-                            "You aren'n authorized to login with these credentials",
-                        status: false,
+                        message: "The credentials are not correct",
                     });
                 }
             } else {
                 res.status(401).json({
-                    message:
-                        "You aren'n authorized to login with these credentials",
-                    status: false,
+                    message: "The credentials are not correct",
                 });
             }
         } catch (error) {
@@ -248,6 +274,7 @@ class UserController {
     public async authGoogle(req: Request, res: Response) {
         const { access_token } = req.body;
 
+        // Check if the access_token is missing
         if (!access_token) {
             res.status(400).send({ message: "Missing access_token" });
             return;
@@ -281,12 +308,15 @@ class UserController {
             }
 
             res.status(200).send({
-                mail: userData.email,
-                name: userData.name,
-                photo: userData.picture,
-                verified: userData.verified_email,
-                autenticator: "Google",
-                nickname,
+                message: "User authenticated with Google",
+                data: {
+                    name: userData.name,
+                    nickname,
+                    mail: userData.email,
+                    photo: userData.picture,
+                    verified: userData.verified_email,
+                    autenticator: "Google",
+                },
             });
         } catch (error) {
             res.status(500).send({

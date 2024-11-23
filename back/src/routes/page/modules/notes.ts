@@ -2,7 +2,7 @@
 import { Router } from "express";
 
 // Local
-import NotesPageController from "../../controllers/page/notes.js";
+import notesPageController from "../../../controllers/page/modules/notes.js";
 
 class NotesPageRoute {
     public router: Router;
@@ -13,8 +13,8 @@ class NotesPageRoute {
     }
 
     private init() {
-        this.router.get("/:id", NotesPageController.get);
-        this.router.patch("/set-module/:id", NotesPageController.setModule);
+        this.router.get("/:id", notesPageController.get);
+        this.router.patch("/set/:id", notesPageController.set);
     }
 }
 

@@ -1,19 +1,24 @@
 // Routes
-import UserRoute from "../routes/user.js";
-import TokenRoute from "../routes/token.js";
-import ProjectRoute from "../routes/project.js";
-import NotesPageRoute from "../routes/page/notes.js";
-import PageGeralRoute from "../routes/page/geral.js";
+import userRoute from "../routes/user.js";
+import tokenRoute from "../routes/token.js";
+import projectRoute from "../routes/project/project.js";
+import shareRoute from "../routes/project/share.js";
+import notesPageRoute from "../routes/page/modules/notes.js";
+import pageRoute from "../routes/page/page.js";
+import rootRoute from "../routes/root.js";
 
 type MainRoutesType = Array<[String, Object]>;
 
 const mainRoutes: MainRoutesType = [
-    ["/user", UserRoute.router],
-    ["/token", TokenRoute.router],
-    ["/project", ProjectRoute.router],
+    ["/user", userRoute.router],
+    ["/token", tokenRoute.router],
+    ["/project", projectRoute.router],
+    ["/project/share", shareRoute.router],
 
-    ["/page/notes", NotesPageRoute.router],
-    ["/page/geral", PageGeralRoute.router],
+    ["/page", pageRoute.router],
+    ["/page/notes", notesPageRoute.router],
+
+    ["/", rootRoute.router],
 ];
 
 export default mainRoutes;
