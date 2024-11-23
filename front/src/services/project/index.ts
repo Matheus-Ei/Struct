@@ -66,6 +66,31 @@ class Project {
             return false;
         }
     }
+
+    public static async share(
+        id: number,
+        nickname: string,
+        permission: string,
+        onSuccess: () => void
+    ) {
+        try {
+            await Request.post(`project/share/${id}`, { nickname, permission });
+            onSuccess();
+
+            return true;
+        } catch {
+            return false;
+        }
+    }
+
+    public static async getUsers(id: number) {
+        try {
+            const response = await Request.get(`project/users/${id}`);
+            return response;
+        } catch {
+            return null;
+        }
+    }
 }
 
 export default Project;

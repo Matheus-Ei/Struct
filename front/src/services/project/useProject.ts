@@ -8,3 +8,7 @@ export function useProject(id: number) {
 export function useAllProjects() {
     return useQuery("all-user-projects", () => Project.getAll());
 }
+
+export function useProjectUsers(id: number) {
+    return useQuery(["project-users", id], () => Project.getUsers(id));
+}

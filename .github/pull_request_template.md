@@ -1,27 +1,51 @@
 # Description
 Please include a summary of the changes and the related issue.
-Please also include relevant motivation and context. 
-List any dependencies that are required for this change.
+
+## Changes 
+- List of changes: and a brief description of the changes
 
 ## Type
 - [ ] Bug fix
 - [ ] New feature
+- [ ] Refactor
+- [ ] Other
 
-## More information
+## Field
+- [ ] Front-end
+- [ ] Back-end
+- [ ] Server
+- [ ] DevOps
+- [ ] Database
+- [ ] Design
+- [ ] Documentation
+- [ ] Other
+
+## More
 - [ ] Require a documentation update
 - [ ] Breaking change
+- [ ] Change the dependencies or packages
+- [ ] Must change the database structure
+- [ ] Other
 
 # Tests
 Select the ways that you tested your code in the list below
-- [ ] Postman
+- [ ] Unit Tests
+- [ ] Integration Tests
+- [ ] Manual Tests
+- [ ] Other
 
 **Test Configuration**:
 * OS:
+* Browser:
 * Hardware:
 
 # Checklist
+- [ ] The changes don't generate new warnings or errors
 - [ ] Follow the project guidelines
-- [ ] The code was tested
-- [ ] Hard parts commented
-- [ ] Documentation updated
-- [ ] The changes don't generate new warnings
+- [ ] The code was
+  - [ ] Commented
+  - [ ] Refactored
+  - [ ] Formatted
+  - [ ] Tested
+  - [ ] Reviewed
+  - [ ] Documented
