@@ -7,23 +7,20 @@ import { useCallback, useEffect, useState } from "react";
 import Button from "components/Button";
 import Icons from "modules/Icons";
 import User from "services/user";
-import { useGoogleUserProvider } from "services/providers/useUser";
+import useUserProvider from "services/providers/useUserProvider";
 
 interface GoogleLoginButtonProps {
     toggleError: (value: boolean) => void;
 }
 
 const GoogleLoginButton = ({ toggleError }: GoogleLoginButtonProps) => {
-    const [googleAccessToken, setGoogleAccessToken] = useState<string | null>(
-        null
-    );
+    const [accessToken, setAccessToken] = useState<string | null>(null);
     const navigate = useNavigate();
-    const { data: response } = useGoogleUserProvider(googleAccessToken);
+    const { data: response } = useUserProvider(accessToken, "google");
 
     // Gets the access_token from the google login
     const googleProvider = useGoogleLogin({
-        onSuccess: (codeResponse) =>
-            setGoogleAccessToken(codeResponse.access_token),
+        onSuccess: (codeResponse) => setAccessToken(codeResponse.access_token),
         onError: (error) => console.log("Login Failed:", error),
     });
 
@@ -47,11 +44,7 @@ const GoogleLoginButton = ({ toggleError }: GoogleLoginButtonProps) => {
         }
     };
 
-    const memoizedLogin = useCallback(login, [
-        navigate,
-        toggleError,
-        response,
-    ]);
+    const memoizedLogin = useCallback(login, [navigate, toggleError, response]);
 
     useEffect(() => {
         memoizedLogin();

@@ -1,7 +1,7 @@
 import { useQuery } from "react-query";
 import Request from "modules/Request";
 
-export const useGoogleUserProvider = (access_token: string | null) => {
+const useUserProvider = (access_token: string | null, provider: "google") => {
     const getGoogleUser = async (access_token: string | null) => {
         try {
             if (!access_token) return null;
@@ -16,7 +16,12 @@ export const useGoogleUserProvider = (access_token: string | null) => {
         }
     };
 
-    return useQuery(["google-user-provider", access_token], () =>
-        getGoogleUser(access_token)
-    );
+    return useQuery(["google-user-provider", access_token], () => {
+        switch (provider) {
+            case "google":
+                return getGoogleUser(access_token);
+        }
+    });
 };
+
+export default useUserProvider;

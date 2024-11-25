@@ -1,10 +1,10 @@
 import Request from "modules/Request";
-import { PagesRequestType } from "./types";
+import { GetPageType, GetPagesType, PageType } from "./types";
 
 class Page {
     public static async get(id: number) {
         try {
-            const response = await Request.get(`page/${id}`);
+            const response: GetPageType = await Request.get(`page/${id}`);
             return response.data;
         } catch {
             return null;
@@ -13,7 +13,9 @@ class Page {
 
     public static async getAll(projectId: number) {
         try {
-            const response = await Request.get(`project/${projectId}/pages`);
+            const response: GetPagesType = await Request.get(
+                `project/${projectId}/pages`
+            );
             return response.data;
         } catch {
             return null;
@@ -48,15 +50,15 @@ class Page {
         name: string | undefined,
         description: string | undefined,
         emoji: string | undefined,
-        onSuccess: () => void
+        onSuccess: (response?: any) => void
     ) {
         try {
-            await Request.patch(`page/${id}`, {
+            const response = await Request.patch(`page/${id}`, {
                 name,
                 description,
                 emoji,
             });
-            onSuccess();
+            onSuccess(response);
 
             return true;
         } catch {
@@ -65,10 +67,10 @@ class Page {
     }
 
     public static removeById(
-        rootPages: PagesRequestType[],
+        rootPages: PagesType[],
         targetPageId: number
-    ): PagesRequestType[] {
-        function removePage(page: PagesRequestType): boolean {
+    ): PagesType[] {
+        function removePage(page: PagesType): boolean {
             if (page.id === targetPageId) return true;
 
             if (page.children_pages) {
@@ -93,10 +95,13 @@ class Page {
         return rootPages;
     }
 
-    public static async delete(id: number, onSuccess: () => void) {
+    public static async delete(
+        id: number,
+        onSuccess: (response?: any) => void
+    ) {
         try {
-            await Request.delete(`page/${id}`);
-            onSuccess();
+            const response = await Request.delete(`page/${id}`);
+            onSuccess(response);
 
             return true;
         } catch {

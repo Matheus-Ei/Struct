@@ -8,14 +8,14 @@ import Button from "components/Button";
 import Icons from "modules/Icons";
 import User from "services/user";
 import { SignUpContext } from ".";
-import { useGoogleUserProvider } from "services/providers/useUser";
+import useUserProvider from "services/providers/useUserProvider";
 
 const GoogleSignUpButton = () => {
     const [accessToken, setAccessToken] = useState<string | null>(null);
     const navigate = useNavigate();
     const context = useContext(SignUpContext);
 
-    const { data: response } = useGoogleUserProvider(accessToken);
+    const { data: response } = useUserProvider(accessToken, "google");
 
     const googleProvider = useGoogleLogin({
         onSuccess: (codeResponse) => setAccessToken(codeResponse.access_token),
