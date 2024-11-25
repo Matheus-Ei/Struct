@@ -1,6 +1,5 @@
 // Local
 import { SignUpContextType } from "./types";
-import Request from "modules/Request";
 import { ErrorType, SetStateType } from "types/global";
 
 class Validations {
@@ -42,36 +41,12 @@ class Validations {
             return false;
         }
 
-        // Check if nickname is available
-        const response = await Request.post("user/check/nickname", {
-            nickname: nickname,
-        });
-        if (response.isAvailable === false) {
-            this.setNickError({
-                message: "This nickname is not avaliable",
-                isError: true,
-            });
-            return false;
-        }
-
         return true;
     }
 
     private async mail() {
         const mail = this.context.mail;
         if (!mail) return false;
-
-        // Check if mail registered already
-        const response = await Request.post("user/check/mail", {
-            mail: mail,
-        });
-        if (response.isAvailable === false) {
-            this.setMailError({
-                message: "This mail is already in use",
-                isError: true,
-            });
-            return false;
-        }
 
         // Mail validation
         const mailUser = mail.substring(0, mail.indexOf("@"));

@@ -5,9 +5,9 @@ import { useCallback, useEffect, useState } from "react";
 
 // Local
 import Button from "components/Button";
-import Request from "modules/Request";
 import Icons from "modules/Icons";
 import User from "services/user";
+import { useGoogleUserProvider } from "services/providers/useUser";
 
 interface GoogleLoginButtonProps {
     toggleError: (value: boolean) => void;
@@ -18,43 +18,39 @@ const GoogleLoginButton = ({ toggleError }: GoogleLoginButtonProps) => {
         null
     );
     const navigate = useNavigate();
+    const { data: response } = useGoogleUserProvider(googleAccessToken);
 
     // Gets the access_token from the google login
-    const googleLogin = useGoogleLogin({
+    const googleProvider = useGoogleLogin({
         onSuccess: (codeResponse) =>
             setGoogleAccessToken(codeResponse.access_token),
         onError: (error) => console.log("Login Failed:", error),
     });
 
     const login = async () => {
-        if (googleAccessToken) {
-            try {
-                // Get the informations of the user from the access_token
-                const response = await Request.post("user/auth/google", {
-                    access_token: googleAccessToken,
-                });
+        try {
+            if (!response) return;
 
-                // Make the login using the Auth autenticator
-                const isLogged = await User.login(
-                    response.mail,
-                    "",
-                    "Auth",
-                    navigate
-                );
+            // Make the login using the Auth autenticator
+            const isLogged = await User.login(
+                response.mail,
+                "",
+                "Auth",
+                navigate
+            );
 
-                if (!isLogged) {
-                    toggleError(true);
-                }
-            } catch (error) {
-                console.error(error);
+            if (!isLogged) {
+                toggleError(true);
             }
+        } catch {
+            toggleError(true);
         }
     };
 
     const memoizedLogin = useCallback(login, [
-        googleAccessToken,
         navigate,
         toggleError,
+        response,
     ]);
 
     useEffect(() => {
@@ -65,7 +61,7 @@ const GoogleLoginButton = ({ toggleError }: GoogleLoginButtonProps) => {
         <Button
             className="border-2 w-fit h-fit p-2 rounded-btn bg-white border-red-400 text-red-400 font-bold text-2xl"
             inverse={true}
-            onClick={googleLogin}
+            onClick={googleProvider}
         >
             <Icons library="fc" name="FcGoogle" />
         </Button>

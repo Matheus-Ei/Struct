@@ -13,13 +13,11 @@ class PageRoute {
     }
 
     private init() {
-        this.router.get("/:id", pageController.get);
-        this.router.get("/all/:projectId", pageController.getAll);
-        this.router.get("/:id/children", pageController.children);
-
         this.router.post("/", pageController.create);
+        this.router.get("/:id", pageController.get);
         this.router.delete("/:id", pageController.delete);
         this.router.patch("/:id", pageController.edit);
+        this.router.get("/:id/children", pageController.children);
     }
 }
 

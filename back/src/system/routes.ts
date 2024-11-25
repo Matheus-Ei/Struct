@@ -1,4 +1,5 @@
 // Routes
+import userProviderRoute from "../routes/provider/user.js";
 import userRoute from "../routes/user.js";
 import tokenRoute from "../routes/token.js";
 import projectRoute from "../routes/project/project.js";
@@ -12,9 +13,15 @@ type MainRoutesType = Array<[String, Object]>;
 const mainRoutes: MainRoutesType = [
     ["/user", userRoute.router],
     ["/token", tokenRoute.router],
+
+    // Project
     ["/project", projectRoute.router],
     ["/project/share", shareRoute.router],
 
+    // Providers
+    ["/provider/user", userProviderRoute.router],
+
+    // Page
     ["/page", pageRoute.router],
     ["/page/notes", notesPageRoute.router],
 

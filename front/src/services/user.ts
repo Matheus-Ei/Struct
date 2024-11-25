@@ -12,7 +12,7 @@ class User {
         navigate: NavigateFunction
     ) {
         try {
-            await Request.post("user/login", {
+            await Request.post("user/auth", {
                 mail,
                 password,
                 autenticator,
@@ -55,7 +55,7 @@ class User {
 
     static async logout(navigate: NavigateFunction) {
         try {
-            await Request.post("user/logout", {});
+            await Request.delete("user/auth");
 
             navigate("/");
             return true;
@@ -73,7 +73,7 @@ class User {
         navigate: NavigateFunction
     ) {
         try {
-            await Request.post("user/register", {
+            await Request.post("user", {
                 name,
                 nickname,
                 password,
@@ -83,6 +83,24 @@ class User {
 
             navigate("/dashboard");
             return true;
+        } catch {
+            return false;
+        }
+    }
+
+    static async checkAvailability(nickname?: string, mail?: string) {
+        try {
+            if (nickname) {
+                const response = await Request.get("user?nickname=" + nickname);
+                return response.isAvailable;
+            }
+
+            if (mail) {
+                const response = await Request.get("user?mail=" + mail);
+                return response.isAvailable;
+            }
+
+            return false;
         } catch {
             return false;
         }

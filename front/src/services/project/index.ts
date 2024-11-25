@@ -3,8 +3,8 @@ import Request from "modules/Request";
 class Project {
     public static async get(id: number) {
         try {
-            const response = await Request.get(`project/get/${id}`);
-            return response;
+            const response = await Request.get(`project/${id}`);
+            return response.data;
         } catch {
             return null;
         }
@@ -12,8 +12,8 @@ class Project {
 
     public static async getAll() {
         try {
-            const response = await Request.get("user/projects");
-            return response;
+            const response = await Request.get("project");
+            return response.data;
         } catch {
             return null;
         }
@@ -25,7 +25,7 @@ class Project {
         onSuccess: () => void
     ) {
         try {
-            await Request.post("project/create", {
+            await Request.post("project", {
                 title,
                 description,
             });
@@ -44,7 +44,7 @@ class Project {
         onSuccess: () => void
     ) {
         try {
-            await Request.patch(`project/edit/${id}`, {
+            await Request.patch(`project/${id}`, {
                 title,
                 description,
             });
@@ -58,7 +58,7 @@ class Project {
 
     public static async delete(id: number, onSuccess: () => void) {
         try {
-            await Request.delete(`project/delete/${id}`);
+            await Request.delete(`project/${id}`);
             onSuccess();
 
             return true;
@@ -85,8 +85,8 @@ class Project {
 
     public static async getUsers(id: number) {
         try {
-            const response = await Request.get(`project/users/${id}`);
-            return response;
+            const response = await Request.get(`project/share/${id}`);
+            return response.data;
         } catch {
             return null;
         }

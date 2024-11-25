@@ -13,19 +13,11 @@ class UserRoute {
     }
 
     private init() {
-        this.router.post("/", userController.register);
         this.router.get("/", userController.get);
+        this.router.post("/", userController.register);
 
-        // Access
-        this.router.post("/login", userController.login);
-        this.router.post("/logout", userController.logout);
-
-        // Auth
-        this.router.post("/auth/google", userController.authGoogle);
-
-        // Check availability
-        this.router.post("/check/nickname", userController.nicknameIsAvalaible);
-        this.router.post("/check/mail", userController.mailIsAvalaible);
+        this.router.post("/auth", userController.login);
+        this.router.delete("/auth", userController.logout);
     }
 }
 

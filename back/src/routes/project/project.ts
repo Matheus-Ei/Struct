@@ -14,12 +14,13 @@ class ProjectRoute {
 
     private init() {
         this.router.post("/", projectController.create);
-
-        this.router.get("/:id", projectController.get);
         this.router.get("/", projectController.getAll);
 
+        this.router.get("/:id", projectController.get);
         this.router.patch("/:id", projectController.edit);
         this.router.delete("/:id", projectController.delete);
+
+        this.router.get("/:id/pages", projectController.getPages);
     }
 }
 

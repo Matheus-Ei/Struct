@@ -174,6 +174,64 @@ class ProjectController {
             });
         }
     }
+
+    public async getPages(req: Request, res: Response) {
+        const { id } = req.params;
+
+        try {
+            const pages = await operations.query(`
+                WITH RECURSIVE page_hierarchy AS (
+                    SELECT 
+                        page.id,
+                        page.name,
+                        page.emoji,
+                        page.description,
+                        page.position,
+                        page.parent_page_id
+                    FROM page
+                    WHERE project_id = ${id}
+                        AND parent_page_id IS NULL
+                
+                    UNION ALL
+                
+                    SELECT 
+                        child.id,
+                        child.name,
+                        child.emoji,
+                        child.description,
+                        child.position,
+                        child.parent_page_id
+                    FROM page AS child
+                    JOIN page_hierarchy AS parent ON child.parent_page_id = parent.id
+                )
+                SELECT 
+                    root.id,
+                    root.name,
+                    root.emoji,
+                    root.description,
+                    root.position,
+                    get_children(root.id) AS children_pages
+                FROM project
+                JOIN page AS root ON root.project_id = project.id
+                WHERE project.id = ${id}
+                    AND root.parent_page_id IS NULL
+                GROUP BY root.id
+                ORDER BY root.position, root.id;
+            `);
+
+            res.status(200).send({
+                messages: "Pages found",
+                data: pages[0],
+            });
+            return;
+        } catch (error) {
+            res.status(500).send({
+                message: "Error fetching the pages",
+                error,
+            });
+            return;
+        }
+    }
 }
 
 export default new ProjectController();

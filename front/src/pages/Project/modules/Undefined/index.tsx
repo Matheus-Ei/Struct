@@ -8,7 +8,6 @@ import { PagesContext } from "pages/Project";
 import SearchElement from "./SearchElement";
 import EditableField from "./EditableField";
 import useToggle from "hooks/useToggle";
-import Request from "modules/Request";
 import Emoji from "components/Emoji";
 
 const Undefined = () => {
@@ -22,12 +21,9 @@ const Undefined = () => {
         context?.refetchPage();
     }, [context?.refetchPage, context]);
 
-    // Updates the emoji on the database
     useEffect(() => {
         if (emoji && context && context.page) {
-            Request.patch(`page/geral/edit/${context.page.id}`, {
-                emoji: emoji.emoji,
-            });
+            // Updates the emoji on the database
         }
     }, [emoji, context?.page?.id, context]);
 

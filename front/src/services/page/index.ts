@@ -4,8 +4,8 @@ import { PagesRequestType } from "./types";
 class Page {
     public static async get(id: number) {
         try {
-            const response = await Request.get(`page/geral/${id}`);
-            return response;
+            const response = await Request.get(`page/${id}`);
+            return response.data;
         } catch {
             return null;
         }
@@ -13,8 +13,8 @@ class Page {
 
     public static async getAll(projectId: number) {
         try {
-            const response = await Request.get(`project/pages/${projectId}`);
-            return response;
+            const response = await Request.get(`project/${projectId}/pages`);
+            return response.data;
         } catch {
             return null;
         }
@@ -28,7 +28,7 @@ class Page {
         onSuccess: (response?: any) => void
     ) {
         try {
-            const response = await Request.post("page/geral/create", {
+            const response = await Request.post("page", {
                 name,
                 emoji,
                 description: "Page description...",
@@ -51,7 +51,7 @@ class Page {
         onSuccess: () => void
     ) {
         try {
-            await Request.patch(`page/geral/edit/${id}`, {
+            await Request.patch(`page/${id}`, {
                 name,
                 description,
                 emoji,
@@ -95,7 +95,7 @@ class Page {
 
     public static async delete(id: number, onSuccess: () => void) {
         try {
-            await Request.delete(`page/geral/${id}`);
+            await Request.delete(`page/${id}`);
             onSuccess();
 
             return true;

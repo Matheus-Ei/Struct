@@ -3,7 +3,6 @@ import { useRef } from "react";
 
 // Local
 import useToggle from "hooks/useToggle";
-import Request from "modules/Request";
 
 interface EditableFieldProps {
     defaultValue: string | undefined;
@@ -15,7 +14,6 @@ interface EditableFieldProps {
 const EditableField = ({
     defaultValue,
     className,
-    pageId,
     field,
 }: EditableFieldProps) => {
     const [isEditable, toggleIsEditable] = useToggle(false);
@@ -27,10 +25,6 @@ const EditableField = ({
 
             const data: any = {};
             data[field] = divRef.current?.innerText;
-
-            Request.patch(`page/geral/edit/${pageId}`, data).then(() => {
-                toggleIsEditable(false);
-            });
         }
     };
 

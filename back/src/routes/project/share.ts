@@ -13,8 +13,8 @@ class ProjectRoute {
     }
 
     private init() {
-        this.router.get("/users/:id", shareController.get);
-        this.router.post("/share/:id", shareController.share);
+        this.router.get("/:id", shareController.get);
+        this.router.post("/:id", shareController.share);
     }
 }
 
