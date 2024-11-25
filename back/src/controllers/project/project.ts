@@ -2,12 +2,11 @@
 import { Request, Response } from "express";
 
 // Local
-import operations from "../services/database/operations.js";
-import Cookie from "../services/cookie.js";
+import operations from "../../services/database/operations.js";
+import Cookie from "../../services/cookie.js";
 
 // Models
-import ProjectModel from "../models/project.js";
-import UserModel from "../models/user.js";
+import ProjectModel from "../../models/project.js";
 
 class ProjectController {
     public async get(req: Request, res: Response) {
@@ -28,12 +27,16 @@ class ProjectController {
                 GROUP BY project.id;
             `);
 
+            // Check if the project exists
             if (project[0].length === 0) {
                 res.status(404).json({ message: "Project not found" });
                 return;
             }
 
-            res.status(200).json(project[0][0]);
+            res.status(200).json({
+                message: "Project found",
+                data: project[0][0],
+            });
         } catch (error) {
             res.status(500).json({
                 message: "Error fetching this project",
@@ -42,21 +45,60 @@ class ProjectController {
         }
     }
 
+    public async getAll(req: Request, res: Response) {
+        const userId = Cookie.get("id", req);
+
+        try {
+            const projects = await ProjectModel.findAll({
+                where: {
+                    owner_user_id: userId,
+                },
+            });
+
+            // Check if the projects were found
+            if (projects) {
+                res.status(200).json({
+                    message: "Projects found",
+                    data: projects,
+                });
+            } else {
+                res.status(404).json({
+                    message: "No projects for this user were found",
+                });
+            }
+        } catch (error) {
+            res.status(500).json({
+                message: "Error fetching the projects",
+                error,
+            });
+        }
+    }
+
     public async create(req: Request, res: Response) {
-        const { title, description } = req.body;
         const ownerUserId = Cookie.get("id", req);
+        const { title, description } = req.body;
+
+        // Check if the title and description are present
+        if (!title || !description) {
+            res.status(400).json({ message: "Missing title or description" });
+            return;
+        }
 
         try {
             const project = await ProjectModel.create({
                 title,
                 description,
-
                 owner_user_id: ownerUserId,
             });
 
             res.status(201).json({
                 message: "Project created",
-                id: project.id,
+                data: {
+                    id: project.id,
+                    title: project.title,
+                    description: project.description,
+                    owner_user_id: project.owner_user_id,
+                },
             });
 
             return;
@@ -76,8 +118,11 @@ class ProjectController {
         try {
             const project = await ProjectModel.findByPk(id);
 
+            // Check if the project exists
             if (!project) {
-                res.status(404).json({ message: "Project not found" });
+                res.status(404).json({
+                    message: "Project not found, so not deleted",
+                });
                 return;
             }
 
@@ -85,8 +130,10 @@ class ProjectController {
             res.status(200).json({ message: "Project deleted" });
             return;
         } catch (error) {
-            console.error(error);
-            res.status(500).json({ message: "Error deleting the project" });
+            res.status(500).json({
+                message: "Error deleting the project",
+                error,
+            });
             return;
         }
     }
@@ -94,25 +141,37 @@ class ProjectController {
     public async edit(req: Request, res: Response) {
         const { id } = req.params;
 
-        const project = await ProjectModel.findByPk(id);
-
-        if (!project) {
-            res.status(404).send({ message: "Project not found" });
-            return;
-        }
-
-        const { title = project.title, description = project.description } =
-            req.body;
-
         try {
+            const project = await ProjectModel.findByPk(id);
+
+            // Check if the project exists
+            if (!project) {
+                res.status(404).send({ message: "Project not found" });
+                return;
+            }
+
+            const { title = project.title, description = project.description } =
+                req.body;
+
             await project.update({
                 title,
                 description,
             });
 
-            res.status(200).send({ message: "Project updated", project });
+            res.status(200).send({
+                message: "Project updated",
+                data: {
+                    id: project.id,
+                    title: project.title,
+                    description: project.description,
+                    owner_user_id: project.owner_user_id,
+                },
+            });
         } catch (error) {
-            res.status(500).send({ message: "Error updating the project" });
+            res.status(500).send({
+                message: "Error updating the project",
+                error,
+            });
         }
     }
 
@@ -160,98 +219,16 @@ class ProjectController {
                 ORDER BY root.position, root.id;
             `);
 
-            res.status(200).send(pages[0]);
+            res.status(200).send({
+                messages: "Pages found",
+                data: pages[0],
+            });
             return;
-        } catch (error) {
-            res.status(500).send(error);
-            return;
-        }
-    }
-
-    public async getShared(req: Request, res: Response) {
-        const { id } = req.params;
-
-        try {
-            const response = await operations.query(`
-                SELECT relationship_shared_project.project_id as project_id,
-	                permission_level_id,
-	                permission_level.name,
-	                permission_level.description,
-	                users.id as user_id,
-	                users.name as user_name,
-	                users.nickname as user_nickname,
-	                users.mail as user_mail,
-	                users.photo as user_photo
-                FROM relationship_shared_project
-                JOIN permission_level ON relationship_shared_project.permission_level_id = permission_level.id
-                JOIN users ON relationship_shared_project.user_shared_id = users.id
-                WHERE relationship_shared_project.project_id = ${id};
-            `);
-
-            res.status(200).send(response[0]);
         } catch (error) {
             res.status(500).send({
-                message: "Error fetching shared users",
+                message: "Error fetching the pages",
                 error,
             });
-        }
-    }
-
-    public async share(req: Request, res: Response) {
-        const { id } = req.params;
-        const { nickname, permission } = req.body;
-
-        if (!nickname || !permission) {
-            res.status(400).json({ message: "Missing nickname or permission" });
-            return;
-        }
-
-        try {
-            const project = await ProjectModel.findByPk(id);
-            const user = await UserModel.findOne({
-                where: { nickname },
-            });
-
-            if (!project || !user) {
-                res.status(404).json({ message: "Project or user not found" });
-                return;
-            }
-
-            // Get the permission level id
-            const permissionLevel: any = await operations.query(`
-                SELECT * FROM permission_level
-                WHERE name = '${permission}';
-            `);
-            if (permissionLevel[0].length === 0 || !permissionLevel) {
-                res.status(404).json({ message: "Permission not found" });
-                return;
-            }
-            const permissionLevelId = permissionLevel[0][0].id;
-
-            // Check if the user is already shared
-            const shared = await operations.query(`
-                SELECT * FROM relationship_shared_project
-                WHERE project_id = ${id}
-                    AND user_shared_id = ${user.id};
-            `);
-            if (shared[0].length > 0) {
-                res.status(400).json({ message: "User already shared" });
-                return;
-            }
-
-            await operations.query(`
-                INSERT INTO relationship_shared_project (project_id, user_shared_id, permission_level_id)
-                VALUES (${id}, ${user.id}, ${permissionLevelId});
-            `);
-
-            res.status(201).json({ message: "User shared" });
-            return;
-        } catch (error) {
-            res.status(500).json({
-                message: "Error sharing the project",
-                error,
-            });
-
             return;
         }
     }

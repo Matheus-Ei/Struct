@@ -2,7 +2,7 @@
 import { Router } from "express";
 
 // Local
-import TokenController from "../controllers/token.js";
+import tokenController from "../controllers/token.js";
 
 class TokenRoute {
     public router: Router;
@@ -13,9 +13,9 @@ class TokenRoute {
     }
 
     private init() {
-        this.router.get("/refresh", TokenController.refresh);
+        this.router.get("/refresh", tokenController.refresh);
 
-        this.router.get("/check", TokenController.check);
+        this.router.get("/check", tokenController.check);
     }
 }
 

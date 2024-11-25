@@ -22,8 +22,8 @@ const Projects = () => {
 
     const { data: projects, refetch } = useAllProjects();
     const [searchResult, setSearchResult] = useState<Array<string>>([]);
-    const searchPlace = projects?.map((item: any): string => item.title);
 
+    const searchPlace = projects?.map((item: any): string => item.title);
     const renderProject = (item: any, index: number) => {
         // If the searchPlace is set and the item is not in the searchPlace, return null
         if (searchResult?.length >= 0 && !searchResult?.includes(item.title))

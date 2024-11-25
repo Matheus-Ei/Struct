@@ -3,20 +3,19 @@ import { useContext } from "react";
 
 // Local
 import { PagesContext } from "pages/Project";
-import Request from "modules/Request";
 
 interface ModuleProps {
     pageId?: number;
     module: string;
 }
 
-const Module = ({ pageId, module }: ModuleProps) => {
+const Module = ({ module }: ModuleProps) => {
     const context = useContext(PagesContext);
 
     const setModule = async () => {
         switch (module) {
             case "notes":
-                await Request.patch(`page/notes/set-module/${pageId}`, {});
+                // Send a request to update the page to the new module
                 context?.refetchPage();
                 return;
         }

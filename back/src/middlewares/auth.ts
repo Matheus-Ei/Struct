@@ -9,11 +9,9 @@ import Token from "../services/token.js";
 dotenv.config();
 
 const autorizedPaths = [
-    "/user/check/nickname",
-    "/user/check/mail",
-    "/user/auth/google",
-    "/user/login",
-    "/user/register",
+    "/user",
+    "/user/auth",
+    "/provider/user/google",
     "/token/check",
     "/token/refresh",
 ];
