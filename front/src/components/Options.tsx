@@ -1,5 +1,4 @@
 // Libraries
-import clsx from "clsx";
 import { ChangeEvent } from "react";
 
 // Local
@@ -13,7 +12,7 @@ interface OptionsProps {
     className?: string;
 }
 
-const defaultCss = clsx("bg-base-300 px-2 py-1 rounded-btn");
+const defaultCss = "bg-base-300 px-2 py-1 rounded-btn";
 
 const renderOptions = (option: string, index: number) => {
     return (
