@@ -4,7 +4,7 @@ import { useContext } from "react";
 // Local
 import { addPage } from "pages/Project/util/events";
 import { PagesContext } from "pages/Project";
-import Icons from "modules/Icons";
+import Icon from "components/Icon";
 import clsx from "clsx";
 import { PageType } from "services/page/types";
 
@@ -33,11 +33,11 @@ const HoverButtons = ({
 
         if (showChildren) {
             return (
-                <Icons name="MdExpandLess" library="md" className="h-full" />
+                <Icon name="MdExpandLess" library="md" className="h-full" />
             );
         }
 
-        return <Icons name="MdExpandMore" library="md" className="h-full" />;
+        return <Icon name="MdExpandMore" library="md" className="h-full" />;
     };
 
     const bodyCss = clsx("flex flex-row absolute gap-x-2 right-2 top-2", {
@@ -48,7 +48,7 @@ const HoverButtons = ({
     return (
         <div className={bodyCss}>
             <div onClick={() => addPage(context, toggleShowChildren, pageId)}>
-                <Icons name="IoAddOutline" library="io5" className="h-full" />
+                <Icon name="IoAddOutline" library="io5" className="h-full" />
             </div>
 
             <div onClick={() => toggleShowChildren()}>{childrenButton()}</div>

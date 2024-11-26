@@ -4,7 +4,7 @@ import { useState } from "react";
 
 // Components
 import Emoji from "components/Emoji";
-import EmojiSelector from "components/EmojiSelector";
+import EmojiSelector from "components/Emoji/Selector";
 import Input from "components/Input";
 import Point from "components/Point";
 

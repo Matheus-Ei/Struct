@@ -5,7 +5,7 @@ import clsx from "clsx";
 import { TabProps } from "../../utils/types";
 import AddPage from "./AddPage";
 import Page from "./Page";
-import Icons from "modules/Icons";
+import Icon from "components/Icon";
 import { useAllPages } from "services/page/usePage";
 
 interface PageRequestType {
@@ -43,7 +43,7 @@ const Pages = ({ projectId }: TabProps) => {
         if (pages?.length === 0) {
             return (
                 <div className="flex items-center justify-start w-full h-fit gap-x-6 ml-10 mt-4">
-                    <Icons
+                    <Icon
                         name="TbError404"
                         library="tb"
                         className="text-4xl w-fit"

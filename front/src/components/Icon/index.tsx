@@ -15,7 +15,7 @@ interface IconType {
     [key: string]: any;
 }
 
-const Icons = ({ library, name, className, onClick }: IconsProps) => {
+const Icon = ({ library, name, className, onClick }: IconsProps) => {
     const handleClick = (event: MouseEvent) => onClick && onClick(event);
     const handleClickClean = () => onClick && onClick();
 
@@ -34,4 +34,4 @@ const Icons = ({ library, name, className, onClick }: IconsProps) => {
     }
 };
 
-export default Icons;
+export default Icon;

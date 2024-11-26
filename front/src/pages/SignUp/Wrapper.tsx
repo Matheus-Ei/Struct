@@ -7,7 +7,7 @@ import GoogleSignUp from "./provider/Google";
 import { goPrevStep } from "./utils/functions";
 import Card from "components/Card";
 import { SignUpContext } from ".";
-import Icons from "modules/Icons";
+import Icon from "components/Icon";
 
 interface WrapperSignUpProps {
     children: JSX.Element;
@@ -31,7 +31,7 @@ const WrapperSignUp = ({ children }: WrapperSignUpProps) => {
                         className="absolute flex top-4 left-4 gap-2 items-center justify-center text-neutral"
                         onClick={prevStep}
                     >
-                        <Icons library="io5" name="IoArrowBackOutline" />
+                        <Icon library="io5" name="IoArrowBackOutline" />
                         <p>Go back</p>
                     </button>
                 )}

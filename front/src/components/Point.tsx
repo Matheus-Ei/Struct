@@ -1,6 +1,6 @@
 // Local
 import clsx from "clsx";
-import Icons from "modules/Icons";
+import Icon from "components/Icon";
 
 interface PointProps {
     icon: string;
@@ -25,7 +25,7 @@ const Point = ({ text, icon, library, isSelected, onClick }: PointProps) => {
 
     return (
         <div onClick={handleClick} className={css}>
-            <Icons library={library} name={icon} className="text-xl" />
+            <Icon library={library} name={icon} className="text-xl" />
             {text && <p className="cursor-default">{text}</p>}
         </div>
     );

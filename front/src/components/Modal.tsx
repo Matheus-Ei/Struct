@@ -1,6 +1,6 @@
 // Local
 import clsx from "clsx";
-import Icons from "modules/Icons";
+import Icon from "components/Icon";
 import Card from "./Card";
 
 interface ModalProps {
@@ -31,7 +31,7 @@ const Modal = ({ children, isOpen, close, className }: ModalProps) => {
             <Card>
                 <div className={css}>
                     <button onClick={close} className="absolute right-0 top-0">
-                        <Icons
+                        <Icon
                             name="IoMdClose"
                             library="io"
                             className="text-2xl"

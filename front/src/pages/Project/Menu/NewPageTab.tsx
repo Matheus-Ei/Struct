@@ -3,7 +3,7 @@ import { useContext } from "react";
 
 // Local
 import { addPage } from "../util/events";
-import Icons from "modules/Icons";
+import Icon from "components/Icon";
 import { PagesContext } from "..";
 import clsx from "clsx";
 
@@ -21,7 +21,7 @@ const NewPageTab = () => {
 
     return (
         <div className={bodyCss} onClick={() => addPage(context, null, null)}>
-            <Icons
+            <Icon
                 name="IoAddOutline"
                 library="io5"
                 className="text-primary h-full"

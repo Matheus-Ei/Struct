@@ -2,7 +2,7 @@
 import clsx from "clsx";
 import EditableField from "components/EditableField";
 import Emoji from "components/Emoji";
-import EmojiSelector from "components/EmojiSelector";
+import EmojiSelector from "components/Emoji/Selector";
 import { EmojiClickData } from "emoji-picker-react";
 import useToggle from "hooks/useToggle";
 import { MouseEvent, useEffect, useState } from "react";

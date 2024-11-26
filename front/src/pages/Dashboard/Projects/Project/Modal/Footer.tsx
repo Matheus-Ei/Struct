@@ -3,7 +3,7 @@ import clsx from "clsx";
 import { useNavigate } from "react-router-dom";
 
 // Local
-import Icons from "modules/Icons";
+import Icon from "components/Icon";
 
 interface FooterProps {
     id: number;
@@ -22,7 +22,7 @@ const Footer = ({ id }: FooterProps) => {
 
     return (
         <div onClick={handleClick} className={bodyCss}>
-            <Icons name="FaRegFolderOpen" library="fa6" />
+            <Icon name="FaRegFolderOpen" library="fa6" />
 
             <h1 className="font-bold text-base-content">Open project</h1>
         </div>

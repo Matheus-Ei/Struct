@@ -2,7 +2,7 @@
 import clsx from "clsx";
 
 // Local
-import Icons from "modules/Icons";
+import Icon from "components/Icon";
 import { SetStateType } from "types/global";
 
 interface CreateProjectButtonProps {
@@ -22,7 +22,7 @@ const CreateProject = ({ showModal }: CreateProjectButtonProps) => {
     return (
         <div className="flex w-96 h-32 p-3 justify-start items-center">
             <button onClick={handleOpen} className={buttonCss}>
-                <Icons name="IoAdd" library="io5" className="text-2xl" />
+                <Icon name="IoAdd" library="io5" className="text-2xl" />
                 <h1>New project</h1>
             </button>
         </div>

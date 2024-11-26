@@ -9,7 +9,7 @@ import ContextMenu from "components/ContextMenu";
 import { SetStateType } from "types/global";
 import getPosition from "utils/getPosition";
 import useToggle from "hooks/useToggle";
-import Icons from "modules/Icons";
+import Icon from "components/Icon";
 import router from "./router";
 
 interface HeaderProps {
@@ -55,7 +55,7 @@ const Header = ({ tab, setTab }: HeaderProps) => {
                 className="flex flex-row w-fit h-full items-center justify-end"
                 ref={menuRef}
             >
-                <Icons
+                <Icon
                     name="FaUserAstronaut"
                     library="fa"
                     className="text-4xl"
@@ -72,7 +72,7 @@ const Header = ({ tab, setTab }: HeaderProps) => {
                             className="flex items-center justify-center gap-x-2 cursor-pointer select-none text-lg"
                             onClick={() => navigate("/profile")}
                         >
-                            <Icons name="FaUser" library="fa6" />
+                            <Icon name="FaUser" library="fa6" />
 
                             <h1>Profile</h1>
                         </div>
@@ -81,7 +81,7 @@ const Header = ({ tab, setTab }: HeaderProps) => {
                             className="flex items-center justify-center gap-x-2 cursor-pointer select-none text-lg"
                             onClick={() => navigate("/settings")}
                         >
-                            <Icons name="IoMdSettings" library="io" />
+                            <Icon name="IoMdSettings" library="io" />
 
                             <h1>Settings</h1>
                         </div>

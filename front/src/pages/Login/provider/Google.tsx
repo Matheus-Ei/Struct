@@ -5,7 +5,7 @@ import { useCallback, useEffect, useState } from "react";
 
 // Local
 import Button from "components/Button";
-import Icons from "modules/Icons";
+import Icon from "components/Icon";
 import User from "services/user";
 import useUserProvider from "services/providers/useUserProvider";
 
@@ -44,7 +44,7 @@ const GoogleLogin = ({ toggleError }: GoogleLoginProps) => {
             inverse={true}
             onClick={googleProvider}
         >
-            <Icons library="fc" name="FcGoogle" />
+            <Icon library="fc" name="FcGoogle" />
         </Button>
     );
 };

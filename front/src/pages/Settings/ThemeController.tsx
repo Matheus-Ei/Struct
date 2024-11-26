@@ -3,7 +3,7 @@ import clsx from "clsx";
 import { ChangeEvent, useState } from "react";
 
 // Local
-import Icons from "modules/Icons";
+import Icon from "components/Icon";
 import Theme from "modules/Theme";
 
 const themeListCss = clsx(
@@ -44,7 +44,7 @@ const ThemeController = () => {
         <div className="dropdown">
             <div tabIndex={0} role="button" className="btn m-1">
                 <p className="w-20 text-start">{theme}</p>
-                <Icons name="MdExpandMore" library="md" />
+                <Icon name="MdExpandMore" library="md" />
             </div>
 
             <ul tabIndex={0} className={themeListCss}>
