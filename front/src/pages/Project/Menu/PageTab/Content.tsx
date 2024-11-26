@@ -2,13 +2,13 @@
 import { useContext } from "react";
 
 // Local
-import { PagesRequestType } from "pages/Project/util/types";
 import { PagesContext } from "pages/Project";
 import Emoji from "components/Emoji";
 import clsx from "clsx";
+import { PageType } from "services/page/types";
 
 interface ContentProps {
-    item: PagesRequestType;
+    item: PageType;
     onContextMenu: (event: any) => void;
 }
 

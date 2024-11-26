@@ -23,11 +23,9 @@ const AddPage = ({ projectId, refetch }: AddPageProps) => {
 
     const [title, setTitle] = useState<string>("");
 
-    const createPage = async () => {
-        if (!title) return;
-
-        Page.create(title, emoji?.emoji, projectId, null, refetch);
-    };
+    const createPage = async () =>
+        title &&
+        (await Page.create(title, emoji?.emoji, projectId, null, refetch));
 
     return (
         <div className="flex items-center justify-center absolute bottom-3 left-5">

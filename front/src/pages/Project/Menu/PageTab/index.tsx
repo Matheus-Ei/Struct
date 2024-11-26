@@ -2,15 +2,15 @@
 import { useState } from "react";
 
 // Local
-import { PagesRequestType } from "pages/Project/util/types";
 import ContextPageMenu from "./ContextPageMenu";
 import HoverButtons from "./HoverButtons";
 import useToggle from "hooks/useToggle";
 import Childrens from "./Childrens";
 import Content from "./Content";
+import { PageType } from "services/page/types";
 
 interface PageTabProps {
-    item: PagesRequestType;
+    item: PageType;
     index: number;
 }
 
@@ -26,7 +26,7 @@ const PageTab = ({ item, index }: PageTabProps) => {
     const [clickPosition, setClickPosition] = useState({ x: 0, y: 0 });
 
     const onContextMenu = (event: any) => {
-        event?.preventDefault();
+        event.preventDefault();
         setClickPosition({ x: event.clientX, y: event.clientY });
         toggleShowMenu(true);
     };

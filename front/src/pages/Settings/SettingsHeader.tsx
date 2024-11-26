@@ -4,9 +4,8 @@ import { useNavigate } from "react-router-dom";
 // Local
 import Icons from "modules/Icons";
 
-const goDashboard = (navigator: any) => {
+const goDashboard = (navigator: (arg0: string) => void) =>
     navigator("/dashboard");
-};
 
 const SettingsHeader = () => {
     const navigator = useNavigate();

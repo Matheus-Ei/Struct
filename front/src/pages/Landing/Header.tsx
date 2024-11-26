@@ -9,15 +9,9 @@ import User from "services/user";
 const Header = () => {
     const navigate = useNavigate();
 
-    const onLogin = () => {
-        User.verifyLogin(navigate).then((response) => {
-            response && navigate("/dashboard");
-        });
-    };
+    const onLogin = () => User.verifyLogin(navigate);
 
-    const onSignup = () => {
-        navigate("/sign-up");
-    };
+    const onSignup = () => navigate("/sign-up");
 
     return (
         <div className="flex flex-row relative justify-between items-center top-0 border-b border-base-200 w-screen h-16 px-6">

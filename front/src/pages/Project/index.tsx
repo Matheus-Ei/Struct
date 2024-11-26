@@ -2,24 +2,23 @@
 import { createContext, useState } from "react";
 import { useParams } from "react-router-dom";
 // Local
-import { PagesRequestType, ReactProjectContext } from "./util/types";
+import { ReactProjectContext } from "./util/types";
 import withLoader from "HOCs/withLoader";
 import Dashboard from "./Dashboard";
 import Menu from "./Menu";
 import Page from "./Page";
 import { useAllPages, usePage } from "services/page/usePage";
+import { PageType } from "services/page/types";
 
 export const PagesContext = createContext<ReactProjectContext | undefined>(
     undefined
 );
 
-type PagesRequestTypeArray = Array<PagesRequestType> | null;
-
 const Project = () => {
     const { id } = useParams();
 
     // Menu tabs request
-    const [menuTabs, setMenuTabs] = useState<PagesRequestTypeArray>(null);
+    const [menuTabs, setMenuTabs] = useState<PageType[]>();
     const { refetch: refetchMenuTabs } = useAllPages(Number(id), (response) => {
         setMenuTabs(response);
     });

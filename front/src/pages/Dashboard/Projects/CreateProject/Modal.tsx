@@ -15,6 +15,20 @@ interface CreateProjectModalProps {
     setModal: SetStateType<boolean>;
 }
 
+const modalCss = clsx(
+    "relative w-[65vw] h-[50vh]",
+    "flex flex-col items-start justify-start"
+);
+const bodyCss = clsx(
+    "w-full h-full gap-4",
+    "flex flex-col items-center justify-center"
+);
+const inputsCss = clsx(
+    "w-full h-4/6",
+    "flex flex-col items-center justify-center"
+);
+const headerCss = "w-full font-bold text-2xl text-center mb-5";
+
 const CreateProjectModal = ({
     showModal,
     setModal,
@@ -66,11 +80,6 @@ const CreateProjectModal = ({
 
     const handleClose = () => setModal(false);
 
-    // Styles
-    const modalCss = clsx(
-        "relative w-[65vw] h-[50vh]",
-        "flex flex-col items-start justify-start"
-    );
     const descriptionCss = clsx(
         "h-96 w-[95%] pl-4 mb-3 pt-4",
         "border rounded-btn outline-none resize-none",
@@ -80,15 +89,6 @@ const CreateProjectModal = ({
             "border-neutral": !descError.isError,
         }
     );
-    const bodyCss = clsx(
-        "w-full h-full gap-4",
-        "flex flex-col items-center justify-center"
-    );
-    const inputsCss = clsx(
-        "w-full h-4/6",
-        "flex flex-col items-center justify-center"
-    );
-    const headerCss = "w-full font-bold text-2xl text-center mb-5";
 
     return (
         <Modal isOpen={showModal} close={handleClose} className={modalCss}>

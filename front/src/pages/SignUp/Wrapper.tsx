@@ -3,7 +3,7 @@ import { useContext } from "react";
 
 // Local
 import { ReactComponent as Logo } from "assets/logo-500x500-3.svg";
-import GoogleSignUpButton from "./GoogleSignUpButton";
+import GoogleSignUp from "./provider/Google";
 import { goPrevStep } from "./utils/functions";
 import Card from "components/Card";
 import { SignUpContext } from ".";
@@ -49,7 +49,7 @@ const WrapperSignUp = ({ children }: WrapperSignUpProps) => {
                 </div>
 
                 <div className="divider px-40">Or sign-up with</div>
-                <GoogleSignUpButton />
+                <GoogleSignUp />
             </div>
         </Card>
     );

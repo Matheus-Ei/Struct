@@ -21,9 +21,7 @@ const Textareas = ({ note, type, index }: TextareasProps) => {
             const elements = context?.divBodyRef.current?.children;
 
             const notesWithElements = prevBase.map((item, index) => {
-                if (!elements) {
-                    return item;
-                }
+                if (!elements) return item;
 
                 item.element = elements[index] as HTMLElement;
                 return item;

@@ -13,16 +13,16 @@ interface ProjectProps {
     id: number;
 }
 
+const bodyCss = clsx(
+    "w-96 h-32 p-3",
+    "flex flex-col justify-between",
+    "border border-primary rounded-btn"
+);
+
 const Project = ({ title, description, id, setModal }: ProjectProps) => {
     const handleOpen = () => {
         setModal({ projectId: id, show: true });
     };
-
-    const bodyCss = clsx(
-        "w-96 h-32 p-3",
-        "flex flex-col justify-between",
-        "border border-primary rounded-btn"
-    );
 
     return (
         <div className={bodyCss}>

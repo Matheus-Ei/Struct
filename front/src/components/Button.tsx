@@ -25,10 +25,8 @@ const Button = ({
     );
     const css = className ? className : buttonStyle;
 
-    const handdleClick = () => onClick && onClick();
-
     return (
-        <button className={css} onClick={handdleClick}>
+        <button className={css} onClick={() => onClick && onClick()}>
             {children ? children : <h1>{text}</h1>}
         </button>
     );

@@ -13,6 +13,11 @@ import SearchBar from "components/SearchBar";
 
 export const projectsContext = React.createContext<any>(undefined);
 
+const projectsDivCss = clsx(
+    "grid items-center justify-items-start gap-6",
+    "grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4"
+);
+
 const Projects = () => {
     const [showCreateProject, setShowCreateProject] = useState(false);
     const [projectModal, setProjectModal] = useState<ModalType>({
@@ -39,11 +44,6 @@ const Projects = () => {
             />
         );
     };
-
-    const projectsDivCss = clsx(
-        "grid items-center justify-items-start gap-6",
-        "grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4"
-    );
 
     return (
         <projectsContext.Provider value={{ refetch }}>

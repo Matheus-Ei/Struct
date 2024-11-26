@@ -18,12 +18,11 @@ const ContextPageMenu = ({
     pageId,
     refetch,
 }: ContextPageMenuProps) => {
-    const deletePage = () => {
+    const deletePage = () =>
         Page.delete(pageId, () => {
             toggleShowMenu(false);
             refetch();
         });
-    };
 
     return (
         <ContextMenu

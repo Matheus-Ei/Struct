@@ -16,6 +16,14 @@ interface PageRequestType {
     module: string;
 }
 
+const pagesDivCss = clsx(
+    "grid items-start content-start",
+    "overflow-y-scroll overflow-x-hidden",
+    "w-[95%] h-4/5 mt-4",
+    "gap-x-6 gap-y-4",
+    "grid-cols-2 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-7"
+);
+
 const Pages = ({ projectId }: TabProps) => {
     const { data: pages, refetch } = useAllPages(projectId);
 
@@ -30,14 +38,6 @@ const Pages = ({ projectId }: TabProps) => {
             />
         );
     };
-
-    const pagesDivCss = clsx(
-        "grid items-start content-start",
-        "overflow-y-scroll overflow-x-hidden",
-        "w-[95%] h-4/5 mt-4",
-        "gap-x-6 gap-y-4",
-        "grid-cols-2 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-7"
-    );
 
     const getAllPages = () => {
         if (pages?.length === 0) {

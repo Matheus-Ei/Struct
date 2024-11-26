@@ -16,6 +16,17 @@ interface PageProps {
     refetch: () => void;
 }
 
+const cssNameEditing = clsx(
+    "w-fit px-1",
+    "text-md text-base-content cursor-text",
+    "outline-none bg-base-200 rounded-btn"
+);
+const cssNameNotEditing = clsx(
+    "w-full px-1 line-clamp-1 select-none",
+    "text-md text-base-content cursor-pointer",
+    "outline-none bg-base-100 rounded-btn"
+);
+
 const Page = ({ id, name, emoji, refetch }: PageProps) => {
     const [showEmojiSelector, toggleEmojiSelector] = useToggle(false);
     const [newEmoji, setEmoji] = useState<EmojiClickData | undefined>();
@@ -45,19 +56,8 @@ const Page = ({ id, name, emoji, refetch }: PageProps) => {
     }, [newEmoji, id]);
 
     const updateName = async (value: string) => {
-        PageService.edit(id, value, undefined, undefined, () => {});
+        await PageService.edit(id, value, undefined, undefined, () => {});
     };
-
-    const cssNameEditing = clsx(
-        "w-fit px-1",
-        "text-md text-base-content cursor-text",
-        "outline-none bg-base-200 rounded-btn"
-    );
-    const cssNameNotEditing = clsx(
-        "w-full px-1 line-clamp-1 select-none",
-        "text-md text-base-content cursor-pointer",
-        "outline-none bg-base-100 rounded-btn"
-    );
 
     return (
         <div

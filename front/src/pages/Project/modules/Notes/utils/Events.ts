@@ -1,19 +1,13 @@
 // Local
-import { NotesPageContextType } from "./types";
 import { Text } from "./Text";
 
-export const handleKeyDown = (
-    event: any,
-    index: number,
-    textObj: Text,
-    context: NotesPageContextType
-) => {
+export const handleKeyDown = (event: any, index: number, textEditor: Text) => {
     // Add textArea
     if (event.key === "Enter" && !event.shiftKey) {
         event.preventDefault();
-        textObj.addNote(index);
+        textEditor.addNote(index);
 
-        textObj.setFocus(index + 1);
+        textEditor.setFocus(index + 1);
     }
 
     // Delete textArea
@@ -21,16 +15,16 @@ export const handleKeyDown = (
         if (index === 0) return;
 
         event.preventDefault();
-        textObj.removeNote(index);
+        textEditor.removeNote(index);
 
-        textObj.setFocus(index - 1);
+        textEditor.setFocus(index - 1);
     }
 
     // Arrow down
     if (event.key === "ArrowDown") {
         event.preventDefault();
 
-        textObj.setFocus(index + 1);
+        textEditor.setFocus(index + 1);
     }
 
     // Arrow up
@@ -39,12 +33,12 @@ export const handleKeyDown = (
 
         event.preventDefault();
 
-        textObj.setFocus(index - 1);
+        textEditor.setFocus(index - 1);
     }
 
     // Make the textarea bigger
     if (event.key === "Enter" && event.shiftKey) {
-        textObj.addLine(index);
+        textEditor.addLine(index);
         event.preventDefault();
     }
 };

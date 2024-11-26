@@ -6,6 +6,14 @@ import { useState } from "react";
 import Icons from "modules/Icons";
 import Theme from "modules/Theme";
 
+const themeListCss = clsx(
+    "dropdown-content",
+    "w-52 h-56",
+    "overflow-y-scroll overflow-x-hidden",
+    "bg-base-300 rounded-box shadow-2xl",
+    "z-1 pr-3 p-2"
+);
+
 const ThemeController = () => {
     const [theme, setTheme] = useState(Theme.getCurrent());
     const themes = Theme.getKeys();
@@ -30,14 +38,6 @@ const ThemeController = () => {
             </li>
         );
     };
-
-    const themeListCss = clsx(
-        "dropdown-content",
-        "w-52 h-56",
-        "overflow-y-scroll overflow-x-hidden",
-        "bg-base-300 rounded-box shadow-2xl",
-        "z-1 pr-3 p-2"
-    );
 
     return (
         <div className="dropdown">

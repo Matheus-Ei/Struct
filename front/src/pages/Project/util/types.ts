@@ -1,20 +1,11 @@
+import { PageType } from "services/page/types";
 import { SetStateType } from "types/global";
 
-// Libraries
-export interface PagesRequestType {
-    id: number;
-    name: string;
-    description: string;
-    children_pages: Array<PagesRequestType> | null;
-    emoji: string | null;
-    module: string;
-}
-
 export interface ReactProjectContext {
-    page: PagesRequestType | null;
+    page: PageType | null | undefined;
     refetchPage: () => void;
-    menuTabs: Array<PagesRequestType> | null;
-    setMenuTabs: (newMenuTabs: Array<PagesRequestType>) => void;
+    menuTabs: Array<PageType> | undefined;
+    setMenuTabs: (newMenuTabs: Array<PageType>) => void;
     refetchMenuTabs: () => void;
     selectedPageId: number | null;
     setSelectedPageId: SetStateType<number | null>;

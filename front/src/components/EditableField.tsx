@@ -2,6 +2,10 @@
 import { useRef, useState } from "react";
 import clsx from "clsx";
 
+// Local
+import Cursor from "modules/Cursor";
+import Event from "modules/Event";
+
 interface EditableFieldProps {
     defaultValue: string | undefined;
     onUpdate: (value: string) => Promise<void>;
@@ -19,61 +23,62 @@ const EditableField = ({
     const [preValue, setPreValue] = useState<string>("");
     const divRef = useRef<HTMLDivElement>(null);
 
-    const onKeyDown = async (event: any) => {
-        if (event.key === "Enter") {
-            event.preventDefault();
+    const onKeyDown = (event: any) => {
+        const onKeyEvent = new Event(event);
+
+        const onPressEnter = async () => {
+            onKeyEvent.preventDefault();
             setIsEditing(false);
 
-            const newText = event.target.innerText.replace(/\n/g, "");
+            // Remove all new lines
+            const newText = onKeyEvent.targetInnerText.replace(/\n/g, "");
 
+            // Verifications
             if (newText === preValue) return;
-            if (newText === "") {
-                event.target.innerText = preValue;
+            if (!newText) {
+                onKeyEvent.targetInnerText = preValue;
                 return;
             }
 
+            // Update the value
             setPreValue(newText);
-
             try {
                 await onUpdate(newText);
             } catch (error) {
-                event.target.innerText = preValue;
+                onKeyEvent.targetInnerText = preValue;
             }
-        }
+        };
 
-        if (event.key === "Escape") {
-            event.preventDefault();
-            setIsEditing(false);
-            event.target.innerText = preValue;
-        }
+        Event.onKeyDown(event, [
+            { key: "Enter", callback: onPressEnter },
+            {
+                key: "Escape",
+                callback: () => {
+                    setIsEditing(false);
+                    onKeyEvent.targetInnerText = preValue;
+                },
+            },
+        ]);
     };
 
     const onClick = (event: any) => {
-        if (isEditing) return;
-
         setIsEditing(true);
-        setPreValue(event.target.innerText);
+        setPreValue(event.target.value);
+
+        // Focus the cursor, and move it to the end
         setTimeout(() => {
-            if (!divRef.current) return;
+            if (isEditing) return;
 
-            // Focus on the div
-            divRef.current.focus();
+            const cursor = new Cursor(divRef.current);
 
-            // Move cursor to the end
-            const range = document.createRange();
-            const selection = window.getSelection();
-            if (!selection || !range) return;
-
-            range.selectNodeContents(divRef.current);
-            range.collapse(false);
-            selection.removeAllRanges();
-            selection.addRange(range);
+            cursor.focus();
+            cursor.move("end");
         }, 0);
     };
 
     const onBlur = (event: any) => {
+        event.target.value = preValue;
         setIsEditing(false);
-        event.target.innerText = preValue;
     };
 
     const defaultCss = clsx(
@@ -84,7 +89,7 @@ const EditableField = ({
         }
     );
 
-    const className = clsx({
+    const css = clsx({
         [classNameEditing as string]: isEditing,
         [classNameNotEditing as string]: !isEditing,
     });
@@ -99,7 +104,7 @@ const EditableField = ({
             onClick={onClick}
             onBlur={onBlur}
             onKeyDown={onKeyDown}
-            className={className ? className : defaultCss}
+            className={css ? css : defaultCss}
         ></div>
     );
 };

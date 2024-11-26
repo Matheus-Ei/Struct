@@ -1,17 +1,17 @@
 // Local
-import { PagesRequestType } from "pages/Project/util/types";
+import { PageType } from "services/page/types";
 import PageTab from ".";
 
 interface ChildrensProps {
-    items: Array<PagesRequestType> | null;
+    items: Array<PageType> | null;
     parentPageId: number;
     show: boolean;
 }
 
 const Childrens = ({ show, items }: ChildrensProps) => {
-    const renderChildrens = (item: PagesRequestType, index: number) => {
-        return <PageTab item={item} index={index} key={index} />;
-    };
+    const renderChildrens = (item: PageType, index: number) => (
+        <PageTab item={item} index={index} key={index} />
+    );
 
     if (!show) return null;
 

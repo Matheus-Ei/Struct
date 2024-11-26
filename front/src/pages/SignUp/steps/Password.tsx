@@ -3,13 +3,13 @@ import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 
 // Local
-import { makeSignUp } from "./utils/functions";
+import { makeSignUp } from "../utils/functions";
 import Message from "components/Message";
 import Button from "components/Button";
 import Input from "components/Input";
-import { SignUpContext } from ".";
+import { SignUpContext } from "..";
 
-const PasswordStep = () => {
+const Password = () => {
     const context = useContext(SignUpContext);
     const navigate = useNavigate();
 
@@ -49,4 +49,4 @@ const PasswordStep = () => {
     );
 };
 
-export default PasswordStep;
+export default Password;

@@ -32,8 +32,10 @@ const Options = ({
     const css = className ? className : defaultCss;
 
     const onChange = (event: any) => {
-        setSelected(options.indexOf(event.target.value));
+        const index = options.indexOf(event.target.value);
+        setSelected(index);
     };
+
 
     return (
         <div className="flex flex-col items-center justify-center">

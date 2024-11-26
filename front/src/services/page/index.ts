@@ -1,5 +1,5 @@
 import Request from "modules/Request";
-import { GetPageType, GetPagesType, PageType } from "./types";
+import { GetPageType, GetPagesType } from "./types";
 
 class Page {
     public static async get(id: number) {

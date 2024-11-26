@@ -2,17 +2,17 @@
 import { useContext } from "react";
 
 // Local
-import { PagesRequestType } from "pages/Project/util/types";
 import { addPage } from "pages/Project/util/events";
 import { PagesContext } from "pages/Project";
 import Icons from "modules/Icons";
 import clsx from "clsx";
+import { PageType } from "services/page/types";
 
 interface HoverButtonsProps {
     toggleShowChildren: (value?: boolean) => void;
     showChildren: boolean;
     isHover: boolean;
-    childrens: Array<PagesRequestType> | null;
+    childrens: Array<PageType> | null;
     pageId: number;
 }
 
@@ -24,9 +24,9 @@ const HoverButtons = ({
     pageId,
 }: HoverButtonsProps) => {
     const context = useContext(PagesContext);
-    const isSelected = context?.selectedPageId === pageId;
 
     if (!isHover || !context) return null;
+    const isSelected = context.selectedPageId === pageId;
 
     const childrenButton = () => {
         if (childrens?.length === 0) return null;
