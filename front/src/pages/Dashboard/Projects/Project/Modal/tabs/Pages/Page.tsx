@@ -2,10 +2,10 @@
 import clsx from "clsx";
 import EditableField from "components/EditableField";
 import Emoji from "components/Emoji";
-import EmojiSelector from "components/EmojiSelector";
+import EmojiSelector from "components/Emoji/Selector";
 import { EmojiClickData } from "emoji-picker-react";
 import useToggle from "hooks/useToggle";
-import { useEffect, useState } from "react";
+import { MouseEvent, useEffect, useState } from "react";
 import ContextPageMenu from "./ContextPageMenu";
 import PageService from "services/page";
 
@@ -16,6 +16,17 @@ interface PageProps {
     refetch: () => void;
 }
 
+const cssNameEditing = clsx(
+    "w-fit px-1",
+    "text-md text-base-content cursor-text",
+    "outline-none bg-base-200 rounded-btn"
+);
+const cssNameNotEditing = clsx(
+    "w-full px-1 line-clamp-1 select-none",
+    "text-md text-base-content cursor-pointer",
+    "outline-none bg-base-100 rounded-btn"
+);
+
 const Page = ({ id, name, emoji, refetch }: PageProps) => {
     const [showEmojiSelector, toggleEmojiSelector] = useToggle(false);
     const [newEmoji, setEmoji] = useState<EmojiClickData | undefined>();
@@ -24,7 +35,7 @@ const Page = ({ id, name, emoji, refetch }: PageProps) => {
     const [showMenu, toggleShowMenu] = useToggle(false);
     const [clickPosition, setClickPosition] = useState({ x: 0, y: 0 });
 
-    const onContextMenu = (event: any) => {
+    const onContextMenu = (event: MouseEvent) => {
         event?.preventDefault();
         setClickPosition({ x: event.clientX, y: event.clientY });
         toggleShowMenu(true);
@@ -45,19 +56,8 @@ const Page = ({ id, name, emoji, refetch }: PageProps) => {
     }, [newEmoji, id]);
 
     const updateName = async (value: string) => {
-        PageService.edit(id, value, undefined, undefined, () => {});
+        await PageService.edit(id, value, undefined, undefined, () => {});
     };
-
-    const cssNameEditing = clsx(
-        "w-fit px-1",
-        "text-md text-base-content cursor-text",
-        "outline-none bg-base-200 rounded-btn"
-    );
-    const cssNameNotEditing = clsx(
-        "w-full px-1 line-clamp-1 select-none",
-        "text-md text-base-content cursor-pointer",
-        "outline-none bg-base-100 rounded-btn"
-    );
 
     return (
         <div

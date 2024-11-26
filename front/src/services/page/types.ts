@@ -4,7 +4,7 @@ export interface PageType {
     description: string;
     children_pages: Array<PageType> | null;
     emoji: string | null;
-    module: string;
+    module: string | null;
 }
 
 export interface GetPagesType {

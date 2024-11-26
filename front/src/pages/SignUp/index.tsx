@@ -4,9 +4,9 @@ import { createContext, useState } from "react";
 // Local
 import { SignUpContextType } from "./utils/types";
 import { ErrorType } from "types/global";
-import WrapperSignUp from "./WrapperSignUp";
-import PasswordStep from "./PasswordsStep";
-import MainStep from "./MainStep";
+import Wrapper from "./Wrapper";
+import Password from "./steps/Password";
+import Start from "./steps/Start";
 
 export const SignUpContext = createContext<SignUpContextType | null>(null);
 
@@ -45,13 +45,13 @@ const SignUp = () => {
             }}
         >
             <div className="flex justify-center items-center w-screen h-[97vh]">
-                <WrapperSignUp>
+                <Wrapper>
                     <>
-                        {step === 0 && <MainStep />}
+                        {step === 0 && <Start />}
 
-                        {step === 1 && <PasswordStep />}
+                        {step === 1 && <Password />}
                     </>
-                </WrapperSignUp>
+                </Wrapper>
             </div>
         </SignUpContext.Provider>
     );

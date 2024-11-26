@@ -13,6 +13,7 @@ const Body = () => {
     const [notes, setNotes] = useState<Array<NotesTextType>>([
         { note: "", type: "paragraph", element: null },
     ]);
+
     const divBodyRef = useRef<HTMLDivElement>(null);
 
     const sendFocus = (event: MouseEvent) => {

@@ -1,11 +1,11 @@
 // Libraries
-import { useContext, useEffect, useMemo, useRef, useState } from "react";
+import { KeyboardEvent, useContext, useEffect, useMemo, useRef, useState } from "react";
 
 // Local
 import { handleKeyDown } from "../utils/Events";
 import { NotesPageContext } from "../Body";
-import Cursor from "../utils/Cursor";
 import { Text } from "../utils/Text";
+import Cursor from "modules/Cursor";
 
 interface TitleProps {
     note: string;
@@ -15,39 +15,38 @@ interface TitleProps {
 
 const Title = ({ note, index, titleType }: TitleProps) => {
     const [position, setPosition] = useState<number>(0);
-
     const divRef = useRef<HTMLDivElement | null>(null);
-    const cursorObj = useMemo(() => new Cursor(divRef), [divRef]);
+
+    const cursor = useMemo(() => new Cursor(divRef.current), [divRef]);
 
     useEffect(() => {
-        cursorObj.setCursorPosition(position);
-    }, [position, cursorObj]);
+        cursor.position = position;
+    }, [position, cursor]);
 
     const context = useContext(NotesPageContext);
     if (!context) return null;
-
-    const textObj = new Text(context);
+    const textEditor = new Text(context);
 
     const onChange = () => {
-        setPosition(cursorObj.getCursorPosition());
-        if (divRef.current) {
-            textObj.handleSetText(index, divRef.current.innerHTML);
-        }
+        setPosition(cursor.position);
+        if (divRef.current)
+            textEditor.handleSetText(index, divRef.current.innerHTML);
     };
+
+    const keyDownHandler = (event: KeyboardEvent<HTMLDivElement>) =>
+        handleKeyDown(event, index, textEditor);
+
+    const innerHTML = { __html: note };
 
     switch (titleType) {
         case 1:
             return (
                 <div
                     contentEditable
-                    dangerouslySetInnerHTML={{
-                        __html: note,
-                    }}
+                    dangerouslySetInnerHTML={innerHTML}
                     ref={divRef}
                     className="w-full h-auto bg-base-100 resize-none outline-none font-bold text-4xl"
-                    onKeyDown={(event) =>
-                        handleKeyDown(event, index, textObj, context)
-                    }
+                    onKeyDown={keyDownHandler}
                     onInput={onChange}
                 ></div>
             );
@@ -56,14 +55,10 @@ const Title = ({ note, index, titleType }: TitleProps) => {
             return (
                 <div
                     contentEditable
-                    dangerouslySetInnerHTML={{
-                        __html: note,
-                    }}
+                    dangerouslySetInnerHTML={innerHTML}
                     ref={divRef}
                     className="w-full h-auto bg-base-100 resize-none outline-none font-bold text-2xl"
-                    onKeyDown={(event) =>
-                        handleKeyDown(event, index, textObj, context)
-                    }
+                    onKeyDown={keyDownHandler}
                     onInput={onChange}
                 ></div>
             );
@@ -72,14 +67,10 @@ const Title = ({ note, index, titleType }: TitleProps) => {
             return (
                 <div
                     contentEditable
-                    dangerouslySetInnerHTML={{
-                        __html: note,
-                    }}
+                    dangerouslySetInnerHTML={innerHTML}
                     ref={divRef}
                     className="w-full h-auto bg-base-100 resize-none outline-none font-bold text-xl"
-                    onKeyDown={(event) =>
-                        handleKeyDown(event, index, textObj, context)
-                    }
+                    onKeyDown={keyDownHandler}
                     onInput={onChange}
                 ></div>
             );

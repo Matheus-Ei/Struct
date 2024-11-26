@@ -1,5 +1,6 @@
 // Libraries
 import clsx from "clsx";
+import Event from "modules/Event";
 import { useCallback, useEffect, useRef } from "react";
 
 interface ContextMenuProps {
@@ -10,6 +11,12 @@ interface ContextMenuProps {
     translateY?: boolean;
     className?: string;
 }
+
+const defaultCss = clsx(
+    "fixed p-[10px] z-50",
+    "flex flex-col items-center justify-center",
+    "bg-base-100 border rounded-btn border-primary"
+);
 
 const ContextMenu = ({
     children,
@@ -23,31 +30,27 @@ const ContextMenu = ({
 
     const handleClickOutside = useCallback(
         (event: MouseEvent) => {
-            if (
-                menuRef.current &&
+            if (!menuRef.current) return;
+
+            Event.onClickCallback(
+                onClose,
                 !menuRef.current.contains(event.target as Node)
-            ) {
-                onClose();
-            }
+            );
         },
         [onClose]
     );
 
+    // Close the context menu when clicking outside of it
     useEffect(() => {
-        document.addEventListener("mousedown", handleClickOutside);
+        Event.addListener("contextmenu", handleClickOutside);
 
         return () => {
-            document.removeEventListener("mousedown", handleClickOutside);
+            Event.removeListener("contextmenu", handleClickOutside);
         };
     }, [onClose, handleClickOutside]);
 
     if (!show) return null;
 
-    const defaultCss = clsx(
-        "fixed p-[10px] z-50",
-        "flex flex-col items-center justify-center",
-        "bg-base-100 border rounded-btn border-primary"
-    );
     const css = className ? className : defaultCss;
     const translation = translateY
         ? "translate(0%, -100%)"

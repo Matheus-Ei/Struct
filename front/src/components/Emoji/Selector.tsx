@@ -8,6 +8,7 @@ import EmojiPicker, {
 
 // Local
 import { SetStateType } from "types/global";
+import Event from "modules/Event";
 
 interface EmojiSelectorProps {
     setEmoji: SetStateType<EmojiClickData | undefined>;
@@ -31,22 +32,23 @@ const EmojiSelector = ({
 
     const handleClickOutside = useCallback(
         (event: MouseEvent) => {
-            if (
-                emojiRef.current &&
+            if (!emojiRef.current) return;
+
+            Event.onClickCallback(
+                () => toggleShow(false),
                 !emojiRef.current.contains(event.target as Node)
-            ) {
-                toggleShow(false);
-            }
+            );
         },
         [toggleShow]
     );
 
     useEffect(() => {
         if (show) {
-            window.addEventListener("mousedown", handleClickOutside);
+            Event.addListener("contextmenu", handleClickOutside);
         }
+
         return () => {
-            window.removeEventListener("mousedown", handleClickOutside);
+            Event.removeListener("contextmenu", handleClickOutside);
         };
     }, [show, handleClickOutside]);
 

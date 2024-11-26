@@ -1,13 +1,13 @@
 // Local
 import Page from "services/page";
+import { PageType } from "services/page/types";
 import { ReactProjectContext } from "./types";
-import { PagesRequestType } from "./types";
 
 const removePageById = (
-    rootPages: PagesRequestType[],
+    rootPages: PageType[],
     targetPageId: number
-): PagesRequestType[] => {
-    function removePage(page: PagesRequestType): boolean {
+): PageType[] => {
+    function removePage(page: PageType): boolean {
         if (page.id === targetPageId) return true;
 
         if (page.children_pages) {

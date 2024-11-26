@@ -1,5 +1,6 @@
 import clsx from "clsx";
-import Icons from "modules/Icons";
+import Icon from "components/Icon";
+import { SharedUserType } from "services/project/type";
 import { useProjectUsers } from "services/project/useProject";
 import { TabProps } from "../../utils/types";
 import Share from "./Share";
@@ -12,7 +13,7 @@ const usersDivCss = clsx(
     "grid-cols-2 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-7"
 );
 
-const renderUsers = (item: any, index: number) => {
+const renderUsers = (item: SharedUserType, index: number) => {
     return (
         <div
             key={index}
@@ -20,12 +21,12 @@ const renderUsers = (item: any, index: number) => {
         >
             <div className="flex items-center justify-between w-full">
                 <div className="flex items-center justify-start gap-x-3">
-                    <Icons name="FaUserAlt" library="fa" className="text-2xl" />
+                    <Icon name="FaUserAlt" library="fa" className="text-2xl" />
 
                     <h1 className="text-lg">{item.user_nickname}</h1>
                 </div>
 
-                {/*<Icons name="IoIosMore" library="io" />*/}
+                {/*<Icon name="IoIosMore" library="io" />*/}
             </div>
 
             <h1 className="text-sm text-neutral italic line-clamp-1 w-full">
@@ -42,7 +43,7 @@ const Shared = ({ projectId }: TabProps) => {
         if (users?.length === 0) {
             return (
                 <div className="flex items-center justify-start w-full h-fit gap-x-6 ml-10 mt-4">
-                    <Icons
+                    <Icon
                         name="TbError404"
                         library="tb"
                         className="text-4xl w-fit"

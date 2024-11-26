@@ -1,5 +1,6 @@
 // Libraries
 import { NavigateFunction } from "react-router-dom";
+
 // Local
 import { SignUpContextType } from "./types";
 import User from "services/user";

@@ -5,50 +5,38 @@ import { useCallback, useEffect, useState } from "react";
 
 // Local
 import Button from "components/Button";
-import Icons from "modules/Icons";
+import Icon from "components/Icon";
 import User from "services/user";
 import useUserProvider from "services/providers/useUserProvider";
 
-interface GoogleLoginButtonProps {
+interface GoogleLoginProps {
     toggleError: (value: boolean) => void;
 }
 
-const GoogleLoginButton = ({ toggleError }: GoogleLoginButtonProps) => {
+const GoogleLogin = ({ toggleError }: GoogleLoginProps) => {
     const [accessToken, setAccessToken] = useState<string | null>(null);
-    const navigate = useNavigate();
     const { data: response } = useUserProvider(accessToken, "google");
+    const navigate = useNavigate();
 
     // Gets the access_token from the google login
     const googleProvider = useGoogleLogin({
         onSuccess: (codeResponse) => setAccessToken(codeResponse.access_token),
-        onError: (error) => console.log("Login Failed:", error),
+        onError: () => toggleError(true),
     });
 
-    const login = async () => {
-        try {
-            if (!response) return;
+    const login = useCallback(async () => {
+        if (!response) return;
 
-            // Make the login using the Auth autenticator
-            const isLogged = await User.login(
-                response.mail,
-                "",
-                "Auth",
-                navigate
-            );
+        // Make the login using the Auth autenticator
+        const isLogged = await User.login(response.mail, "", "Auth", navigate);
 
-            if (!isLogged) {
-                toggleError(true);
-            }
-        } catch {
-            toggleError(true);
-        }
-    };
-
-    const memoizedLogin = useCallback(login, [navigate, toggleError, response]);
+        if (!isLogged) toggleError(true);
+        toggleError(true);
+    }, [navigate, toggleError, response]);
 
     useEffect(() => {
-        memoizedLogin();
-    }, [memoizedLogin]);
+        login();
+    }, [login]);
 
     return (
         <Button
@@ -56,9 +44,9 @@ const GoogleLoginButton = ({ toggleError }: GoogleLoginButtonProps) => {
             inverse={true}
             onClick={googleProvider}
         >
-            <Icons library="fc" name="FcGoogle" />
+            <Icon library="fc" name="FcGoogle" />
         </Button>
     );
 };
 
-export default GoogleLoginButton;
+export default GoogleLogin;

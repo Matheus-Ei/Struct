@@ -1,5 +1,5 @@
 // Libraries
-import React, { useContext } from "react";
+import { createElement, useContext } from "react";
 
 // Libraries
 import Undefined from "./modules/Undefined";
@@ -14,7 +14,7 @@ interface RouterType {
 const getModule = (element: RouterType) => {
     if (!module || !element) return <Undefined />;
 
-    return React.createElement(element.endpoint, {});
+    return createElement(element.endpoint, {});
 };
 
 const Page = () => {

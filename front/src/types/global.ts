@@ -8,3 +8,14 @@ export interface ErrorType {
 export type SetStateType<T> = Dispatch<SetStateAction<T>>;
 
 export type ElementType = JSX.Element | null;
+
+export interface ErrorResponseType {
+    message: string;
+    error: string;
+    details?: string;
+}
+
+export interface SuccessResponseType<T> {
+    message: string;
+    data?: T;
+}

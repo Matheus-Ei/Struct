@@ -14,23 +14,23 @@ interface ShareProps {
     refetch: () => void;
 }
 
+const permissionOptions = [
+    "owner",
+    "admin",
+    "editor",
+    "commenter",
+    "filler",
+    "viewer",
+];
+
 const Share = ({ projectId, refetch }: ShareProps) => {
     const [nickname, setNickname] = useState<string>("");
     const [permission, setPermission] = useState<number>(5);
 
-    const permissionOptions = [
-        "owner",
-        "admin",
-        "editor",
-        "commenter",
-        "filler",
-        "viewer",
-    ];
-
     const shareProject = async () => {
         if (!nickname) return;
 
-        Project.share(
+        await Project.share(
             projectId,
             nickname,
             permissionOptions[permission],

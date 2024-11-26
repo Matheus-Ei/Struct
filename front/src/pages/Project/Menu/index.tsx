@@ -2,20 +2,19 @@
 import { useContext } from "react";
 
 // Local
-import { PagesRequestType } from "../util/types";
 import NewPageTab from "./NewPageTab";
 import { PagesContext } from "..";
 import PageTab from "./PageTab";
+import { PageType } from "services/page/types";
 
 const Menu = () => {
     const context = useContext(PagesContext);
     if (!context) return null;
-
     const { menuTabs } = context;
 
-    const renderPages = (item: PagesRequestType, index: number) => {
-        return <PageTab item={item} index={index} key={index} />;
-    };
+    const renderPages = (item: PageType, index: number) => (
+        <PageTab item={item} index={index} key={index} />
+    );
 
     return (
         <div className="flex flex-col w-[300px] items-center h-screen border-r border-neutral gap-4 px-1">

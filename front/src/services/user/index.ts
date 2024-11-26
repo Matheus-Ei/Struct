@@ -30,7 +30,6 @@ class User {
         try {
             await Request.get("token/refresh");
 
-            console.log("Refreshed session");
             return true;
         } catch {
             return false;

@@ -5,14 +5,13 @@ import { useCallback, useContext, useEffect, useState } from "react";
 
 // Local
 import Button from "components/Button";
-import Icons from "modules/Icons";
+import Icon from "components/Icon";
 import User from "services/user";
-import { SignUpContext } from ".";
+import { SignUpContext } from "..";
 import useUserProvider from "services/providers/useUserProvider";
 
-const GoogleSignUpButton = () => {
+const GoogleSignUp = () => {
     const [accessToken, setAccessToken] = useState<string | null>(null);
-    const navigate = useNavigate();
     const context = useContext(SignUpContext);
 
     const { data: response } = useUserProvider(accessToken, "google");
@@ -23,7 +22,8 @@ const GoogleSignUpButton = () => {
             context?.setError({ message: "An error occurred", isError: true }),
     });
 
-    const signUp = async () => {
+    const navigate = useNavigate();
+    const signUp = useCallback(async () => {
         try {
             if (!response) return;
 
@@ -36,22 +36,19 @@ const GoogleSignUpButton = () => {
                 navigate
             );
 
-            if (!isSignedUp) {
+            if (!isSignedUp)
                 context?.setError({
                     message: "An error occurred",
                     isError: true,
                 });
-            }
         } catch (error) {
             context?.setError({ message: "An error occurred", isError: true });
         }
-    };
-
-    const memoizedSignUp = useCallback(signUp, [navigate, context, response]);
+    }, [context, navigate, response]);
 
     useEffect(() => {
-        memoizedSignUp();
-    }, [memoizedSignUp]);
+        signUp();
+    }, [signUp]);
 
     return (
         <Button
@@ -59,9 +56,9 @@ const GoogleSignUpButton = () => {
             inverse={true}
             onClick={googleProvider}
         >
-            <Icons library="fc" name="FcGoogle" />
+            <Icon library="fc" name="FcGoogle" />
         </Button>
     );
 };
 
-export default GoogleSignUpButton;
+export default GoogleSignUp;

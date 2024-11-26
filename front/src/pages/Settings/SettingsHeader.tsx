@@ -2,11 +2,10 @@
 import { useNavigate } from "react-router-dom";
 
 // Local
-import Icons from "modules/Icons";
+import Icon from "components/Icon";
 
-const goDashboard = (navigator: any) => {
+const goDashboard = (navigator: (arg0: string) => void) =>
     navigator("/dashboard");
-};
 
 const SettingsHeader = () => {
     const navigator = useNavigate();
@@ -17,7 +16,7 @@ const SettingsHeader = () => {
                 className="flex flex-row items-center justify-center gap-4 absolute left-20 top-20"
                 onClick={() => goDashboard(navigator)}
             >
-                <Icons name="IoIosArrowBack" library="io" />
+                <Icon name="IoIosArrowBack" library="io" />
                 <p>Go back</p>
             </button>
 

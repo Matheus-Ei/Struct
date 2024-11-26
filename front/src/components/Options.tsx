@@ -1,5 +1,5 @@
 // Libraries
-import clsx from "clsx";
+import { ChangeEvent } from "react";
 
 // Local
 import { SetStateType } from "types/global";
@@ -12,7 +12,7 @@ interface OptionsProps {
     className?: string;
 }
 
-const defaultCss = clsx("bg-base-300 px-2 py-1 rounded-btn");
+const defaultCss = "bg-base-300 px-2 py-1 rounded-btn";
 
 const renderOptions = (option: string, index: number) => {
     return (
@@ -31,8 +31,9 @@ const Options = ({
 }: OptionsProps) => {
     const css = className ? className : defaultCss;
 
-    const onChange = (event: any) => {
-        setSelected(options.indexOf(event.target.value));
+    const onChange = (event: ChangeEvent<HTMLSelectElement>) => {
+        const index = options.indexOf(event.target.value);
+        setSelected(index);
     };
 
     return (

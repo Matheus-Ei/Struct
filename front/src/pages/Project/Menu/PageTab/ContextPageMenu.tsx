@@ -5,7 +5,7 @@ import { useContext } from "react";
 import { deletePage } from "pages/Project/util/events";
 import ContextMenu from "components/ContextMenu";
 import { PagesContext } from "pages/Project";
-import Icons from "modules/Icons";
+import Icon from "components/Icon";
 
 interface ContextPageMenuProps {
     showMenu: boolean;
@@ -34,7 +34,7 @@ const ContextPageMenu = ({
                     className="flex gap-2 items-center justify-center"
                     onClick={() => deletePage(toggleShowMenu, pageId, context)}
                 >
-                    <Icons name="MdDelete" library="md" />
+                    <Icon name="MdDelete" library="md" />
                     <h1>Delete</h1>
                 </button>
             </div>

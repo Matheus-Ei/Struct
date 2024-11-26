@@ -3,11 +3,11 @@ import { useContext, useState } from "react";
 
 // Local
 import Message from "components/Message";
-import { goNextStep } from "./utils/functions";
-import Validations from "./utils/validations";
+import { goNextStep } from "../utils/functions";
+import Validations from "../utils/validations";
 import Button from "components/Button";
 import Input from "components/Input";
-import { SignUpContext } from ".";
+import { SignUpContext } from "..";
 import User from "services/user";
 
 interface ErrorType {
@@ -15,7 +15,7 @@ interface ErrorType {
     isError: boolean;
 }
 
-const MainStep = () => {
+const Start = () => {
     const [nickError, setNickError] = useState<ErrorType>({
         message: "",
         isError: false,
@@ -129,4 +129,4 @@ const MainStep = () => {
     );
 };
 
-export default MainStep;
+export default Start;

@@ -3,7 +3,7 @@ import clsx from "clsx";
 import { ChangeEvent, useEffect, useRef } from "react";
 
 // Local
-import Icons from "modules/Icons";
+import Icon from "components/Icon";
 import { SetStateType } from "types/global";
 
 interface SearchBarProps {
@@ -47,7 +47,7 @@ const SearchBar = ({
     const css = className ? className : defaultCss;
     return (
         <div className="relative flex text-xl text-base-content w-full">
-            <Icons
+            <Icon
                 name="IoSearchOutline"
                 library="io5"
                 className="flex items-center h-full absolute left-6 text-primary"

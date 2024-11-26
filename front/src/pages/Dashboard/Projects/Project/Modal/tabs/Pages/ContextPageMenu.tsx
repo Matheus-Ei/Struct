@@ -1,6 +1,6 @@
 // Local
 import ContextMenu from "components/ContextMenu";
-import Icons from "modules/Icons";
+import Icon from "components/Icon";
 import Page from "services/page";
 
 interface ContextPageMenuProps {
@@ -18,12 +18,11 @@ const ContextPageMenu = ({
     pageId,
     refetch,
 }: ContextPageMenuProps) => {
-    const deletePage = () => {
+    const deletePage = () =>
         Page.delete(pageId, () => {
             toggleShowMenu(false);
             refetch();
         });
-    };
 
     return (
         <ContextMenu
@@ -37,7 +36,7 @@ const ContextPageMenu = ({
                     className="flex gap-2 items-center justify-center"
                     onClick={deletePage}
                 >
-                    <Icons name="MdDelete" library="md" />
+                    <Icon name="MdDelete" library="md" />
                     <h1>Delete</h1>
                 </button>
             </div>

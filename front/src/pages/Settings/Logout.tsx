@@ -7,10 +7,7 @@ import User from "services/user";
 
 const Logout = () => {
     const navigate = useNavigate();
-
-    const handleLogout = () => {
-        User.logout(navigate);
-    };
+    const handleLogout = () => User.logout(navigate);
 
     return (
         <Button

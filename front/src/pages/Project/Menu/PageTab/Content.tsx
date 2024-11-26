@@ -1,15 +1,15 @@
 // Libraries
-import { useContext } from "react";
+import { MouseEvent, useContext } from "react";
 
 // Local
-import { PagesRequestType } from "pages/Project/util/types";
 import { PagesContext } from "pages/Project";
 import Emoji from "components/Emoji";
 import clsx from "clsx";
+import { PageType } from "services/page/types";
 
 interface ContentProps {
-    item: PagesRequestType;
-    onContextMenu: (event: any) => void;
+    item: PageType;
+    onContextMenu: (event: MouseEvent<HTMLDivElement>) => void;
 }
 
 const Content = ({ item, onContextMenu }: ContentProps) => {

@@ -1,5 +1,5 @@
 // Libraries
-import GoogleLoginButton from "./GoogleLoginButton";
+import GoogleLogin from "./provider/Google";
 import { useNavigate } from "react-router";
 import { useState } from "react";
 
@@ -19,11 +19,10 @@ const Login = () => {
 
     const navigate = useNavigate();
 
-    const handleLogin = () => {
-        User.login(mail, password, "Default", navigate).then(() => {
-            toggleError(true);
-        });
-    };
+    const handleLogin = () =>
+        User.login(mail, password, "Default", navigate).then(() =>
+            toggleError(true)
+        );
 
     return (
         <div className="w-screen h-[97vh] flex items-center justify-center">
@@ -59,7 +58,7 @@ const Login = () => {
 
                     <div className="divider">Or login with</div>
 
-                    <GoogleLoginButton toggleError={toggleError} />
+                    <GoogleLogin toggleError={toggleError} />
                 </div>
             </Card>
         </div>

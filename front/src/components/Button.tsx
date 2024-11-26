@@ -5,7 +5,7 @@ interface ButtonProps {
     children?: JSX.Element;
     inverse?: boolean;
     text?: string;
-    onClick?: () => any;
+    onClick?: () => void;
     className?: string;
 }
 
@@ -25,10 +25,8 @@ const Button = ({
     );
     const css = className ? className : buttonStyle;
 
-    const handdleClick = () => onClick && onClick();
-
     return (
-        <button className={css} onClick={handdleClick}>
+        <button className={css} onClick={() => onClick && onClick()}>
             {children ? children : <h1>{text}</h1>}
         </button>
     );

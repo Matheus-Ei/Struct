@@ -1,4 +1,5 @@
 // Libraries
+import Cursor from "modules/Cursor";
 import { SetStateType } from "types/global";
 
 // Local
@@ -7,12 +8,10 @@ import { NotesPageContextType, NotesTextType } from "./types";
 export class Text {
     private setNotes: SetStateType<Array<NotesTextType>>;
     private notes: Array<NotesTextType>;
-    private context: NotesPageContextType;
 
     constructor(context: NotesPageContextType) {
         this.setNotes = context.setNotes;
         this.notes = context.notes;
-        this.context = context;
     }
 
     public setType(index: number, type: string) {
@@ -56,28 +55,12 @@ export class Text {
         return item;
     }
 
-    moveCursor(div: HTMLElement, direction: "end" | "start") {
-        if (div) {
-            const range = document.createRange();
-            const selection = window.getSelection();
-            if (!selection || !range) return;
-
-            range.selectNodeContents(div);
-            range.collapse(direction === "start");
-            selection.removeAllRanges();
-            selection.addRange(range);
-        }
-    }
-
     public setFocus(index: number) {
         if (!this.notes[index]) return null;
-
         const element = this.notes[index].element;
-
-        if (!element) return null;
-
-        element.focus();
-        this.moveCursor(element, "end");
+        const cursor = new Cursor(element);
+        cursor.focus();
+        cursor.move("end");
     }
 
     public setNote(index: number, note: string) {

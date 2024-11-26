@@ -1,61 +1,27 @@
 // Libraries
-import { useContext, useEffect, useState } from "react";
-import { EmojiClickData } from "emoji-picker-react";
+import { useContext } from "react";
 
 // Local
-import EmojiSelector from "components/EmojiSelector";
 import { PagesContext } from "pages/Project";
 import SearchElement from "./SearchElement";
-import EditableField from "./EditableField";
-import useToggle from "hooks/useToggle";
 import Emoji from "components/Emoji";
 
 const Undefined = () => {
-    const [emoji, setEmoji] = useState<EmojiClickData | undefined>();
-    const [showEmojiSelector, toggleShowEmojiSelector] = useToggle(false);
-
     const context = useContext(PagesContext);
-
-    // Refetch the page data on load
-    useEffect(() => {
-        context?.refetchPage();
-    }, [context?.refetchPage, context]);
-
-    useEffect(() => {
-        if (emoji && context && context.page) {
-            // Updates the emoji on the database
-        }
-    }, [emoji, context?.page?.id, context]);
 
     return (
         <div className="flex flex-col w-full h-full items-center justify-center gap-2">
-            <EmojiSelector
-                setEmoji={setEmoji}
-                show={showEmojiSelector}
-                toggleShow={toggleShowEmojiSelector}
-            />
-
             <div className="flex flex-row gap-4 w-full text-start text-4xl">
-                <button onClick={() => toggleShowEmojiSelector()}>
-                    <Emoji
-                        symbol={emoji ? emoji.emoji : context?.page?.emoji}
-                    />
-                </button>
+                <Emoji symbol={context?.page?.emoji} />
 
-                <EditableField
-                    defaultValue={context?.page?.name}
-                    pageId={context?.page?.id}
-                    field="name"
-                    className="w-full text-start font-bold text-3xl"
-                />
+                <h1 className="w-full text-start font-bold text-3xl">
+                    {context?.page?.name}
+                </h1>
             </div>
 
-            <EditableField
-                defaultValue={context?.page?.description}
-                pageId={context?.page?.id}
-                field="description"
-                className="w-full text-start text-lg mb-10"
-            />
+            <h1 className="w-full text-start text-lg mb-10">
+                {context?.page?.description}
+            </h1>
 
             <SearchElement pageId={context?.page?.id} />
         </div>

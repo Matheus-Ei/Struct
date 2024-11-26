@@ -6,14 +6,14 @@ interface CardProps {
     className?: string;
 }
 
-const Card = ({ children, className }: CardProps) => {
-    const defaultCss = clsx(
-        "w-fit h-fit p-4",
-        "flex flex-col items-center justify-center",
-        "border rounded-box border-primary bg-base-100"
-    );
+const defaultCss = clsx(
+    "w-fit h-fit p-4",
+    "flex flex-col items-center justify-center",
+    "border rounded-box border-primary bg-base-100"
+);
 
-    const css = className ? className : defaultCss;
+const Card = ({ children, className }: CardProps) => {
+    const css: string = className ? className : defaultCss;
 
     return <div className={css}>{children}</div>;
 };
