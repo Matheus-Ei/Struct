@@ -1,5 +1,6 @@
 // Libraries
 import clsx from "clsx";
+import { ChangeEvent } from "react";
 
 // Local
 import { SetStateType } from "types/global";
@@ -31,11 +32,10 @@ const Options = ({
 }: OptionsProps) => {
     const css = className ? className : defaultCss;
 
-    const onChange = (event: any) => {
+    const onChange = (event: ChangeEvent<HTMLSelectElement>) => {
         const index = options.indexOf(event.target.value);
         setSelected(index);
     };
-
 
     return (
         <div className="flex flex-col items-center justify-center">

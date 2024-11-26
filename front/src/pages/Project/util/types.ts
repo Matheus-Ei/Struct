@@ -4,7 +4,7 @@ import { SetStateType } from "types/global";
 export interface ReactProjectContext {
     page: PageType | null | undefined;
     refetchPage: () => void;
-    menuTabs: Array<PageType> | undefined;
+    menuTabs: Array<PageType> | null;
     setMenuTabs: (newMenuTabs: Array<PageType>) => void;
     refetchMenuTabs: () => void;
     selectedPageId: number | null;

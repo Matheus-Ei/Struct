@@ -15,6 +15,7 @@ interface CreateProjectModalProps {
     setModal: SetStateType<boolean>;
 }
 
+// Styles
 const modalCss = clsx(
     "relative w-[65vw] h-[50vh]",
     "flex flex-col items-start justify-start"

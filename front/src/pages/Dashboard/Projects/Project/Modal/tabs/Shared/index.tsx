@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import Icons from "modules/Icons";
+import { SharedUserType } from "services/project/type";
 import { useProjectUsers } from "services/project/useProject";
 import { TabProps } from "../../utils/types";
 import Share from "./Share";
@@ -12,7 +13,7 @@ const usersDivCss = clsx(
     "grid-cols-2 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-7"
 );
 
-const renderUsers = (item: any, index: number) => {
+const renderUsers = (item: SharedUserType, index: number) => {
     return (
         <div
             key={index}

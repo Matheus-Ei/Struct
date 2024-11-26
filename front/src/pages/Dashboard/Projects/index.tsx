@@ -1,5 +1,5 @@
 // Libraries
-import React, { useState } from "react";
+import { createContext, useState } from "react";
 
 // Local
 import CreateProjectModal from "./CreateProject/Modal";
@@ -10,8 +10,14 @@ import clsx from "clsx";
 import { ModalType } from "./Project/Modal/utils/types";
 import { useAllProjects } from "services/project/useProject";
 import SearchBar from "components/SearchBar";
+import { ProjectType } from "services/project/type";
 
-export const projectsContext = React.createContext<any>(undefined);
+interface ProjectsContextType {
+    refetch: () => void;
+}
+export const projectsContext = createContext<ProjectsContextType | undefined>(
+    undefined
+);
 
 const projectsDivCss = clsx(
     "grid items-center justify-items-start gap-6",
@@ -28,8 +34,10 @@ const Projects = () => {
     const { data: projects, refetch } = useAllProjects();
     const [searchResult, setSearchResult] = useState<Array<string>>([]);
 
-    const searchPlace = projects?.map((item: any): string => item.title);
-    const renderProject = (item: any, index: number) => {
+    const searchPlace = projects?.map(
+        (item: ProjectType): string => item.title
+    );
+    const renderProject = (item: ProjectType, index: number) => {
         // If the searchPlace is set and the item is not in the searchPlace, return null
         if (searchResult?.length >= 0 && !searchResult?.includes(item.title))
             return null;

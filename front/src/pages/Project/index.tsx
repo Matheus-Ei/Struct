@@ -18,7 +18,7 @@ const Project = () => {
     const { id } = useParams();
 
     // Menu tabs request
-    const [menuTabs, setMenuTabs] = useState<PageType[]>();
+    const [menuTabs, setMenuTabs] = useState<PageType[] | null>(null);
     const { refetch: refetchMenuTabs } = useAllPages(Number(id), (response) => {
         setMenuTabs(response);
     });

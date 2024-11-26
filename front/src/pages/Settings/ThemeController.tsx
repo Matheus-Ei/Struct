@@ -1,6 +1,6 @@
 // Libraries
 import clsx from "clsx";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 
 // Local
 import Icons from "modules/Icons";
@@ -18,13 +18,14 @@ const ThemeController = () => {
     const [theme, setTheme] = useState(Theme.getCurrent());
     const themes = Theme.getKeys();
 
-    const handleThemeChange = (event: any) => {
-        const { newTheme } = Theme.set(event.target.value);
+    const handleThemeChange = (event: ChangeEvent<HTMLInputElement>) => {
+        const eventTarget = event.target as HTMLInputElement;
+        const { newTheme } = Theme.set(eventTarget.value);
 
         setTheme(newTheme);
     };
 
-    const renderThemes = (item: any, index: number) => {
+    const renderThemes = (item: string, index: number) => {
         return (
             <li key={index}>
                 <input

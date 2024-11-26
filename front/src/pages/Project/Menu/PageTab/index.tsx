@@ -1,5 +1,5 @@
 // Libraries
-import { useState } from "react";
+import { MouseEvent, useState } from "react";
 
 // Local
 import ContextPageMenu from "./ContextPageMenu";
@@ -25,7 +25,7 @@ const PageTab = ({ item, index }: PageTabProps) => {
     const [showMenu, toggleShowMenu] = useToggle(false);
     const [clickPosition, setClickPosition] = useState({ x: 0, y: 0 });
 
-    const onContextMenu = (event: any) => {
+    const onContextMenu = (event: MouseEvent) => {
         event.preventDefault();
         setClickPosition({ x: event.clientX, y: event.clientY });
         toggleShowMenu(true);

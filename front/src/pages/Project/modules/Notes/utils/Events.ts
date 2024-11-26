@@ -1,7 +1,14 @@
 // Local
+import { KeyboardEvent } from "react";
 import { Text } from "./Text";
 
-export const handleKeyDown = (event: any, index: number, textEditor: Text) => {
+export const handleKeyDown = (
+    event: KeyboardEvent<HTMLDivElement>,
+    index: number,
+    textEditor: Text
+) => {
+    const eventTarget = event.target as HTMLElement;
+
     // Add textArea
     if (event.key === "Enter" && !event.shiftKey) {
         event.preventDefault();
@@ -11,7 +18,7 @@ export const handleKeyDown = (event: any, index: number, textEditor: Text) => {
     }
 
     // Delete textArea
-    if (event.key === "Backspace" && event.target.innerText.trim() === "") {
+    if (event.key === "Backspace" && eventTarget.innerText.trim() === "") {
         if (index === 0) return;
 
         event.preventDefault();

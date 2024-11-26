@@ -1,5 +1,5 @@
 // Libraries
-import { useRef, useState } from "react";
+import { KeyboardEvent, MouseEvent, useRef, useState } from "react";
 import clsx from "clsx";
 
 // Local
@@ -23,7 +23,7 @@ const EditableField = ({
     const [preValue, setPreValue] = useState<string>("");
     const divRef = useRef<HTMLDivElement>(null);
 
-    const onKeyDown = (event: any) => {
+    const onKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
         const onKeyEvent = new Event(event);
 
         const onPressEnter = async () => {
@@ -61,9 +61,10 @@ const EditableField = ({
         ]);
     };
 
-    const onClick = (event: any) => {
+    const onClick = (event: MouseEvent<HTMLDivElement>) => {
         setIsEditing(true);
-        setPreValue(event.target.value);
+        const content = event.target as HTMLDivElement;
+        setPreValue(content.innerText);
 
         // Focus the cursor, and move it to the end
         setTimeout(() => {
@@ -76,8 +77,9 @@ const EditableField = ({
         }, 0);
     };
 
-    const onBlur = (event: any) => {
-        event.target.value = preValue;
+    const onBlur = (event: FocusEvent) => {
+        const content = event.target as HTMLDivElement;
+        content.innerText = preValue;
         setIsEditing(false);
     };
 

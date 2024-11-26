@@ -1,5 +1,6 @@
 import Request from "modules/Request";
-import { GetPageType, GetPagesType } from "./types";
+import { SuccessResponseType } from "types/global";
+import { GetPageType, GetPagesType, PageType } from "./types";
 
 class Page {
     public static async get(id: number) {
@@ -27,7 +28,7 @@ class Page {
         emoji: string | undefined,
         projectId: number,
         parentPage: number | null,
-        onSuccess: (response?: any) => void
+        onSuccess: (response?: SuccessResponseType) => void
     ) {
         try {
             const response = await Request.post("page", {
@@ -50,7 +51,7 @@ class Page {
         name: string | undefined,
         description: string | undefined,
         emoji: string | undefined,
-        onSuccess: (response?: any) => void
+        onSuccess: (response?: SuccessResponseType) => void
     ) {
         try {
             const response = await Request.patch(`page/${id}`, {
@@ -67,10 +68,10 @@ class Page {
     }
 
     public static removeById(
-        rootPages: PagesType[],
+        rootPages: PageType[],
         targetPageId: number
-    ): PagesType[] {
-        function removePage(page: PagesType): boolean {
+    ): PageType[] {
+        function removePage(page: PageType): boolean {
             if (page.id === targetPageId) return true;
 
             if (page.children_pages) {
@@ -97,7 +98,7 @@ class Page {
 
     public static async delete(
         id: number,
-        onSuccess: (response?: any) => void
+        onSuccess: (response?: SuccessResponseType) => void
     ) {
         try {
             const response = await Request.delete(`page/${id}`);

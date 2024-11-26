@@ -1,5 +1,5 @@
 // Libraries
-import { useContext, useEffect, useMemo, useRef, useState } from "react";
+import { KeyboardEvent, useContext, useEffect, useMemo, useRef, useState } from "react";
 
 // Local
 import { handleKeyDown } from "../utils/Events";
@@ -33,7 +33,7 @@ const Title = ({ note, index, titleType }: TitleProps) => {
             textEditor.handleSetText(index, divRef.current.innerHTML);
     };
 
-    const keyDownHandler = (event: any) =>
+    const keyDownHandler = (event: KeyboardEvent<HTMLDivElement>) =>
         handleKeyDown(event, index, textEditor);
 
     const innerHTML = { __html: note };

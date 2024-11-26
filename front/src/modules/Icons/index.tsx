@@ -8,22 +8,29 @@ interface IconsProps {
     library: string;
     name: string;
     className?: string;
-    onClick?: (event?: any) => void;
+    onClick?: (event?: MouseEvent) => void;
+}
+
+interface IconType {
+    [key: string]: any;
 }
 
 const Icons = ({ library, name, className, onClick }: IconsProps) => {
-    if (!library || !name) return <FaQuestion onClick={onClick} />;
+    const handleClick = (event: MouseEvent) => onClick && onClick(event);
+    const handleClickClean = () => onClick && onClick();
+
+    if (!library || !name) return <FaQuestion onClick={handleClickClean} />;
 
     try {
-        const repository: any = lib[library];
+        const repository: IconType = lib[library];
         const RequiredIcon = repository[name];
 
         if (className)
-            return <RequiredIcon className={className} onClick={onClick} />;
+            return <RequiredIcon className={className} onClick={handleClick} />;
 
-        return <RequiredIcon onClick={onClick} />;
+        return <RequiredIcon onClick={handleClick} />;
     } catch (error) {
-        return <FaQuestion onClick={onClick} />;
+        return <FaQuestion onClick={handleClickClean} />;
     }
 };
 

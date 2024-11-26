@@ -6,7 +6,7 @@ import Card from "./Card";
 interface ModalProps {
     children: JSX.Element;
     isOpen: boolean;
-    close: () => any;
+    close: () => void;
     className?: string;
 }
 

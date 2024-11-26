@@ -1,5 +1,5 @@
 // Libraries
-import { useContext } from "react";
+import { MouseEvent, useContext } from "react";
 
 // Local
 import { PagesContext } from "pages/Project";
@@ -9,7 +9,7 @@ import { PageType } from "services/page/types";
 
 interface ContentProps {
     item: PageType;
-    onContextMenu: (event: any) => void;
+    onContextMenu: (event: MouseEvent<HTMLDivElement>) => void;
 }
 
 const Content = ({ item, onContextMenu }: ContentProps) => {

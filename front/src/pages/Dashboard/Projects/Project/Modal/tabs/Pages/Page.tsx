@@ -5,7 +5,7 @@ import Emoji from "components/Emoji";
 import EmojiSelector from "components/EmojiSelector";
 import { EmojiClickData } from "emoji-picker-react";
 import useToggle from "hooks/useToggle";
-import { useEffect, useState } from "react";
+import { MouseEvent, useEffect, useState } from "react";
 import ContextPageMenu from "./ContextPageMenu";
 import PageService from "services/page";
 
@@ -35,7 +35,7 @@ const Page = ({ id, name, emoji, refetch }: PageProps) => {
     const [showMenu, toggleShowMenu] = useToggle(false);
     const [clickPosition, setClickPosition] = useState({ x: 0, y: 0 });
 
-    const onContextMenu = (event: any) => {
+    const onContextMenu = (event: MouseEvent) => {
         event?.preventDefault();
         setClickPosition({ x: event.clientX, y: event.clientY });
         toggleShowMenu(true);

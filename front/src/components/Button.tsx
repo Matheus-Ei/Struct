@@ -5,7 +5,7 @@ interface ButtonProps {
     children?: JSX.Element;
     inverse?: boolean;
     text?: string;
-    onClick?: () => any;
+    onClick?: () => void;
     className?: string;
 }
 

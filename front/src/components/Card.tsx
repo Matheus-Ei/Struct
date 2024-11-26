@@ -13,7 +13,7 @@ const defaultCss = clsx(
 );
 
 const Card = ({ children, className }: CardProps) => {
-    const css = className ? className : defaultCss;
+    const css: string = className ? className : defaultCss;
 
     return <div className={css}>{children}</div>;
 };
