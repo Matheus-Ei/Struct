@@ -31,7 +31,7 @@ const Options = ({
 }: OptionsProps) => {
     const css = className ? className : defaultCss;
 
-    const onChange = (event: ChangeEvent<HTMLSelectElement>) => {
+    const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
         const index = options.indexOf(event.target.value);
         setSelected(index);
     };
@@ -41,7 +41,7 @@ const Options = ({
             <select
                 id="options"
                 value={options[selected] || ""}
-                onChange={onChange}
+                onChange={handleChange}
                 className={css}
             >
                 <option value="">{placeholder || "Select"}</option>

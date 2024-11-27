@@ -15,7 +15,8 @@ import { ProjectType } from "services/project/type";
 interface ProjectsContextType {
     refetch: () => void;
 }
-export const projectsContext = createContext<ProjectsContextType | undefined>(
+
+export const ProjectsContext = createContext<ProjectsContextType | undefined>(
     undefined
 );
 
@@ -33,10 +34,9 @@ const Projects = () => {
 
     const { data: projects, refetch } = useAllProjects();
     const [searchResult, setSearchResult] = useState<Array<string>>([]);
+    if (!projects) return <div>Loading. . .</div>;
 
-    const searchPlace = projects?.map(
-        (item: ProjectType): string => item.title
-    );
+    const searchPlace = projects.map((item: ProjectType): string => item.title);
     const renderProject = (item: ProjectType, index: number) => {
         // If the searchPlace is set and the item is not in the searchPlace, return null
         if (searchResult?.length >= 0 && !searchResult?.includes(item.title))
@@ -54,7 +54,7 @@ const Projects = () => {
     };
 
     return (
-        <projectsContext.Provider value={{ refetch }}>
+        <ProjectsContext.Provider value={{ refetch }}>
             <div className="flex flex-col items-center justify-center w-[95%] gap-4">
                 <div className="w-[40%]">
                     <SearchBar
@@ -76,7 +76,7 @@ const Projects = () => {
                 showModal={showCreateProject}
                 setModal={setShowCreateProject}
             />
-        </projectsContext.Provider>
+        </ProjectsContext.Provider>
     );
 };
 

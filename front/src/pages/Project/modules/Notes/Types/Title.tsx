@@ -1,5 +1,12 @@
 // Libraries
-import { KeyboardEvent, useContext, useEffect, useMemo, useRef, useState } from "react";
+import {
+    KeyboardEvent,
+    useContext,
+    useEffect,
+    useMemo,
+    useRef,
+    useState,
+} from "react";
 
 // Local
 import { handleKeyDown } from "../utils/Events";

@@ -25,7 +25,7 @@ const PageTab = ({ item, index }: PageTabProps) => {
     const [showMenu, toggleShowMenu] = useToggle(false);
     const [clickPosition, setClickPosition] = useState({ x: 0, y: 0 });
 
-    const onContextMenu = (event: MouseEvent) => {
+    const handleContextMenu = (event: MouseEvent) => {
         event.preventDefault();
         setClickPosition({ x: event.clientX, y: event.clientY });
         toggleShowMenu(true);
@@ -38,7 +38,7 @@ const PageTab = ({ item, index }: PageTabProps) => {
             onMouseLeave={() => toggleHover(false)}
             key={index}
         >
-            <Content item={item} onContextMenu={onContextMenu} />
+            <Content item={item} onContextMenu={handleContextMenu} />
 
             <HoverButtons
                 showChildren={showChildren}

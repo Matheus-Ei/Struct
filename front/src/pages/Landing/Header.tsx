@@ -9,10 +9,10 @@ import User from "services/user";
 const Header = () => {
     const navigate = useNavigate();
 
-    const onLogin = async () =>
+    const openLogin = async () =>
         (await User.verifyLogin(navigate)) && navigate("/dashboard");
 
-    const onSignup = () => navigate("/sign-up");
+    const openSignup = () => navigate("/sign-up");
 
     return (
         <div className="flex flex-row relative justify-between items-center top-0 border-b border-base-200 w-screen h-16 px-6">
@@ -22,13 +22,13 @@ const Header = () => {
                 <Button
                     text="Login"
                     className="border-2 w-fit h-fit px-10 py-1 rounded-btn bg-base-100 border-primary font-bold"
-                    onClick={onLogin}
+                    onClick={openLogin}
                 />
 
                 <Button
                     text="Sign-up"
                     className="border-2 w-fit h-fit px-10 py-1 rounded-btn bg-primary border-primary text-primary-content font-bold"
-                    onClick={onSignup}
+                    onClick={openSignup}
                 />
             </div>
         </div>

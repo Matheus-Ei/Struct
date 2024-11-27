@@ -35,7 +35,7 @@ const Page = ({ id, name, emoji, refetch }: PageProps) => {
     const [showMenu, toggleShowMenu] = useToggle(false);
     const [clickPosition, setClickPosition] = useState({ x: 0, y: 0 });
 
-    const onContextMenu = (event: MouseEvent) => {
+    const handleContextMenu = (event: MouseEvent) => {
         event?.preventDefault();
         setClickPosition({ x: event.clientX, y: event.clientY });
         toggleShowMenu(true);
@@ -62,7 +62,7 @@ const Page = ({ id, name, emoji, refetch }: PageProps) => {
     return (
         <div
             className="flex gap-x-4 items-center"
-            onContextMenu={onContextMenu}
+            onContextMenu={handleContextMenu}
         >
             <Emoji
                 symbol={defaultEmoji}

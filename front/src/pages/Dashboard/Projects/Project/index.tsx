@@ -20,9 +20,7 @@ const bodyCss = clsx(
 );
 
 const Project = ({ title, description, id, setModal }: ProjectProps) => {
-    const handleOpen = () => {
-        setModal({ projectId: id, show: true });
-    };
+    const handleOpen = () => setModal({ projectId: id, show: true });
 
     return (
         <div className={bodyCss}>

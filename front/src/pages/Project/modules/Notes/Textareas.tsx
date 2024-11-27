@@ -18,7 +18,7 @@ const Textareas = ({ note, type, index }: TextareasProps) => {
     useEffect(() => {
         context?.setNotes((prev) => {
             const prevBase = [...prev];
-            const elements = context?.divBodyRef.current?.children;
+            const elements = context?.mainDivRef.current?.children;
 
             const notesWithElements = prevBase.map((item, index) => {
                 if (!elements) return item;

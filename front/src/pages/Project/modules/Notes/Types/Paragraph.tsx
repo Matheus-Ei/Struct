@@ -32,14 +32,11 @@ const Paragraph = ({ note, index }: ParagraphProps) => {
     if (!context) return null;
     const textEditor = new Text(context);
 
-    const onChange = () => {
+    const handleChange = () => {
         setPosition(cursor.position);
         if (divRef.current)
             textEditor.handleSetText(index, divRef.current.innerHTML);
     };
-
-    const keyDownHandler = (event: KeyboardEvent<HTMLDivElement>) =>
-        handleKeyDown(event, index, textEditor);
 
     const innerHTML = { __html: note };
 
@@ -49,8 +46,8 @@ const Paragraph = ({ note, index }: ParagraphProps) => {
             dangerouslySetInnerHTML={innerHTML}
             ref={divRef}
             className="w-full h-auto bg-base-100 resize-none outline-none"
-            onKeyDown={keyDownHandler}
-            onInput={onChange}
+            onKeyDown={(event) => handleKeyDown(event, index, textEditor)}
+            onInput={handleChange}
         ></div>
     );
 };

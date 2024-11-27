@@ -15,8 +15,8 @@ const themeListCss = clsx(
 );
 
 const ThemeController = () => {
-    const [theme, setTheme] = useState(Theme.getCurrent());
-    const themes = Theme.getKeys();
+    const [theme, setTheme] = useState(Theme.current);
+    const themes = Theme.keys;
 
     const handleThemeChange = (event: ChangeEvent<HTMLInputElement>) => {
         const eventTarget = event.target as HTMLInputElement;

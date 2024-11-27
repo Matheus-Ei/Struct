@@ -23,20 +23,20 @@ const EditableField = ({
     const [preValue, setPreValue] = useState<string>("");
     const divRef = useRef<HTMLDivElement>(null);
 
-    const onKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
-        const onKeyEvent = new Event(event);
+    const handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
+        const keyEvent = new Event(event);
 
         const onPressEnter = async () => {
-            onKeyEvent.preventDefault();
+            keyEvent.preventDefault();
             setIsEditing(false);
 
             // Remove all new lines
-            const newText = onKeyEvent.targetInnerText.replace(/\n/g, "");
+            const newText = keyEvent.targetInnerText.replace(/\n/g, "");
 
             // Verifications
             if (newText === preValue) return;
             if (!newText) {
-                onKeyEvent.targetInnerText = preValue;
+                keyEvent.targetInnerText = preValue;
                 return;
             }
 
@@ -45,7 +45,7 @@ const EditableField = ({
             try {
                 await onUpdate(newText);
             } catch (error) {
-                onKeyEvent.targetInnerText = preValue;
+                keyEvent.targetInnerText = preValue;
             }
         };
 
@@ -55,13 +55,13 @@ const EditableField = ({
                 key: "Escape",
                 callback: () => {
                     setIsEditing(false);
-                    onKeyEvent.targetInnerText = preValue;
+                    keyEvent.targetInnerText = preValue;
                 },
             },
         ]);
     };
 
-    const onClick = (event: MouseEvent<HTMLDivElement>) => {
+    const handleClick = (event: MouseEvent<HTMLDivElement>) => {
         setIsEditing(true);
         const content = event.target as HTMLDivElement;
         setPreValue(content.innerText);
@@ -77,7 +77,7 @@ const EditableField = ({
         }, 0);
     };
 
-    const onBlur = (event: FocusEvent) => {
+    const handleBlur = (event: FocusEvent) => {
         const content = event.target as HTMLDivElement;
         content.innerText = preValue;
         setIsEditing(false);
@@ -103,9 +103,9 @@ const EditableField = ({
             contentEditable={isEditing}
             dangerouslySetInnerHTML={innerHTML}
             ref={divRef}
-            onClick={onClick}
-            onBlur={onBlur}
-            onKeyDown={onKeyDown}
+            onClick={handleClick}
+            onBlur={handleBlur}
+            onKeyDown={handleKeyDown}
             className={css ? css : defaultCss}
         ></div>
     );

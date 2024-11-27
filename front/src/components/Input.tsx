@@ -11,6 +11,7 @@ interface InputProps {
     className?: string;
     onEnter?: () => void;
     maxLength?: number;
+    minLength?: number;
     defaultValue?: string | null;
     error?: ErrorType;
 }
@@ -25,6 +26,7 @@ const Input = ({
     className,
     onEnter,
     maxLength,
+    minLength,
     defaultValue,
     error,
 }: InputProps) => {
@@ -61,6 +63,8 @@ const Input = ({
                     onChange={handleChange}
                     onKeyDown={onKeyDown}
                     defaultValue={defaultValue ? defaultValue : ""}
+                    maxLength={maxLength}
+                    minLength={minLength}
                 ></textarea>
             </>
         );
@@ -82,6 +86,7 @@ const Input = ({
                 defaultValue={defaultValue ? defaultValue : ""}
                 onKeyDown={onKeyDown}
                 maxLength={maxLength}
+                minLength={minLength}
             ></input>
         </>
     );

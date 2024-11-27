@@ -25,7 +25,7 @@ const EmojiSelector = ({
 }: EmojiSelectorProps) => {
     const emojiRef = useRef<HTMLDivElement>(null);
 
-    const onEmojiClick = (emojiObject: EmojiClickData) => {
+    const handleEmojiClick = (emojiObject: EmojiClickData) => {
         setEmoji(emojiObject);
         toggleShow(false);
     };
@@ -56,7 +56,7 @@ const EmojiSelector = ({
     return (
         <div className="absolute z-50" ref={emojiRef}>
             <EmojiPicker
-                onEmojiClick={onEmojiClick}
+                onEmojiClick={handleEmojiClick}
                 theme={Theme.AUTO}
                 emojiStyle={EmojiStyle.NATIVE}
                 style={{

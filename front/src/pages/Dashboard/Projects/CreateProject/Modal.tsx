@@ -2,7 +2,7 @@
 import { useContext, useEffect, useState } from "react";
 
 // Local
-import { projectsContext } from "pages/Dashboard/Projects";
+import { ProjectsContext } from "pages/Dashboard/Projects";
 import Button from "components/Button";
 import Modal from "components/Modal";
 import Input from "components/Input";
@@ -34,13 +34,13 @@ const CreateProjectModal = ({
     showModal,
     setModal,
 }: CreateProjectModalProps) => {
-    const context = useContext(projectsContext);
+    const context = useContext(ProjectsContext);
 
     const [title, setTitle] = useState<string>("");
     const [description, setDescription] = useState<string>("");
 
     // Error handling
-    const [descError, setDescError] = useState<ErrorType>({
+    const [descError, setDescriptionError] = useState<ErrorType>({
         message: "",
         isError: false,
     });
@@ -54,7 +54,7 @@ const CreateProjectModal = ({
         setTitle("");
         setDescription("");
         setTitleError({ message: "", isError: false });
-        setDescError({ message: "", isError: false });
+        setDescriptionError({ message: "", isError: false });
     }, [showModal]);
 
     const handleCreate = async () => {
@@ -65,13 +65,13 @@ const CreateProjectModal = ({
         setTitleError({ message: "", isError: false });
 
         if (!description) {
-            setDescError({
+            setDescriptionError({
                 message: "The description is required",
                 isError: true,
             });
             return;
         }
-        setDescError({ message: "", isError: false });
+        setDescriptionError({ message: "", isError: false });
 
         await Project.create(title, description, () => {
             setModal(false);

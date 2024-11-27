@@ -27,10 +27,10 @@ const Content = ({ item, onContextMenu }: ContentProps) => {
         }
     );
 
-    const onClick = () => context.setSelectedPageId(item.id);
+    const handleClick = () => context.setSelectedPageId(item.id);
 
     return (
-        <div className={css} onContextMenu={onContextMenu} onClick={onClick}>
+        <div className={css} onContextMenu={onContextMenu} onClick={handleClick}>
             <Emoji symbol={item.emoji} />
             <h1 className="line-clamp-1 w-full text-sm">{item.name}</h1>
         </div>

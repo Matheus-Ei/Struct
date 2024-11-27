@@ -7,7 +7,7 @@ export const handleKeyDown = (
     index: number,
     textEditor: Text
 ) => {
-    const eventTarget = event.target as HTMLElement;
+    const targetEvent = event.target as HTMLElement;
 
     // Add textArea
     if (event.key === "Enter" && !event.shiftKey) {
@@ -18,7 +18,7 @@ export const handleKeyDown = (
     }
 
     // Delete textArea
-    if (event.key === "Backspace" && eventTarget.innerText.trim() === "") {
+    if (event.key === "Backspace" && targetEvent.innerText.trim() === "") {
         if (index === 0) return;
 
         event.preventDefault();

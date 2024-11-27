@@ -14,11 +14,11 @@ const Body = () => {
         { note: "", type: "paragraph", element: null },
     ]);
 
-    const divBodyRef = useRef<HTMLDivElement>(null);
+    const mainDivRef = useRef<HTMLDivElement>(null);
 
     const sendFocus = (event: MouseEvent) => {
         if (event.target === event.currentTarget) {
-            const firstElement = divBodyRef.current?.children[0] as HTMLElement;
+            const firstElement = mainDivRef.current?.children[0] as HTMLElement;
             firstElement.focus();
         }
     };
@@ -39,11 +39,11 @@ const Body = () => {
             value={{
                 notes,
                 setNotes,
-                divBodyRef,
+                mainDivRef,
             }}
         >
             <div
-                ref={divBodyRef}
+                ref={mainDivRef}
                 className="flex flex-col gap-1 w-full h-3/4"
                 onClick={sendFocus}
             >

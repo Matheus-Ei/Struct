@@ -16,10 +16,9 @@ interface IconType {
 }
 
 const Icon = ({ library, name, className, onClick }: IconsProps) => {
-    const handleClick = (event: MouseEvent) => onClick && onClick(event);
-    const handleClickClean = () => onClick && onClick();
+    const handleClick = (event: any) => onClick && onClick(event);
 
-    if (!library || !name) return <FaQuestion onClick={handleClickClean} />;
+    if (!library || !name) return <FaQuestion onClick={handleClick} />;
 
     try {
         const repository: IconType = lib[library];
@@ -30,7 +29,7 @@ const Icon = ({ library, name, className, onClick }: IconsProps) => {
 
         return <RequiredIcon onClick={handleClick} />;
     } catch (error) {
-        return <FaQuestion onClick={handleClickClean} />;
+        return <FaQuestion onClick={handleClick} />;
     }
 };
 

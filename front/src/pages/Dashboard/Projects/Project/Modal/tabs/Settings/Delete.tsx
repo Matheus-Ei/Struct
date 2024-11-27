@@ -2,7 +2,7 @@
 import { useContext, useEffect } from "react";
 
 // Local
-import { projectsContext } from "pages/Dashboard/Projects";
+import { ProjectsContext } from "pages/Dashboard/Projects";
 import Point from "components/Point";
 import useToggle from "hooks/useToggle";
 import ConfirmModal from "components/ConfirmModal";
@@ -15,7 +15,7 @@ interface DeleteProps {
 }
 
 const Delete = ({ projectId, setModal }: DeleteProps) => {
-    const context = useContext(projectsContext);
+    const context = useContext(ProjectsContext);
 
     const [wantDelete, toggleWantDelete] = useToggle(false);
     const [showConfirmDelete, toggleShowConfirmDelete] = useToggle(false);

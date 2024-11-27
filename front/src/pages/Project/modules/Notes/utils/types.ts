@@ -11,5 +11,5 @@ export interface NotesTextType {
 export interface NotesPageContextType {
     notes: Array<NotesTextType>;
     setNotes: SetStateType<Array<NotesTextType>>;
-    divBodyRef: RefObject<HTMLDivElement>;
+    mainDivRef: RefObject<HTMLDivElement>;
 }

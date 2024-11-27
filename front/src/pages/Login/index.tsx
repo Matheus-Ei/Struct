@@ -19,7 +19,7 @@ const Login = () => {
 
     const navigate = useNavigate();
 
-    const handleLogin = () =>
+    const login = () =>
         User.login(mail, password, "Default", navigate).then(() =>
             toggleError(true)
         );
@@ -41,20 +41,16 @@ const Login = () => {
                         isVisible={error}
                     />
 
-                    <Input
-                        text="Mail"
-                        setValue={setMail}
-                        onEnter={handleLogin}
-                    />
+                    <Input text="Mail" setValue={setMail} onEnter={login} />
 
                     <Input
                         text="Password"
                         setValue={setPassword}
                         isPassword={true}
-                        onEnter={handleLogin}
+                        onEnter={login}
                     />
 
-                    <Button text="Login" inverse={true} onClick={handleLogin} />
+                    <Button text="Login" inverse={true} onClick={login} />
 
                     <div className="divider">Or login with</div>
 

@@ -57,7 +57,7 @@ const Share = ({ projectId, refetch }: ShareProps) => {
                 setSelected={setPermission}
             />
 
-            <Point icon="FaPlus" library="fa6" onClick={shareProject} />
+            <Point icon="BsFillShareFill" library="bs" onClick={shareProject} />
         </div>
     );
 };

@@ -26,14 +26,14 @@ const SearchBar = ({
     placeholder,
     className,
 }: SearchBarProps) => {
-    const initialSearchPlace = useRef(searchPlace);
+    const startSearchPlace = useRef(searchPlace);
 
     // Set the result to the search place when the component is mounted
     useEffect(() => {
-        setResult(initialSearchPlace.current);
+        setResult(startSearchPlace.current);
     }, [setResult]);
 
-    const onChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
         const search = event.target.value as string;
         if (!search) return setResult(searchPlace);
 
@@ -56,7 +56,7 @@ const SearchBar = ({
             <input
                 className={css}
                 placeholder={placeholder ? placeholder : "Search. . . "}
-                onChange={onChange}
+                onChange={handleChange}
                 defaultValue=""
             />
         </div>

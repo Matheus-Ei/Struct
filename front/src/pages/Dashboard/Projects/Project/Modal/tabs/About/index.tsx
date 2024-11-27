@@ -1,6 +1,6 @@
 // Libraries
 import Point from "components/Point";
-import { projectsContext } from "pages/Dashboard/Projects";
+import { ProjectsContext } from "pages/Dashboard/Projects";
 import { useContext } from "react";
 
 // Local
@@ -12,7 +12,7 @@ import Project from "services/project";
 const About = ({ projectId }: TabProps) => {
     const { data: project } = useProject(projectId);
 
-    const context = useContext(projectsContext);
+    const context = useContext(ProjectsContext);
     if (!context) return null;
 
     const updateTitle = async (newValue: string) => {
