@@ -6,7 +6,7 @@ import operations from "../../services/database/operations.js";
 import Cookie from "../../services/cookie.js";
 
 // Models
-import ProjectModel from "../../models/project.js";
+import { ProjectModel } from "../../models/index.js";
 
 class ProjectController {
     public async get(req: Request, res: Response) {

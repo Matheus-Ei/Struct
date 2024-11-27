@@ -14,6 +14,18 @@ class ProjectModel extends Model {
     public description!: string;
 
     public owner_user_id!: number;
+
+    public static associate() {
+        // User
+        UserModel.hasMany(this, {
+            foreignKey: "owner_user_id",
+            as: "projects",
+        });
+        this.belongsTo(UserModel, {
+            foreignKey: "owner_user_id",
+            as: "owner",
+        });
+    }
 }
 
 ProjectModel.init(

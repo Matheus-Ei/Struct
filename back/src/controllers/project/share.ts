@@ -5,8 +5,12 @@ import { Request, Response } from "express";
 import operations from "../../services/database/operations.js";
 
 // Models
-import ProjectModel from "../../models/project.js";
-import UserModel from "../../models/user.js";
+import {
+    PermissionLevelModel,
+    ProjectModel,
+    RelationshipSharedProject,
+    UserModel,
+} from "../../models/index.js";
 
 class ShareController {
     public async get(req: Request, res: Response) {
@@ -65,18 +69,13 @@ class ShareController {
             const user = await UserModel.findOne({
                 where: { nickname },
             });
-            const permissionLevel: any = await operations.query(`
-                SELECT * FROM permission_level
-                WHERE name = '${permission}';
-            `);
+
+            const permissionLevel = await PermissionLevelModel.findOne({
+                where: { name: permission },
+            });
 
             // Check if the project, user and permission level exist
-            if (
-                !project ||
-                !user ||
-                permissionLevel[0].length === 0 ||
-                !permissionLevel
-            ) {
+            if (!project || !user || !permissionLevel || !permissionLevel) {
                 res.status(404).json({
                     message: "Project, user or permission level not found",
                 });
@@ -84,20 +83,22 @@ class ShareController {
             }
 
             // Check if the user is already shared
-            const shared = await operations.query(`
-                SELECT * FROM relationship_shared_project
-                WHERE project_id = ${id}
-                    AND user_shared_id = ${user.id};
-            `);
-            if (shared[0].length > 0) {
+            const shared = await RelationshipSharedProject.findOne({
+                where: {
+                    project_id: id,
+                    user_shared_id: user.id,
+                },
+            });
+            if (shared) {
                 res.status(400).json({ message: "User already shared" });
                 return;
             }
 
-            await operations.query(`
-                INSERT INTO relationship_shared_project (project_id, user_shared_id, permission_level_id)
-                VALUES (${id}, ${user.id}, ${permissionLevel[0][0].id});
-            `);
+            RelationshipSharedProject.create({
+                project_id: id,
+                user_shared_id: user.id,
+                permission_level_id: permissionLevel.id,
+            });
 
             res.status(201).json({ message: "User shared" });
             return;

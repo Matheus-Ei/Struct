@@ -2,9 +2,7 @@
 import { Request, Response } from "express";
 
 // Models
-import ModuleModel from "../../models/module.js";
-import PageModel from "../../models/page.js";
-import operations from "../../services/database/operations.js";
+import { PageModel, ModuleModel } from "../../models/index.js";
 
 class PageController {
     public async get(req: Request, res: Response) {

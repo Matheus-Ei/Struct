@@ -3,12 +3,26 @@ import { DataTypes, Model } from "sequelize";
 
 // Local
 import connection from "../services/database/connection.js";
+import UserModel from "./user.js";
 
 class SettingsModel extends Model {
     public id!: number;
 
     public language!: string;
     public country!: string;
+
+    public user_id!: number;
+
+    public static associate() {
+        this.belongsTo(UserModel, {
+            foreignKey: "user_id",
+            as: "settings",
+        });
+        UserModel.hasOne(this, {
+            foreignKey: "user_id",
+            as: "settings",
+        });
+    }
 }
 
 SettingsModel.init(
@@ -27,6 +41,16 @@ SettingsModel.init(
         country: {
             type: DataTypes.STRING(50),
             allowNull: false,
+        },
+
+        user_id: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            unique: true,
+            references: {
+                model: UserModel,
+                key: "id",
+            },
         },
     },
     {

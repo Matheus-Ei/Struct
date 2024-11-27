@@ -9,7 +9,8 @@ import User from "services/user";
 const Header = () => {
     const navigate = useNavigate();
 
-    const onLogin = () => User.verifyLogin(navigate);
+    const onLogin = async () =>
+        (await User.verifyLogin(navigate)) && navigate("/dashboard");
 
     const onSignup = () => navigate("/sign-up");
 

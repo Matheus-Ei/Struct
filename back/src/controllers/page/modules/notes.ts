@@ -5,9 +5,11 @@ import { Request, Response } from "express";
 import operations from "../../../services/database/operations.js";
 
 // Models
-import NotesPageDataModel from "../../../models/notesPageData.js";
-import ModuleModel from "../../../models/module.js";
-import PageModel from "../../../models/page.js";
+import {
+    ModuleModel,
+    PageModel,
+    NotesPageDataModel,
+} from "../../../models/index.js";
 
 class NotesPageController {
     public async get(req: Request, res: Response) {

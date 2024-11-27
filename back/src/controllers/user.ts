@@ -7,9 +7,9 @@ import Token from "../services/token.js";
 import Hash from "../services/hash.js";
 
 // Models
-import SubscriptionModel from "../models/subscription.js";
-import SettingsModel from "../models/settings.js";
-import UserModel from "../models/user.js";
+import {
+    UserModel,
+} from "../models/index.js";
 
 class UserController {
     public async get(req: Request, res: Response) {
@@ -86,63 +86,79 @@ class UserController {
             return;
         }
 
-        // Generate the hash for the password
-        const hashObj = new Hash();
-        const hashPassword = await hashObj.make(password);
-
         try {
-            const userSettings = await SettingsModel.create({
-                language: "pt-br",
-                country: "Brazil",
-            });
+            // Generate the hash for the password
+            const hashObj = new Hash();
+            const hashPassword = await hashObj.make(password);
 
-            const userSubscription = await SubscriptionModel.create({
-                last_paid: Date.now(),
-                subscription_plan_id: 1,
-            });
+            const newUser = await UserModel.create(
+                {
+                    name,
+                    nickname,
+                    mail,
+                    verified,
+                    autenticator,
+                    photo,
+                    password: hashPassword,
+                    settings: {
+                        country: "Brazil",
+                        language: "pt-br",
+                    },
+                    subscription: {
+                        last_paid: Date.now(),
+                        subscription_plan_id: 1,
+                    },
+                },
 
-            const newUser = await UserModel.create({
-                name,
-                nickname,
-                mail,
-                verified,
-                autenticator,
-                photo,
-                password: hashPassword,
-                subscription_id: userSubscription.id,
-                settings_id: userSettings.id,
-            });
+                {
+                    include: [
+                        UserModel.associations.settings,
+                        UserModel.associations.subscription,
+                    ],
+                }
+            );
+
+            if (!newUser) {
+                res.status(500).json({ message: "Error creating the user" });
+                return;
+            }
 
             // Generate the tokens and set them as cookies to make user logged in
-            if (newUser) {
-                const refresh = new Token(process.env.REFRESH_SECRET as string);
-                const access = new Token(process.env.JWT_SECRET as string);
+            const refresh = new Token(process.env.REFRESH_SECRET as string);
+            const access = new Token(process.env.JWT_SECRET as string);
 
-                const accessTk = access.generate(
-                    { id: newUser.dataValues.id },
-                    "1h"
-                );
-                const refreshTk = refresh.generate(
-                    { id: newUser.dataValues.id },
-                    "7d"
-                );
+            const accessTk = access.generate(
+                { id: newUser.dataValues.id },
+                "1h"
+            );
+            const refreshTk = refresh.generate(
+                { id: newUser.dataValues.id },
+                "7d"
+            );
 
-                Cookie.generate("access_token", accessTk, res);
-                Cookie.generate("refresh_token", refreshTk, res);
-                Cookie.generate("id", newUser.dataValues.id, res);
-            }
+            Cookie.generate("access_token", accessTk, res);
+            Cookie.generate("refresh_token", refreshTk, res);
+            Cookie.generate("id", newUser.dataValues.id, res);
 
             res.status(201).json({
                 message: "User created",
                 status: true,
                 data: {
-                    id: newUser.dataValues.id,
-                    name: newUser.dataValues.name,
-                    nickname: newUser.dataValues.nickname,
-                    mail: newUser.dataValues.mail,
-                    verified: newUser.dataValues.verified,
-                    autenticator: newUser.dataValues.autenticator,
-                    photo: newUser.dataValues,
+                    id: newUser.id,
+                    name: newUser.name,
+                    nickname: newUser.nickname,
+                    mail: newUser.mail,
+                    verified: newUser.verified,
+                    autenticator: newUser.autenticator,
+                    photo: newUser.photo,
+                    settings: {
+                        country: newUser.dataValues.settings.country,
+                        language: newUser.dataValues.settings.language,
+                    },
+                    subscription: {
+                        last_paid: newUser.dataValues.subscription.last_paid,
+                        status: newUser.dataValues.subscription.status,
+                    },
                 },
             });
         } catch (error) {
