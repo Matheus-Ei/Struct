@@ -7,7 +7,7 @@ import clsx from "clsx";
 import { ReactComponent as Logo } from "assets/logo-1800x400-1.svg";
 import ContextMenu from "components/ContextMenu";
 import { SetStateType } from "types/global";
-import getPosition from "utils/getPosition";
+import Element from "modules/Element";
 import useToggle from "hooks/useToggle";
 import Icon from "components/Icon";
 import router from "./router";
@@ -19,7 +19,9 @@ interface HeaderProps {
 
 const Header = ({ tab, setTab }: HeaderProps) => {
     const [showMenu, toggleShowMenu] = useToggle(false);
+
     const menuRef = useRef<HTMLDivElement>(null);
+    const menuElement = new Element(menuRef);
 
     const navigate = useNavigate();
 
@@ -38,7 +40,7 @@ const Header = ({ tab, setTab }: HeaderProps) => {
 
     const openOptions = () => toggleShowMenu(true);
 
-    const { left: x, bottom: y } = getPosition(menuRef);
+    const { left: x, bottom: y } = menuElement.position;
     return (
         <div className="flex flex-row w-screen h-32 items-center justify-between px-12">
             <div className="flex flex-row w-fit h-full items-center justify-start gap-12">

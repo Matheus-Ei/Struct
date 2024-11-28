@@ -31,7 +31,9 @@ class Element {
     }
 
     get position() {
-        return this.element?.getBoundingClientRect();
+        if (!this.element) return { top: 0, left: 0, right: 0, bottom: 0 };
+
+        return this.element.getBoundingClientRect() as DOMRect;
     }
 
     focus() {
