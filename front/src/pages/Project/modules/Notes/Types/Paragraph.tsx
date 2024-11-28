@@ -1,6 +1,5 @@
 // Libraries
 import {
-    KeyboardEvent,
     useContext,
     useEffect,
     useMemo,

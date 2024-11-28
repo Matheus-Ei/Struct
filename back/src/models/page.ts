@@ -18,34 +18,6 @@ class PageModel extends Model {
     public project_id!: number;
     public module_id?: number;
     public parent_page_id?: number;
-
-    public static associate() {
-        // Project
-        ProjectModel.hasMany(this, {
-            foreignKey: "project_id",
-            as: "pages",
-        });
-        this.belongsTo(ProjectModel, {
-            foreignKey: "project_id",
-            as: "project",
-        });
-
-        // Childrens
-        this.belongsTo(this, {
-            foreignKey: "parent_page_id",
-            as: "parent",
-        });
-
-        // Module
-        this.belongsTo(ModuleModel, {
-            foreignKey: "module_id",
-            as: "module",
-        });
-        ModuleModel.hasMany(this, {
-            foreignKey: "module_id",
-            as: "pages",
-        });
-    }
 }
 
 PageModel.init(

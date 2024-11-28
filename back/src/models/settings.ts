@@ -12,17 +12,6 @@ class SettingsModel extends Model {
     public country!: string;
 
     public user_id!: number;
-
-    public static associate() {
-        this.belongsTo(UserModel, {
-            foreignKey: "user_id",
-            as: "settings",
-        });
-        UserModel.hasOne(this, {
-            foreignKey: "user_id",
-            as: "settings",
-        });
-    }
 }
 
 SettingsModel.init(

@@ -3,7 +3,7 @@ import { Request, Response } from "express";
 
 // Local
 import RequestService from "../../services/request.js";
-import { UserModel } from "../../models/index.js";
+import UserModel from "../../models/user.js";
 
 class UserProviderController {
     public async google(req: Request, res: Response) {

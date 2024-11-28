@@ -7,9 +7,7 @@ import Token from "../services/token.js";
 import Hash from "../services/hash.js";
 
 // Models
-import {
-    UserModel,
-} from "../models/index.js";
+import UserModel from "../models/user.js";
 
 class UserController {
     public async get(req: Request, res: Response) {

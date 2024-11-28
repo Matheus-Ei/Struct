@@ -16,17 +16,6 @@ class SubscriptionModel extends Model {
 
     public subscription_plan_id!: number;
     public user_id!: number;
-
-    public static associate() {
-        this.belongsTo(UserModel, {
-            foreignKey: "user_id",
-            as: "subscription",
-        });
-        UserModel.hasOne(this, {
-            foreignKey: "user_id",
-            as: "subscription",
-        });
-    }
 }
 
 SubscriptionModel.init(

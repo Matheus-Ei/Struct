@@ -5,12 +5,10 @@ import { Request, Response } from "express";
 import operations from "../../services/database/operations.js";
 
 // Models
-import {
-    PermissionLevelModel,
-    ProjectModel,
-    RelationshipSharedProject,
-    UserModel,
-} from "../../models/index.js";
+import RelationshipSharedProject from "../../models/relationshipSharedProject.js";
+import PermissionLevelModel from "../../models/permissionLevel.js";
+import ProjectModel from "../../models/project.js";
+import UserModel from "../../models/user.js";
 
 class ShareController {
     public async get(req: Request, res: Response) {
