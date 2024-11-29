@@ -43,7 +43,7 @@ class UserProviderController {
             }
 
             res.status(200).send({
-                message: "User authenticated with Google",
+                message: "User authenticated with Google, information provided",
                 data: {
                     name: userData.name,
                     nickname,

@@ -48,7 +48,7 @@ class PageController {
             // Check if the page exists
             if (!page) {
                 res.status(404).send({
-                    message: "The page don't exist, so don's deleted",
+                    message: "The page don't exist, so wasn't deleted",
                 });
                 return;
             }

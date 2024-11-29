@@ -18,13 +18,13 @@ class ShareController {
             const response = await operations.query(`
                 SELECT relationship_shared_project.project_id as project_id,
 	                permission_level_id,
-	                permission_level.name,
-	                permission_level.description,
-	                users.id as user_id,
-	                users.name as user_name,
-	                users.nickname as user_nickname,
-	                users.mail as user_mail,
-	                users.photo as user_photo
+	                permission_level.name AS permission_level_name,
+	                permission_level.description AS permission_level_description,
+	                users.id AS user_id,
+	                users.name AS user_name,
+	                users.nickname AS user_nickname,
+	                users.mail AS user_mail,
+	                users.photo AS user_photo
                 FROM relationship_shared_project
                 JOIN permission_level ON relationship_shared_project.permission_level_id = permission_level.id
                 JOIN users ON relationship_shared_project.user_shared_id = users.id
@@ -46,7 +46,7 @@ class ShareController {
             });
         } catch (error) {
             res.status(500).send({
-                message: "Error fetching shared users",
+                message: "Error fetching the shared users",
                 error,
             });
         }
@@ -88,7 +88,7 @@ class ShareController {
                 },
             });
             if (shared) {
-                res.status(400).json({ message: "User already shared" });
+                res.status(400).json({ message: "User already shared with this project" });
                 return;
             }
 
@@ -98,7 +98,7 @@ class ShareController {
                 permission_level_id: permissionLevel.id,
             });
 
-            res.status(201).json({ message: "User shared" });
+            res.status(201).json({ message: "Project shared" });
             return;
         } catch (error) {
             res.status(500).json({

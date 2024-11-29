@@ -4,7 +4,7 @@ import { Router } from "express";
 // Local
 import shareController from "../../controllers/project/share.js";
 
-class ProjectRoute {
+class ShareRoute {
     public router: Router;
 
     constructor() {
@@ -18,4 +18,4 @@ class ProjectRoute {
     }
 }
 
-export default new ProjectRoute();
+export default new ShareRoute();
