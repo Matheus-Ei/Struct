@@ -1,4 +1,7 @@
+// Libraries
 import { useQuery } from "react-query";
+
+// Local
 import Project from "services/project";
 
 export function useProject(id: number) {

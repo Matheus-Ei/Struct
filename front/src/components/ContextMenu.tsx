@@ -1,7 +1,9 @@
 // Libraries
 import clsx from "clsx";
-import Event from "modules/Event";
 import { useCallback, useEffect, useRef } from "react";
+
+// Local
+import Event from "modules/Event";
 
 interface ContextMenuProps {
     children: JSX.Element;

@@ -1,10 +1,14 @@
-// Local
+// Library
 import clsx from "clsx";
+
+// Components
 import EditableField from "components/EditableField";
-import Emoji from "components/Emoji";
 import EmojiSelector from "components/Emoji/Selector";
-import { EmojiClickData } from "emoji-picker-react";
+import Emoji from "components/Emoji";
+
+// Local
 import useToggle from "hooks/useToggle";
+import { EmojiClickData } from "emoji-picker-react";
 import { MouseEvent, useEffect, useState } from "react";
 import ContextPageMenu from "./ContextPageMenu";
 import PageService from "services/page";

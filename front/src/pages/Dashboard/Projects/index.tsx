@@ -1,15 +1,17 @@
 // Libraries
 import { createContext, useState } from "react";
+import clsx from "clsx";
 
-// Local
+// Components
 import CreateProjectModal from "./CreateProject/Modal";
+import SearchBar from "components/SearchBar";
 import CreateProject from "./CreateProject";
 import ProjectModal from "./Project/Modal";
 import Project from "./Project";
-import clsx from "clsx";
-import { ModalType } from "./Project/Modal/utils/types";
+
+// Local
 import { useAllProjects } from "services/project/useProject";
-import SearchBar from "components/SearchBar";
+import { ModalType } from "./Project/Modal/utils/types";
 import { ProjectType } from "services/project/type";
 
 interface ProjectsContextType {

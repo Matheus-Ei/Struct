@@ -1,5 +1,7 @@
-// Local
+// Libraries
 import clsx from "clsx";
+
+// Local
 import Icon from "components/Icon";
 import Card from "./Card";
 

@@ -1,11 +1,11 @@
 // Libraries
 import { useContext } from "react";
+import clsx from "clsx";
 
 // Local
 import { addPage } from "../util/events";
 import Icon from "components/Icon";
 import { PagesContext } from "..";
-import clsx from "clsx";
 
 const bodyCss = clsx(
     "flex flex-row justify-start items-center",

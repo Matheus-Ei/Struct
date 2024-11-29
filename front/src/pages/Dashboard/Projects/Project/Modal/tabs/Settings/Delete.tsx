@@ -3,11 +3,11 @@ import { useContext, useEffect } from "react";
 
 // Local
 import { ProjectsContext } from "pages/Dashboard/Projects";
-import Point from "components/Point";
-import useToggle from "hooks/useToggle";
-import ConfirmModal from "components/ConfirmModal";
 import { SetStateType } from "types/global";
+import useToggle from "hooks/useToggle";
 import Project from "services/project";
+import ConfirmModal from "components/ConfirmModal";
+import Point from "components/Point";
 
 interface DeleteProps {
     projectId: number;

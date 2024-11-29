@@ -1,12 +1,12 @@
 // Libraries
 import { useContext } from "react";
+import clsx from "clsx";
 
 // Local
 import { addPage } from "pages/Project/util/events";
+import { PageType } from "services/page/types";
 import { PagesContext } from "pages/Project";
 import Icon from "components/Icon";
-import clsx from "clsx";
-import { PageType } from "services/page/types";
 
 interface HoverButtonsProps {
     toggleShowChildren: (value?: boolean) => void;

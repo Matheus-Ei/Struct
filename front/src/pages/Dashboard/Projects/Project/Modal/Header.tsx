@@ -1,8 +1,10 @@
 // Libraries
 import clsx from "clsx";
+
+// Local
 import { SetStateType } from "types/global";
-import router from "./utils/router";
 import { TabProps } from "./utils/types";
+import router from "./utils/router";
 
 interface HeaderProps {
     tab: string;

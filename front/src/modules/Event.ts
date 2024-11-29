@@ -1,3 +1,4 @@
+// Local
 import { SetStateType } from "types/global";
 
 interface KeyActivity {

@@ -1,7 +1,7 @@
 // Local
-import Page from "services/page";
 import { PageType } from "services/page/types";
 import { ReactProjectContext } from "./types";
+import Page from "services/page";
 
 const removePageById = (
     rootPages: PageType[],

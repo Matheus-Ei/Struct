@@ -3,8 +3,8 @@ import { NavigateFunction } from "react-router-dom";
 
 // Local
 import { SignUpContextType } from "./types";
-import User from "services/user";
 import { SetStateType } from "types/global";
+import User from "services/user";
 
 export const makeSignUp = async (
     context: SignUpContextType | null,

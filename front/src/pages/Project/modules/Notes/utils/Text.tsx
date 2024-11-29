@@ -1,9 +1,7 @@
-// Libraries
-import Cursor from "modules/Cursor";
-import { SetStateType } from "types/global";
-
 // Local
 import { NotesPageContextType, NotesTextType } from "./types";
+import { SetStateType } from "types/global";
+import Cursor from "modules/Cursor";
 
 export class Text {
     private setNotes: SetStateType<Array<NotesTextType>>;

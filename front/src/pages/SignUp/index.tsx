@@ -4,9 +4,9 @@ import { createContext, useState } from "react";
 // Local
 import { SignUpContextType } from "./utils/types";
 import { ErrorType } from "types/global";
-import Wrapper from "./Wrapper";
 import Password from "./steps/Password";
 import Start from "./steps/Start";
+import Wrapper from "./Wrapper";
 
 export const SignUpContext = createContext<SignUpContextType | null>(null);
 

@@ -5,7 +5,7 @@ import { useState } from "react";
 import Input from "components/Input";
 import Point from "components/Point";
 
-// Other Locals
+// Local
 import Project from "services/project";
 import Options from "components/Options";
 

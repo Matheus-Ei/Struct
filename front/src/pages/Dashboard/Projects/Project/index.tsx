@@ -3,8 +3,10 @@ import clsx from "clsx";
 
 // Local
 import Icon from "components/Icon";
-import { SetStateType } from "types/global";
+
+// Types
 import { ModalType } from "./Modal//utils/types";
+import { SetStateType } from "types/global";
 
 interface ProjectProps {
     title: string;

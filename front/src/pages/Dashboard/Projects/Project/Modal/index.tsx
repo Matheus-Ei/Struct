@@ -1,14 +1,16 @@
 // Libraries
 import { createElement, useState } from "react";
 
-// Local
+// Types
+import { SetStateType } from "types/global";
+import { ModalType } from "./utils/types";
+import { TabProps } from "./utils/types";
 import Modal from "components/Modal";
+
+// Local
+import router from "./utils/router";
 import Footer from "./Footer";
 import Header from "./Header";
-import { ModalType } from "./utils/types";
-import { SetStateType } from "types/global";
-import router from "./utils/router";
-import { TabProps } from "./utils/types";
 
 interface ProjectModalProps {
     modal: ModalType;

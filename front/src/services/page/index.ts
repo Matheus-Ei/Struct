@@ -1,6 +1,7 @@
-import Request from "modules/Request";
-import { SuccessResponseType } from "types/global";
+// Local
 import { GetPageType, GetPagesType, PageType } from "./types";
+import { SuccessResponseType } from "types/global";
+import Request from "modules/Request";
 
 class Page {
     public static async get(id: number) {

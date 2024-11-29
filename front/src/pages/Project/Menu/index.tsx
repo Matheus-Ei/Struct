@@ -2,10 +2,10 @@
 import { useContext } from "react";
 
 // Local
+import { PageType } from "services/page/types";
 import NewPageTab from "./NewPageTab";
 import { PagesContext } from "..";
 import PageTab from "./PageTab";
-import { PageType } from "services/page/types";
 
 const Menu = () => {
     const context = useContext(PagesContext);

@@ -1,8 +1,11 @@
+// Library
 import clsx from "clsx";
-import Icon from "components/Icon";
-import { SharedUserType } from "services/project/type";
+
+// Local
 import { useProjectUsers } from "services/project/useProject";
+import { SharedUserType } from "services/project/type";
 import { TabProps } from "../../utils/types";
+import Icon from "components/Icon";
 import Share from "./Share";
 
 const usersDivCss = clsx(

@@ -1,14 +1,16 @@
 // Libraries
 import { useContext, useEffect, useState } from "react";
+import clsx from "clsx";
 
 // Local
 import { ProjectsContext } from "pages/Dashboard/Projects";
+import { ErrorType, SetStateType } from "types/global";
+import Project from "services/project";
+
+// Components
 import Button from "components/Button";
 import Modal from "components/Modal";
 import Input from "components/Input";
-import { ErrorType, SetStateType } from "types/global";
-import clsx from "clsx";
-import Project from "services/project";
 
 interface CreateProjectModalProps {
     showModal: boolean;

@@ -1,3 +1,4 @@
+// Pages
 import Dashboard from "pages/Dashboard";
 import NotFound from "pages/NotFound";
 import Project from "pages/Project";

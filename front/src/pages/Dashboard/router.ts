@@ -1,3 +1,4 @@
+// Components
 import Projects from "./Projects";
 import Tools from "./Tools";
 

@@ -1,14 +1,15 @@
 // Librarie
 import { createContext, useState } from "react";
 import { useParams } from "react-router-dom";
+
 // Local
+import { useAllPages, usePage } from "services/page/usePage";
 import { ReactProjectContext } from "./util/types";
+import { PageType } from "services/page/types";
 import withLoader from "HOCs/withLoader";
 import Dashboard from "./Dashboard";
 import Menu from "./Menu";
 import Page from "./Page";
-import { useAllPages, usePage } from "services/page/usePage";
-import { PageType } from "services/page/types";
 
 export const PagesContext = createContext<ReactProjectContext | undefined>(
     undefined

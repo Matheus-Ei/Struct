@@ -1,11 +1,11 @@
 // Libraries
 import { MouseEvent, useContext } from "react";
+import clsx from "clsx";
 
 // Local
+import { PageType } from "services/page/types";
 import { PagesContext } from "pages/Project";
 import Emoji from "components/Emoji";
-import clsx from "clsx";
-import { PageType } from "services/page/types";
 
 interface ContentProps {
     item: PageType;

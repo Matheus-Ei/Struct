@@ -4,9 +4,9 @@ import compression from "compression";
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
-import "./services/database/associations.js";
 
 // Local
+import "./services/database/associations.js";
 import mainRoutes from "./system/routes.js";
 import auth from "./middlewares/auth.js";
 

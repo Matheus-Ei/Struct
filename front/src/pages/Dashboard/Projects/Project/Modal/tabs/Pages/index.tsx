@@ -2,11 +2,13 @@
 import clsx from "clsx";
 
 // Local
+import { useAllPages } from "services/page/usePage";
 import { TabProps } from "../../utils/types";
+
+// Components
+import Icon from "components/Icon";
 import AddPage from "./AddPage";
 import Page from "./Page";
-import Icon from "components/Icon";
-import { useAllPages } from "services/page/usePage";
 
 interface PageRequestType {
     id: number;

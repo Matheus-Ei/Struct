@@ -1,14 +1,14 @@
 // Libraries
+import { useCallback, useContext, useEffect, useState } from "react";
 import { useGoogleLogin } from "@react-oauth/google";
 import { useNavigate } from "react-router-dom";
-import { useCallback, useContext, useEffect, useState } from "react";
 
 // Local
+import useUserProvider from "services/providers/useUserProvider";
 import Button from "components/Button";
 import Icon from "components/Icon";
 import User from "services/user";
 import { SignUpContext } from "..";
-import useUserProvider from "services/providers/useUserProvider";
 
 const GoogleSignUp = () => {
     const [accessToken, setAccessToken] = useState<string | null>(null);

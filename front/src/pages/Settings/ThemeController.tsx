@@ -1,6 +1,6 @@
 // Libraries
-import clsx from "clsx";
 import { ChangeEvent, useState } from "react";
+import clsx from "clsx";
 
 // Local
 import Icon from "components/Icon";

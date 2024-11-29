@@ -3,12 +3,12 @@ import { EmojiClickData } from "emoji-picker-react";
 import { useState } from "react";
 
 // Components
-import Emoji from "components/Emoji";
 import EmojiSelector from "components/Emoji/Selector";
+import Emoji from "components/Emoji";
 import Input from "components/Input";
 import Point from "components/Point";
 
-// Other Locals
+// Local
 import useToggle from "hooks/useToggle";
 import Page from "services/page";
 

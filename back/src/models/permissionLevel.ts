@@ -1,4 +1,7 @@
+// Libraries
 import { DataTypes, Model } from "sequelize";
+
+// Local
 import connection from "../services/database/connection";
 
 class PermissionLevelModel extends Model {

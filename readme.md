@@ -18,7 +18,7 @@ This README provides an overview of the Struct project, its technology stack, ar
   - [Database](#database)
 - [Development Workflow](#development-workflow)
   - [Git Workflow](#git-workflow)
-  - [Sprints & Milestones](#sprints-and-milestones)
+  - [Sprints & Milestones](#sprints--milestones)
   - [Documentation](#documentation)
 - [Hosting](#hosting)
 

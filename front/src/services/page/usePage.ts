@@ -1,6 +1,9 @@
+// Libraries
 import { useQuery } from "react-query";
-import Page from ".";
+
+// Local
 import { PageType } from "./types";
+import Page from ".";
 
 export const usePage = (id: number) => {
     return useQuery(["page", id], () => Page.get(id));

@@ -1,3 +1,4 @@
+// Local
 import { PageType } from "services/page/types";
 import { SetStateType } from "types/global";
 

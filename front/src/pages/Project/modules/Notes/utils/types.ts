@@ -1,5 +1,7 @@
 // Libraries
 import { RefObject } from "react";
+
+// Local
 import { SetStateType } from "types/global";
 
 export interface NotesTextType {

@@ -3,11 +3,11 @@ import { MouseEvent, useState } from "react";
 
 // Local
 import ContextPageMenu from "./ContextPageMenu";
+import { PageType } from "services/page/types";
 import HoverButtons from "./HoverButtons";
 import useToggle from "hooks/useToggle";
 import Childrens from "./Childrens";
 import Content from "./Content";
-import { PageType } from "services/page/types";
 
 interface PageTabProps {
     item: PageType;
