@@ -22,9 +22,9 @@ const Page = () => {
     if (!context) return null;
 
     const module: Array<RouterType> = router.filter((item) => {
-        if (!context.page) return false;
+        if (!context.page.data) return false;
 
-        return context.page.module === item.name;
+        return context.page.data.module === item.name;
     });
 
     const renderPages = () => getModule(module[0]);

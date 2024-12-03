@@ -16,7 +16,7 @@ const Content = ({ item, onContextMenu }: ContentProps) => {
     const context = useContext(PagesContext);
     if (!context) return null;
 
-    const isSelected = item.id === context.selectedPageId;
+    const isSelected = item.id === context.selectedPage.id;
 
     const css = clsx(
         "w-full gap-x-2 rounded-btn py-1 px-4",
@@ -27,10 +27,14 @@ const Content = ({ item, onContextMenu }: ContentProps) => {
         }
     );
 
-    const handleClick = () => context.setSelectedPageId(item.id);
+    const handleClick = () => context.selectedPage.set(item.id);
 
     return (
-        <div className={css} onContextMenu={onContextMenu} onClick={handleClick}>
+        <div
+            className={css}
+            onContextMenu={onContextMenu}
+            onClick={handleClick}
+        >
             <Emoji symbol={item.emoji} />
             <h1 className="line-clamp-1 w-full text-sm">{item.name}</h1>
         </div>

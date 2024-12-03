@@ -26,15 +26,13 @@ const HoverButtons = ({
     const context = useContext(PagesContext);
 
     if (!isHover || !context) return null;
-    const isSelected = context.selectedPageId === pageId;
+    const isSelected = context.selectedPage.id === pageId;
 
     const childrenButton = () => {
         if (childrens?.length === 0) return null;
 
         if (showChildren) {
-            return (
-                <Icon name="MdExpandLess" library="md" className="h-full" />
-            );
+            return <Icon name="MdExpandLess" library="md" className="h-full" />;
         }
 
         return <Icon name="MdExpandMore" library="md" className="h-full" />;

@@ -16,7 +16,7 @@ const Module = ({ module }: ModuleProps) => {
         switch (module) {
             case "notes":
                 // Send a request to update the page to the new module
-                context?.refetchPage();
+                context?.page.refetch();
                 return;
         }
     };

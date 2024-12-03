@@ -43,9 +43,9 @@ export const addPage = async (
         Number(context.projectId),
         pageId,
         (response) => {
-            context.setSelectedPageId(response.id);
+            context.selectedPage.set(response.id);
             toggleShowChildren && toggleShowChildren(true);
-            context.refetchMenuTabs();
+            context.menu.refetch();
         }
     );
 };
@@ -60,12 +60,6 @@ export const deletePage = async (
     toggleShowMenu && toggleShowMenu(false);
     await Page.delete(pageId, () => {});
 
-    if (pageId === context.selectedPageId) context.setSelectedPageId(null);
-
-    // Updates the list on menu
-    const prevMenuTabs = context.menuTabs;
-    if (!prevMenuTabs) return;
-
-    const newPages = removePageById(prevMenuTabs, pageId);
-    context.setMenuTabs(newPages);
+    if (pageId === context.selectedPage.id) context.selectedPage.set(null);
+    context.menu.refetch();
 };

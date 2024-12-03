@@ -11,9 +11,6 @@ export const usePage = (id: number) => {
 
 export const useAllPages = (
     projectId: number,
-    onSuccess?: (response: PageType[] | null) => void
 ) => {
-    return useQuery(["all-pages", projectId], () =>
-        Page.getAll(projectId).then(onSuccess)
-    );
+    return useQuery(["all-pages", projectId], () => Page.getAll(projectId));
 };

@@ -3,12 +3,18 @@ import { PageType } from "services/page/types";
 import { SetStateType } from "types/global";
 
 export interface ReactProjectContext {
-    page: PageType | null | undefined;
-    refetchPage: () => void;
-    menuTabs: Array<PageType> | null;
-    setMenuTabs: (newMenuTabs: Array<PageType>) => void;
-    refetchMenuTabs: () => void;
-    selectedPageId: number | null;
-    setSelectedPageId: SetStateType<number | null>;
     projectId: string | undefined;
+    menu: {
+        tabs?: PageType[] | null;
+        refetch: () => void;
+    };
+    page: {
+        data?: PageType | null
+        refetch: () => void;
+    };
+    selectedPage: {
+        id: number | null;
+        set: SetStateType<number | null>;
+    };
 }
+

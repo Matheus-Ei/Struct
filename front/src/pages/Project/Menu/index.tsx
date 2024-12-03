@@ -10,7 +10,7 @@ import PageTab from "./PageTab";
 const Menu = () => {
     const context = useContext(PagesContext);
     if (!context) return null;
-    const { menuTabs } = context;
+    const { menu } = context;
 
     const renderPages = (item: PageType, index: number) => (
         <PageTab item={item} index={index} key={index} />
@@ -24,7 +24,7 @@ const Menu = () => {
             </div>
 
             <div className="flex flex-col justify-start items-start w-full h-full overflow-y-scroll">
-                {menuTabs && menuTabs.map(renderPages)}
+                {menu.tabs && menu.tabs.map(renderPages)}
                 <NewPageTab />
             </div>
 
