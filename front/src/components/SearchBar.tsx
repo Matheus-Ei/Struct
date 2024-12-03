@@ -14,10 +14,10 @@ interface SearchBarProps {
 }
 
 const defaultCss = clsx(
-    "w-full shadow-sm shadow-neutral",
+    "w-full",
     "py-2 pl-16 pr-4",
-    "bg-base-200 placeholder:text-base-content",
-    "rounded-badge outline-none"
+    "placeholder:text-base-content bg-base-100",
+    "outline-none border-b border-base-content"
 );
 
 const SearchBar = ({

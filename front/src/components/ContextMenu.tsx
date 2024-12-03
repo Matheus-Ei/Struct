@@ -44,11 +44,9 @@ const ContextMenu = ({
 
     // Close the context menu when clicking outside of it
     useEffect(() => {
-        Event.addListener("contextmenu", handleClickOutside);
+        Event.addListener("mousedown", handleClickOutside);
 
-        return () => {
-            Event.removeListener("contextmenu", handleClickOutside);
-        };
+        return () => Event.removeListener("mousedown", handleClickOutside);
     }, [onClose, handleClickOutside]);
 
     if (!show) return null;

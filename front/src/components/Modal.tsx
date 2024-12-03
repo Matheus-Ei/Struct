@@ -18,7 +18,7 @@ const defaultCss = clsx(
 );
 
 const bgCss = clsx(
-    "fixed top-0 right-0",
+    "fixed top-0 left-0",
     "w-screen h-screen",
     "flex items-center justify-center z-20",
     "bg-[rgba(0,0,0,0.3)]"

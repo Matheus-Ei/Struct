@@ -38,7 +38,7 @@ const Header = ({ tab, setTab }: HeaderProps) => {
         );
     };
 
-    const openOptions = () => toggleShowMenu(true);
+    const openOptions = () => toggleShowMenu();
 
     const { left: x, bottom: y } = menuElement.position;
     return (

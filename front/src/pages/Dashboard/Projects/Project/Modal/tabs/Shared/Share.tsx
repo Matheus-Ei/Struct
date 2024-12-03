@@ -43,7 +43,7 @@ const Share = ({ projectId, refetch }: ShareProps) => {
     };
 
     return (
-        <div className="flex items-center justify-center absolute bottom-3 left-5 gap-2">
+        <div className="flex items-center justify-center absolute bottom-3 right-5 gap-x-4">
             <Input
                 text="Nickname"
                 className="border-b border-neutral px-2 pb-1 outline-none bg-base-100"

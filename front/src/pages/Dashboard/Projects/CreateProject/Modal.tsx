@@ -19,7 +19,7 @@ interface CreateProjectModalProps {
 
 // Styles
 const modalCss = clsx(
-    "relative w-[65vw] h-[50vh]",
+    "relative w-[55vw] h-[50vh]",
     "flex flex-col items-start justify-start"
 );
 const bodyCss = clsx(

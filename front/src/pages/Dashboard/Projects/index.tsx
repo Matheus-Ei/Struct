@@ -23,7 +23,7 @@ export const ProjectsContext = createContext<ProjectsContextType | undefined>(
 );
 
 const projectsDivCss = clsx(
-    "grid items-center justify-items-start gap-6",
+    "grid items-center justify-items-start gap-x-6 gap-y-2",
     "grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4"
 );
 

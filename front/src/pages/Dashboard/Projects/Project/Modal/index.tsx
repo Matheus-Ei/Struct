@@ -1,5 +1,6 @@
 // Libraries
 import { createElement, useState } from "react";
+import clsx from "clsx";
 
 // Types
 import { SetStateType } from "types/global";
@@ -9,13 +10,17 @@ import Modal from "components/Modal";
 
 // Local
 import router from "./utils/router";
-import Footer from "./Footer";
 import Header from "./Header";
 
 interface ProjectModalProps {
     modal: ModalType;
     setModal: SetStateType<ModalType>;
 }
+
+const modalCss = clsx(
+    "relative w-[100vw] h-[100vh] sm:w-[75vw] sm:h-[55vh] z-30",
+    "flex flex-col items-start justify-start"
+);
 
 const ProjectModal = ({ modal, setModal }: ProjectModalProps) => {
     const [tab, setTab] = useState<string>("About");
@@ -39,13 +44,11 @@ const ProjectModal = ({ modal, setModal }: ProjectModalProps) => {
     };
 
     return (
-        <Modal isOpen={modal.show} close={handleClose}>
+        <Modal isOpen={modal.show} close={handleClose} className={modalCss}>
             <div className="w-full h-full">
                 <Header tab={tab} setTab={setTab} />
 
                 {router.map(renderTab)}
-
-                <Footer id={modal.projectId} />
             </div>
         </Modal>
     );

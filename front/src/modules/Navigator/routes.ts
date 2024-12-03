@@ -15,7 +15,7 @@ const routes: RoutesType = [
     ["/sign-up", SignUp],
     ["/dashboard", Dashboard],
     ["/settings", Settings],
-    ["/projects/:id", Project],
+    ["/project/:id", Project],
     ["*", NotFound]
 ];
 

@@ -28,7 +28,7 @@ const AddPage = ({ projectId, refetch }: AddPageProps) => {
         (await Page.create(title, emoji?.emoji, projectId, null, refetch));
 
     return (
-        <div className="flex items-center justify-center absolute bottom-3 left-5">
+        <div className="flex items-center justify-center absolute bottom-3 right-5">
             <div className="flex items-center justify-center gap-x-4 mr-8">
                 <Input
                     text="Title"
@@ -50,7 +50,7 @@ const AddPage = ({ projectId, refetch }: AddPageProps) => {
                 show={showEmoji}
                 setEmoji={setEmoji}
                 toggleShow={toggleShowEmoji}
-                position={{ x: 80, y: -470 }}
+                position={{ x: -270, y: -470 }}
             />
         </div>
     );
