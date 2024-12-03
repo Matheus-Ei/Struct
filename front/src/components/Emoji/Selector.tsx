@@ -44,11 +44,11 @@ const EmojiSelector = ({
 
     useEffect(() => {
         if (show) {
-            Event.addListener("contextmenu", handleClickOutside);
+            Event.addListener("mousedown", handleClickOutside);
         }
 
         return () => {
-            Event.removeListener("contextmenu", handleClickOutside);
+            Event.removeListener("mousedown", handleClickOutside);
         };
     }, [show, handleClickOutside]);
 

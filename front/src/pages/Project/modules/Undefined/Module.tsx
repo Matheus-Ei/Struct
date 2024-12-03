@@ -23,7 +23,7 @@ const Module = ({ module }: ModuleProps) => {
 
     return (
         <button
-            className="flex items-center justify-center h-12 w-full p-4 bg-base-300 rounded-btn"
+            className="flex items-center justify-center h-12 w-full p-4 bg-base-100 rounded-btn border border-base-300 border-b-4 border-b-primary"
             onClick={setModule}
         >
             <p>{module[0].toUpperCase() + module.slice(1)}</p>

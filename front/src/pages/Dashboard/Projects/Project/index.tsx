@@ -19,8 +19,8 @@ interface ProjectProps {
 
 const bodyCss = clsx(
     "w-96 h-24 p-3",
-    "flex flex-col",
-    "border border-b-primary border-base-300 rounded-btn cursor-pointer"
+    "flex flex-col cursor-pointer",
+    "border border-b-primary border-base-300 rounded-btn  border-b-4"
 );
 
 const Project = ({ title, description, id, setModal }: ProjectProps) => {
@@ -51,7 +51,7 @@ const Project = ({ title, description, id, setModal }: ProjectProps) => {
                 )}
             </div>
 
-            <p className="line-clamp-2">{description}</p>
+            <p className="line-clamp-2 text-sm">{description}</p>
         </div>
     );
 };

@@ -83,13 +83,10 @@ const EditableField = ({
         setIsEditing(false);
     };
 
-    const defaultCss = clsx(
-        "w-fit h-fit text-md text-base-content outline-none",
-        {
-            "bg-base-200 rounded-btn p-1": isEditing,
-            "bg-base-100 cursor-pointer select-none": !isEditing,
-        }
-    );
+    const defaultCss = clsx("w-fit h-fit text-base-content outline-none", {
+        "bg-base-200 rounded-btn p-1": isEditing,
+        "bg-base-100 cursor-pointer select-none": !isEditing,
+    });
 
     const css = clsx({
         [classNameEditing as string]: isEditing,

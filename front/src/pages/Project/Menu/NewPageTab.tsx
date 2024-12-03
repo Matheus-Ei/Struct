@@ -10,7 +10,7 @@ import { PagesContext } from "..";
 const bodyCss = clsx(
     "flex flex-row justify-start items-center",
     "py-2 px-4 gap-x-2 mt-2",
-    "w-full bg-base-200",
+    "w-full bg-base-100 hover:text-primary hover:italir",
     "rounded-btn text-start",
     "cursor-default select-none"
 );
