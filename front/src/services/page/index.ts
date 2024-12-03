@@ -29,7 +29,7 @@ class Page {
         emoji: string | undefined,
         projectId: number,
         parentPage: number | null,
-        onSuccess: (response?: SuccessResponseType) => void
+        onSuccess: (response?: SuccessResponseType<PageType>) => void
     ) {
         try {
             const response = await Request.post("page", {

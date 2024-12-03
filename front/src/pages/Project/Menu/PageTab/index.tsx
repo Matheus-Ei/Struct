@@ -2,7 +2,7 @@
 import { MouseEvent, useState } from "react";
 
 // Local
-import ContextPageMenu from "./ContextPageMenu";
+import PageMenu from "./PageMenu";
 import { PageType } from "services/page/types";
 import HoverButtons from "./HoverButtons";
 import useToggle from "hooks/useToggle";
@@ -11,56 +11,65 @@ import Content from "./Content";
 
 interface PageTabProps {
     item: PageType;
-    index: number;
 }
 
-const PageTab = ({ item, index }: PageTabProps) => {
+const PageTab = ({ item }: PageTabProps) => {
     // States
     const [isHover, toggleHover] = useToggle(false);
 
     // Children
-    const [showChildren, toggleShowChildren] = useToggle(false);
+    const [showChildren, toggleChildren] = useToggle(false);
 
     // Context menu
-    const [showMenu, toggleShowMenu] = useToggle(false);
+    const [showMenu, toggleMenu] = useToggle(false);
     const [clickPosition, setClickPosition] = useState({ x: 0, y: 0 });
 
     const handleContextMenu = (event: MouseEvent) => {
         event.preventDefault();
         setClickPosition({ x: event.clientX, y: event.clientY });
-        toggleShowMenu(true);
+        toggleMenu(true);
     };
 
     return (
-        <div
-            className="flex flex-col relative w-full justify-start"
-            onMouseOver={() => toggleHover(true)}
-            onMouseLeave={() => toggleHover(false)}
-            key={index}
-        >
-            <Content item={item} onContextMenu={handleContextMenu} />
+        <>
+            <div
+                className="flex flex-col relative w-full h-9 justify-start"
+                onMouseOver={() => toggleHover(true)}
+                onMouseLeave={() => toggleHover(false)}
+            >
+                <Content
+                    item={item}
+                    onContextMenu={handleContextMenu}
+                    isHover={isHover}
+                    showChildren={showChildren}
+                    childrens={item.children_pages}
+                    toggleChildren={toggleChildren}
+                />
 
-            <HoverButtons
-                showChildren={showChildren}
-                toggleShowChildren={toggleShowChildren}
-                isHover={isHover}
-                childrens={item.children_pages}
-                pageId={item.id}
-            />
+                <HoverButtons
+                    isHover={isHover}
+                    toggleChildren={toggleChildren}
+                    toggleMenu={toggleMenu}
+                    setClickPosition={setClickPosition}
+                    pageId={item.id}
+                />
 
-            <Childrens
-                items={item.children_pages}
-                show={showChildren}
-                parentPageId={item.id}
-            />
+                <PageMenu
+                    showMenu={showMenu}
+                    toggleMenu={toggleMenu}
+                    clickPosition={clickPosition}
+                    pageId={item.id}
+                />
+            </div>
 
-            <ContextPageMenu
-                showMenu={showMenu}
-                toggleShowMenu={toggleShowMenu}
-                clickPosition={clickPosition}
-                pageId={item.id}
-            />
-        </div>
+            <div className="flex flex-col relative w-full justify-start">
+                <Childrens
+                    items={item.children_pages}
+                    show={showChildren}
+                    parentPageId={item.id}
+                />
+            </div>
+        </>
     );
 };
 

@@ -43,7 +43,7 @@ export const addPage = async (
         Number(context.projectId),
         pageId,
         (response) => {
-            context.selectedPage.set(response.id);
+            context.selectedPage.set(response?.data?.id || null);
             toggleShowChildren && toggleShowChildren(true);
             context.menu.refetch();
         }
@@ -60,6 +60,9 @@ export const deletePage = async (
     toggleShowMenu && toggleShowMenu(false);
     await Page.delete(pageId, () => {});
 
-    if (pageId === context.selectedPage.id) context.selectedPage.set(null);
-    context.menu.refetch();
+    // Remove page from menu
+    setTimeout(() => {
+        if (pageId === context.selectedPage.id) context.selectedPage.set(null);
+        context.menu.refetch();
+    }, 10);
 };

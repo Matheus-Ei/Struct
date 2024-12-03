@@ -10,7 +10,7 @@ interface ChildrensProps {
 
 const Childrens = ({ show, items }: ChildrensProps) => {
     const renderChildrens = (item: PageType, index: number) => (
-        <PageTab item={item} index={index} key={index} />
+        <PageTab item={item} key={index} />
     );
 
     if (!show) return null;

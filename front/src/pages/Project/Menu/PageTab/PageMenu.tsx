@@ -9,14 +9,14 @@ import Icon from "components/Icon";
 
 interface ContextPageMenuProps {
     showMenu: boolean;
-    toggleShowMenu: (value?: boolean) => void;
+    toggleMenu: (value?: boolean) => void;
     clickPosition: { x: number; y: number };
     pageId: number;
 }
 
-const ContextPageMenu = ({
+const PageMenu = ({
     showMenu,
-    toggleShowMenu,
+    toggleMenu,
     clickPosition,
     pageId,
 }: ContextPageMenuProps) => {
@@ -26,13 +26,13 @@ const ContextPageMenu = ({
     return (
         <ContextMenu
             show={showMenu}
-            onClose={() => toggleShowMenu(false)}
+            onClose={() => toggleMenu(false)}
             position={clickPosition}
         >
             <div className="flex flex-col">
                 <button
                     className="flex gap-2 items-center justify-center"
-                    onClick={() => deletePage(toggleShowMenu, pageId, context)}
+                    onClick={() => deletePage(toggleMenu, pageId, context)}
                 >
                     <Icon name="MdDelete" library="md" />
                     <h1>Delete</h1>
@@ -42,4 +42,4 @@ const ContextPageMenu = ({
     );
 };
 
-export default ContextPageMenu;
+export default PageMenu;

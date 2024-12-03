@@ -6,6 +6,7 @@ import { PageType } from "services/page/types";
 import NewPageTab from "./NewPageTab";
 import { PagesContext } from "..";
 import PageTab from "./PageTab";
+import Point from "components/Point";
 
 const Menu = () => {
     const context = useContext(PagesContext);
@@ -13,14 +14,13 @@ const Menu = () => {
     const { menu } = context;
 
     const renderPages = (item: PageType, index: number) => (
-        <PageTab item={item} index={index} key={index} />
+        <PageTab item={item} key={index} />
     );
 
     return (
-        <div className="flex flex-col w-[300px] items-center h-screen border-r border-neutral gap-4 px-1">
-            <div className="flex flex-col items-center justify-center w-full h-32">
-                <h1>Dashboard</h1>
-                <h1>Shared</h1>
+        <div className="flex flex-col w-[300px] items-center h-screen border-r border-neutral gap-y-4 px-1">
+            <div className="flex flex-col items-start justify-start w-full h-32 mt-4">
+                <Point text="Search" icon="IoMdSearch" library="io" />
             </div>
 
             <div className="flex flex-col justify-start items-start w-full h-full overflow-y-scroll">
@@ -28,12 +28,15 @@ const Menu = () => {
                 <NewPageTab />
             </div>
 
-            <div className="flex flex-col w-full items-center justify-center h-32">
-                <h1>Workflows</h1>
-                <h1>Settings</h1>
+            <div className="flex flex-col w-full items-start justify-end h-32 mb-4">
+                <Point text="Share" icon="CiShare2" library="ci" />
             </div>
         </div>
     );
 };
+
+// <Point text="Home" icon="IoMdHome" library="io" />
+// <Point text="Workflow" icon="GoWorkflow" library="go" />
+// <Point text="Settings" icon="IoMdSettings" library="io" />
 
 export default Menu;
