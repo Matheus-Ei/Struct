@@ -40,7 +40,7 @@ const Content = ({
     const handleClick = () => useProjectContext?.selectedPage.set(item.id);
 
     const pageIcon = () => {
-        if (isHover && childrens?.length != 0) {
+        if (isHover && childrens?.length !== 0) {
             if (showChildren) {
                 return (
                     <Icon

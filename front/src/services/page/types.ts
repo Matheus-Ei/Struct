@@ -3,7 +3,7 @@ export interface PageType {
     name: string;
     description: string;
     children_pages: Array<PageType> | null;
-    emoji: string | null;
+    emoji: string | undefined;
     module: string | null;
 }
 

@@ -2,7 +2,6 @@
 import { useQuery } from "react-query";
 
 // Local
-import { PageType } from "./types";
 import Page from ".";
 
 export const usePage = (id: number) => {

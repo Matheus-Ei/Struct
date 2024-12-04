@@ -3,13 +3,11 @@ import clsx from "clsx";
 
 // Components
 import EditableField from "components/EditableField";
-import EmojiSelector from "components/Emoji/Selector";
 import Emoji from "components/Emoji";
 
 // Local
 import useToggle from "hooks/useToggle";
-import { EmojiClickData } from "emoji-picker-react";
-import { MouseEvent, useEffect, useState } from "react";
+import { MouseEvent, useState } from "react";
 import ContextPageMenu from "./ContextPageMenu";
 import PageService from "services/page";
 
@@ -32,10 +30,6 @@ const cssNameNotEditing = clsx(
 );
 
 const Page = ({ id, name, emoji, refetch }: PageProps) => {
-    const [showEmojiSelector, toggleEmojiSelector] = useToggle(false);
-    const [newEmoji, setEmoji] = useState<EmojiClickData | undefined>();
-    const [defaultEmoji, setDefauldEmoji] = useState<string | null>();
-
     const [showMenu, toggleShowMenu] = useToggle(false);
     const [clickPosition, setClickPosition] = useState({ x: 0, y: 0 });
 
@@ -45,22 +39,16 @@ const Page = ({ id, name, emoji, refetch }: PageProps) => {
         toggleShowMenu(true);
     };
 
-    // Set default emoji on first render
-    useEffect(() => {
-        setDefauldEmoji(emoji);
-    }, [emoji]);
-
-    // Update emoji when newEmoji is set
-    useEffect(() => {
+    const updateEmoji = (newEmoji?: string | null) => {
         if (!newEmoji) return;
 
-        PageService.edit(id, undefined, undefined, newEmoji.emoji, () =>
-            setDefauldEmoji(newEmoji.emoji)
-        );
-    }, [newEmoji, id]);
+        PageService.edit(id, undefined, undefined, newEmoji);
+    };
 
     const updateName = async (value: string) => {
-        await PageService.edit(id, value, undefined, undefined, () => {});
+        if (!value) return;
+
+        await PageService.edit(id, value, undefined, undefined);
     };
 
     return (
@@ -69,21 +57,17 @@ const Page = ({ id, name, emoji, refetch }: PageProps) => {
             onContextMenu={handleContextMenu}
         >
             <Emoji
-                symbol={defaultEmoji}
+                symbol={emoji}
                 className="cursor-pointer select-none text-xl"
-                onClick={() => toggleEmojiSelector()}
+                selectorOnClick={true}
+                onUpdate={updateEmoji}
             />
+
             <EditableField
                 defaultValue={name}
                 onUpdate={updateName}
                 classNameEditing={cssNameEditing}
                 classNameNotEditing={cssNameNotEditing}
-            />
-
-            <EmojiSelector
-                setEmoji={setEmoji}
-                toggleShow={toggleEmojiSelector}
-                show={showEmojiSelector}
             />
 
             <ContextPageMenu

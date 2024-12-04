@@ -63,6 +63,7 @@ const EmojiSelector = ({
                     top: position?.y ?? 0,
                     left: position?.x ?? 0,
                     position: "absolute",
+                    fontSize: "1rem",
                 }}
             />
         </div>

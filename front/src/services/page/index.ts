@@ -26,10 +26,10 @@ class Page {
 
     public static async create(
         name: string,
-        emoji: string | undefined,
+        emoji: string | undefined | null,
         projectId: number,
         parentPage: number | null,
-        onSuccess: (response?: SuccessResponseType<PageType>) => void
+        onSuccess?: (response?: SuccessResponseType<PageType>) => void
     ) {
         try {
             const response = await Request.post("page", {
@@ -39,7 +39,7 @@ class Page {
                 projectId,
                 parentPage,
             });
-            onSuccess(response);
+            onSuccess && onSuccess(response);
 
             return true;
         } catch {
@@ -51,8 +51,8 @@ class Page {
         id: number,
         name: string | undefined,
         description: string | undefined,
-        emoji: string | undefined,
-        onSuccess: (response?: SuccessResponseType) => void
+        emoji: string | undefined | null,
+        onSuccess?: (response?: SuccessResponseType) => void
     ) {
         try {
             const response = await Request.patch(`page/${id}`, {
@@ -60,7 +60,7 @@ class Page {
                 description,
                 emoji,
             });
-            onSuccess(response);
+            onSuccess && onSuccess(response);
 
             return true;
         } catch {
@@ -68,42 +68,28 @@ class Page {
         }
     }
 
-    public static removeById(
-        rootPages: PageType[],
-        targetPageId: number
-    ): PageType[] {
-        function removePage(page: PageType): boolean {
-            if (page.id === targetPageId) return true;
-
-            if (page.children_pages) {
-                const indexToRemove = page.children_pages.findIndex((child) =>
-                    removePage(child)
-                );
-
-                if (indexToRemove !== -1) {
-                    page.children_pages.splice(indexToRemove, 1);
-                    return false;
-                }
-            }
-
-            return false;
-        }
-
-        const rootIndexToRemove = rootPages.findIndex((page) =>
-            removePage(page)
-        );
-        if (rootIndexToRemove !== -1) rootPages.splice(rootIndexToRemove, 1);
-
-        return rootPages;
-    }
-
     public static async delete(
         id: number,
-        onSuccess: (response?: SuccessResponseType) => void
+        onSuccess?: (response?: SuccessResponseType) => void
     ) {
         try {
             const response = await Request.delete(`page/${id}`);
-            onSuccess(response);
+            onSuccess && onSuccess(response);
+
+            return true;
+        } catch {
+            return false;
+        }
+    }
+
+    public static async setModule(
+        id: number,
+        module: string | null,
+        onSuccess?: (response?: SuccessResponseType) => void
+    ) {
+        try {
+            const response = await Request.patch(`page/${id}/${module}`, {});
+            onSuccess && onSuccess(response);
 
             return true;
         } catch {

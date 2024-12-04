@@ -36,7 +36,6 @@ const Projects = () => {
 
     const { data: projects, refetch } = useAllProjects();
     const [searchResult, setSearchResult] = useState<Array<string>>([]);
-    if (!projects) return <div>Loading. . .</div>;
 
     const searchPlace = projects.map((item: ProjectType): string => item.title);
     const renderProject = (item: ProjectType, index: number) => {
