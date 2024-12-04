@@ -5,6 +5,9 @@ import { Request, Response } from "express";
 import ModuleModel from "../../models/module";
 import PageModel from "../../models/page";
 
+// Local
+import NotesModule from "./modules/notes.js";
+
 class PageController {
     public async get(req: Request, res: Response) {
         const { id } = req.params;
@@ -22,6 +25,15 @@ class PageController {
 
             const module = await ModuleModel.findByPk(page.module_id);
 
+            let moduleInformation = null;
+            switch (module?.name) {
+                case "notes":
+                    moduleInformation = await NotesModule.get(id);
+                    break;
+                default:
+                    break;
+            }
+
             res.status(200).send({
                 message: "Page found",
                 data: {
@@ -32,6 +44,7 @@ class PageController {
                     project_id: page.project_id,
                     parent_page_id: page.parent_page_id,
                     module: module ? module.name : null,
+                    moduleInformation,
                 },
             });
         } catch (error) {
@@ -177,6 +190,57 @@ class PageController {
         } catch (error) {
             res.status(500).send({
                 message: "Error updating the page",
+                error,
+            });
+        }
+    }
+
+    public async setModule(req: Request, res: Response) {
+        const { id } = req.params;
+        const { module } = req.body;
+
+        if (!module) {
+            res.status(400).send({
+                message: "Missing module",
+            });
+            return;
+        }
+
+        try {
+            const page = await PageModel.findByPk(id);
+            const moduleFound = await ModuleModel.findOne({
+                where: {
+                    name: module,
+                },
+            });
+
+            // Check if the page exists
+            if (!page || !moduleFound) {
+                res.status(404).send({ message: "Page or module not found" });
+                return;
+            }
+
+            switch (module) {
+                case "notes":
+                    NotesModule.set(id);
+                    break;
+                default:
+                    res.status(400).send({
+                        message: "Module not set",
+                    });
+                    return;
+            }
+
+            page.update({
+                module_id: moduleFound.id,
+            });
+
+            res.status(201).send({
+                message: "Module set",
+            });
+        } catch (error) {
+            res.status(500).send({
+                message: "Error updating the module",
                 error,
             });
         }

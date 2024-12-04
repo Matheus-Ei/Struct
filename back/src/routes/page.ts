@@ -2,7 +2,7 @@
 import { Router } from "express";
 
 // Local
-import pageController from "../../controllers/page/page.js";
+import pageController from "../controllers/page/page.js";
 
 class PageRoute {
     public router: Router;
@@ -18,6 +18,7 @@ class PageRoute {
         this.router.delete("/:id", pageController.delete);
         this.router.patch("/:id", pageController.edit);
         this.router.get("/:id/children", pageController.children);
+        this.router.patch("/:id/module", pageController.setModule);
     }
 }
 
