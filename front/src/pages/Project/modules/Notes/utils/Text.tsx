@@ -1,5 +1,5 @@
 // Local
-import { NotesPageContextType, NotesTextType } from "./types";
+import { NotesContextType, NotesTextType } from "./types";
 import { SetStateType } from "types/global";
 import Cursor from "modules/Cursor";
 
@@ -7,9 +7,9 @@ export class Text {
     private setNotes: SetStateType<Array<NotesTextType>>;
     private notes: Array<NotesTextType>;
 
-    constructor(context: NotesPageContextType) {
-        this.setNotes = context.setNotes;
-        this.notes = context.notes;
+    constructor(useNotesContext: NotesContextType) {
+        this.setNotes = useNotesContext.setNotes;
+        this.notes = useNotesContext.notes;
     }
 
     public setType(index: number, type: string) {

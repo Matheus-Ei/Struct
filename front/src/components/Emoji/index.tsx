@@ -5,7 +5,7 @@ interface EmojiProps {
 }
 
 const Emoji = ({ symbol, className, onClick }: EmojiProps) => {
-    const css = className ? className : "cursor-pointer select-none text-lg";
+    const css = className ? className : "cursor-pointer select-none";
 
     if (!symbol)
         return (

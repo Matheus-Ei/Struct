@@ -16,7 +16,7 @@ export interface ErrorResponseType {
     details?: string;
 }
 
-export interface SuccessResponseType<T> {
+export interface SuccessResponseType<T = undefined> {
     message: string;
-    data?: T;
+    data: T;
 }

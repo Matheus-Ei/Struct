@@ -13,7 +13,7 @@ class Page {
         }
     }
 
-    public static async getAll(projectId: number) {
+    public static async getAll(projectId: number): Promise<PageType[] | null> {
         try {
             const response: GetPagesType = await Request.get(
                 `project/${projectId}/pages`
@@ -29,7 +29,7 @@ class Page {
         emoji: string | undefined,
         projectId: number,
         parentPage: number | null,
-        onSuccess: (response?: SuccessResponseType) => void
+        onSuccess: (response?: SuccessResponseType<PageType>) => void
     ) {
         try {
             const response = await Request.post("page", {

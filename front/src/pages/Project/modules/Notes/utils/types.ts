@@ -10,7 +10,7 @@ export interface NotesTextType {
     element: HTMLElement | null;
 }
 
-export interface NotesPageContextType {
+export interface NotesContextType {
     notes: Array<NotesTextType>;
     setNotes: SetStateType<Array<NotesTextType>>;
     mainDivRef: RefObject<HTMLDivElement>;

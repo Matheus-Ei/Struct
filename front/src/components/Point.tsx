@@ -17,7 +17,7 @@ const Point = ({ text, icon, library, isSelected, onClick }: PointProps) => {
 
     const css = clsx(
         "flex justify-center items-center",
-        "rounded-btn cursor-pointer",
+        "rounded-btn cursor-pointer select-none",
         {
             "gap-4 py-2 px-4": text,
             "p-1": !text,
@@ -28,7 +28,7 @@ const Point = ({ text, icon, library, isSelected, onClick }: PointProps) => {
     return (
         <div onClick={handleClick} className={css}>
             <Icon library={library} name={icon} className="text-xl" />
-            {text && <p className="cursor-default">{text}</p>}
+            {text && <p>{text}</p>}
         </div>
     );
 };

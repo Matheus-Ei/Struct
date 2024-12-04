@@ -36,7 +36,7 @@ const CreateProjectModal = ({
     showModal,
     setModal,
 }: CreateProjectModalProps) => {
-    const context = useContext(ProjectsContext);
+    const useProjectsContext = useContext(ProjectsContext);
 
     const [title, setTitle] = useState<string>("");
     const [description, setDescription] = useState<string>("");
@@ -77,7 +77,7 @@ const CreateProjectModal = ({
 
         await Project.create(title, description, () => {
             setModal(false);
-            context?.refetch();
+            useProjectsContext?.refetch();
         });
     };
 

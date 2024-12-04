@@ -15,7 +15,7 @@ interface DeleteProps {
 }
 
 const Delete = ({ projectId, setModal }: DeleteProps) => {
-    const context = useContext(ProjectsContext);
+    const useProjectsContext = useContext(ProjectsContext);
 
     const [wantDelete, toggleWantDelete] = useToggle(false);
     const [showConfirmDelete, toggleShowConfirmDelete] = useToggle(false);
@@ -26,9 +26,9 @@ const Delete = ({ projectId, setModal }: DeleteProps) => {
 
         Project.delete(projectId, () => {
             setModal({ projectId: 1, show: false });
-            context?.refetch();
+            useProjectsContext?.refetch();
         });
-    }, [wantDelete, context, projectId, setModal]);
+    }, [wantDelete, useProjectsContext, projectId, setModal]);
 
     return (
         <div className="flex w-fit flex-col items-start">

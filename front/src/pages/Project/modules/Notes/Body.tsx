@@ -2,12 +2,10 @@
 import { createContext, MouseEvent, useRef, useState } from "react";
 
 // Local
-import { NotesPageContextType, NotesTextType } from "./utils/types";
+import { NotesContextType, NotesTextType } from "./utils/types";
 import Textareas from "./Textareas";
 
-export const NotesPageContext = createContext<NotesPageContextType | null>(
-    null
-);
+export const NotesContext = createContext<NotesContextType | null>(null);
 
 const Body = () => {
     const [notes, setNotes] = useState<Array<NotesTextType>>([
@@ -35,7 +33,7 @@ const Body = () => {
     };
 
     return (
-        <NotesPageContext.Provider
+        <NotesContext.Provider
             value={{
                 notes,
                 setNotes,
@@ -49,7 +47,7 @@ const Body = () => {
             >
                 {notes.map(renderNotes)}
             </div>
-        </NotesPageContext.Provider>
+        </NotesContext.Provider>
     );
 };
 

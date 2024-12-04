@@ -1,4 +1,5 @@
 // Libraries
+import { MouseEvent } from "react";
 import { FaQuestion } from "react-icons/fa";
 
 // Local
@@ -8,7 +9,7 @@ interface IconsProps {
     library: string;
     name: string;
     className?: string;
-    onClick?: (event?: MouseEvent) => void;
+    onClick?: (event?: MouseEvent<HTMLElement>) => void;
 }
 
 interface IconType {
