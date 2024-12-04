@@ -45,7 +45,9 @@ const HoverButtons = ({
                 name="IoAddOutline"
                 library="io5"
                 className="h-full"
-                onClick={() => addPage(useProjectContext, toggleChildren, pageId)}
+                onClick={() =>
+                    addPage(useProjectContext, toggleChildren, pageId)
+                }
             />
 
             <Icon
