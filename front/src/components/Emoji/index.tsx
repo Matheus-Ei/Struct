@@ -27,7 +27,7 @@ const Emoji = ({
 
     // Update emoji when newEmoji is set
     useEffect(() => {
-        setEmoji(newEmoji?.emoji);
+        newEmoji?.emoji && setEmoji(newEmoji.emoji);
         onUpdate && onUpdate(newEmoji?.emoji);
     }, [newEmoji, onUpdate]);
 
@@ -37,7 +37,7 @@ const Emoji = ({
     }, [symbol]);
 
     const handleClick = () => {
-        selectorOnClick && toggleSelector();
+        selectorOnClick && toggleSelector(true);
         onClick && onClick();
     };
 

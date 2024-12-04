@@ -1,19 +1,31 @@
 import Icon from "components/Icon";
+import { ProjectContext } from "pages/Project";
+import { useContext } from "react";
+import Page from "services/page";
 
 interface ModuleProps {
     name: string;
     description: string;
-    url: string;
     icon: string;
     library: string;
 }
 
-const Module = ({ name, description, url, icon, library }: ModuleProps) => {
-    const handleClick = () => {};
+const Module = ({ name, description, icon, library }: ModuleProps) => {
+    const useProjectContext = useContext(ProjectContext);
+
+    const handleClick = () => {
+        if (!useProjectContext?.selectedPage.id) return;
+
+        Page.setModule(useProjectContext?.selectedPage.id, name).then(() => {
+            setTimeout(() => {
+                useProjectContext?.page.refetch();
+            }, 10);
+        });
+    };
 
     return (
         <div
-            className="w-64 h-28 gap-y-1 border rounded-btn p-2 flex flex-col cursor-pointer select-none"
+            className="w-64 h-28 gap-y-1 border border-base-300 rounded-btn p-2 flex flex-col hover:italic cursor-pointer select-none"
             onClick={handleClick}
         >
             <div className="flex items-center gap-x-2">

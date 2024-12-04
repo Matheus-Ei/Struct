@@ -84,11 +84,13 @@ class Page {
 
     public static async setModule(
         id: number,
-        module: string | null,
+        module: string,
         onSuccess?: (response?: SuccessResponseType) => void
     ) {
         try {
-            const response = await Request.patch(`page/${id}/${module}`, {});
+            const response = await Request.patch(`page/${id}/module`, {
+                module,
+            });
             onSuccess && onSuccess(response);
 
             return true;
