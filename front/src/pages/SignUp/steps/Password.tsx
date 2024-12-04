@@ -10,14 +10,14 @@ import Input from "components/Input";
 import { SignUpContext } from "..";
 
 const Password = () => {
-    const context = useContext(SignUpContext);
+    const useSignUpContext = useContext(SignUpContext);
     const navigate = useNavigate();
 
-    if (!context) return null;
-    const { setPassword, setRePassword, error } = context;
+    if (!useSignUpContext) return null;
+    const { setPassword, setRePassword, error } = useSignUpContext;
 
     const signUp = () => {
-        makeSignUp(context, navigate);
+        makeSignUp(useSignUpContext, navigate);
     };
 
     return (

@@ -3,25 +3,25 @@ import { ErrorType, SetStateType } from "types/global";
 import { SignUpContextType } from "./types";
 
 class Validations {
-    private context: SignUpContextType;
+    private useSignUpContext: SignUpContextType;
     private setNickError: SetStateType<ErrorType>;
     private setMailError: SetStateType<ErrorType>;
 
     constructor(
-        context: SignUpContextType,
+        useSignUpContext: SignUpContextType,
         setNickError: SetStateType<ErrorType>,
         setMailError: SetStateType<ErrorType>
     ) {
-        this.context = context;
+        this.useSignUpContext = useSignUpContext;
         this.setMailError = setMailError;
         this.setNickError = setNickError;
     }
 
     private emptyFields() {
-        const { name, nickname, mail } = this.context;
+        const { name, nickname, mail } = this.useSignUpContext;
 
         if (!name || !nickname || !mail) {
-            this.context.setError({
+            this.useSignUpContext.setError({
                 isError: true,
                 message: "Please fill all fields",
             });
@@ -32,7 +32,7 @@ class Validations {
     }
 
     private async nickname() {
-        const nickname = this.context.nickname;
+        const nickname = this.useSignUpContext.nickname;
         if (!nickname) return false;
 
         // Nickname validation
@@ -45,7 +45,7 @@ class Validations {
     }
 
     private async mail() {
-        const mail = this.context.mail;
+        const mail = this.useSignUpContext.mail;
         if (!mail) return false;
 
         // Mail validation
@@ -66,7 +66,7 @@ class Validations {
     }
 
     private resetErrors() {
-        this.context.setError({ message: "", isError: false });
+        this.useSignUpContext.setError({ message: "", isError: false });
         this.setNickError({ message: "", isError: false });
         this.setMailError({ message: "", isError: false });
     }

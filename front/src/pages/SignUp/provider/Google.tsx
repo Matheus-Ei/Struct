@@ -12,14 +12,17 @@ import { SignUpContext } from "..";
 
 const GoogleSignUp = () => {
     const [accessToken, setAccessToken] = useState<string | null>(null);
-    const context = useContext(SignUpContext);
+    const useSignUpContext = useContext(SignUpContext);
 
     const { data: response } = useUserProvider(accessToken, "google");
 
     const googleProvider = useGoogleLogin({
         onSuccess: (codeResponse) => setAccessToken(codeResponse.access_token),
         onError: () =>
-            context?.setError({ message: "An error occurred", isError: true }),
+            useSignUpContext?.setError({
+                message: "An error occurred",
+                isError: true,
+            }),
     });
 
     const navigate = useNavigate();
@@ -37,14 +40,17 @@ const GoogleSignUp = () => {
             );
 
             if (!isSignedUp)
-                context?.setError({
+                useSignUpContext?.setError({
                     message: "An error occurred",
                     isError: true,
                 });
         } catch (error) {
-            context?.setError({ message: "An error occurred", isError: true });
+            useSignUpContext?.setError({
+                message: "An error occurred",
+                isError: true,
+            });
         }
-    }, [context, navigate, response]);
+    }, [useSignUpContext, navigate, response]);
 
     useEffect(() => {
         signUp();

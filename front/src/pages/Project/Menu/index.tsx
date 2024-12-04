@@ -4,14 +4,14 @@ import { useContext } from "react";
 // Local
 import { PageType } from "services/page/types";
 import NewPageTab from "./NewPageTab";
-import { PagesContext } from "..";
+import { ProjectContext } from "..";
 import PageTab from "./PageTab";
 import Point from "components/Point";
 
 const Menu = () => {
-    const context = useContext(PagesContext);
-    if (!context) return null;
-    const { menu } = context;
+    const useProjectContext = useContext(ProjectContext);
+    if (!useProjectContext) return null;
+    const { menu } = useProjectContext;
 
     const renderPages = (item: PageType, index: number) => (
         <PageTab item={item} key={index} />

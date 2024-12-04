@@ -1,10 +1,10 @@
 // Libraries
-import { useContext } from "react";
+import { MouseEvent, useContext } from "react";
 import clsx from "clsx";
 
 // Local
 import { addPage } from "pages/Project/util/events";
-import { PagesContext } from "pages/Project";
+import { ProjectContext } from "pages/Project";
 import Icon from "components/Icon";
 
 interface HoverButtonsProps {
@@ -22,10 +22,17 @@ const HoverButtons = ({
     isHover,
     pageId,
 }: HoverButtonsProps) => {
-    const context = useContext(PagesContext);
+    const useProjectContext = useContext(ProjectContext);
 
-    if (!isHover || !context) return null;
-    const isSelected = context.selectedPage.id === pageId;
+    if (!isHover || !useProjectContext) return null;
+    const isSelected = useProjectContext.selectedPage.id === pageId;
+
+    const handleMenu = (event?: MouseEvent<HTMLElement>) => {
+        if (!event) return;
+
+        toggleMenu(true);
+        setClickPosition({ x: event.clientX, y: event.clientY });
+    };
 
     const bodyCss = clsx("flex flex-row absolute gap-x-2 right-2 top-2", {
         "text-primary-content": isSelected,
@@ -38,17 +45,14 @@ const HoverButtons = ({
                 name="IoAddOutline"
                 library="io5"
                 className="h-full"
-                onClick={() => addPage(context, toggleChildren, pageId)}
+                onClick={() => addPage(useProjectContext, toggleChildren, pageId)}
             />
 
             <Icon
                 name="MdMoreHoriz"
                 library="md"
                 className="h-full"
-                onClick={(event) => {
-                    toggleMenu(true);
-                    setClickPosition({ x: event.clientX, y: event.clientY });
-                }}
+                onClick={handleMenu}
             />
         </div>
     );

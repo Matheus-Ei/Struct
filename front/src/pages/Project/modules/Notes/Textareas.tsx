@@ -2,7 +2,7 @@
 import { useContext, useEffect } from "react";
 
 // Local
-import { NotesPageContext } from "./Body";
+import { NotesContext } from "./Body";
 import Paragraph from "./Types/Paragraph";
 import Title from "./Types/Title";
 
@@ -13,12 +13,12 @@ interface TextareasProps {
 }
 
 const Textareas = ({ note, type, index }: TextareasProps) => {
-    const context = useContext(NotesPageContext);
+    const useNotesContext = useContext(NotesContext);
 
     useEffect(() => {
-        context?.setNotes((prev) => {
+        useNotesContext?.setNotes((prev) => {
             const prevBase = [...prev];
-            const elements = context?.mainDivRef.current?.children;
+            const elements = useNotesContext?.mainDivRef.current?.children;
 
             const notesWithElements = prevBase.map((item, index) => {
                 if (!elements) return item;
@@ -29,7 +29,7 @@ const Textareas = ({ note, type, index }: TextareasProps) => {
 
             return notesWithElements;
         });
-    }, [note, type, index, context]);
+    }, [note, type, index, useNotesContext]);
 
     switch (type) {
         case "title1":

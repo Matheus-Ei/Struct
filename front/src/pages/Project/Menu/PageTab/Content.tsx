@@ -4,7 +4,7 @@ import clsx from "clsx";
 
 // Local
 import { PageType } from "services/page/types";
-import { PagesContext } from "pages/Project";
+import { ProjectContext } from "pages/Project";
 import Emoji from "components/Emoji";
 import Icon from "components/Icon";
 
@@ -25,10 +25,8 @@ const Content = ({
     showChildren,
     toggleChildren,
 }: ContentProps) => {
-    const context = useContext(PagesContext);
-    if (!context) return null;
-
-    const isSelected = item.id === context.selectedPage.id;
+    const useProjectContext = useContext(ProjectContext);
+    const isSelected = item.id === useProjectContext?.selectedPage.id;
 
     const css = clsx(
         "w-full h-10 gap-x-2 rounded-btn py-1 px-4",
@@ -39,7 +37,7 @@ const Content = ({
         }
     );
 
-    const handleClick = () => context.selectedPage.set(item.id);
+    const handleClick = () => useProjectContext?.selectedPage.set(item.id);
 
     const pageIcon = () => {
         if (isHover && childrens?.length != 0) {

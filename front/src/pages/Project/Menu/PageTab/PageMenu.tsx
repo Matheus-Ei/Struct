@@ -4,7 +4,7 @@ import { useContext } from "react";
 // Local
 import { deletePage } from "pages/Project/util/events";
 import ContextMenu from "components/ContextMenu";
-import { PagesContext } from "pages/Project";
+import { ProjectContext } from "pages/Project";
 import Icon from "components/Icon";
 
 interface ContextPageMenuProps {
@@ -20,8 +20,8 @@ const PageMenu = ({
     clickPosition,
     pageId,
 }: ContextPageMenuProps) => {
-    const context = useContext(PagesContext);
-    if (!context) return null;
+    const useProjectContext = useContext(ProjectContext);
+    if (!useProjectContext) return null;
 
     return (
         <ContextMenu
@@ -32,7 +32,7 @@ const PageMenu = ({
             <div className="flex flex-col">
                 <button
                     className="flex gap-2 items-center justify-center"
-                    onClick={() => deletePage(toggleMenu, pageId, context)}
+                    onClick={() => deletePage(toggleMenu, pageId, useProjectContext)}
                 >
                     <Icon name="MdDelete" library="md" />
                     <h1>Delete</h1>

@@ -14,10 +14,10 @@ interface WrapperSignUpProps {
 }
 
 const WrapperSignUp = ({ children }: WrapperSignUpProps) => {
-    const context = useContext(SignUpContext);
+    const useSignUpContext = useContext(SignUpContext);
 
-    if (!context) return null;
-    const { step, setStep } = context;
+    if (!useSignUpContext) return null;
+    const { step, setStep } = useSignUpContext;
 
     const prevStep = () => {
         goPrevStep(setStep);

@@ -4,13 +4,13 @@ import { useParams } from "react-router-dom";
 
 // Local
 import { useAllPages, usePage } from "services/page/usePage";
-import { ReactProjectContext } from "./util/types";
+import { ProjectContextType } from "./util/types";
 import withLoader from "HOCs/withLoader";
 import Dashboard from "./Dashboard";
 import Menu from "./Menu";
 import Page from "./Page";
 
-export const PagesContext = createContext<ReactProjectContext | undefined>(
+export const ProjectContext = createContext<ProjectContextType | undefined>(
     undefined
 );
 
@@ -32,7 +32,7 @@ const Project = () => {
     const { data: page, refetch: refetchPage } = usePage(getSelectedPageId());
 
     return (
-        <PagesContext.Provider
+        <ProjectContext.Provider
             value={{
                 projectId: id,
                 menu: { tabs, refetch: refetchTabs },
@@ -45,7 +45,7 @@ const Project = () => {
 
                 {selectedPageId ? <Page /> : <Dashboard />}
             </div>
-        </PagesContext.Provider>
+        </ProjectContext.Provider>
     );
 };
 

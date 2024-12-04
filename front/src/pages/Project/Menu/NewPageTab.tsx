@@ -5,7 +5,7 @@ import clsx from "clsx";
 // Local
 import { addPage } from "../util/events";
 import Icon from "components/Icon";
-import { PagesContext } from "..";
+import { ProjectContext } from "..";
 
 const bodyCss = clsx(
     "flex flex-row justify-start items-center",
@@ -16,11 +16,13 @@ const bodyCss = clsx(
 );
 
 const NewPageTab = () => {
-    const context = useContext(PagesContext);
-    if (!context) return null;
+    const useProjectContext = useContext(ProjectContext);
 
     return (
-        <div className={bodyCss} onClick={() => addPage(context, null, null)}>
+        <div
+            className={bodyCss}
+            onClick={() => addPage(useProjectContext, null, null)}
+        >
             <Icon
                 name="IoAddOutline"
                 library="io5"

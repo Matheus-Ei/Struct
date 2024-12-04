@@ -9,7 +9,7 @@ import {
 
 // Local
 import { handleKeyDown } from "../utils/Events";
-import { NotesPageContext } from "../Body";
+import { NotesContext } from "../Body";
 import { Text } from "../utils/Text";
 import Cursor from "modules/Cursor";
 
@@ -27,9 +27,9 @@ const Paragraph = ({ note, index }: ParagraphProps) => {
         cursor.position = position;
     }, [position, cursor]);
 
-    const context = useContext(NotesPageContext);
-    if (!context) return null;
-    const textEditor = new Text(context);
+    const useNotesContext = useContext(NotesContext);
+    if (!useNotesContext) return null;
+    const textEditor = new Text(useNotesContext);
 
     const handleChange = () => {
         setPosition(cursor.position);

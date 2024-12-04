@@ -2,7 +2,7 @@
 import { PageType } from "services/page/types";
 import { SetStateType } from "types/global";
 
-export interface ReactProjectContext {
+export interface ProjectContextType {
     projectId: string | undefined;
     menu: {
         tabs?: PageType[] | null;

@@ -12,15 +12,25 @@ import Field from "./Field";
 const About = ({ projectId }: TabProps) => {
     const { data: project } = useProject(projectId);
 
-    const context = useContext(ProjectsContext);
-    if (!context) return null;
+    const useProjectsContext = useContext(ProjectsContext);
+    if (!useProjectsContext) return null;
 
     const updateTitle = async (newValue: string) => {
-        await Project.edit(projectId, newValue, undefined, context.refetch);
+        await Project.edit(
+            projectId,
+            newValue,
+            undefined,
+            useProjectsContext.refetch
+        );
     };
 
     const updateDescription = async (newValue: string) => {
-        await Project.edit(projectId, undefined, newValue, context.refetch);
+        await Project.edit(
+            projectId,
+            undefined,
+            newValue,
+            useProjectsContext.refetch
+        );
     };
 
     return (

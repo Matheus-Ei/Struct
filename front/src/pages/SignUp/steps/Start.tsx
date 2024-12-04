@@ -26,9 +26,9 @@ const Start = () => {
         isError: false,
     });
 
-    const context = useContext(SignUpContext);
+    const useSignUpContext = useContext(SignUpContext);
 
-    if (!context) return null;
+    if (!useSignUpContext) return null;
     const {
         setNickname,
         nickname,
@@ -38,11 +38,11 @@ const Start = () => {
         mail,
         setStep,
         error,
-    } = context;
+    } = useSignUpContext;
 
     const nextStep = async () => {
         const validations = new Validations(
-            context,
+            useSignUpContext,
             setNickError,
             setMailError
         );

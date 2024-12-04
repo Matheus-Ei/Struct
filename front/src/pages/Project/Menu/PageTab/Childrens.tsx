@@ -8,11 +8,11 @@ interface ChildrensProps {
     show: boolean;
 }
 
-const Childrens = ({ show, items }: ChildrensProps) => {
-    const renderChildrens = (item: PageType, index: number) => (
-        <PageTab item={item} key={index} />
-    );
+const renderChildrens = (item: PageType, index: number) => (
+    <PageTab item={item} key={index} />
+);
 
+const Childrens = ({ show, items }: ChildrensProps) => {
     if (!show) return null;
 
     return (
