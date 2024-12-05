@@ -30,12 +30,10 @@ export const deletePage = async (
     if (!pageId && !projectContext) return null;
 
     toggleShowMenu && toggleShowMenu(false);
-    await Page.delete(pageId, () => {});
+    await Page.delete(pageId);
 
-    // Remove page from menu
-    setTimeout(() => {
-        if (pageId === projectContext.selectedPage.id)
-            projectContext.selectedPage.set(null);
-        projectContext.menu.refetch();
-    }, 10);
+    // Update the menu
+    projectContext.menu.refetch();
+    if (pageId === projectContext.selectedPage.id)
+        projectContext.selectedPage.set(null);
 };

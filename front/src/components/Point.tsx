@@ -9,10 +9,18 @@ interface PointProps {
     library: string;
     text?: string;
     isSelected?: boolean;
+    className?: string;
     onClick?: () => void;
 }
 
-const Point = ({ text, icon, library, isSelected, onClick }: PointProps) => {
+const Point = ({
+    text,
+    icon,
+    library,
+    isSelected,
+    onClick,
+    className,
+}: PointProps) => {
     const handleClick = () => onClick && onClick();
 
     const css = clsx(
@@ -26,7 +34,7 @@ const Point = ({ text, icon, library, isSelected, onClick }: PointProps) => {
     );
 
     return (
-        <div onClick={handleClick} className={css}>
+        <div onClick={handleClick} className={className ? className : css}>
             <Icon library={library} name={icon} className="text-xl" />
             {text && <p>{text}</p>}
         </div>

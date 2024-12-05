@@ -21,10 +21,8 @@ const ContextPageMenu = ({
     const deletePage = async () => {
         await Page.delete(pageId, () => {});
 
-        setTimeout(() => {
-            toggleShowMenu(false);
-            refetch();
-        }, 10);
+        toggleShowMenu(false);
+        refetch();
     };
 
     return (

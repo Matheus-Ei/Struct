@@ -46,7 +46,7 @@ const ProjectModal = ({ modal, setModal }: ProjectModalProps) => {
     return (
         <Modal isOpen={modal.show} close={handleClose} className={modalCss}>
             <div className="w-full h-full">
-                <Header tab={tab} setTab={setTab} />
+                <Header tab={tab} setTab={setTab} modal={modal} />
 
                 {router.map(renderTab)}
             </div>
