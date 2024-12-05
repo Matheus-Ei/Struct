@@ -29,7 +29,7 @@ const ConfirmModal = ({
     cancelText = "No",
 }: ConfirmModalProps) => {
     return (
-        <Modal isOpen={isOpen} close={close} className={css}>
+        <Modal isOpen={isOpen} onClose={close} className={css}>
             <>
                 <h1 className="mb-5">{message}</h1>
 

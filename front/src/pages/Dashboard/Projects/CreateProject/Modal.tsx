@@ -94,7 +94,7 @@ const CreateProjectModal = ({
     );
 
     return (
-        <Modal isOpen={showModal} close={handleClose} className={modalCss}>
+        <Modal isOpen={showModal} onClose={handleClose} className={modalCss}>
             <div className={bodyCss}>
                 <h1 className={headerCss}>New project</h1>
 
