@@ -31,7 +31,7 @@ const Content = ({
     const css = clsx(
         "w-full h-full gap-x-2 rounded-btn py-1 px-4",
         "flex flex-row justify-start items-center text-start",
-        "cursor-default select-none",
+        "cursor-pointer select-none",
         {
             "bg-primary text-primary-content": isSelected,
         }

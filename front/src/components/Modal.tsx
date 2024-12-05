@@ -9,7 +9,7 @@ import Card from "./Card";
 interface ModalProps {
     children: JSX.Element;
     isOpen: boolean;
-    close: () => void;
+    onClose: () => void;
     className?: string;
 }
 
@@ -25,13 +25,13 @@ const bgCss = clsx(
     "bg-[rgba(0,0,0,0.3)]"
 );
 
-const Modal = ({ children, isOpen, close, className }: ModalProps) => {
+const Modal = ({ children, isOpen, onClose, className }: ModalProps) => {
     if (!isOpen) return null;
     const css = className ? className : defaultCss;
 
     const closeOnBgClick = (event: MouseEvent<HTMLElement>) => {
         if (event.target !== event.currentTarget) return;
-        close();
+        onClose();
     };
 
     return (
@@ -39,7 +39,7 @@ const Modal = ({ children, isOpen, close, className }: ModalProps) => {
             <Card>
                 <div className={css}>
                     <button
-                        onClick={close}
+                        onClick={onClose}
                         className="absolute right-4 top-2 sm:right-0 sm:top-0"
                     >
                         <Icon

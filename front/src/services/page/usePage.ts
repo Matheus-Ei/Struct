@@ -8,6 +8,6 @@ export const usePage = (id: number | null) => {
     return useQuery(["page", id], () => (id ? Page.get(id) : null));
 };
 
-export const useAllPages = (projectId: number) => {
+export const useAllPages = (projectId?: string | null) => {
     return useQuery(["all-pages", projectId], () => Page.getAll(projectId));
 };

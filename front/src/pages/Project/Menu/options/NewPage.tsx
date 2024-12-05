@@ -3,9 +3,9 @@ import { useContext } from "react";
 import clsx from "clsx";
 
 // Local
-import { addPage } from "../util/events";
+import { addPage } from "../../util/events";
 import Icon from "components/Icon";
-import { ProjectContext } from "..";
+import { ProjectContext } from "../..";
 
 const bodyCss = clsx(
     "flex flex-row justify-start items-center",
@@ -15,7 +15,7 @@ const bodyCss = clsx(
     "cursor-default select-none"
 );
 
-const NewPageTab = () => {
+const NewPage = () => {
     const useProjectContext = useContext(ProjectContext);
     if (!useProjectContext) return null;
 
@@ -31,4 +31,4 @@ const NewPageTab = () => {
     );
 };
 
-export default NewPageTab;
+export default NewPage;

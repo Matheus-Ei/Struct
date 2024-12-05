@@ -44,7 +44,7 @@ const ProjectModal = ({ modal, setModal }: ProjectModalProps) => {
     };
 
     return (
-        <Modal isOpen={modal.show} close={handleClose} className={modalCss}>
+        <Modal isOpen={modal.show} onClose={handleClose} className={modalCss}>
             <div className="w-full h-full">
                 <Header tab={tab} setTab={setTab} modal={modal} />
 

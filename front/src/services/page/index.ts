@@ -13,8 +13,10 @@ class Page {
         }
     }
 
-    public static async getAll(projectId: number): Promise<PageType[] | null> {
+    public static async getAll(projectId?: string | null): Promise<PageType[] | null> {
         try {
+            if (!projectId) return null;
+
             const response: GetPagesType = await Request.get(
                 `project/${projectId}/pages`
             );

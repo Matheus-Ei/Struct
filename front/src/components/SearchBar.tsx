@@ -46,12 +46,14 @@ const SearchBar = ({
 
     const css = className ? className : defaultCss;
     return (
-        <div className="relative flex text-xl text-base-content w-full">
-            <Icon
-                name="IoSearchOutline"
-                library="io5"
-                className="flex items-center h-full absolute left-6 text-primary"
-            />
+        <div className="relative flex text-base-content w-full">
+            {!className && (
+                <Icon
+                    name="IoSearchOutline"
+                    library="io5"
+                    className="flex items-center h-full text-xl absolute left-6 text-primary"
+                />
+            )}
 
             <input
                 className={css}
