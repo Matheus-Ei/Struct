@@ -93,7 +93,7 @@ const Search = () => {
             >
                 <div className="w-5/6 h-5/6">
                     <SearchBar
-                        className="w-full h-9 pl-4 mb-2 outline-none border-b"
+                        className="w-full h-9 pl-4 mb-2 outline-none border-b bg-base-100"
                         searchPlace={formattedPages.map((page) => page.name)}
                         setResult={setPagesString}
                     />
