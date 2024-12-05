@@ -15,6 +15,7 @@ class ShareRoute {
     private init() {
         this.router.get("/:id", shareController.get);
         this.router.post("/:id", shareController.share);
+        this.router.delete("/:id/:nickname", shareController.unshare);
     }
 }
 
