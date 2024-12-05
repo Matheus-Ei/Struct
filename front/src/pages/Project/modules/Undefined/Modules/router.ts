@@ -9,8 +9,8 @@ const modules: Array<ModuleType> = [
     {
         name: "notes",
         description: "Module to create and manage notes.",
-        icon: "IoMdDocument",
-        library: "io",
+        icon: "PiNoteBlankFill",
+        library: "pi",
     },
 ];
 

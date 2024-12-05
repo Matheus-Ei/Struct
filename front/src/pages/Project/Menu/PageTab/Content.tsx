@@ -29,7 +29,7 @@ const Content = ({
     const isSelected = item.id === useProjectContext?.selectedPage.id;
 
     const css = clsx(
-        "w-full h-10 gap-x-2 rounded-btn py-1 px-4",
+        "w-full h-full gap-x-2 rounded-btn py-1 px-4",
         "flex flex-row justify-start items-center text-start",
         "cursor-default select-none",
         {

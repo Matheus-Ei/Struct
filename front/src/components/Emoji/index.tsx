@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 // Local
 import EmojiSelector from "./Selector";
 import useToggle from "hooks/useToggle";
+import Icon from "components/Icon";
 
 interface EmojiProps {
     symbol?: string | null;
@@ -29,7 +30,8 @@ const Emoji = ({
     useEffect(() => {
         newEmoji?.emoji && setEmoji(newEmoji.emoji);
         onUpdate && onUpdate(newEmoji?.emoji);
-    }, [newEmoji, onUpdate]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [newEmoji]);
 
     // Set emoji on first render
     useEffect(() => {
@@ -46,7 +48,7 @@ const Emoji = ({
     if (!emoji)
         return (
             <div className={css} onClick={handleClick}>
-                &#x2753;
+                <Icon name="IoIosDocument" library="io" />
                 <EmojiSelector
                     setEmoji={setNewEmoji}
                     toggleShow={toggleSelector}

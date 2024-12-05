@@ -24,6 +24,8 @@ const Header = () => {
             undefined,
             newEmoji
         );
+
+        useProjectContext.menu.refetch();
     };
 
     const updateName = async (value: string) => {
@@ -35,6 +37,8 @@ const Header = () => {
             undefined,
             undefined
         );
+
+        useProjectContext.menu.refetch();
     };
 
     const updateDescription = async (value: string) => {

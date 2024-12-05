@@ -22,14 +22,7 @@ const Project = () => {
 
     // Page content request
     const [selectedPageId, setSelectedPageId] = useState<number | null>(null);
-    const getSelectedPageId = () => {
-        if (!tabs || !selectedPageId) return 0;
-
-        if (!selectedPageId) return tabs[0].id;
-
-        return selectedPageId;
-    };
-    const { data: page, refetch: refetchPage } = usePage(getSelectedPageId());
+    const { data: page, refetch: refetchPage } = usePage(selectedPageId);
 
     return (
         <ProjectContext.Provider

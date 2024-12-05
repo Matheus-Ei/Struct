@@ -33,7 +33,7 @@ const PageTab = ({ item }: PageTabProps) => {
     return (
         <>
             <div
-                className="flex flex-col relative w-full h-9 justify-start"
+                className="flex flex-col relative w-full h-9 justify-start items-center"
                 onMouseOver={() => toggleHover(true)}
                 onMouseLeave={() => toggleHover(false)}
             >

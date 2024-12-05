@@ -34,28 +34,25 @@ const HoverButtons = ({
         setClickPosition({ x: event.clientX, y: event.clientY });
     };
 
-    const bodyCss = clsx("flex flex-row absolute gap-x-2 right-2 top-2", {
-        "text-primary-content": isSelected,
-        "text-base-content": !isSelected,
-    });
+    const bodyCss = clsx(
+        "h-full flex flex-row items-center justify-center absolute gap-x-2 right-2",
+        {
+            "text-primary-content": isSelected,
+            "text-base-content": !isSelected,
+        }
+    );
 
     return (
         <div className={bodyCss}>
             <Icon
                 name="IoAddOutline"
                 library="io5"
-                className="h-full"
                 onClick={() =>
                     addPage(useProjectContext, toggleChildren, pageId)
                 }
             />
 
-            <Icon
-                name="MdMoreHoriz"
-                library="md"
-                className="h-full"
-                onClick={handleMenu}
-            />
+            <Icon name="MdMoreHoriz" library="md" onClick={handleMenu} />
         </div>
     );
 };

@@ -66,7 +66,7 @@ class PageController {
                 return;
             }
 
-            page.destroy();
+            await page.destroy();
 
             res.status(200).send({ message: "The page was deleted" });
         } catch (error) {
@@ -170,7 +170,7 @@ class PageController {
                 emoji = page.emoji,
             } = req.body;
 
-            page.update({
+            await page.update({
                 name,
                 description,
                 emoji,
@@ -231,7 +231,7 @@ class PageController {
                     return;
             }
 
-            page.update({
+            await page.update({
                 module_id: moduleFound.id,
             });
 

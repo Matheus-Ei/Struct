@@ -88,7 +88,9 @@ class ShareController {
                 },
             });
             if (shared) {
-                res.status(400).json({ message: "User already shared with this project" });
+                res.status(400).json({
+                    message: "User already shared with this project",
+                });
                 return;
             }
 
@@ -103,6 +105,56 @@ class ShareController {
         } catch (error) {
             res.status(500).json({
                 message: "Error sharing the project",
+                error,
+            });
+
+            return;
+        }
+    }
+
+    public async unshare(req: Request, res: Response) {
+        const { id, nickname } = req.params;
+
+        // Check if the nickname is present
+        if (!nickname) {
+            res.status(400).json({ message: "Missing nickname" });
+            return;
+        }
+
+        try {
+            const project = await ProjectModel.findByPk(id);
+            const user = await UserModel.findOne({
+                where: { nickname },
+            });
+
+            // Check if the project and user exist
+            if (!project || !user) {
+                res.status(404).json({ message: "Project or user not found" });
+                return;
+            }
+
+            // Check if the user is already shared
+            const shared = await RelationshipSharedProject.findOne({
+                where: {
+                    project_id: id,
+                    user_shared_id: user.id,
+                },
+            });
+
+            if (!shared) {
+                res.status(400).json({
+                    message: "User not shared with this project",
+                });
+                return;
+            }
+
+            await shared.destroy();
+
+            res.status(200).json({ message: "User removed from the project" });
+            return;
+        } catch (error) {
+            res.status(500).json({
+                message: "Error unsharing the project",
                 error,
             });
 
