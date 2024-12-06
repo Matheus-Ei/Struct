@@ -4,7 +4,6 @@ import clsx from "clsx";
 
 // Local
 import Modal from "components/Modal";
-import Point from "components/Point";
 import useToggle from "hooks/useToggle";
 import { ProjectContext } from "pages/Project";
 import { useAllPages } from "services/page/usePage";
@@ -44,8 +43,12 @@ const pageCss = clsx(
     "cursor-pointer select-none hover:bg-base-200"
 );
 
-const Search = () => {
-    const [isOpen, toggleOpen] = useToggle(false);
+interface SearchModalProps {
+    isOpen: boolean;
+    toggleOpen: (isOpen: boolean) => void;
+}
+
+const SearchModal = ({ isOpen, toggleOpen }: SearchModalProps) => {
     const useProjectContext = useContext(ProjectContext);
 
     // Fetch all pages and format them to be flat
@@ -85,33 +88,25 @@ const Search = () => {
     };
 
     return (
-        <>
-            <Modal
-                isOpen={isOpen}
-                onClose={() => toggleOpen(false)}
-                className={modalCss}
-            >
-                <div className="w-5/6 h-5/6">
-                    <SearchBar
-                        className="w-full h-9 pl-4 mb-2 outline-none border-b bg-base-100"
-                        searchPlace={formattedPages.map((page) => page.name)}
-                        setResult={setPagesString}
-                    />
+        <Modal
+            isOpen={isOpen}
+            onClose={() => toggleOpen(false)}
+            className={modalCss}
+        >
+            <div className="w-5/6 h-5/6">
+                <SearchBar
+                    className="w-full h-9 pl-4 mb-2 outline-none border-b bg-base-100"
+                    searchPlace={formattedPages.map((page) => page.name)}
+                    placeholder="Search pages"
+                    setResult={setPagesString}
+                />
 
-                    <div className="flex flex-col w-full h-full items-start overflow-y-scroll">
-                        {formattedPages.map(renderPages)}
-                    </div>
+                <div className="flex flex-col w-full h-full items-start overflow-y-scroll">
+                    {formattedPages.map(renderPages)}
                 </div>
-            </Modal>
-
-            <Point
-                text="Search"
-                icon="IoMdSearch"
-                library="io"
-                onClick={() => toggleOpen(true)}
-            />
-        </>
+            </div>
+        </Modal>
     );
 };
 
-export default Search;
+export default SearchModal;
