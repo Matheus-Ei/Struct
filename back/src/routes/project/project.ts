@@ -2,7 +2,7 @@
 import { Router } from "express";
 
 // Local
-import projectController from "../../controllers/project/project.js";
+import projectController from "../../controllers/project/project";
 
 class ProjectRoute {
     public router: Router;

@@ -3,8 +3,8 @@ import { Request, Response, NextFunction } from "express";
 import dotenv from "dotenv";
 
 // Local
-import Cookie from "../services/cookie.js";
-import Token from "../services/token.js";
+import Cookie from "../services/cookie";
+import Token from "../services/token";
 
 dotenv.config();
 

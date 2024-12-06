@@ -2,10 +2,10 @@
 import { DataTypes, Model } from "sequelize";
 
 // Local
-import connection from "../services/database/connection.js";
+import connection from "../services/database/connection";
 
 // Models
-import SubscriptionPlanModel from "./subscriptionPlan.js";
+import SubscriptionPlanModel from "./subscriptionPlan";
 import UserModel from "./user.js";
 
 class SubscriptionModel extends Model {

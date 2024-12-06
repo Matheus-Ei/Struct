@@ -2,12 +2,12 @@
 import { Request, Response } from "express";
 
 // Local
-import Cookie from "../services/cookie.js";
-import Token from "../services/token.js";
-import Hash from "../services/hash.js";
+import Cookie from "../services/cookie";
+import Token from "../services/token";
+import Hash from "../services/hash";
 
 // Models
-import UserModel from "../models/user.js";
+import UserModel from "../models/user";
 
 class UserController {
     public async get(req: Request, res: Response) {

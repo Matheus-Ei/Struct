@@ -1,12 +1,12 @@
 // Models
-import SubscriptionModel from "../../models/subscription.js";
-import SettingsModel from "../../models/settings.js";
-import ProjectModel from "../../models/project.js";
-import PageModel from "../../models/page.js";
-import RelationshipSharedProject from "../../models/relationshipSharedProject.js";
-import PermissionLevelModel from "../../models/permissionLevel.js";
-import ModuleModel from "../../models/module.js";
-import UserModel from "../../models/user.js";
+import SubscriptionModel from "../../models/subscription";
+import SettingsModel from "../../models/settings";
+import ProjectModel from "../../models/project";
+import PageModel from "../../models/page";
+import RelationshipSharedProject from "../../models/relationshipSharedProject";
+import PermissionLevelModel from "../../models/permissionLevel";
+import ModuleModel from "../../models/module";
+import UserModel from "../../models/user";
 
 // Page
 PageModel.belongsTo(PageModel, {

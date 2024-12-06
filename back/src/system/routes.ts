@@ -1,11 +1,11 @@
 // Routes
-import userProviderRoute from "../routes/provider/user.js";
-import userRoute from "../routes/user.js";
-import tokenRoute from "../routes/token.js";
-import projectRoute from "../routes/project/project.js";
-import shareRoute from "../routes/project/share.js";
-import pageRoute from "../routes/page.js";
-import rootRoute from "../routes/root.js";
+import userProviderRoute from "../routes/provider/user";
+import userRoute from "../routes/user";
+import tokenRoute from "../routes/token";
+import projectRoute from "../routes/project/project";
+import shareRoute from "../routes/project/share";
+import pageRoute from "../routes/page";
+import rootRoute from "../routes/root";
 
 type MainRoutesType = Array<[String, Object]>;
 

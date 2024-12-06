@@ -2,7 +2,7 @@
 import { Router } from "express";
 
 // Local
-import userProviderController from "../../controllers/provider/user.js";
+import userProviderController from "../../controllers/provider/user";
 
 class UserProviderRoute {
     public router: Router;

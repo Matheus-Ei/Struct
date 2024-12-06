@@ -2,8 +2,8 @@
 import { DataTypes, Model } from "sequelize";
 
 // Local
-import connection from "../services/database/connection.js";
-import UserModel from "./user.js";
+import connection from "../services/database/connection";
+import UserModel from "./user";
 
 class SettingsModel extends Model {
     public id!: number;

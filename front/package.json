@@ -34,7 +34,7 @@
         "pm2:serve": "pm2 serve build 3000 --name 'struct-frontend'",
         "pm2:stop": "pm2 stop struct-frontend",
         "pm2:delete": "pm2 delete struct-frontend",
-        "test": "react-scripts test",
+        "test": "npx majestic",
         "eject": "react-scripts eject"
     },
     "eslintConfig": {

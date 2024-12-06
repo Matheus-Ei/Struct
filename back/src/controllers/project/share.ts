@@ -2,13 +2,13 @@
 import { Request, Response } from "express";
 
 // Local
-import operations from "../../services/database/operations.js";
+import operations from "../../services/database/operations";
 
 // Models
-import RelationshipSharedProject from "../../models/relationshipSharedProject.js";
-import PermissionLevelModel from "../../models/permissionLevel.js";
-import ProjectModel from "../../models/project.js";
-import UserModel from "../../models/user.js";
+import RelationshipSharedProject from "../../models/relationshipSharedProject";
+import PermissionLevelModel from "../../models/permissionLevel";
+import ProjectModel from "../../models/project";
+import UserModel from "../../models/user";
 
 class ShareController {
     public async get(req: Request, res: Response) {

@@ -2,7 +2,7 @@
 import { DataTypes, Model } from "sequelize";
 
 // Local
-import connection from "../services/database/connection.js";
+import connection from "../services/database/connection";
 
 class ModuleModel extends Model {
     public id!: number;

@@ -6,9 +6,9 @@ import dotenv from "dotenv";
 import cors from "cors";
 
 // Local
-import "./services/database/associations.js";
-import mainRoutes from "./system/routes.js";
-import auth from "./middlewares/auth.js";
+import "./services/database/associations";
+import mainRoutes from "./system/routes";
+import auth from "./middlewares/auth";
 
 export class App {
     private app: any;

@@ -2,8 +2,8 @@
 import { Request, Response } from "express";
 
 // Local
-import RequestService from "../../services/request.js";
-import UserModel from "../../models/user.js";
+import RequestService from "../../services/request";
+import UserModel from "../../models/user";
 
 class UserProviderController {
     public async google(req: Request, res: Response) {

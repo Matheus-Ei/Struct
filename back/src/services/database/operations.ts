@@ -1,5 +1,5 @@
 // Libraries
-import connection from "./connection.js";
+import connection from "./connection";
 
 class Operations {
     public async query(statement: string) {

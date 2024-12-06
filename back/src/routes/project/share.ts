@@ -2,7 +2,7 @@
 import { Router } from "express";
 
 // Local
-import shareController from "../../controllers/project/share.js";
+import shareController from "../../controllers/project/share";
 
 class ShareRoute {
     public router: Router;

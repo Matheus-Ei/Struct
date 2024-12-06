@@ -1,8 +1,8 @@
 // Local
-import operations from "../../../services/database/operations.js";
+import operations from "../../../services/database/operations";
 
 // Models
-import NotesPageDataModel from "../../../models/notesPageData.js";
+import NotesPageDataModel from "../../../models/notesPageData";
 
 class NotesModule {
     public async get(id: string) {

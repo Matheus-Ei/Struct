@@ -6,7 +6,7 @@ import ModuleModel from "../../models/module";
 import PageModel from "../../models/page";
 
 // Local
-import NotesModule from "./modules/notes.js";
+import NotesModule from "./modules/notes";
 
 class PageController {
     public async get(req: Request, res: Response) {

@@ -1,5 +1,5 @@
 // Models
-import PageModel from "../../models/page.js";
+import PageModel from "../../models/page";
 
 class Hooks {
     private static page() {
