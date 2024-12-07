@@ -4,7 +4,6 @@ import clsx from "clsx";
 
 // Local
 import Modal from "components/Modal";
-import useToggle from "hooks/useToggle";
 import { ProjectContext } from "pages/Project";
 import { useAllPages } from "services/page/usePage";
 import { PageType } from "services/page/types";
@@ -33,7 +32,7 @@ const flattenPages = (pages?: PageType[] | null): PageType[] => {
 };
 
 const modalCss = clsx(
-    "relative w-screen h-screen sm:w-[15vw] sm:h-[30rem] z-30",
+    "relative w-screen h-screen sm:w-[30vw] sm:h-[30rem] xl:w-[15vw] z-30",
     "flex flex-col items-start justify-start"
 );
 

@@ -1,16 +1,21 @@
 // Library
+import { useContext, useEffect, useState } from "react";
 import clsx from "clsx";
-import Input from "components/Input";
 
 // Local
 import Modal from "components/Modal";
-import Options from "components/Options";
-import Point from "components/Point";
 import SearchBar from "components/SearchBar";
-import { useState } from "react";
+import { ProjectContext } from "pages/Project";
+
+// Services
+import AddUser from "services/project/share/Add";
+import { SharedUserType } from "services/project/type";
+import { useProjectShare } from "services/project/share/useShare";
+import RenderUser from "services/project/share/RenderUser";
+import Icon from "components/Icon";
 
 const modalCss = clsx(
-    "relative w-screen h-screen sm:w-[25vw] sm:h-[40rem] z-30",
+    "relative w-screen h-screen pb-4 sm:pb-0 sm:h-[40rem] sm:w-[60vw] md:w-[50vw] lg:w-[35vw] xl:w-[30vw] 2xl:w-[25vw] z-30",
     "flex flex-col items-start justify-start"
 );
 
@@ -20,24 +25,28 @@ interface ShareModalProps {
 }
 
 const ShareModal = ({ isOpen, toggleOpen }: ShareModalProps) => {
-    // Temporary data
-    const allShares = [
-        { name: "Share 1" },
-        { name: "Share 2" },
-        { name: "Share 3" },
-    ];
-    const permissionOptions = [
-        "owner",
-        "admin",
-        "editor",
-        "commenter",
-        "filler",
-        "viewer",
-    ];
+    const useProjectContext = useContext(ProjectContext);
 
-    const [nickname, setNickname] = useState<string>("");
-    const [permission, setPermission] = useState<number>(0);
+    const { data: allShares, refetch: refetchUsers } = useProjectShare(
+        useProjectContext?.projectId
+    );
+
     const [shares, setShares] = useState<string[]>([]);
+
+    // Set shares to be the nicknames of the users
+    useEffect(() => {
+        if (allShares) {
+            setShares(
+                allShares.map((share: SharedUserType) => share.user_nickname)
+            );
+        }
+    }, [allShares]);
+
+    const getUsers = () => {
+        return allShares?.filter((share: SharedUserType) =>
+            shares.includes(share.user_nickname)
+        );
+    };
 
     return (
         <Modal
@@ -47,36 +56,48 @@ const ShareModal = ({ isOpen, toggleOpen }: ShareModalProps) => {
         >
             <div className="flex flex-col w-full h-full items-center justify-between">
                 <div className="w-full h-full flex flex-col items-center justify-start">
-                    <SearchBar
-                        className="w-5/6 h-9 pl-4 mb-2 outline-none border-b bg-base-100"
-                        searchPlace={allShares.map((share) => share.name)}
-                        placeholder="Search users"
-                        setResult={setShares}
-                    />
+                    {!getUsers() ? (
+                        <div className="w-full">
+                            <h1>No user found...</h1>
+                            <Icon
+                                name="TbError404"
+                                library="tb"
+                                className="text-4xl w-fit"
+                            />
+                        </div>
+                    ) : (
+                        <>
+                            <SearchBar
+                                className="w-5/6 h-9 pl-4 mb-2 outline-none border-b bg-base-100"
+                                searchPlace={
+                                    allShares?.map(
+                                        (share: SharedUserType) =>
+                                            share.user_nickname
+                                    ) ?? []
+                                }
+                                placeholder="Search users"
+                                setResult={setShares}
+                            />
 
-                    {/* Users will go here */}
+                            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 items-center justify-items-start w-full mt-2 ml-4">
+                                {getUsers()?.map(
+                                    (item: SharedUserType, index: number) => (
+                                        <RenderUser
+                                            user={item}
+                                            refetch={refetchUsers}
+                                            key={index}
+                                        />
+                                    )
+                                )}
+                            </div>
+                        </>
+                    )}
                 </div>
 
-                <div className="flex items-center justify-center gap-x-4">
-                    <Input
-                        text="Nickname"
-                        className="border-b border-neutral px-2 pb-1 outline-none bg-base-100"
-                        setValue={setNickname}
-                        onEnter={() => {}}
-                    />
-
-                    <Options
-                        options={permissionOptions}
-                        selected={permission}
-                        setSelected={setPermission}
-                    />
-
-                    <Point
-                        icon="BsFillShareFill"
-                        library="bs"
-                        onClick={() => {}}
-                    />
-                </div>
+                <AddUser
+                    projectId={useProjectContext?.projectId}
+                    refetch={refetchUsers}
+                />
             </div>
         </Modal>
     );

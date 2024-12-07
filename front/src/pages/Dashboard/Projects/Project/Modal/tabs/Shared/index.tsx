@@ -2,11 +2,12 @@
 import clsx from "clsx";
 
 // Local
-import { useProjectUsers } from "services/project/useProject";
-import { SharedUserType } from "services/project/type";
+import { useProjectShare } from "services/project/share/useShare";
 import { TabProps } from "../../utils/types";
 import Icon from "components/Icon";
-import Share from "./Share";
+import RenderUser from "services/project/share/RenderUser";
+import AddUser from "services/project/share/Add";
+import { SharedUserType } from "services/project/type";
 
 const usersDivCss = clsx(
     "grid items-start content-start",
@@ -16,34 +17,11 @@ const usersDivCss = clsx(
     "grid-cols-2 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-7"
 );
 
-const renderUsers = (item: SharedUserType, index: number) => {
-    return (
-        <div
-            key={index}
-            className="flex flex-col items-center justify-center gap-y-2 w-full"
-        >
-            <div className="flex items-center justify-between w-full">
-                <div className="flex items-center justify-start gap-x-3">
-                    <Icon name="FaUserAlt" library="fa" className="text-2xl" />
-
-                    <h1 className="text-lg">{item.user_nickname}</h1>
-                </div>
-
-                {/*<Icon name="IoIosMore" library="io" />*/}
-            </div>
-
-            <h1 className="text-sm text-neutral italic line-clamp-1 w-full">
-                {item.user_mail}
-            </h1>
-        </div>
-    );
-};
-
 const Shared = ({ projectId }: TabProps) => {
-    const { data: users, refetch } = useProjectUsers(projectId);
+    const { data: users, refetch } = useProjectShare(String(projectId));
 
     const getUsers = () => {
-        if (users?.length === 0) {
+        if (!users) {
             return (
                 <div className="flex items-center justify-start w-full h-fit gap-x-6 ml-10 mt-4">
                     <Icon
@@ -56,14 +34,22 @@ const Shared = ({ projectId }: TabProps) => {
                 </div>
             );
         } else {
-            return <div className={usersDivCss}>{users?.map(renderUsers)}</div>;
+            return (
+                <div className={usersDivCss}>
+                    {users?.map((item: SharedUserType, index: number) => (
+                        <RenderUser user={item} refetch={refetch} key={index} />
+                    ))}
+                </div>
+            );
         }
     };
 
     return (
         <div className="w-full h-5/6 flex justify-center">
             {getUsers()}
-            <Share projectId={projectId} refetch={refetch} />
+            <div className="absolute bottom-2 right-2">
+                <AddUser projectId={String(projectId)} refetch={refetch} />
+            </div>
         </div>
     );
 };

@@ -9,13 +9,14 @@ interface ContextMenuProps {
     children: JSX.Element;
     onClose: () => void;
     position: { x: number; y: number };
+    isAbsolute?: boolean;
     show: boolean;
     translateY?: boolean;
     className?: string;
 }
 
 const defaultCss = clsx(
-    "fixed p-[10px] z-50",
+    "p-[10px] z-50",
     "flex flex-col items-center justify-center",
     "bg-base-100 border rounded-btn border-primary"
 );
@@ -25,11 +26,11 @@ const ContextMenu = ({
     show,
     onClose,
     position,
+    isAbsolute,
     translateY,
     className,
 }: ContextMenuProps) => {
     const menuRef = useRef<HTMLDivElement>(null);
-
     const handleClickOutside = useCallback(
         (event: MouseEvent) => {
             if (!menuRef.current) return;
@@ -55,6 +56,7 @@ const ContextMenu = ({
     const translation = translateY
         ? "translate(0%, -100%)"
         : "translate(0%, 0%)";
+    const positionCss = isAbsolute ? "absolute" : "fixed";
 
     return (
         <div
@@ -63,6 +65,7 @@ const ContextMenu = ({
             style={{
                 top: position.y,
                 left: position.x,
+                position: positionCss,
                 transform: translation,
             }}
         >

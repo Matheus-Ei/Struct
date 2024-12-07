@@ -94,7 +94,7 @@ class ShareController {
                 return;
             }
 
-            RelationshipSharedProject.create({
+            await RelationshipSharedProject.create({
                 project_id: id,
                 user_shared_id: user.id,
                 permission_level_id: permissionLevel.id,
