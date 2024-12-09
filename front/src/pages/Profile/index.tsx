@@ -1,11 +1,18 @@
-// import { useParams } from "react-router-dom";
+// Local
+import BasicInfo from "./BasicInfo";
+import SideBar from "./SideBar";
+import GoBackButton from "components/GoBackButton";
 
 const Profile = () => {
-    // const { nickname } = useParams<{ nickname: string }>();
-
     return (
-        <div>
-            <h1>Profile</h1>
+        <div className="relative w-screen h-screen flex flex-col items-center pt-20">
+            <GoBackButton />
+
+            <div className="flex justify-center w-2/4 h-full">
+                <BasicInfo />
+
+                <SideBar />
+            </div>
         </div>
     );
 };

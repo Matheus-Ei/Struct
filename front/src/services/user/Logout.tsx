@@ -11,9 +11,9 @@ const Logout = () => {
 
     return (
         <Button
-            text="Exit"
+            text="Logout"
             onClick={handleLogout}
-            className="flex bg-base-200 px-4 py-2 rounded-btn"
+            className="flex w-fit text-error font-bold border-error px-4 py-2 rounded-btn"
         />
     );
 };

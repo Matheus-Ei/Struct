@@ -5,12 +5,18 @@ import clsx from "clsx";
 // Local
 import Cursor from "modules/Cursor";
 import Event from "modules/Event";
+import Icon from "./Icon";
 
 interface EditableFieldProps {
     defaultValue: string | undefined;
     onUpdate: (value: string) => Promise<void>;
     classNameEditing?: string;
     classNameNotEditing?: string;
+    title?: {
+        isVisible: boolean;
+        text: string;
+        iconPosition?: "left" | "right";
+    };
 }
 
 const EditableField = ({
@@ -18,6 +24,7 @@ const EditableField = ({
     onUpdate,
     classNameEditing,
     classNameNotEditing,
+    title,
 }: EditableFieldProps) => {
     const [isEditing, setIsEditing] = useState<boolean>(false);
     const [preValue, setPreValue] = useState<string>("");
@@ -96,15 +103,33 @@ const EditableField = ({
     const innerHTML = { __html: defaultValue ? defaultValue : "" };
 
     return (
-        <div
-            contentEditable={isEditing}
-            dangerouslySetInnerHTML={innerHTML}
-            ref={divRef}
-            onClick={handleClick}
-            onBlur={handleBlur}
-            onKeyDown={handleKeyDown}
-            className={css ? css : defaultCss}
-        ></div>
+        <div>
+            {title && title.isVisible && (
+                <div className="flex items-center gap-x-2">
+                    {title.iconPosition === "right" && (
+                        <Icon name="MdEdit" library="md" />
+                    )}
+
+                    <h1 className="font-bold italic select-none">
+                        {title.text}
+                    </h1>
+
+                    {title.iconPosition !== "right" && (
+                        <Icon name="MdEdit" library="md" />
+                    )}
+                </div>
+            )}
+
+            <div
+                contentEditable={isEditing}
+                dangerouslySetInnerHTML={innerHTML}
+                ref={divRef}
+                onClick={handleClick}
+                onBlur={handleBlur}
+                onKeyDown={handleKeyDown}
+                className={css ? css : defaultCss}
+            />
+        </div>
     );
 };
 

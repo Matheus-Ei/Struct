@@ -35,12 +35,12 @@ const Field = ({ title, value, type, onUpdate }: FieldProps) => {
 
     return (
         <div className="w-fit">
-            <h3 className="text-xl font-bold italic">{title}</h3>
             <EditableField
                 defaultValue={value}
                 onUpdate={onUpdate}
                 classNameEditing={cssEditing}
                 classNameNotEditing={cssNotEditing}
+                title={{ isVisible: true, text: title ?? "Error" }}
             />
         </div>
     );
