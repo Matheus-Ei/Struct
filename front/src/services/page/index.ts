@@ -14,7 +14,7 @@ class Page {
     }
 
     public static async getAll(
-        projectId: string | undefined | null
+        projectId: string | number | undefined | null
     ): Promise<PageType[] | null> {
         try {
             if (!projectId) return null;

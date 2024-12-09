@@ -1,5 +1,5 @@
 // Libraries
-import { useContext, useEffect } from "react";
+import { useEffect } from "react";
 
 // Local
 import { ProjectsContext } from "pages/Dashboard/Projects";
@@ -8,6 +8,7 @@ import useToggle from "hooks/useToggle";
 import Project from "services/project";
 import ConfirmModal from "components/ConfirmModal";
 import Point from "components/Point";
+import useDefinedContext from "hooks/useDefinedContext";
 
 interface DeleteProps {
     projectId: number;
@@ -15,7 +16,7 @@ interface DeleteProps {
 }
 
 const Delete = ({ projectId, setModal }: DeleteProps) => {
-    const useProjectsContext = useContext(ProjectsContext);
+    const { refetch } = useDefinedContext(ProjectsContext);
 
     const [wantDelete, toggleWantDelete] = useToggle(false);
     const [showConfirmDelete, toggleShowConfirmDelete] = useToggle(false);
@@ -26,9 +27,9 @@ const Delete = ({ projectId, setModal }: DeleteProps) => {
 
         Project.delete(projectId, () => {
             setModal({ projectId: 1, show: false });
-            useProjectsContext?.refetch();
+            refetch();
         });
-    }, [wantDelete, useProjectsContext, projectId, setModal]);
+    }, [wantDelete, refetch, projectId, setModal]);
 
     return (
         <div className="flex w-fit flex-col items-start">

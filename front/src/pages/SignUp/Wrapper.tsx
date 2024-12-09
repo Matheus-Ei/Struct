@@ -1,6 +1,3 @@
-// Libraries
-import { useContext } from "react";
-
 // Local
 import { ReactComponent as Logo } from "assets/logo-500x500-3.svg";
 import { goPrevStep } from "./utils/functions";
@@ -8,16 +5,14 @@ import GoogleSignUp from "./provider/Google";
 import Card from "components/Card";
 import Icon from "components/Icon";
 import { SignUpContext } from ".";
+import useDefinedContext from "hooks/useDefinedContext";
 
 interface WrapperSignUpProps {
     children: JSX.Element;
 }
 
 const WrapperSignUp = ({ children }: WrapperSignUpProps) => {
-    const useSignUpContext = useContext(SignUpContext);
-
-    if (!useSignUpContext) return null;
-    const { step, setStep } = useSignUpContext;
+    const { step, setStep } = useDefinedContext(SignUpContext);
 
     const prevStep = () => {
         goPrevStep(setStep);

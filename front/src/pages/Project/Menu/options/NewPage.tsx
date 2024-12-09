@@ -1,11 +1,11 @@
 // Libraries
-import { useContext } from "react";
 import clsx from "clsx";
 
 // Local
 import { addPage } from "../../util/events";
 import Icon from "components/Icon";
 import { ProjectContext } from "../..";
+import useDefinedContext from "hooks/useDefinedContext";
 
 const bodyCss = clsx(
     "flex flex-row justify-start items-center",
@@ -16,8 +16,7 @@ const bodyCss = clsx(
 );
 
 const NewPage = () => {
-    const useProjectContext = useContext(ProjectContext);
-    if (!useProjectContext) return null;
+    const useProjectContext = useDefinedContext(ProjectContext);
 
     return (
         <div

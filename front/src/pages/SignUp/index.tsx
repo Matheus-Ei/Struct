@@ -8,7 +8,9 @@ import Password from "./steps/Password";
 import Start from "./steps/Start";
 import Wrapper from "./Wrapper";
 
-export const SignUpContext = createContext<SignUpContextType | null>(null);
+export const SignUpContext = createContext<SignUpContextType | undefined>(
+    undefined
+);
 
 const SignUp = () => {
     const [step, setStep] = useState<number>(0);

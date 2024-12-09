@@ -1,7 +1,5 @@
-// Libraries
-import { useContext } from "react";
-
 // Local
+import useDefinedContext from "hooks/useDefinedContext";
 import { PageType } from "services/page/types";
 import { ProjectContext } from "..";
 import PageTab from "./PageTab";
@@ -14,10 +12,7 @@ import Search from "./options/Search";
 import Share from "./options/Share";
 
 const Menu = () => {
-    const useProjectContext = useContext(ProjectContext);
-
-    if (!useProjectContext) return null;
-    const { menu } = useProjectContext;
+    const { menu } = useDefinedContext(ProjectContext);
 
     const renderPages = (item: PageType, index: number) => (
         <PageTab item={item} key={index} />

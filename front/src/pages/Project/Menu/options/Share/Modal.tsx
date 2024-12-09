@@ -1,11 +1,12 @@
 // Library
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import clsx from "clsx";
 
 // Local
-import Modal from "components/Modal";
-import SearchBar from "components/SearchBar";
+import useDefinedContext from "hooks/useDefinedContext";
 import { ProjectContext } from "pages/Project";
+import SearchBar from "components/SearchBar";
+import Modal from "components/Modal";
 
 // Services
 import AddUser from "services/project/share/Add";
@@ -25,11 +26,10 @@ interface ShareModalProps {
 }
 
 const ShareModal = ({ isOpen, toggleOpen }: ShareModalProps) => {
-    const useProjectContext = useContext(ProjectContext);
+    const { projectId } = useDefinedContext(ProjectContext);
 
-    const { data: allShares, refetch: refetchUsers } = useProjectShare(
-        useProjectContext?.projectId
-    );
+    const { data: allShares, refetch: refetchUsers } =
+        useProjectShare(projectId);
 
     const [shares, setShares] = useState<string[]>([]);
 
@@ -94,10 +94,7 @@ const ShareModal = ({ isOpen, toggleOpen }: ShareModalProps) => {
                     )}
                 </div>
 
-                <AddUser
-                    projectId={useProjectContext?.projectId}
-                    refetch={refetchUsers}
-                />
+                <AddUser projectId={projectId} refetch={refetchUsers} />
             </div>
         </Modal>
     );

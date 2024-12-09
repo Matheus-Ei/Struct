@@ -1,5 +1,5 @@
 // Libraries
-import { useContext, useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import clsx from "clsx";
 
 // Local
@@ -9,6 +9,7 @@ import { useAllPages } from "services/page/usePage";
 import { PageType } from "services/page/types";
 import SearchBar from "components/SearchBar";
 import Emoji from "components/Emoji";
+import useDefinedContext from "hooks/useDefinedContext";
 
 const flattenPages = (pages?: PageType[] | null): PageType[] => {
     let result: PageType[] = [];
@@ -48,12 +49,10 @@ interface SearchModalProps {
 }
 
 const SearchModal = ({ isOpen, toggleOpen }: SearchModalProps) => {
-    const useProjectContext = useContext(ProjectContext);
+    const { projectId, selectedPage } = useDefinedContext(ProjectContext);
 
     // Fetch all pages and format them to be flat
-    const { data: allPages, refetch: refetchPages } = useAllPages(
-        useProjectContext?.projectId
-    );
+    const { data: allPages, refetch: refetchPages } = useAllPages(projectId);
     const formattedPages = useMemo(() => flattenPages(allPages), [allPages]);
 
     const [pagesString, setPagesString] = useState<string[]>([]);
@@ -76,7 +75,7 @@ const SearchModal = ({ isOpen, toggleOpen }: SearchModalProps) => {
                 className={pageCss}
                 key={index}
                 onClick={() => {
-                    useProjectContext?.selectedPage.set(page.id);
+                    selectedPage.set(page.id);
                     toggleOpen(false);
                 }}
             >

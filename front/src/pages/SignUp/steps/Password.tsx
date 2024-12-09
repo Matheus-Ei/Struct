@@ -1,6 +1,5 @@
 // Libraries
 import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
 
 // Local
 import { makeSignUp } from "../utils/functions";
@@ -8,13 +7,13 @@ import Message from "components/Message";
 import Button from "components/Button";
 import Input from "components/Input";
 import { SignUpContext } from "..";
+import useDefinedContext from "hooks/useDefinedContext";
 
 const Password = () => {
-    const useSignUpContext = useContext(SignUpContext);
-    const navigate = useNavigate();
-
-    if (!useSignUpContext) return null;
+    const useSignUpContext = useDefinedContext(SignUpContext);
     const { setPassword, setRePassword, error } = useSignUpContext;
+
+    const navigate = useNavigate();
 
     const signUp = () => {
         makeSignUp(useSignUpContext, navigate);

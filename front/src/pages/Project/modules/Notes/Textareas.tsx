@@ -1,5 +1,6 @@
 // Libraries
-import { useContext, useEffect } from "react";
+import useDefinedContext from "hooks/useDefinedContext";
+import { useEffect } from "react";
 
 // Local
 import { NotesContext } from "./Body";
@@ -13,12 +14,12 @@ interface TextareasProps {
 }
 
 const Textareas = ({ note, type, index }: TextareasProps) => {
-    const useNotesContext = useContext(NotesContext);
+    const { setNotes, mainDivRef } = useDefinedContext(NotesContext);
 
     useEffect(() => {
-        useNotesContext?.setNotes((prev) => {
+        setNotes((prev) => {
             const prevBase = [...prev];
-            const elements = useNotesContext?.mainDivRef.current?.children;
+            const elements = mainDivRef.current?.children;
 
             const notesWithElements = prevBase.map((item, index) => {
                 if (!elements) return item;
@@ -29,7 +30,7 @@ const Textareas = ({ note, type, index }: TextareasProps) => {
 
             return notesWithElements;
         });
-    }, [note, type, index, useNotesContext]);
+    }, [note, type, index, mainDivRef, setNotes]);
 
     switch (type) {
         case "title1":

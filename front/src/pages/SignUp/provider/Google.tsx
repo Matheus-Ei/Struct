@@ -1,5 +1,5 @@
 // Libraries
-import { useCallback, useContext, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useGoogleLogin } from "@react-oauth/google";
 import { useNavigate } from "react-router-dom";
 
@@ -9,17 +9,18 @@ import Button from "components/Button";
 import Icon from "components/Icon";
 import User from "services/user";
 import { SignUpContext } from "..";
+import useDefinedContext from "hooks/useDefinedContext";
 
 const GoogleSignUp = () => {
     const [accessToken, setAccessToken] = useState<string | null>(null);
-    const useSignUpContext = useContext(SignUpContext);
+    const { setError } = useDefinedContext(SignUpContext);
 
     const { data: response } = useUserProvider(accessToken, "google");
 
     const googleProvider = useGoogleLogin({
         onSuccess: (codeResponse) => setAccessToken(codeResponse.access_token),
         onError: () =>
-            useSignUpContext?.setError({
+            setError({
                 message: "An error occurred",
                 isError: true,
             }),
@@ -40,17 +41,17 @@ const GoogleSignUp = () => {
             );
 
             if (!isSignedUp)
-                useSignUpContext?.setError({
+                setError({
                     message: "An error occurred",
                     isError: true,
                 });
         } catch (error) {
-            useSignUpContext?.setError({
+            setError({
                 message: "An error occurred",
                 isError: true,
             });
         }
-    }, [useSignUpContext, navigate, response]);
+    }, [navigate, response, setError]);
 
     useEffect(() => {
         signUp();
