@@ -1,6 +1,6 @@
 import Icon from "components/Icon";
+import useDefinedContext from "hooks/useDefinedContext";
 import { ProjectContext } from "pages/Project";
-import { useContext } from "react";
 import Page from "services/page";
 
 interface ModuleProps {
@@ -11,14 +11,14 @@ interface ModuleProps {
 }
 
 const Module = ({ name, description, icon, library }: ModuleProps) => {
-    const useProjectContext = useContext(ProjectContext);
+    const { selectedPage, page } = useDefinedContext(ProjectContext);
 
     const handleClick = () => {
-        if (!useProjectContext?.selectedPage.id) return;
+        if (!selectedPage.id) return;
 
-        Page.setModule(useProjectContext?.selectedPage.id, name).then(() => {
+        Page.setModule(selectedPage.id, name).then(() => {
             setTimeout(() => {
-                useProjectContext?.page.refetch();
+                page.refetch();
             }, 10);
         });
     };

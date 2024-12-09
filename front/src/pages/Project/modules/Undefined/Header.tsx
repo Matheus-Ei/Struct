@@ -1,55 +1,41 @@
 // Libraries
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 // Local
 import { ProjectContext } from "pages/Project";
 import EditableField from "components/EditableField";
 import Emoji from "components/Emoji";
 import Page from "services/page";
+import useDefinedContext from "hooks/useDefinedContext";
 
 const Header = () => {
-    const useProjectContext = useContext(ProjectContext);
+    const { page, selectedPage, menu } = useDefinedContext(ProjectContext);
     const [emoji, setEmoji] = useState<string | undefined>();
 
     useEffect(() => {
-        setEmoji(useProjectContext?.page.data?.emoji);
-    }, [useProjectContext?.page.data?.emoji]);
+        setEmoji(page.data?.emoji);
+    }, [page.data?.emoji]);
 
     const updateEmoji = async (newEmoji?: string | null) => {
-        if (!useProjectContext?.selectedPage?.id) return;
+        if (!selectedPage?.id) return;
 
-        await Page.edit(
-            useProjectContext.selectedPage.id,
-            undefined,
-            undefined,
-            newEmoji
-        );
+        await Page.edit(selectedPage.id, undefined, undefined, newEmoji);
 
-        useProjectContext.menu.refetch();
+        menu.refetch();
     };
 
     const updateName = async (value: string) => {
-        if (!useProjectContext?.selectedPage?.id) return;
+        if (!selectedPage?.id) return;
 
-        await Page.edit(
-            useProjectContext.selectedPage.id,
-            value,
-            undefined,
-            undefined
-        );
+        await Page.edit(selectedPage.id, value, undefined, undefined);
 
-        useProjectContext.menu.refetch();
+        menu.refetch();
     };
 
     const updateDescription = async (value: string) => {
-        if (!useProjectContext?.selectedPage?.id) return;
+        if (!selectedPage?.id) return;
 
-        await Page.edit(
-            useProjectContext.selectedPage.id,
-            undefined,
-            value,
-            undefined
-        );
+        await Page.edit(selectedPage.id, undefined, value, undefined);
     };
 
     return (
@@ -62,13 +48,13 @@ const Header = () => {
                 />
 
                 <EditableField
-                    defaultValue={useProjectContext?.page.data?.name}
+                    defaultValue={page.data?.name}
                     onUpdate={updateName}
                 />
             </div>
 
             <EditableField
-                defaultValue={useProjectContext?.page.data?.description}
+                defaultValue={page.data?.description}
                 onUpdate={updateDescription}
             />
         </div>

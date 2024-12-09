@@ -14,7 +14,7 @@ import { useAllProjects } from "services/project/useProject";
 import { ModalType } from "./Project/Modal/utils/types";
 import { ProjectType } from "services/project/type";
 
-interface ProjectsContextType {
+export interface ProjectsContextType {
     refetch: () => void;
 }
 
@@ -37,7 +37,9 @@ const Projects = () => {
     const { data: projects, refetch } = useAllProjects();
     const [searchResult, setSearchResult] = useState<Array<string>>([]);
 
-    const searchPlace = projects?.map((item: ProjectType): string => item.title);
+    const searchPlace = projects?.map(
+        (item: ProjectType): string => item.title
+    );
     const renderProject = (item: ProjectType, index: number) => {
         // If the searchPlace is set and the item is not in the searchPlace, return null
         if (searchResult?.length >= 0 && !searchResult?.includes(item.title))

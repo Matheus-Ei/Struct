@@ -1,6 +1,3 @@
-// Libraries
-import { useContext } from "react";
-
 // Local
 import { ProjectsContext } from "pages/Dashboard/Projects";
 import { useProject } from "services/project/useProject";
@@ -8,29 +5,18 @@ import Project from "services/project";
 import Point from "components/Point";
 import { TabProps } from "../../utils/types";
 import Field from "./Field";
+import useDefinedContext from "hooks/useDefinedContext";
 
 const About = ({ projectId }: TabProps) => {
     const { data: project } = useProject(projectId);
-
-    const useProjectsContext = useContext(ProjectsContext);
-    if (!useProjectsContext) return null;
+    const { refetch } = useDefinedContext(ProjectsContext);
 
     const updateTitle = async (newValue: string) => {
-        await Project.edit(
-            projectId,
-            newValue,
-            undefined,
-            useProjectsContext.refetch
-        );
+        await Project.edit(projectId, newValue, undefined, refetch);
     };
 
     const updateDescription = async (newValue: string) => {
-        await Project.edit(
-            projectId,
-            undefined,
-            newValue,
-            useProjectsContext.refetch
-        );
+        await Project.edit(projectId, undefined, newValue, refetch);
     };
 
     return (

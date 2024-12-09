@@ -1,21 +1,20 @@
 // Library
 import clsx from "clsx";
-import { useContext } from "react";
 
 // Local
 import Point from "components/Point";
 import { ProjectContext } from "pages/Project";
+import useDefinedContext from "hooks/useDefinedContext";
 
 const DashProject = () => {
-    const useProjectContext = useContext(ProjectContext);
+    const { selectedPage } = useDefinedContext(ProjectContext);
 
     const projectPointCss = clsx(
         "w-full h-9 gap-x-2 rounded-btn py-1 px-4 mb-2",
         "flex flex-row justify-start items-center text-start",
         "cursor-default select-none",
         {
-            "bg-primary text-primary-content":
-                useProjectContext?.selectedPage.id === null,
+            "bg-primary text-primary-content": selectedPage.id === null,
         }
     );
 
@@ -25,7 +24,7 @@ const DashProject = () => {
             icon="PiProjectorScreen"
             library="pi"
             className={projectPointCss}
-            onClick={() => useProjectContext?.selectedPage.set(null)}
+            onClick={() => selectedPage.set(null)}
         />
     );
 };

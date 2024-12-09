@@ -1,11 +1,12 @@
 // Libraries
-import { MouseEvent, useContext } from "react";
+import { MouseEvent } from "react";
 import clsx from "clsx";
 
 // Local
 import { addPage } from "pages/Project/util/events";
 import { ProjectContext } from "pages/Project";
 import Icon from "components/Icon";
+import useDefinedContext from "hooks/useDefinedContext";
 
 interface HoverButtonsProps {
     toggleChildren: (value?: boolean) => void;
@@ -22,10 +23,11 @@ const HoverButtons = ({
     isHover,
     pageId,
 }: HoverButtonsProps) => {
-    const useProjectContext = useContext(ProjectContext);
+    const useProjectContext = useDefinedContext(ProjectContext);
+    const { selectedPage } = useProjectContext;
 
-    if (!isHover || !useProjectContext) return null;
-    const isSelected = useProjectContext.selectedPage.id === pageId;
+    if (!isHover) return null;
+    const isSelected = selectedPage.id === pageId;
 
     const handleMenu = (event?: MouseEvent<HTMLElement>) => {
         if (!event) return;

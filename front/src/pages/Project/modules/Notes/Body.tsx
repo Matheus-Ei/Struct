@@ -5,7 +5,9 @@ import { createContext, MouseEvent, useRef, useState } from "react";
 import { NotesContextType, NotesTextType } from "./utils/types";
 import Textareas from "./Textareas";
 
-export const NotesContext = createContext<NotesContextType | null>(null);
+export const NotesContext = createContext<NotesContextType | undefined>(
+    undefined
+);
 
 const Body = () => {
     const [notes, setNotes] = useState<Array<NotesTextType>>([

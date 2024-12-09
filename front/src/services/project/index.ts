@@ -2,7 +2,7 @@
 import Request from "modules/Request";
 
 class Project {
-    public static async get(id: number) {
+    public static async get(id: number | undefined) {
         try {
             const response = await Request.get(`project/${id}`);
             return response.data;
@@ -23,14 +23,14 @@ class Project {
     public static async create(
         title: string,
         description: string,
-        onSuccess: () => void
+        onSuccess?: () => void
     ) {
         try {
             await Request.post("project", {
                 title,
                 description,
             });
-            onSuccess();
+            onSuccess && onSuccess();
 
             return true;
         } catch {
@@ -39,17 +39,17 @@ class Project {
     }
 
     public static async edit(
-        id: number,
+        id: number | undefined,
         title: string | undefined,
         description: string | undefined,
-        onSuccess: () => void
+        onSuccess?: () => void
     ) {
         try {
             await Request.patch(`project/${id}`, {
                 title,
                 description,
             });
-            onSuccess();
+            onSuccess && onSuccess();
 
             return true;
         } catch {
@@ -57,39 +57,14 @@ class Project {
         }
     }
 
-    public static async delete(id: number, onSuccess: () => void) {
+    public static async delete(id: number | undefined, onSuccess?: () => void) {
         try {
             await Request.delete(`project/${id}`);
-            onSuccess();
+            onSuccess && onSuccess();
 
             return true;
         } catch {
             return false;
-        }
-    }
-
-    public static async share(
-        id: number,
-        nickname: string,
-        permission: string,
-        onSuccess: () => void
-    ) {
-        try {
-            await Request.post(`project/share/${id}`, { nickname, permission });
-            onSuccess();
-
-            return true;
-        } catch {
-            return false;
-        }
-    }
-
-    public static async getUsers(id: number) {
-        try {
-            const response = await Request.get(`project/share/${id}`);
-            return response.data;
-        } catch {
-            return null;
         }
     }
 }

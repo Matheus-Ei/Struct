@@ -1,10 +1,11 @@
 // Libraries
-import { createElement, useContext } from "react";
+import { createElement } from "react";
 
 // Libraries
 import Undefined from "./modules/Undefined";
 import router from "./util/router";
 import { ProjectContext } from ".";
+import useDefinedContext from "hooks/useDefinedContext";
 
 interface RouterType {
     endpoint: () => JSX.Element;
@@ -18,12 +19,12 @@ const getModule = (element: RouterType) => {
 };
 
 const Page = () => {
-    const useProjectContext = useContext(ProjectContext);
+    const { page } = useDefinedContext(ProjectContext);
 
     const module: Array<RouterType> = router.filter((item) => {
-        if (!useProjectContext?.page.data) return false;
+        if (!page.data) return false;
 
-        return useProjectContext.page.data.module === item.name;
+        return page.data.module === item.name;
     });
 
     const renderPages = () => getModule(module[0]);

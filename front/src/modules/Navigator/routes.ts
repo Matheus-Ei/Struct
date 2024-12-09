@@ -1,6 +1,7 @@
 // Pages
 import Dashboard from "pages/Dashboard";
 import NotFound from "pages/NotFound";
+import Profile from "pages/Profile";
 import Project from "pages/Project";
 import Settings from "pages/Settings";
 import SignUp from "pages/SignUp";
@@ -16,7 +17,8 @@ const routes: RoutesType = [
     ["/dashboard", Dashboard],
     ["/settings", Settings],
     ["/project/:id", Project],
-    ["*", NotFound]
+    ["/profile/:nickname", Profile],
+    ["*", NotFound],
 ];
 
 export default routes;

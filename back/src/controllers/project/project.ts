@@ -18,8 +18,8 @@ class ProjectController {
 	                project.title AS title,
 	                project.description AS description,
 	                owner_user_id,
-	                COUNT(relationship_shared_project) AS number_shared,
-	                COUNT(page) AS number_pages
+                    COUNT(DISTINCT relationship_shared_project.id) AS number_shared,
+                    COUNT(DISTINCT page.id) AS number_pages
                 FROM project
                 LEFT JOIN page ON project.id = page.project_id
                 LEFT JOIN relationship_shared_project ON project.id = relationship_shared_project.project_id

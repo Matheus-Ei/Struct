@@ -9,7 +9,6 @@ import ProjectController from "../../controllers/project/project";
 const app = express();
 
 let cookies: string | undefined = "";
-
 beforeAll(async () => {
     const { loginCookies } = await setup(app, true);
     cookies = loginCookies;
@@ -30,5 +29,9 @@ describe("POST /project", () => {
 
         expect(res.statusCode).toEqual(201);
         expect(res.body.message).toBe("Project created");
+        expect(res.body.data).toMatchObject({
+            title: "Project 1",
+            description: "Description of project 1",
+        });
     });
 });

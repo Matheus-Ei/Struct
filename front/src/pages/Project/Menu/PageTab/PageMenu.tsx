@@ -1,11 +1,9 @@
-// Libraries
-import { useContext } from "react";
-
 // Local
 import { deletePage } from "pages/Project/util/events";
 import ContextMenu from "components/ContextMenu";
 import { ProjectContext } from "pages/Project";
 import Icon from "components/Icon";
+import useDefinedContext from "hooks/useDefinedContext";
 
 interface ContextPageMenuProps {
     showMenu: boolean;
@@ -20,8 +18,7 @@ const PageMenu = ({
     clickPosition,
     pageId,
 }: ContextPageMenuProps) => {
-    const useProjectContext = useContext(ProjectContext);
-    if (!useProjectContext) return null;
+    const useProjectContext = useDefinedContext(ProjectContext);
 
     return (
         <ContextMenu
@@ -32,7 +29,9 @@ const PageMenu = ({
             <div className="flex flex-col">
                 <button
                     className="flex gap-2 items-center justify-center"
-                    onClick={() => deletePage(toggleMenu, pageId, useProjectContext)}
+                    onClick={() =>
+                        deletePage(toggleMenu, pageId, useProjectContext)
+                    }
                 >
                     <Icon name="MdDelete" library="md" />
                     <h1>Delete</h1>

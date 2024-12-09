@@ -1,5 +1,5 @@
 // Libraries
-import { useContext, useState } from "react";
+import { useState } from "react";
 
 // Local
 import { goNextStep } from "../utils/functions";
@@ -9,6 +9,7 @@ import Button from "components/Button";
 import Input from "components/Input";
 import { SignUpContext } from "..";
 import User from "services/user";
+import useDefinedContext from "hooks/useDefinedContext";
 
 interface ErrorType {
     message: string;
@@ -26,9 +27,7 @@ const Start = () => {
         isError: false,
     });
 
-    const useSignUpContext = useContext(SignUpContext);
-
-    if (!useSignUpContext) return null;
+    const useSignUpContext = useDefinedContext(SignUpContext);
     const {
         setNickname,
         nickname,

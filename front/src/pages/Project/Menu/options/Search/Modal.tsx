@@ -1,16 +1,15 @@
 // Libraries
-import { useContext, useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import clsx from "clsx";
 
 // Local
 import Modal from "components/Modal";
-import Point from "components/Point";
-import useToggle from "hooks/useToggle";
 import { ProjectContext } from "pages/Project";
 import { useAllPages } from "services/page/usePage";
 import { PageType } from "services/page/types";
 import SearchBar from "components/SearchBar";
 import Emoji from "components/Emoji";
+import useDefinedContext from "hooks/useDefinedContext";
 
 const flattenPages = (pages?: PageType[] | null): PageType[] => {
     let result: PageType[] = [];
@@ -34,7 +33,7 @@ const flattenPages = (pages?: PageType[] | null): PageType[] => {
 };
 
 const modalCss = clsx(
-    "relative w-screen h-screen sm:w-[15vw] sm:h-[30rem] z-30",
+    "relative w-screen h-screen sm:w-[30vw] sm:h-[30rem] xl:w-[15vw] z-30",
     "flex flex-col items-start justify-start"
 );
 
@@ -44,14 +43,16 @@ const pageCss = clsx(
     "cursor-pointer select-none hover:bg-base-200"
 );
 
-const Search = () => {
-    const [isOpen, toggleOpen] = useToggle(false);
-    const useProjectContext = useContext(ProjectContext);
+interface SearchModalProps {
+    isOpen: boolean;
+    toggleOpen: (isOpen: boolean) => void;
+}
+
+const SearchModal = ({ isOpen, toggleOpen }: SearchModalProps) => {
+    const { projectId, selectedPage } = useDefinedContext(ProjectContext);
 
     // Fetch all pages and format them to be flat
-    const { data: allPages, refetch: refetchPages } = useAllPages(
-        useProjectContext?.projectId
-    );
+    const { data: allPages, refetch: refetchPages } = useAllPages(projectId);
     const formattedPages = useMemo(() => flattenPages(allPages), [allPages]);
 
     const [pagesString, setPagesString] = useState<string[]>([]);
@@ -74,7 +75,7 @@ const Search = () => {
                 className={pageCss}
                 key={index}
                 onClick={() => {
-                    useProjectContext?.selectedPage.set(page.id);
+                    selectedPage.set(page.id);
                     toggleOpen(false);
                 }}
             >
@@ -85,33 +86,25 @@ const Search = () => {
     };
 
     return (
-        <>
-            <Modal
-                isOpen={isOpen}
-                onClose={() => toggleOpen(false)}
-                className={modalCss}
-            >
-                <div className="w-5/6 h-5/6">
-                    <SearchBar
-                        className="w-full h-9 pl-4 mb-2 outline-none border-b bg-base-100"
-                        searchPlace={formattedPages.map((page) => page.name)}
-                        setResult={setPagesString}
-                    />
+        <Modal
+            isOpen={isOpen}
+            onClose={() => toggleOpen(false)}
+            className={modalCss}
+        >
+            <div className="w-5/6 h-5/6">
+                <SearchBar
+                    className="w-full h-9 pl-4 mb-2 outline-none border-b bg-base-100"
+                    searchPlace={formattedPages.map((page) => page.name)}
+                    placeholder="Search pages"
+                    setResult={setPagesString}
+                />
 
-                    <div className="flex flex-col w-full h-full items-start overflow-y-scroll">
-                        {formattedPages.map(renderPages)}
-                    </div>
+                <div className="flex flex-col w-full h-full items-start overflow-y-scroll">
+                    {formattedPages.map(renderPages)}
                 </div>
-            </Modal>
-
-            <Point
-                text="Search"
-                icon="IoMdSearch"
-                library="io"
-                onClick={() => toggleOpen(true)}
-            />
-        </>
+            </div>
+        </Modal>
     );
 };
 
-export default Search;
+export default SearchModal;
