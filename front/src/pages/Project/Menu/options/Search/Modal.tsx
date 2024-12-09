@@ -32,11 +32,6 @@ const flattenPages = (pages?: PageType[] | null): PageType[] => {
     return result;
 };
 
-const modalCss = clsx(
-    "relative w-screen h-screen sm:w-[30vw] sm:h-[30rem] xl:w-[15vw] z-30",
-    "flex flex-col items-start justify-start"
-);
-
 const pageCss = clsx(
     "w-full h-fit gap-x-2 rounded-btn py-2 px-4",
     "flex flex-row justify-start items-start text-start",
@@ -89,11 +84,11 @@ const SearchModal = ({ isOpen, toggleOpen }: SearchModalProps) => {
         <Modal
             isOpen={isOpen}
             onClose={() => toggleOpen(false)}
-            className={modalCss}
+            className="sm:w-[30vw] sm:h-[30rem] xl:w-[15vw]"
         >
             <div className="w-5/6 h-5/6">
                 <SearchBar
-                    className="w-full h-9 pl-4 mb-2 outline-none border-b bg-base-100"
+                    className="h-9 pl-4 mb-2"
                     searchPlace={formattedPages.map((page) => page.name)}
                     placeholder="Search pages"
                     setResult={setPagesString}

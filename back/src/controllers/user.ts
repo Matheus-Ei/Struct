@@ -53,6 +53,7 @@ class UserController {
                         id: user.id,
                         name: user.name,
                         nickname: user.nickname,
+                        about: user.about,
                         mail: user.mail,
                         verified: user.verified,
                         autenticator: user.autenticator,

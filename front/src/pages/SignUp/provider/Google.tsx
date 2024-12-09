@@ -59,7 +59,7 @@ const GoogleSignUp = () => {
 
     return (
         <Button
-            className="border-2 w-fit h-fit p-2 rounded-btn bg-white border-red-400 text-red-400 font-bold text-2xl"
+            className="border-2 p-2 bg-white border-red-400 text-red-400 text-2xl"
             inverse={true}
             onClick={googleProvider}
         >

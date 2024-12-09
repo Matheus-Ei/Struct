@@ -1,6 +1,5 @@
 // Libraries
 import { createElement, useState } from "react";
-import clsx from "clsx";
 
 // Types
 import { SetStateType } from "types/global";
@@ -16,11 +15,6 @@ interface ProjectModalProps {
     modal: ModalType;
     setModal: SetStateType<ModalType>;
 }
-
-const modalCss = clsx(
-    "relative w-[100vw] h-[100vh] sm:w-[75vw] sm:h-[55vh] z-30",
-    "flex flex-col items-start justify-start"
-);
 
 const ProjectModal = ({ modal, setModal }: ProjectModalProps) => {
     const [tab, setTab] = useState<string>("About");
@@ -44,7 +38,11 @@ const ProjectModal = ({ modal, setModal }: ProjectModalProps) => {
     };
 
     return (
-        <Modal isOpen={modal.show} onClose={handleClose} className={modalCss}>
+        <Modal
+            isOpen={modal.show}
+            onClose={handleClose}
+            className="w-[100vw] h-[100vh] sm:w-[75vw] sm:h-[55vh] z-30"
+        >
             <div className="w-full h-full">
                 <Header tab={tab} setTab={setTab} modal={modal} />
 

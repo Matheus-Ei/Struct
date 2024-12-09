@@ -1,9 +1,14 @@
 // Local
 import EditableField from "components/EditableField";
+import { UserType } from "services/user/type";
 
-const BasicInfo = () => {
+interface BasicInfoProps {
+    user: UserType;
+}
+
+const BasicInfo = ({ user }: BasicInfoProps) => {
     return (
-        <div className="flex flex-col w-2/3 gap-y-4">
+        <div className="flex flex-col w-5/6 gap-y-4">
             <div className="flex items-center w-full h-40 gap-x-4">
                 <img
                     src="https://via.placeholder.com/500"
@@ -13,19 +18,19 @@ const BasicInfo = () => {
 
                 <div className="flex flex-col gap-y-1">
                     <EditableField
-                        defaultValue="Name"
+                        defaultValue={user?.name}
                         onUpdate={async () => {}}
-                        title={{ isVisible: true, text: "Name" }}
+                        title={{ text: "Name" }}
                     />
 
-                    <p className="text-neutral italic">@nickname</p>
+                    <p className="text-primary italic">@{user?.nickname}</p>
                 </div>
             </div>
 
             <EditableField
-                defaultValue="About"
+                defaultValue={user?.about ?? "Description was not provided..."}
                 onUpdate={async () => {}}
-                title={{ isVisible: true, text: "About me" }}
+                title={{ text: "About me" }}
             />
         </div>
     );

@@ -1,20 +1,24 @@
 // Local
+import GoBackButton from "components/GoBackButton";
+import withLoader from "HOCs/withLoader";
+import { useUser } from "services/user/useUser";
 import BasicInfo from "./BasicInfo";
 import SideBar from "./SideBar";
-import GoBackButton from "components/GoBackButton";
 
 const Profile = () => {
+    const { data: user } = useUser();
+
     return (
         <div className="relative w-screen h-screen flex flex-col items-center pt-20">
             <GoBackButton />
 
             <div className="flex justify-center w-2/4 h-full">
-                <BasicInfo />
+                <BasicInfo user={user} />
 
-                <SideBar />
+                <SideBar user={user} />
             </div>
         </div>
     );
 };
 
-export default Profile;
+export default withLoader(Profile);

@@ -19,10 +19,6 @@ interface CreateProjectModalProps {
 }
 
 // Styles
-const modalCss = clsx(
-    "relative w-screen h-screen sm:w-[30vw] sm:h-[40rem]",
-    "flex flex-col items-start justify-start"
-);
 const bodyCss = clsx(
     "w-full h-full py-14",
     "flex flex-col items-center justify-center"
@@ -92,7 +88,11 @@ const CreateProjectModal = ({
     );
 
     return (
-        <Modal isOpen={showModal} onClose={handleClose} className={modalCss}>
+        <Modal
+            isOpen={showModal}
+            onClose={handleClose}
+            className="sm:w-[30vw] sm:h-[40rem]"
+        >
             <div className={bodyCss}>
                 <h1 className={headerCss}>New project</h1>
 

@@ -40,7 +40,7 @@ const Header = ({ tab, setTab, modal }: HeaderProps) => {
             <Icon
                 name="MdOpenInNew"
                 library="md"
-                className="absolute cursor-pointer top-1 right-10 text-lg"
+                className="absolute top-1 right-10 text-lg"
                 onClick={() => navigate(`/project/${modal.projectId}`)}
             />
         </div>

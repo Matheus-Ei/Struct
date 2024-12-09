@@ -1,5 +1,6 @@
 // Libraries
 import { KeyboardEvent, MouseEvent, useRef, useState } from "react";
+import { twMerge } from "tailwind-merge";
 import clsx from "clsx";
 
 // Local
@@ -13,7 +14,7 @@ interface EditableFieldProps {
     classNameEditing?: string;
     classNameNotEditing?: string;
     title?: {
-        isVisible: boolean;
+        withIcon?: boolean;
         text: string;
         iconPosition?: "left" | "right";
     };
@@ -90,23 +91,21 @@ const EditableField = ({
         setIsEditing(false);
     };
 
-    const defaultCss = clsx("w-fit h-fit text-base-content outline-none", {
+    const className = clsx("w-fit h-fit text-base-content outline-none", {
         "bg-base-200 rounded-btn p-1": isEditing,
         "bg-base-100 cursor-pointer select-none": !isEditing,
-    });
-
-    const css = clsx({
         [classNameEditing as string]: isEditing,
         [classNameNotEditing as string]: !isEditing,
     });
+    const css = twMerge(className);
 
     const innerHTML = { __html: defaultValue ? defaultValue : "" };
 
     return (
         <div>
-            {title && title.isVisible && (
+            {title && (
                 <div className="flex items-center gap-x-2">
-                    {title.iconPosition === "right" && (
+                    {title.iconPosition === "right" && title.withIcon && (
                         <Icon name="MdEdit" library="md" />
                     )}
 
@@ -114,7 +113,7 @@ const EditableField = ({
                         {title.text}
                     </h1>
 
-                    {title.iconPosition !== "right" && (
+                    {title.iconPosition !== "right" && title.withIcon && (
                         <Icon name="MdEdit" library="md" />
                     )}
                 </div>
@@ -127,7 +126,7 @@ const EditableField = ({
                 onClick={handleClick}
                 onBlur={handleBlur}
                 onKeyDown={handleKeyDown}
-                className={css ? css : defaultCss}
+                className={css}
             />
         </div>
     );

@@ -2,7 +2,8 @@ export interface UserType {
     id: number;
     name: string;
     nickname: string;
-    email: string;
+    about: string;
+    mail: string;
     password: string;
     verified: boolean;
     autentication: "Auth" | "Default";

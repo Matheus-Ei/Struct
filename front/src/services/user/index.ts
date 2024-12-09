@@ -104,6 +104,15 @@ class User {
             return false;
         }
     }
+
+    static async get() {
+        try {
+            const response = await Request.get("user");
+            return response.data;
+        } catch {
+            return null;
+        }
+    }
 }
 
 export default User;

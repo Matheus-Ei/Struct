@@ -1,14 +1,19 @@
 // Local
 import EditableField from "components/EditableField";
 import Logout from "services/user/Logout";
+import { UserType } from "services/user/type";
 
-const SideBar = () => {
+interface SideBarProps {
+    user: UserType;
+}
+
+const SideBar = ({ user }: SideBarProps) => {
     return (
-        <div className="flex flex-col items-end w-1/3 h-full gap-y-4 mt-10">
+        <div className="flex flex-col items-start w-1/6 h-full gap-y-4 mt-10">
             <EditableField
-                defaultValue="Mail"
+                defaultValue={user?.mail}
                 onUpdate={async () => {}}
-                title={{ isVisible: true, text: "Mail" }}
+                title={{ text: "Mail" }}
             />
 
             <Logout />

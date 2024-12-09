@@ -1,6 +1,5 @@
 // Library
 import { useEffect, useState } from "react";
-import clsx from "clsx";
 
 // Local
 import useDefinedContext from "hooks/useDefinedContext";
@@ -14,11 +13,6 @@ import { SharedUserType } from "services/project/type";
 import { useProjectShare } from "services/project/share/useShare";
 import RenderUser from "services/project/share/RenderUser";
 import Icon from "components/Icon";
-
-const modalCss = clsx(
-    "relative w-screen h-screen pb-4 sm:pb-0 sm:h-[40rem] sm:w-[60vw] md:w-[50vw] lg:w-[35vw] xl:w-[30vw] 2xl:w-[25vw] z-30",
-    "flex flex-col items-start justify-start"
-);
 
 interface ShareModalProps {
     isOpen: boolean;
@@ -52,7 +46,7 @@ const ShareModal = ({ isOpen, toggleOpen }: ShareModalProps) => {
         <Modal
             isOpen={isOpen}
             onClose={() => toggleOpen(false)}
-            className={modalCss}
+            className="pb-4 sm:pb-0 sm:h-[40rem] sm:w-[60vw] md:w-[50vw] lg:w-[35vw] xl:w-[30vw] 2xl:w-[25vw]"
         >
             <div className="flex flex-col w-full h-full items-center justify-between">
                 <div className="w-full h-full flex flex-col items-center justify-start">
@@ -68,7 +62,7 @@ const ShareModal = ({ isOpen, toggleOpen }: ShareModalProps) => {
                     ) : (
                         <>
                             <SearchBar
-                                className="w-5/6 h-9 pl-4 mb-2 outline-none border-b bg-base-100"
+                                className="w-5/6 h-9 pl-4 mb-2"
                                 searchPlace={
                                     allShares?.map(
                                         (share: SharedUserType) =>

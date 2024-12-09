@@ -1,6 +1,7 @@
 // Library
 import { EmojiClickData } from "emoji-picker-react";
 import { useEffect, useState } from "react";
+import { twMerge } from "tailwind-merge";
 
 // Local
 import EmojiSelector from "./Selector";
@@ -43,7 +44,7 @@ const Emoji = ({
         onClick && onClick();
     };
 
-    const css = className ? className : "cursor-pointer select-none";
+    const css = twMerge("cursor-pointer select-none", className);
 
     if (!emoji)
         return (
