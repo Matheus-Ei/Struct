@@ -1,3 +1,6 @@
+// Library
+import { createContext } from "react";
+
 // Local
 import { PageType } from "services/page/types";
 import { SetStateType } from "types/global";
@@ -9,7 +12,7 @@ export interface ProjectContextType {
         refetch: () => void;
     };
     page: {
-        data?: PageType | null
+        data?: PageType | null;
         refetch: () => void;
     };
     selectedPage: {
@@ -18,3 +21,6 @@ export interface ProjectContextType {
     };
 }
 
+export const ProjectContext = createContext<ProjectContextType | undefined>(
+    undefined
+);

@@ -4,7 +4,7 @@ import { goPrevStep } from "./utils/functions";
 import GoogleSignUp from "./provider/Google";
 import Card from "components/Card";
 import Icon from "components/Icon";
-import { SignUpContext } from ".";
+import { SignUpContext } from "./context";
 import useDefinedContext from "hooks/useDefinedContext";
 
 interface WrapperSignUpProps {

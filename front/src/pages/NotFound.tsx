@@ -9,24 +9,26 @@ const NotFound = () => {
     const navigate = useNavigate();
 
     return (
-        <div className="flex flex-col items-center justify-center w-screen h-screen gap-y-2">
+        <div className="flex items-center justify-center w-screen h-screen gap-x-10">
             <Icon
-                name="TbUfo"
-                library="tb"
+                name="GiCactusPot"
+                library="gi"
                 className="text-9xl text-primary"
             />
 
-            <h1 className="text-2xl font-semibold italic mb-10">
-                Page not found
-            </h1>
+            <div className="flex flex-col">
+                <h1 className="text-4xl font-semibold italic">
+                    Page not found
+                </h1>
 
-            <Button
-                text="Home"
-                onClick={() => {
-                    navigate("/");
-                }}
-                inverse={true}
-            />
+                <Button
+                    text="Go home"
+                    onClick={() => {
+                        navigate("/");
+                    }}
+                    className="border-none p-0 mt-2 hover:text-secondary"
+                />
+            </div>
         </div>
     );
 };

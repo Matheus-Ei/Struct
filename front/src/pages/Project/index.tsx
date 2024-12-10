@@ -1,18 +1,14 @@
 // Librarie
-import { createContext, useState } from "react";
+import { useState } from "react";
 import { useParams } from "react-router-dom";
 
 // Local
 import { useAllPages, usePage } from "services/page/usePage";
-import { ProjectContextType } from "./util/types";
+import { ProjectContext } from "./context";
 import withLoader from "HOCs/withLoader";
 import Dashboard from "./Dashboard";
 import Menu from "./Menu";
 import Page from "./Page";
-
-export const ProjectContext = createContext<ProjectContextType | undefined>(
-    undefined
-);
 
 const Project = () => {
     const { id } = useParams();

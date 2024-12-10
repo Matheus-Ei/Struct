@@ -1,15 +1,14 @@
 // Libraries
 import { useEffect, useMemo, useState } from "react";
-import clsx from "clsx";
 
 // Local
 import Modal from "components/Modal";
-import { ProjectContext } from "pages/Project";
+import { ProjectContext } from "pages/Project/context";
 import { useAllPages } from "services/page/usePage";
 import { PageType } from "services/page/types";
 import SearchBar from "components/SearchBar";
-import Emoji from "components/Emoji";
 import useDefinedContext from "hooks/useDefinedContext";
+import PagesLayout from "./PagesLayout";
 
 const flattenPages = (pages?: PageType[] | null): PageType[] => {
     let result: PageType[] = [];
@@ -32,12 +31,6 @@ const flattenPages = (pages?: PageType[] | null): PageType[] => {
     return result;
 };
 
-const pageCss = clsx(
-    "w-full h-fit gap-x-2 rounded-btn py-2 px-4",
-    "flex flex-row justify-start items-start text-start",
-    "cursor-pointer select-none hover:bg-base-200"
-);
-
 interface SearchModalProps {
     isOpen: boolean;
     toggleOpen: (isOpen: boolean) => void;
@@ -48,37 +41,19 @@ const SearchModal = ({ isOpen, toggleOpen }: SearchModalProps) => {
 
     // Fetch all pages and format them to be flat
     const { data: allPages, refetch: refetchPages } = useAllPages(projectId);
-    const formattedPages = useMemo(() => flattenPages(allPages), [allPages]);
+    const flatPages = useMemo(() => flattenPages(allPages), [allPages]);
 
-    const [pagesString, setPagesString] = useState<string[]>([]);
+    const [searchPages, setSearchPages] = useState<string[]>([]);
 
-    // Set pages string when formatted pages change
+    // Set pages string when flat pages change
     useEffect(() => {
-        setPagesString(formattedPages.map((page) => page.name));
-    }, [formattedPages]);
+        setSearchPages(flatPages.map((page) => page.name));
+    }, [flatPages]);
 
     // Refetch pages when modal is opened
     useEffect(() => {
         if (isOpen) refetchPages();
     }, [isOpen, refetchPages]);
-
-    const renderPages = (page: PageType, index: number) => {
-        if (!pagesString.includes(page.name)) return null;
-
-        return (
-            <div
-                className={pageCss}
-                key={index}
-                onClick={() => {
-                    selectedPage.set(page.id);
-                    toggleOpen(false);
-                }}
-            >
-                <Emoji symbol={page.emoji} />
-                <h1 className="line-clamp-1 w-full text-sm">{page.name}</h1>
-            </div>
-        );
-    };
 
     return (
         <Modal
@@ -89,14 +64,17 @@ const SearchModal = ({ isOpen, toggleOpen }: SearchModalProps) => {
             <div className="w-5/6 h-5/6">
                 <SearchBar
                     className="h-9 pl-4 mb-2"
-                    searchPlace={formattedPages.map((page) => page.name)}
+                    searchPlace={flatPages.map((page) => page.name)}
                     placeholder="Search pages"
-                    setResult={setPagesString}
+                    setResult={setSearchPages}
                 />
 
-                <div className="flex flex-col w-full h-full items-start overflow-y-scroll">
-                    {formattedPages.map(renderPages)}
-                </div>
+                <PagesLayout
+                    pages={flatPages}
+                    selectedPage={selectedPage}
+                    searchPages={searchPages}
+                    toggleOpen={toggleOpen}
+                />
             </div>
         </Modal>
     );

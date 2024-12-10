@@ -1,36 +1,26 @@
 // Local
 import { deletePage } from "pages/Project/util/events";
 import ContextMenu from "components/ContextMenu";
-import { ProjectContext } from "pages/Project";
+import { ProjectContext } from "pages/Project/context";
 import Icon from "components/Icon";
 import useDefinedContext from "hooks/useDefinedContext";
+import { PageTabContext } from "./context";
 
-interface ContextPageMenuProps {
-    showMenu: boolean;
-    toggleMenu: (value?: boolean) => void;
-    clickPosition: { x: number; y: number };
-    pageId: number;
-}
-
-const PageMenu = ({
-    showMenu,
-    toggleMenu,
-    clickPosition,
-    pageId,
-}: ContextPageMenuProps) => {
+const PageMenu = () => {
     const useProjectContext = useDefinedContext(ProjectContext);
+    const { menu, clickPosition, page } = useDefinedContext(PageTabContext);
 
     return (
         <ContextMenu
-            show={showMenu}
-            onClose={() => toggleMenu(false)}
-            position={clickPosition}
+            show={menu.show}
+            onClose={() => menu.toggle(false)}
+            position={clickPosition.value}
         >
             <div className="flex flex-col">
                 <button
                     className="flex gap-2 items-center justify-center"
                     onClick={() =>
-                        deletePage(toggleMenu, pageId, useProjectContext)
+                        deletePage(menu.toggle, page.id, useProjectContext)
                     }
                 >
                     <Icon name="MdDelete" library="md" />

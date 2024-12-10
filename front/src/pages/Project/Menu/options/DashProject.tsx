@@ -3,7 +3,7 @@ import clsx from "clsx";
 
 // Local
 import Point from "components/Point";
-import { ProjectContext } from "pages/Project";
+import { ProjectContext } from "pages/Project/context";
 import useDefinedContext from "hooks/useDefinedContext";
 
 const DashProject = () => {

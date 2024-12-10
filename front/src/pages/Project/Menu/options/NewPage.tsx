@@ -4,7 +4,7 @@ import clsx from "clsx";
 // Local
 import { addPage } from "../../util/events";
 import Icon from "components/Icon";
-import { ProjectContext } from "../..";
+import { ProjectContext } from "pages/Project/context";
 import useDefinedContext from "hooks/useDefinedContext";
 
 const bodyCss = clsx(

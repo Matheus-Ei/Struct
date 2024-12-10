@@ -8,7 +8,7 @@ import useUserProvider from "services/providers/useUserProvider";
 import Button from "components/Button";
 import Icon from "components/Icon";
 import User from "services/user";
-import { SignUpContext } from "..";
+import { SignUpContext } from "../context";
 import useDefinedContext from "hooks/useDefinedContext";
 
 const GoogleSignUp = () => {

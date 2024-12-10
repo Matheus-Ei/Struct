@@ -36,6 +36,7 @@ const GoogleLogin = ({ toggleError }: GoogleLoginProps) => {
         toggleError(true);
     }, [navigate, toggleError, response]);
 
+    // Login the user when the response is ready
     useEffect(() => {
         login();
     }, [login]);

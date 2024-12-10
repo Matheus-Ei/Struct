@@ -2,7 +2,7 @@
 import { NavigateFunction } from "react-router-dom";
 
 // Local
-import { SignUpContextType } from "./types";
+import { SignUpContextType } from "../context";
 import { SetStateType } from "types/global";
 import User from "services/user";
 

@@ -1,4 +1,7 @@
 // Libraries
+import { createContext } from "react";
+
+// Local
 import { ErrorType, SetStateType } from "types/global";
 
 export interface SignUpContextType {
@@ -23,3 +26,7 @@ export interface SignUpContextType {
     error: ErrorType;
     setError: SetStateType<ErrorType>;
 }
+
+export const SignUpContext = createContext<SignUpContextType | undefined>(
+    undefined
+);

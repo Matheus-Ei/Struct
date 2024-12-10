@@ -1,11 +1,11 @@
 // Local
-import { ProjectsContext } from "pages/Dashboard/Projects";
+import { ProjectsContext } from "pages/Dashboard/Projects/context";
 import { useProject } from "services/project/useProject";
 import Project from "services/project";
-import Point from "components/Point";
 import { TabProps } from "../../utils/types";
 import Field from "./Field";
 import useDefinedContext from "hooks/useDefinedContext";
+import MoreInfo from "./MoreInfo";
 
 const About = ({ projectId }: TabProps) => {
     const { data: project } = useProject(projectId);
@@ -35,19 +35,7 @@ const About = ({ projectId }: TabProps) => {
                 onUpdate={updateDescription}
             />
 
-            <div className="relative flex flex-col items-start justify-center w-full right-4">
-                <Point
-                    text={`Shared with ${project?.number_shared} users`}
-                    icon="FaUsers"
-                    library="fa6"
-                />
-
-                <Point
-                    text={`Has ${project?.number_pages} pages`}
-                    icon="GoPaperclip"
-                    library="go"
-                />
-            </div>
+            <MoreInfo project={project} />
         </div>
     );
 };

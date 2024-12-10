@@ -11,7 +11,7 @@ import PageService from "services/page";
 interface PageProps {
     id: number;
     name: string;
-    emoji: string;
+    emoji: string | undefined;
     refetch: () => void;
 }
 

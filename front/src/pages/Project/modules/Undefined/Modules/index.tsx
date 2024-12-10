@@ -23,6 +23,7 @@ const Modules = () => {
                 searchPlace={modules.map((item) => item.name)}
                 setResult={setModuleList}
             />
+
             <div className="w-full grid grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 gap-y-4 p-4">
                 {getModules()}
             </div>

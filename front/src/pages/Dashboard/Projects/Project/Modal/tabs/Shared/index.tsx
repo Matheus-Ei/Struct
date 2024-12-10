@@ -4,10 +4,10 @@ import clsx from "clsx";
 // Local
 import { useProjectShare } from "services/project/share/useShare";
 import { TabProps } from "../../utils/types";
-import Icon from "components/Icon";
 import RenderUser from "services/project/share/RenderUser";
 import AddUser from "services/project/share/Add";
 import { SharedUserType } from "services/project/type";
+import Message404 from "components/Message404";
 
 const usersDivCss = clsx(
     "grid items-start content-start",
@@ -22,17 +22,7 @@ const Shared = ({ projectId }: TabProps) => {
 
     const getUsers = () => {
         if (!users) {
-            return (
-                <div className="flex items-center justify-start w-full h-fit gap-x-6 ml-10 mt-4">
-                    <Icon
-                        name="TbError404"
-                        library="tb"
-                        className="text-4xl w-fit"
-                    />
-
-                    <h1 className="text-xl w-fit">No users found</h1>
-                </div>
-            );
+            return <Message404 text="No users found" />;
         } else {
             return (
                 <div className={usersDivCss}>

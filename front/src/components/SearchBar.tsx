@@ -41,7 +41,7 @@ const SearchBar = ({
         "w-full",
         "py-2 pl-16 pr-4",
         "placeholder:text-base-content bg-base-100",
-        "outline-none border-b border-base-content",
+        "outline-none border-b border-base-300",
         className
     );
 
@@ -51,7 +51,7 @@ const SearchBar = ({
                 <Icon
                     name="IoSearchOutline"
                     library="io5"
-                    className="flex items-center h-full text-xl absolute left-6 text-primary"
+                    className="flex items-center h-full text-xl absolute left-6 text-base-content"
                 />
             )}
 

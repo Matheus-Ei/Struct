@@ -1,5 +1,5 @@
 // Libraries
-import { createContext, useState } from "react";
+import { useState } from "react";
 import clsx from "clsx";
 
 // Components
@@ -13,14 +13,7 @@ import Project from "./Project";
 import { useAllProjects } from "services/project/useProject";
 import { ModalType } from "./Project/Modal/utils/types";
 import { ProjectType } from "services/project/type";
-
-export interface ProjectsContextType {
-    refetch: () => void;
-}
-
-export const ProjectsContext = createContext<ProjectsContextType | undefined>(
-    undefined
-);
+import { ProjectsContext } from "./context";
 
 const projectsDivCss = clsx(
     "grid items-center justify-items-start gap-x-6 gap-y-2",

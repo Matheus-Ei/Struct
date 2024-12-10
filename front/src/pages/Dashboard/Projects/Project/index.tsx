@@ -4,11 +4,11 @@ import clsx from "clsx";
 
 // Local
 import useToggle from "hooks/useToggle";
-import Icon from "components/Icon";
 
 // Types
 import { ModalType } from "./Modal//utils/types";
 import { SetStateType } from "types/global";
+import HoverButtons from "./HoverButtons";
 
 interface ProjectProps {
     title: string;
@@ -28,7 +28,6 @@ const Project = ({ title, description, id, setModal }: ProjectProps) => {
     const [isHover, toggleHover] = useToggle(false);
 
     const openModal = () => setModal({ projectId: id, show: true });
-    const openProject = () => navigate(`/project/${id}`);
 
     return (
         <div
@@ -40,15 +39,10 @@ const Project = ({ title, description, id, setModal }: ProjectProps) => {
             <div className="flex justify-between items-center">
                 <h1 className="text-lg font-bold line-clamp-1">{title}</h1>
 
-                {isHover && (
-                    <button onClick={openProject} className="w-fit">
-                        <Icon
-                            name="MdOpenInNew"
-                            library="md"
-                            className="text-xl"
-                        />
-                    </button>
-                )}
+                <HoverButtons
+                    openProject={() => navigate(`/project/${id}`)}
+                    isHover={isHover}
+                />
             </div>
 
             <p className="line-clamp-2 text-sm">{description}</p>

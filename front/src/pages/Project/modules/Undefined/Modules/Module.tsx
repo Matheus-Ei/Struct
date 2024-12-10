@@ -1,6 +1,7 @@
+// Local
 import Icon from "components/Icon";
 import useDefinedContext from "hooks/useDefinedContext";
-import { ProjectContext } from "pages/Project";
+import { ProjectContext } from "pages/Project/context";
 import Page from "services/page";
 
 interface ModuleProps {

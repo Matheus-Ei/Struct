@@ -4,7 +4,7 @@ import { createElement } from "react";
 // Libraries
 import Undefined from "./modules/Undefined";
 import router from "./util/router";
-import { ProjectContext } from ".";
+import { ProjectContext } from "./context";
 import useDefinedContext from "hooks/useDefinedContext";
 
 interface RouterType {

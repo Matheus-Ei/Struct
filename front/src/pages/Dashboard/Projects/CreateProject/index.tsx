@@ -23,6 +23,7 @@ const CreateProject = ({ showModal }: CreateProjectButtonProps) => {
         <div className="flex w-96 h-32 p-3 justify-start items-center">
             <button onClick={handleOpen} className={buttonCss}>
                 <Icon name="IoAdd" library="io5" className="text-2xl" />
+
                 <h1>New project</h1>
             </button>
         </div>

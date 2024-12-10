@@ -15,7 +15,7 @@ interface ConfirmModalProps {
 }
 
 const css = clsx(
-    "relative w-96 h-24",
+    "relative w-96 h-24 sm:w-96 sm:h-24",
     "flex flex-col items-center justify-center",
     "rounded-btn"
 );

@@ -1,6 +1,6 @@
 // Local
 import { ErrorType, SetStateType } from "types/global";
-import { SignUpContextType } from "./types";
+import { SignUpContextType } from "../context";
 
 class Validations {
     private useSignUpContext: SignUpContextType;
