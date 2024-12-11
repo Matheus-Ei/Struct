@@ -12,8 +12,7 @@ const Search = () => {
 
             <Point
                 text="Search"
-                icon="IoMdSearch"
-                library="io"
+                icon={{ name: "IoMdSearch", library: "io" }}
                 onClick={() => toggleOpen(true)}
             />
         </>

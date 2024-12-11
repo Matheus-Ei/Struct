@@ -1,5 +1,5 @@
 // Local
-import { ProjectContextType } from "./types";
+import { ProjectContextType } from "./../context";
 import Page from "services/page";
 
 export const addPage = async (

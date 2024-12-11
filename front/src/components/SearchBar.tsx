@@ -49,8 +49,7 @@ const SearchBar = ({
         <div className="relative flex text-base-content w-full">
             {!className && (
                 <Icon
-                    name="IoSearchOutline"
-                    library="io5"
+                    value={{ name: "IoSearchOutline", library: "io5" }}
                     className="flex items-center h-full text-xl absolute left-6 text-base-content"
                 />
             )}

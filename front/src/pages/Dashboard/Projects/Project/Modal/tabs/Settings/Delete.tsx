@@ -41,8 +41,7 @@ const Delete = ({ projectId, setModal }: DeleteProps) => {
             />
 
             <Point
-                icon="MdDelete"
-                library="md"
+                icon={{ name: "MdDelete", library: "md" }}
                 text="Delete"
                 onClick={() => toggleShowConfirmDelete(true)}
             />

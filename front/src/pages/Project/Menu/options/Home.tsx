@@ -10,8 +10,7 @@ const Home = () => {
     return (
         <Point
             text="Home"
-            icon="IoMdHome"
-            library="io"
+            icon={{ name: "IoMdHome", library: "io" }}
             onClick={() => navigate("/dashboard")}
         />
     );

@@ -35,8 +35,7 @@ const Content = ({ childrens, onContextMenu }: ContentProps) => {
             if (children.show) {
                 return (
                     <Icon
-                        name="IoIosArrowDown"
-                        library="io"
+                        value={{ name: "IoIosArrowDown", library: "io" }}
                         className="text-xl"
                         onClick={() => children.toggle()}
                     />
@@ -45,8 +44,7 @@ const Content = ({ childrens, onContextMenu }: ContentProps) => {
 
             return (
                 <Icon
-                    name="IoIosArrowForward"
-                    library="io"
+                    value={{ name: "IoIosArrowForward", library: "io" }}
                     className="text-xl"
                     onClick={() => children.toggle()}
                 />

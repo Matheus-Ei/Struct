@@ -13,8 +13,7 @@ const Settings = () => {
     return (
         <div className="relative flex justify-center h-screen w-screen pt-20">
             <Point
-                icon="IoIosArrowBack"
-                library="io"
+                icon={{ name: "IoIosArrowBack", library: "io" }}
                 text="Go back"
                 onClick={() => navigate("/dashboard")}
                 className="absolute left-20 top-20"

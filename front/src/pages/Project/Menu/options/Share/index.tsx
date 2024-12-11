@@ -12,8 +12,7 @@ const Share = () => {
 
             <Point
                 text="Share"
-                icon="IoMdShare"
-                library="io"
+                icon={{ name: "IoMdShare", library: "io" }}
                 onClick={() => toggleOpen(true)}
             />
         </>

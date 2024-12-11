@@ -11,7 +11,10 @@ const HoverButtons = ({ isHover, openProject }: HoverButtonsProps) => {
 
     return (
         <button onClick={openProject} className="w-fit">
-            <Icon name="MdOpenInNew" library="md" className="text-xl" />
+            <Icon
+                value={{ name: "MdOpenInNew", library: "md" }}
+                className="text-xl"
+            />
         </button>
     );
 };

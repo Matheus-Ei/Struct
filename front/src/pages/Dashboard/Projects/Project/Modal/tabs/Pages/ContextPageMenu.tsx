@@ -37,7 +37,7 @@ const ContextPageMenu = ({
                     className="flex gap-2 items-center justify-center"
                     onClick={deletePage}
                 >
-                    <Icon name="MdDelete" library="md" />
+                    <Icon value={{ name: "MdDelete", library: "md" }} />
                     <h1>Delete</h1>
                 </button>
             </div>

@@ -4,24 +4,17 @@ import clsx from "clsx";
 
 // Local
 import Icon from "components/Icon";
+import { IconType } from "types/global";
 
 interface PointProps {
-    icon: string;
-    library: string;
+    icon: IconType;
     text?: string;
     isSelected?: boolean;
     className?: string;
     onClick?: () => void;
 }
 
-const Point = ({
-    text,
-    icon,
-    library,
-    isSelected,
-    onClick,
-    className,
-}: PointProps) => {
+const Point = ({ text, icon, isSelected, onClick, className }: PointProps) => {
     const handleClick = () => onClick && onClick();
 
     const defaultCss = clsx(
@@ -37,7 +30,7 @@ const Point = ({
 
     return (
         <div onClick={handleClick} className={css}>
-            <Icon library={library} name={icon} className="text-xl" />
+            <Icon value={icon} className="text-xl" />
             {text && <p>{text}</p>}
         </div>
     );

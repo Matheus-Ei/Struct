@@ -23,7 +23,10 @@ const NewPage = () => {
             className={bodyCss}
             onClick={() => addPage(useProjectContext, null, null)}
         >
-            <Icon name="IoMdAddCircle" library="io" className="text-2xl" />
+            <Icon
+                value={{ name: "IoMdAddCircle", library: "io" }}
+                className="text-2xl"
+            />
 
             <h1 className="line-clamp-1 w-full text-sm">New Page</h1>
         </div>

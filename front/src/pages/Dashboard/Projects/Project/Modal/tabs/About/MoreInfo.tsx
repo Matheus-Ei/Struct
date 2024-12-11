@@ -13,14 +13,12 @@ const MoreInfo = ({ project }: MoreInfoProps) => {
         <div className="relative flex flex-col items-start justify-center w-full right-4">
             <Point
                 text={`Shared with ${project?.number_shared} users`}
-                icon="FaUsers"
-                library="fa6"
+                icon={{ name: "FaUsers", library: "fa6" }}
             />
 
             <Point
                 text={`Has ${project?.number_pages} pages`}
-                icon="GoPaperclip"
-                library="go"
+                icon={{ name: "GoPaperclip", library: "go" }}
             />
         </div>
     );

@@ -12,15 +12,13 @@ const SideBar = ({ user }: SideBarProps) => {
         <div className="flex flex-col items-start w-1/6 h-full gap-y-4 mt-10">
             <ChangeInfo
                 text="Change password"
-                icon="IoIosLock"
-                library="io"
+                icon={{ name: "IoIosLock", library: "io" }}
                 onClick={() => {}}
             />
 
             <ChangeInfo
                 text="Change email"
-                icon="IoIosMail"
-                library="io"
+                icon={{ name: "IoIosMail", library: "io" }}
                 onClick={() => {}}
             />
 

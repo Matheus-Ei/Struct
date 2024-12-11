@@ -47,7 +47,7 @@ const GoogleLogin = ({ toggleError }: GoogleLoginProps) => {
             inverse={true}
             onClick={googleProvider}
         >
-            <Icon library="fc" name="FcGoogle" />
+            <Icon value={{ name: "FcGoogle", library: "fc" }} />
         </Button>
     );
 };

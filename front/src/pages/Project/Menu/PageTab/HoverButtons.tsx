@@ -37,14 +37,16 @@ const HoverButtons = () => {
     return (
         <div className={bodyCss}>
             <Icon
-                name="IoAddOutline"
-                library="io5"
+                value={{ name: "IoAddOutline", library: "io5" }}
                 onClick={() =>
                     addPage(useProjectContext, children.toggle, page.id)
                 }
             />
 
-            <Icon name="MdMoreHoriz" library="md" onClick={handleMenu} />
+            <Icon
+                value={{ name: "MdMoreHoriz", library: "md" }}
+                onClick={handleMenu}
+            />
         </div>
     );
 };

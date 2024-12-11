@@ -39,12 +39,11 @@ const AddPage = ({ projectId, refetch }: AddPageProps) => {
             <Emoji
                 symbol={emoji?.emoji}
                 onClick={() => toggleShowEmoji()}
-                className="scale-150 py-1 px-2"
+                className="scale-125 py-1 px-2"
             />
 
             <Point
-                icon="FaPlus"
-                library="fa6"
+                icon={{ name: "FaPlus", library: "fa6" }}
                 onClick={createPage}
                 className="ml-4"
             />

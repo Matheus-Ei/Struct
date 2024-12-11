@@ -16,8 +16,7 @@ const Profile = () => {
     return (
         <div className="relative w-screen h-screen flex flex-col items-center pt-20">
             <Point
-                icon="IoIosArrowBack"
-                library="io"
+                icon={{ name: "IoIosArrowBack", library: "io" }}
                 text="Go back"
                 onClick={() => navigate("/dashboard")}
                 className="absolute left-20 top-20"

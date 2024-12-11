@@ -51,8 +51,7 @@ const AddUser = ({ projectId, refetch }: AddUserProps) => {
             />
 
             <Point
-                icon="BsFillShareFill"
-                library="bs"
+                icon={{ name: "BsFillShareFill", library: "bs" }}
                 onClick={handleAdition}
                 className="ml-4"
             />

@@ -23,7 +23,7 @@ const PageMenu = () => {
                         deletePage(menu.toggle, page.id, useProjectContext)
                     }
                 >
-                    <Icon name="MdDelete" library="md" />
+                    <Icon value={{ name: "MdDelete", library: "md" }} />
                     <h1>Delete</h1>
                 </button>
             </div>

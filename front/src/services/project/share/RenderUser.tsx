@@ -38,7 +38,10 @@ const RenderUser = ({ user, refetch }: RenderUserProps) => {
         >
             <div className="flex items-center justify-between w-full">
                 <div className="flex items-center justify-start gap-x-3">
-                    <Icon name="FaUserAlt" library="fa" className="text-2xl" />
+                    <Icon
+                        value={{ name: "FaUserAlt", library: "fa" }}
+                        className="text-2xl"
+                    />
 
                     <h1 className="text-lg">{user.user_nickname}</h1>
                 </div>
@@ -46,8 +49,7 @@ const RenderUser = ({ user, refetch }: RenderUserProps) => {
                 <div className="relative flex items-center justify-start gap-x-3">
                     {isHover && (
                         <Icon
-                            name="IoIosMore"
-                            library="io"
+                            value={{ name: "IoIosMore", library: "io" }}
                             onClick={handleMenu}
                         />
                     )}
@@ -62,7 +64,9 @@ const RenderUser = ({ user, refetch }: RenderUserProps) => {
                                 className="flex gap-2 items-center justify-center"
                                 onClick={handleDelete}
                             >
-                                <Icon name="MdDelete" library="md" />
+                                <Icon
+                                    value={{ name: "MdDelete", library: "md" }}
+                                />
                                 <h1>Delete</h1>
                             </button>
                         </div>

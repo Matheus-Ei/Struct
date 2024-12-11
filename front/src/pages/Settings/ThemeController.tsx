@@ -44,7 +44,7 @@ const ThemeController = () => {
         <div className="dropdown">
             <div tabIndex={0} role="button" className="btn m-1">
                 <p className="w-20 text-start">{theme}</p>
-                <Icon name="MdExpandMore" library="md" />
+                <Icon value={{ name: "MdExpandMore", library: "md" }} />
             </div>
 
             <ul tabIndex={0} className={themeListCss}>

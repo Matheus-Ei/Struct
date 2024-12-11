@@ -11,8 +11,7 @@ const NotFound = () => {
     return (
         <div className="flex items-center justify-center w-screen h-screen gap-x-10">
             <Icon
-                name="GiCactusPot"
-                library="gi"
+                value={{ name: "GiCactusPot", library: "gi" }}
                 className="text-9xl text-primary"
             />
 

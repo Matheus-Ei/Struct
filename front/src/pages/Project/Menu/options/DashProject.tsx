@@ -16,8 +16,7 @@ const DashProject = () => {
     return (
         <Point
             text="Project"
-            icon="PiProjectorScreen"
-            library="pi"
+            icon={{ name: "PiProjectorScreen", library: "pi" }}
             className={projectPointCss}
             onClick={() => selectedPage.set(null)}
         />

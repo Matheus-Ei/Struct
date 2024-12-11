@@ -106,7 +106,7 @@ const EditableField = ({
             {title && (
                 <div className="flex items-center gap-x-2">
                     {title.iconPosition === "right" && title.withIcon && (
-                        <Icon name="MdEdit" library="md" />
+                        <Icon value={{ name: "MdEdit", library: "md" }} />
                     )}
 
                     <h1 className="font-bold italic select-none">
@@ -114,7 +114,7 @@ const EditableField = ({
                     </h1>
 
                     {title.iconPosition !== "right" && title.withIcon && (
-                        <Icon name="MdEdit" library="md" />
+                        <Icon value={{ name: "MdEdit", library: "md" }} />
                     )}
                 </div>
             )}

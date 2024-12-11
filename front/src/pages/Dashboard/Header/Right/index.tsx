@@ -23,8 +23,7 @@ const Right = () => {
             ref={menuRef}
         >
             <Icon
-                name="FaUserAstronaut"
-                library="fa"
+                value={{ name: "FaUserAstronaut", library: "fa" }}
                 className="text-4xl"
                 onClick={openOptions}
             />

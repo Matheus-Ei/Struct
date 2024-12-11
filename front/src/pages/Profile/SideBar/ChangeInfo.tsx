@@ -1,26 +1,22 @@
 // Local
 import Button from "components/Button";
 import Icon from "components/Icon";
+import { IconType } from "types/global";
 
 interface ChangeInfoProps {
     text: string;
-    icon: string;
-    library: string;
+    icon: IconType;
     onClick: () => void;
 }
 
-const ChangeInfo = ({ text, icon, library, onClick }: ChangeInfoProps) => {
+const ChangeInfo = ({ text, icon, onClick }: ChangeInfoProps) => {
     return (
         <Button
             className="border-none p-0 font-normal italic"
             onClick={onClick}
         >
             <div className="flex gap-x-2 items-center">
-                <Icon
-                    name={icon}
-                    library={library}
-                    className="text-primary text-xl"
-                />
+                <Icon value={icon} className="text-primary text-xl" />
 
                 <h1 className="text-base-content italic">{text}</h1>
             </div>

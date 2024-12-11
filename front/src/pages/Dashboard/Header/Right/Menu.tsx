@@ -25,7 +25,7 @@ const Menu = ({ showMenu, toggleShowMenu, position: { x, y } }: MenuProps) => {
                     className="flex items-center justify-center gap-x-2 cursor-pointer select-none text-lg"
                     onClick={() => navigate("/profile")}
                 >
-                    <Icon name="FaUser" library="fa6" />
+                    <Icon value={{ name: "FaUser", library: "fa6" }} />
 
                     <h1>Profile</h1>
                 </div>
@@ -34,7 +34,7 @@ const Menu = ({ showMenu, toggleShowMenu, position: { x, y } }: MenuProps) => {
                     className="flex items-center justify-center gap-x-2 cursor-pointer select-none text-lg"
                     onClick={() => navigate("/settings")}
                 >
-                    <Icon name="IoMdSettings" library="io" />
+                    <Icon value={{ name: "IoMdSettings", library: "io" }} />
 
                     <h1>Settings</h1>
                 </div>
