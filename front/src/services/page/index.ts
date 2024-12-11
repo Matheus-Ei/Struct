@@ -53,8 +53,8 @@ class Page {
 
     public static async edit(
         id: number,
-        name: string | undefined,
-        description: string | undefined,
+        name: string | undefined | null,
+        description: string | undefined | null,
         emoji: string | undefined | null,
         onSuccess?: (response?: SuccessResponseType) => void
     ) {

@@ -104,6 +104,28 @@ class User {
             return false;
         }
     }
+
+    static async get() {
+        try {
+            const response = await Request.get("user");
+            return response.data;
+        } catch {
+            return null;
+        }
+    }
+
+    static async update(
+        name: string | undefined,
+        about: string | undefined,
+        mail: string | undefined
+    ) {
+        try {
+            await Request.patch("user", { name, about, mail });
+            return true;
+        } catch {
+            return false;
+        }
+    }
 }
 
 export default User;

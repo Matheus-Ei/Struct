@@ -1,22 +1,24 @@
 // Local
+import useDefinedContext from "hooks/useDefinedContext";
 import { PageType } from "services/page/types";
 import PageTab from ".";
-
-interface ChildrensProps {
-    items: Array<PageType> | null;
-    parentPageId: number;
-    show: boolean;
-}
+import { PageTabContext } from "./context";
 
 const renderChildrens = (item: PageType, index: number) => (
     <PageTab item={item} key={index} />
 );
 
-const Childrens = ({ show, items }: ChildrensProps) => {
-    if (!show) return null;
+const Childrens = () => {
+    const { page, children } = useDefinedContext(PageTabContext);
+
+    if (!children.show) return null;
 
     return (
-        <div className="flex flex-col pl-4">{items?.map(renderChildrens)}</div>
+        <div className="flex flex-col relative w-full justify-start">
+            <div className="flex flex-col pl-4">
+                {page.children_pages?.map(renderChildrens)}
+            </div>
+        </div>
     );
 };
 

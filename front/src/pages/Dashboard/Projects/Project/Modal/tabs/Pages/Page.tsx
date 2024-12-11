@@ -1,6 +1,3 @@
-// Library
-import clsx from "clsx";
-
 // Components
 import EditableField from "components/EditableField";
 import Emoji from "components/Emoji";
@@ -14,20 +11,9 @@ import PageService from "services/page";
 interface PageProps {
     id: number;
     name: string;
-    emoji: string;
+    emoji: string | undefined;
     refetch: () => void;
 }
-
-const cssNameEditing = clsx(
-    "w-fit px-1",
-    "text-md text-base-content cursor-text",
-    "outline-none bg-base-200 rounded-btn"
-);
-const cssNameNotEditing = clsx(
-    "w-full px-1 line-clamp-1 select-none",
-    "text-md text-base-content cursor-pointer",
-    "outline-none bg-base-100 rounded-btn"
-);
 
 const Page = ({ id, name, emoji, refetch }: PageProps) => {
     const [showMenu, toggleShowMenu] = useToggle(false);
@@ -58,7 +44,7 @@ const Page = ({ id, name, emoji, refetch }: PageProps) => {
         >
             <Emoji
                 symbol={emoji}
-                className="cursor-pointer select-none text-xl"
+                className="text-xl"
                 selectorOnClick={true}
                 onUpdate={updateEmoji}
             />
@@ -66,8 +52,7 @@ const Page = ({ id, name, emoji, refetch }: PageProps) => {
             <EditableField
                 defaultValue={name}
                 onUpdate={updateName}
-                classNameEditing={cssNameEditing}
-                classNameNotEditing={cssNameNotEditing}
+                classNameNotEditing="w-full px-1 line-clamp-1 select-none"
             />
 
             <ContextPageMenu

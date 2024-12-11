@@ -4,36 +4,26 @@ import clsx from "clsx";
 
 // Local
 import { addPage } from "pages/Project/util/events";
-import { ProjectContext } from "pages/Project";
+import { ProjectContext } from "pages/Project/context";
 import Icon from "components/Icon";
 import useDefinedContext from "hooks/useDefinedContext";
+import { PageTabContext } from "./context";
 
-interface HoverButtonsProps {
-    toggleChildren: (value?: boolean) => void;
-    toggleMenu: (value?: boolean) => void;
-    setClickPosition: (value: { x: number; y: number }) => void;
-    isHover: boolean;
-    pageId: number;
-}
-
-const HoverButtons = ({
-    toggleChildren,
-    setClickPosition,
-    toggleMenu,
-    isHover,
-    pageId,
-}: HoverButtonsProps) => {
+const HoverButtons = () => {
     const useProjectContext = useDefinedContext(ProjectContext);
     const { selectedPage } = useProjectContext;
 
+    const { isHover, menu, clickPosition, page, children } =
+        useDefinedContext(PageTabContext);
+
     if (!isHover) return null;
-    const isSelected = selectedPage.id === pageId;
+    const isSelected = selectedPage.id === page.id;
 
     const handleMenu = (event?: MouseEvent<HTMLElement>) => {
         if (!event) return;
 
-        toggleMenu(true);
-        setClickPosition({ x: event.clientX, y: event.clientY });
+        menu.toggle(true);
+        clickPosition.set({ x: event.clientX, y: event.clientY });
     };
 
     const bodyCss = clsx(
@@ -47,14 +37,16 @@ const HoverButtons = ({
     return (
         <div className={bodyCss}>
             <Icon
-                name="IoAddOutline"
-                library="io5"
+                value={{ name: "IoAddOutline", library: "io5" }}
                 onClick={() =>
-                    addPage(useProjectContext, toggleChildren, pageId)
+                    addPage(useProjectContext, children.toggle, page.id)
                 }
             />
 
-            <Icon name="MdMoreHoriz" library="md" onClick={handleMenu} />
+            <Icon
+                value={{ name: "MdMoreHoriz", library: "md" }}
+                onClick={handleMenu}
+            />
         </div>
     );
 };

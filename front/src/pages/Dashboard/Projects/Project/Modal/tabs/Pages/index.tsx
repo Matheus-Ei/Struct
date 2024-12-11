@@ -3,20 +3,13 @@ import clsx from "clsx";
 
 // Local
 import { useAllPages } from "services/page/usePage";
+import { PageType } from "services/page/types";
 import { TabProps } from "../../utils/types";
 
 // Components
-import Icon from "components/Icon";
 import AddPage from "./AddPage";
 import Page from "./Page";
-
-interface PageRequestType {
-    id: number;
-    name: string;
-    description: string;
-    emoji: string;
-    module: string;
-}
+import Message404 from "components/Message404";
 
 const pagesDivCss = clsx(
     "grid items-start content-start",
@@ -29,7 +22,7 @@ const pagesDivCss = clsx(
 const Pages = ({ projectId }: TabProps) => {
     const { data: pages, refetch } = useAllPages(projectId);
 
-    const renderPages = (item: PageRequestType, index: number) => {
+    const renderPages = (item: PageType, index: number) => {
         return (
             <Page
                 key={index}
@@ -43,17 +36,7 @@ const Pages = ({ projectId }: TabProps) => {
 
     const getAllPages = () => {
         if (pages?.length === 0) {
-            return (
-                <div className="flex items-center justify-start w-full h-fit gap-x-6 ml-10 mt-4">
-                    <Icon
-                        name="TbError404"
-                        library="tb"
-                        className="text-4xl w-fit"
-                    />
-
-                    <h1 className="text-xl w-fit">No pages found</h1>
-                </div>
-            );
+            return <Message404 text="No pages found" />;
         } else {
             return <div className={pagesDivCss}>{pages?.map(renderPages)}</div>;
         }

@@ -4,30 +4,22 @@ import clsx from "clsx";
 
 // Local
 import { PageType } from "services/page/types";
-import { ProjectContext } from "pages/Project";
+import { ProjectContext } from "pages/Project/context";
 import Emoji from "components/Emoji";
 import Icon from "components/Icon";
 import useDefinedContext from "hooks/useDefinedContext";
+import { PageTabContext } from "./context";
 
 interface ContentProps {
-    item: PageType;
-    onContextMenu: (event: MouseEvent<HTMLDivElement>) => void;
-    isHover: boolean;
     childrens: Array<PageType> | null;
-    toggleChildren: (value?: boolean) => void;
-    showChildren: boolean;
+    onContextMenu: (event: MouseEvent) => void;
 }
 
-const Content = ({
-    item,
-    onContextMenu,
-    isHover,
-    childrens,
-    showChildren,
-    toggleChildren,
-}: ContentProps) => {
+const Content = ({ childrens, onContextMenu }: ContentProps) => {
     const { selectedPage } = useDefinedContext(ProjectContext);
-    const isSelected = item.id === selectedPage.id;
+    const { children, isHover, page } = useDefinedContext(PageTabContext);
+
+    const isSelected = page.id === selectedPage.id;
 
     const css = clsx(
         "w-full h-full gap-x-2 rounded-btn py-1 px-4",
@@ -38,31 +30,27 @@ const Content = ({
         }
     );
 
-    const handleClick = () => selectedPage.set(item.id);
-
     const pageIcon = () => {
         if (isHover && childrens?.length !== 0) {
-            if (showChildren) {
+            if (children.show) {
                 return (
                     <Icon
-                        name="IoIosArrowDown"
-                        library="io"
+                        value={{ name: "IoIosArrowDown", library: "io" }}
                         className="text-xl"
-                        onClick={() => toggleChildren()}
+                        onClick={() => children.toggle()}
                     />
                 );
             }
 
             return (
                 <Icon
-                    name="IoIosArrowForward"
-                    library="io"
+                    value={{ name: "IoIosArrowForward", library: "io" }}
                     className="text-xl"
-                    onClick={() => toggleChildren()}
+                    onClick={() => children.toggle()}
                 />
             );
         } else {
-            return <Emoji symbol={item.emoji} />;
+            return <Emoji symbol={page.emoji} />;
         }
     };
 
@@ -70,10 +58,10 @@ const Content = ({
         <div
             className={css}
             onContextMenu={onContextMenu}
-            onClick={handleClick}
+            onClick={() => selectedPage.set(page.id)}
         >
             {pageIcon()}
-            <h1 className="line-clamp-1 w-full text-sm">{item.name}</h1>
+            <h1 className="line-clamp-1 w-full text-sm">{page.name}</h1>
         </div>
     );
 };

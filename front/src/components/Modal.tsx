@@ -1,4 +1,5 @@
 // Libraries
+import { twMerge } from "tailwind-merge";
 import clsx from "clsx";
 
 // Local
@@ -27,7 +28,7 @@ const bgCss = clsx(
 
 const Modal = ({ children, isOpen, onClose, className }: ModalProps) => {
     if (!isOpen) return null;
-    const css = className ? className : defaultCss;
+    const css = twMerge(defaultCss, className);
 
     const closeOnBgClick = (event: MouseEvent<HTMLElement>) => {
         if (event.target !== event.currentTarget) return;
@@ -43,8 +44,7 @@ const Modal = ({ children, isOpen, onClose, className }: ModalProps) => {
                         className="absolute right-4 top-2 sm:right-0 sm:top-0"
                     >
                         <Icon
-                            name="IoMdClose"
-                            library="io"
+                            value={{ name: "IoMdClose", library: "io" }}
                             className="text-2xl"
                         />
                     </button>

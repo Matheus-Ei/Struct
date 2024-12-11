@@ -7,7 +7,7 @@ import Validations from "../utils/validations";
 import Message from "components/Message";
 import Button from "components/Button";
 import Input from "components/Input";
-import { SignUpContext } from "..";
+import { SignUpContext } from "../context";
 import User from "services/user";
 import useDefinedContext from "hooks/useDefinedContext";
 

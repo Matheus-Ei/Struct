@@ -17,11 +17,11 @@ import * as io from "react-icons/io";
 import * as ri from "react-icons/ri";
 import * as fc from "react-icons/fc";
 
-interface LibType {
-    [keys: string]: Object;
+export interface LibsType {
+    [keys: string]: any;
 }
 
-const lib: LibType = {
+const library: LibsType = {
     fa6,
     fa,
     io,
@@ -41,4 +41,4 @@ const lib: LibType = {
     fc,
 };
 
-export default lib;
+export default library;

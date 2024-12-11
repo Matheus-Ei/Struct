@@ -39,7 +39,7 @@ const AddUser = ({ projectId, refetch }: AddUserProps) => {
         <div className="flex gap-x-4 items-center justify-center">
             <Input
                 text="Nickname"
-                className="border-b border-neutral px-2 pb-1 outline-none bg-base-100"
+                className="border-base-100 rounded-none border-b border-b-neutral m-0 h-8 px-2 pb-1 outline-none bg-base-100"
                 setValue={setNickname}
                 onEnter={handleAdition}
             />
@@ -51,9 +51,9 @@ const AddUser = ({ projectId, refetch }: AddUserProps) => {
             />
 
             <Point
-                icon="BsFillShareFill"
-                library="bs"
+                icon={{ name: "BsFillShareFill", library: "bs" }}
                 onClick={handleAdition}
+                className="ml-4"
             />
         </div>
     );

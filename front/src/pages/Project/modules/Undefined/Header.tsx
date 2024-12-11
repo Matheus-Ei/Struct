@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 
 // Local
-import { ProjectContext } from "pages/Project";
+import { ProjectContext } from "pages/Project/context";
 import EditableField from "components/EditableField";
 import Emoji from "components/Emoji";
 import Page from "services/page";
@@ -16,26 +16,19 @@ const Header = () => {
         setEmoji(page.data?.emoji);
     }, [page.data?.emoji]);
 
-    const updateEmoji = async (newEmoji?: string | null) => {
+    const update = async (
+        value: string | null | undefined,
+        type: "name" | "description" | "emoji"
+    ) => {
         if (!selectedPage?.id) return;
 
-        await Page.edit(selectedPage.id, undefined, undefined, newEmoji);
+        let name = type === "name" ? value : undefined;
+        let description = type === "description" ? value : undefined;
+        let emoji = type === "emoji" ? value : undefined;
+
+        await Page.edit(selectedPage.id, name, description, emoji);
 
         menu.refetch();
-    };
-
-    const updateName = async (value: string) => {
-        if (!selectedPage?.id) return;
-
-        await Page.edit(selectedPage.id, value, undefined, undefined);
-
-        menu.refetch();
-    };
-
-    const updateDescription = async (value: string) => {
-        if (!selectedPage?.id) return;
-
-        await Page.edit(selectedPage.id, undefined, value, undefined);
     };
 
     return (
@@ -44,18 +37,18 @@ const Header = () => {
                 <Emoji
                     symbol={emoji}
                     selectorOnClick={true}
-                    onUpdate={updateEmoji}
+                    onUpdate={(value) => update(value, "emoji")}
                 />
 
                 <EditableField
                     defaultValue={page.data?.name}
-                    onUpdate={updateName}
+                    onUpdate={(value) => update(value, "name")}
                 />
             </div>
 
             <EditableField
                 defaultValue={page.data?.description}
-                onUpdate={updateDescription}
+                onUpdate={(value) => update(value, "description")}
             />
         </div>
     );

@@ -1,7 +1,8 @@
 // Libraries
-import clsx from "clsx";
-import { ChangeEvent, KeyboardEvent } from "react";
 import { ErrorType, SetStateType } from "types/global";
+import { ChangeEvent, KeyboardEvent } from "react";
+import { twMerge } from "tailwind-merge";
+import clsx from "clsx";
 
 interface InputProps {
     text?: string;
@@ -46,7 +47,7 @@ const Input = ({
             "resize-none pt-4": type === "textarea",
         }
     );
-    const css = className ? className : defaultCss;
+    const css = twMerge(defaultCss, className);
 
     if (type === "textarea") {
         return (

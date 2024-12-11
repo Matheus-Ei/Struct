@@ -1,16 +1,23 @@
 // Libraries
 import { KeyboardEvent, MouseEvent, useRef, useState } from "react";
+import { twMerge } from "tailwind-merge";
 import clsx from "clsx";
 
 // Local
 import Cursor from "modules/Cursor";
 import Event from "modules/Event";
+import Icon from "./Icon";
 
 interface EditableFieldProps {
     defaultValue: string | undefined;
     onUpdate: (value: string) => Promise<void>;
     classNameEditing?: string;
     classNameNotEditing?: string;
+    title?: {
+        withIcon?: boolean;
+        text: string;
+        iconPosition?: "left" | "right";
+    };
 }
 
 const EditableField = ({
@@ -18,6 +25,7 @@ const EditableField = ({
     onUpdate,
     classNameEditing,
     classNameNotEditing,
+    title,
 }: EditableFieldProps) => {
     const [isEditing, setIsEditing] = useState<boolean>(false);
     const [preValue, setPreValue] = useState<string>("");
@@ -83,28 +91,44 @@ const EditableField = ({
         setIsEditing(false);
     };
 
-    const defaultCss = clsx("w-fit h-fit text-base-content outline-none", {
+    const className = clsx("w-fit h-fit text-base-content outline-none", {
         "bg-base-200 rounded-btn p-1": isEditing,
         "bg-base-100 cursor-pointer select-none": !isEditing,
-    });
-
-    const css = clsx({
         [classNameEditing as string]: isEditing,
         [classNameNotEditing as string]: !isEditing,
     });
+    const css = twMerge(className);
 
     const innerHTML = { __html: defaultValue ? defaultValue : "" };
 
     return (
-        <div
-            contentEditable={isEditing}
-            dangerouslySetInnerHTML={innerHTML}
-            ref={divRef}
-            onClick={handleClick}
-            onBlur={handleBlur}
-            onKeyDown={handleKeyDown}
-            className={css ? css : defaultCss}
-        ></div>
+        <div>
+            {title && (
+                <div className="flex items-center gap-x-2">
+                    {title.iconPosition === "right" && title.withIcon && (
+                        <Icon value={{ name: "MdEdit", library: "md" }} />
+                    )}
+
+                    <h1 className="font-bold italic select-none">
+                        {title.text}
+                    </h1>
+
+                    {title.iconPosition !== "right" && title.withIcon && (
+                        <Icon value={{ name: "MdEdit", library: "md" }} />
+                    )}
+                </div>
+            )}
+
+            <div
+                contentEditable={isEditing}
+                dangerouslySetInnerHTML={innerHTML}
+                ref={divRef}
+                onClick={handleClick}
+                onBlur={handleBlur}
+                onKeyDown={handleKeyDown}
+                className={css}
+            />
+        </div>
     );
 };
 

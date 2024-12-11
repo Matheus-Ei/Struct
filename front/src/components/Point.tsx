@@ -1,29 +1,23 @@
 // Libraries
+import { twMerge } from "tailwind-merge";
 import clsx from "clsx";
 
 // Local
 import Icon from "components/Icon";
+import { IconType } from "types/global";
 
 interface PointProps {
-    icon: string;
-    library: string;
+    icon: IconType;
     text?: string;
     isSelected?: boolean;
     className?: string;
     onClick?: () => void;
 }
 
-const Point = ({
-    text,
-    icon,
-    library,
-    isSelected,
-    onClick,
-    className,
-}: PointProps) => {
+const Point = ({ text, icon, isSelected, onClick, className }: PointProps) => {
     const handleClick = () => onClick && onClick();
 
-    const css = clsx(
+    const defaultCss = clsx(
         "flex justify-center items-center",
         "rounded-btn cursor-pointer select-none",
         {
@@ -32,10 +26,11 @@ const Point = ({
             "bg-primary text-primary-content": isSelected,
         }
     );
+    const css = twMerge(defaultCss, className);
 
     return (
-        <div onClick={handleClick} className={className ? className : css}>
-            <Icon library={library} name={icon} className="text-xl" />
+        <div onClick={handleClick} className={css}>
+            <Icon value={icon} className="text-xl" />
             {text && <p>{text}</p>}
         </div>
     );

@@ -38,9 +38,8 @@ const Header = ({ tab, setTab, modal }: HeaderProps) => {
             {router.map(renderTabs)}
 
             <Icon
-                name="MdOpenInNew"
-                library="md"
-                className="absolute cursor-pointer top-1 right-10 text-lg"
+                value={{ name: "MdOpenInNew", library: "md" }}
+                className="absolute top-1 right-10 text-lg"
                 onClick={() => navigate(`/project/${modal.projectId}`)}
             />
         </div>

@@ -1,7 +1,7 @@
 // Local
 import useDefinedContext from "hooks/useDefinedContext";
 import { PageType } from "services/page/types";
-import { ProjectContext } from "..";
+import { ProjectContext } from "pages/Project/context";
 import PageTab from "./PageTab";
 
 // Options

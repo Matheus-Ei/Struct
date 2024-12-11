@@ -1,6 +1,6 @@
 // Libraries
-import clsx from "clsx";
 import { useCallback, useEffect, useRef } from "react";
+import { twMerge } from "tailwind-merge";
 
 // Local
 import Event from "modules/Event";
@@ -14,12 +14,6 @@ interface ContextMenuProps {
     translateY?: boolean;
     className?: string;
 }
-
-const defaultCss = clsx(
-    "p-[10px] z-50",
-    "flex flex-col items-center justify-center",
-    "bg-base-100 border rounded-btn border-primary"
-);
 
 const ContextMenu = ({
     children,
@@ -52,7 +46,13 @@ const ContextMenu = ({
 
     if (!show) return null;
 
-    const css = className ? className : defaultCss;
+    const css = twMerge(
+        "p-[10px] z-50",
+        "flex flex-col items-center justify-center",
+        "bg-base-100 border rounded-btn border-primary",
+        className
+    );
+
     const translation = translateY
         ? "translate(0%, -100%)"
         : "translate(0%, 0%)";

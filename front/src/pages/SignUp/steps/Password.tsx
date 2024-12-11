@@ -6,7 +6,7 @@ import { makeSignUp } from "../utils/functions";
 import Message from "components/Message";
 import Button from "components/Button";
 import Input from "components/Input";
-import { SignUpContext } from "..";
+import { SignUpContext } from "../context";
 import useDefinedContext from "hooks/useDefinedContext";
 
 const Password = () => {

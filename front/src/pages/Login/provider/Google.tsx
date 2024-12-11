@@ -36,17 +36,18 @@ const GoogleLogin = ({ toggleError }: GoogleLoginProps) => {
         toggleError(true);
     }, [navigate, toggleError, response]);
 
+    // Login the user when the response is ready
     useEffect(() => {
         login();
     }, [login]);
 
     return (
         <Button
-            className="border-2 w-fit h-fit p-2 rounded-btn bg-white border-red-400 text-red-400 font-bold text-2xl"
+            className="border-2 p-2 bg-white border-red-400 text-red-400 text-2xl"
             inverse={true}
             onClick={googleProvider}
         >
-            <Icon library="fc" name="FcGoogle" />
+            <Icon value={{ name: "FcGoogle", library: "fc" }} />
         </Button>
     );
 };

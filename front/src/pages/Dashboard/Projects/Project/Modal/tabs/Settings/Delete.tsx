@@ -2,7 +2,7 @@
 import { useEffect } from "react";
 
 // Local
-import { ProjectsContext } from "pages/Dashboard/Projects";
+import { ProjectsContext } from "pages/Dashboard/Projects/context";
 import { SetStateType } from "types/global";
 import useToggle from "hooks/useToggle";
 import Project from "services/project";
@@ -41,8 +41,7 @@ const Delete = ({ projectId, setModal }: DeleteProps) => {
             />
 
             <Point
-                icon="MdDelete"
-                library="md"
+                icon={{ name: "MdDelete", library: "md" }}
                 text="Delete"
                 onClick={() => toggleShowConfirmDelete(true)}
             />

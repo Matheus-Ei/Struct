@@ -8,6 +8,7 @@ import HoverButtons from "./HoverButtons";
 import useToggle from "hooks/useToggle";
 import Childrens from "./Childrens";
 import Content from "./Content";
+import { PageTabContext } from "./context";
 
 interface PageTabProps {
     item: PageType;
@@ -30,46 +31,33 @@ const PageTab = ({ item }: PageTabProps) => {
         toggleMenu(true);
     };
 
+    const contextValue = {
+        menu: { show: showMenu, toggle: toggleMenu },
+        children: { show: showChildren, toggle: toggleChildren },
+        isHover,
+        clickPosition: { value: clickPosition, set: setClickPosition },
+        page: item,
+    };
+
     return (
-        <>
+        <PageTabContext.Provider value={contextValue}>
             <div
                 className="flex flex-col relative w-full h-9 justify-start items-center"
                 onMouseOver={() => toggleHover(true)}
                 onMouseLeave={() => toggleHover(false)}
             >
                 <Content
-                    item={item}
                     onContextMenu={handleContextMenu}
-                    isHover={isHover}
-                    showChildren={showChildren}
                     childrens={item.children_pages}
-                    toggleChildren={toggleChildren}
                 />
 
-                <HoverButtons
-                    isHover={isHover}
-                    toggleChildren={toggleChildren}
-                    toggleMenu={toggleMenu}
-                    setClickPosition={setClickPosition}
-                    pageId={item.id}
-                />
+                <HoverButtons />
 
-                <PageMenu
-                    showMenu={showMenu}
-                    toggleMenu={toggleMenu}
-                    clickPosition={clickPosition}
-                    pageId={item.id}
-                />
+                <PageMenu />
             </div>
 
-            <div className="flex flex-col relative w-full justify-start">
-                <Childrens
-                    items={item.children_pages}
-                    show={showChildren}
-                    parentPageId={item.id}
-                />
-            </div>
-        </>
+            <Childrens />
+        </PageTabContext.Provider>
     );
 };
 

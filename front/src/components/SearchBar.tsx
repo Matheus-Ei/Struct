@@ -1,6 +1,6 @@
 // Libraries
-import clsx from "clsx";
 import { ChangeEvent, useEffect, useRef } from "react";
+import { twMerge } from "tailwind-merge";
 
 // Local
 import Icon from "components/Icon";
@@ -12,13 +12,6 @@ interface SearchBarProps {
     placeholder?: string;
     className?: string;
 }
-
-const defaultCss = clsx(
-    "w-full",
-    "py-2 pl-16 pr-4",
-    "placeholder:text-base-content bg-base-100",
-    "outline-none border-b border-base-content"
-);
 
 const SearchBar = ({
     searchPlace,
@@ -44,14 +37,20 @@ const SearchBar = ({
         setResult(result);
     };
 
-    const css = className ? className : defaultCss;
+    const css = twMerge(
+        "w-full",
+        "py-2 pl-16 pr-4",
+        "placeholder:text-base-content bg-base-100",
+        "outline-none border-b border-base-300",
+        className
+    );
+
     return (
         <div className="relative flex text-base-content w-full">
             {!className && (
                 <Icon
-                    name="IoSearchOutline"
-                    library="io5"
-                    className="flex items-center h-full text-xl absolute left-6 text-primary"
+                    value={{ name: "IoSearchOutline", library: "io5" }}
+                    className="flex items-center h-full text-xl absolute left-6 text-base-content"
                 />
             )}
 

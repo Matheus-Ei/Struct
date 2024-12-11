@@ -13,8 +13,10 @@ class UserRoute {
     }
 
     private init() {
-        this.router.get("/", userController.get);
+        this.router.get("/", userController.getCurrent);
         this.router.post("/", userController.register);
+        this.router.patch("/", userController.update);
+        this.router.put("/password", userController.changePassword);
 
         this.router.post("/auth", userController.login);
         this.router.delete("/auth", userController.logout);

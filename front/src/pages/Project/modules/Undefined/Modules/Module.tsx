@@ -1,16 +1,17 @@
+// Local
 import Icon from "components/Icon";
 import useDefinedContext from "hooks/useDefinedContext";
-import { ProjectContext } from "pages/Project";
+import { ProjectContext } from "pages/Project/context";
 import Page from "services/page";
+import { IconType } from "types/global";
 
 interface ModuleProps {
     name: string;
     description: string;
-    icon: string;
-    library: string;
+    icon: IconType;
 }
 
-const Module = ({ name, description, icon, library }: ModuleProps) => {
+const Module = ({ name, description, icon }: ModuleProps) => {
     const { selectedPage, page } = useDefinedContext(ProjectContext);
 
     const handleClick = () => {
@@ -29,7 +30,7 @@ const Module = ({ name, description, icon, library }: ModuleProps) => {
             onClick={handleClick}
         >
             <div className="flex items-center gap-x-2">
-                <Icon name={icon} library={library} className="text-2xl" />
+                <Icon value={icon} className="text-2xl" />
                 <h1 className="text-lg font-bold">{name.toUpperCase()}</h1>
             </div>
 
