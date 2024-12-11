@@ -20,3 +20,8 @@ export interface SuccessResponseType<T = undefined> {
     message: string;
     data: T;
 }
+
+export interface IconType {
+    name: string;
+    library: string;
+}
