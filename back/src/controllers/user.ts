@@ -10,7 +10,7 @@ import Hash from "../services/hash";
 import UserModel from "../models/user";
 
 class UserController {
-    public async get(req: Request, res: Response) {
+    public async getCurrent(req: Request, res: Response) {
         const id = Cookie.get("id", req);
         const { nickname, mail } = req.query;
 
@@ -243,6 +243,97 @@ class UserController {
         Cookie.delete(["access_token", "id", "refresh_token"], res);
 
         res.status(200).send({ message: "Logout was made successfuly" });
+    }
+
+    public async update(req: Request, res: Response) {
+        const id = Cookie.get("id", req);
+
+        try {
+            if (!id) {
+                res.status(400).json({ message: "Missing id" });
+                return;
+            }
+
+            const user = await UserModel.findByPk(id);
+
+            if (user) {
+                const {
+                    name = user.name,
+                    mail = user.mail,
+                    about = user.about,
+                } = req.body;
+
+                await user.update({
+                    name,
+                    mail,
+                    about,
+                });
+
+                res.status(200).json({
+                    message: "User updated",
+                    data: {
+                        id: user.id,
+                        name: user.name,
+                        nickname: user.nickname,
+                        mail: user.mail,
+                        about: user.about,
+                    },
+                });
+            } else {
+                res.status(404).json({ message: "User not found" });
+                return;
+            }
+        } catch (error) {
+            res.status(500).json({ message: "Error updating the user", error });
+            return;
+        }
+    }
+
+    public async changePassword(req: Request, res: Response) {
+        const id = Cookie.get("id", req);
+        const { currentKey, newKey } = req.body;
+
+        try {
+            if (!id) {
+                res.status(400).json({ message: "Missing id" });
+                return;
+            }
+
+            const user = await UserModel.findByPk(id);
+            if (!user) {
+                res.status(404).json({ message: "User not found" });
+                return;
+            }
+
+            const hashObj = new Hash();
+            const isMatchPass = await hashObj.compare(
+                currentKey,
+                user.dataValues.password
+            );
+
+            if (!isMatchPass) {
+                res.status(401).json({
+                    message: "The current password is not correct",
+                });
+                return;
+            }
+
+            const hashPassword = await hashObj.make(newKey);
+
+            await user.update({
+                password: hashPassword,
+            });
+
+            res.status(200).json({
+                message: "Password updated",
+            });
+        } catch (error) {
+            res.status(500).json({
+                message: "Error updating the password",
+                error,
+            });
+            return;
+        }
     }
 }
 
