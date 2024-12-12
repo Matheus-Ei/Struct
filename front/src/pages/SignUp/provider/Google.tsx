@@ -9,11 +9,11 @@ import Button from "components/Button";
 import Icon from "components/Icon";
 import User from "services/user";
 import { SignUpContext } from "../context";
-import useDefinedContext from "hooks/useDefinedContext";
+import useSafeContext from "hooks/useSafeContext";
 
 const GoogleSignUp = () => {
     const [accessToken, setAccessToken] = useState<string | null>(null);
-    const { setError } = useDefinedContext(SignUpContext);
+    const { setError } = useSafeContext(SignUpContext);
 
     const { data: response } = useUserProvider(accessToken, "google");
 

@@ -7,10 +7,10 @@ import Message from "components/Message";
 import Button from "components/Button";
 import Input from "components/Input";
 import { SignUpContext } from "../context";
-import useDefinedContext from "hooks/useDefinedContext";
+import useSafeContext from "hooks/useSafeContext";
 
 const Password = () => {
-    const useSignUpContext = useDefinedContext(SignUpContext);
+    const useSignUpContext = useSafeContext(SignUpContext);
     const { setPassword, setRePassword, error } = useSignUpContext;
 
     const navigate = useNavigate();
@@ -25,14 +25,14 @@ const Password = () => {
                 text="password..."
                 setValue={setPassword}
                 isPassword={true}
-                maxLength={80}
+                length={{ max: 80 }}
                 onEnter={signUp}
             />
             <Input
                 text="re-type password..."
                 setValue={setRePassword}
                 isPassword={true}
-                maxLength={80}
+                length={{ max: 80 }}
                 onEnter={signUp}
             />
 

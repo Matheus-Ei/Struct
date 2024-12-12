@@ -3,11 +3,11 @@ import clsx from "clsx";
 
 // Local
 import Input from "components/Input";
-import useDefinedContext from "hooks/useDefinedContext";
+import useSafeContext from "hooks/useSafeContext";
 import { CreateProjectContext } from "./context";
 
 const InputFields = () => {
-    const { title, description } = useDefinedContext(CreateProjectContext);
+    const { title, description } = useSafeContext(CreateProjectContext);
 
     const descriptionCss = clsx(
         "h-full w-[95%] pl-4 mb-3 pt-4",

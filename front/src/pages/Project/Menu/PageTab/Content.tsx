@@ -7,7 +7,7 @@ import { PageType } from "services/page/types";
 import { ProjectContext } from "pages/Project/context";
 import Emoji from "components/Emoji";
 import Icon from "components/Icon";
-import useDefinedContext from "hooks/useDefinedContext";
+import useSafeContext from "hooks/useSafeContext";
 import { PageTabContext } from "./context";
 
 interface ContentProps {
@@ -16,8 +16,8 @@ interface ContentProps {
 }
 
 const Content = ({ childrens, onContextMenu }: ContentProps) => {
-    const { selectedPage } = useDefinedContext(ProjectContext);
-    const { children, isHover, page } = useDefinedContext(PageTabContext);
+    const { selectedPage } = useSafeContext(ProjectContext);
+    const { children, isHover, page } = useSafeContext(PageTabContext);
 
     const isSelected = page.id === selectedPage.id;
 

@@ -1,6 +1,6 @@
 import { Context, useContext } from "react";
 
-const useDefinedContext = <T>(UnknownContext: Context<T>) => {
+const useSafeContext = <T>(UnknownContext: Context<T>) => {
     const context = useContext<T>(UnknownContext);
 
     if (context === undefined) {
@@ -12,4 +12,4 @@ const useDefinedContext = <T>(UnknownContext: Context<T>) => {
     return context;
 };
 
-export default useDefinedContext;
+export default useSafeContext;

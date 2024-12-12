@@ -30,7 +30,7 @@ const ContextPageMenu = ({
             show={showMenu}
             onClose={() => toggleShowMenu(false)}
             position={clickPosition}
-            translateY={true}
+            isTranslateY={true}
         >
             <div className="flex flex-col">
                 <button

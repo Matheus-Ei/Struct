@@ -1,5 +1,5 @@
 // Local
-import useDefinedContext from "hooks/useDefinedContext";
+import useSafeContext from "hooks/useSafeContext";
 import { PageType } from "services/page/types";
 import { ProjectContext } from "pages/Project/context";
 import PageTab from "./PageTab";
@@ -12,7 +12,7 @@ import Search from "./options/Search";
 import Share from "./options/Share";
 
 const Menu = () => {
-    const { menu } = useDefinedContext(ProjectContext);
+    const { menu } = useSafeContext(ProjectContext);
 
     const renderPages = (item: PageType, index: number) => (
         <PageTab item={item} key={index} />

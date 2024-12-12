@@ -7,7 +7,7 @@ import { ProjectContext } from "pages/Project/context";
 import { useAllPages } from "services/page/usePage";
 import { PageType } from "services/page/types";
 import SearchBar from "components/SearchBar";
-import useDefinedContext from "hooks/useDefinedContext";
+import useSafeContext from "hooks/useSafeContext";
 import PagesLayout from "./PagesLayout";
 
 const flattenPages = (pages?: PageType[] | null): PageType[] => {
@@ -37,7 +37,7 @@ interface SearchModalProps {
 }
 
 const SearchModal = ({ isOpen, toggleOpen }: SearchModalProps) => {
-    const { projectId, selectedPage } = useDefinedContext(ProjectContext);
+    const { projectId, selectedPage } = useSafeContext(ProjectContext);
 
     // Fetch all pages and format them to be flat
     const { data: allPages, refetch: refetchPages } = useAllPages(projectId);

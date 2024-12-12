@@ -2,6 +2,7 @@ const themes = [
     {
         default: {
             primary: "#1c1917",
+            "primary-content": "#ffffff",
             secondary: "#ffffff",
 
             accent: "#6b7280",

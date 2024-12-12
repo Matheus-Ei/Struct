@@ -5,7 +5,7 @@ import { createElement } from "react";
 import Undefined from "./modules/Undefined";
 import router from "./util/router";
 import { ProjectContext } from "./context";
-import useDefinedContext from "hooks/useDefinedContext";
+import useSafeContext from "hooks/useSafeContext";
 
 interface RouterType {
     endpoint: () => JSX.Element;
@@ -19,7 +19,7 @@ const getModule = (element: RouterType) => {
 };
 
 const Page = () => {
-    const { page } = useDefinedContext(ProjectContext);
+    const { page } = useSafeContext(ProjectContext);
 
     const module: Array<RouterType> = router.filter((item) => {
         if (!page.data) return false;

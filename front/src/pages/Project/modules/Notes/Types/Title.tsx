@@ -2,11 +2,11 @@
 import { KeyboardEvent, useEffect, useMemo, useRef, useState } from "react";
 
 // Local
-import useDefinedContext from "hooks/useDefinedContext";
+import useSafeContext from "hooks/useSafeContext";
 import { handleKeyDown } from "../utils/Events";
-import { NotesContext } from "../Body";
 import { Text } from "../utils/Text";
 import Cursor from "modules/Cursor";
+import { NotesContext } from "../context";
 
 interface TitleProps {
     note: string;
@@ -24,7 +24,7 @@ const Title = ({ note, index, titleType }: TitleProps) => {
         cursor.position = position;
     }, [position, cursor]);
 
-    const useNotesContext = useDefinedContext(NotesContext);
+    const useNotesContext = useSafeContext(NotesContext);
     const textEditor = new Text(useNotesContext);
 
     const onChange = () => {

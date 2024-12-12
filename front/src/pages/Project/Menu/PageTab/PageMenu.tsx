@@ -3,12 +3,12 @@ import { deletePage } from "pages/Project/util/events";
 import ContextMenu from "components/ContextMenu";
 import { ProjectContext } from "pages/Project/context";
 import Icon from "components/Icon";
-import useDefinedContext from "hooks/useDefinedContext";
+import useSafeContext from "hooks/useSafeContext";
 import { PageTabContext } from "./context";
 
 const PageMenu = () => {
-    const useProjectContext = useDefinedContext(ProjectContext);
-    const { menu, clickPosition, page } = useDefinedContext(PageTabContext);
+    const useProjectContext = useSafeContext(ProjectContext);
+    const { menu, clickPosition, page } = useSafeContext(PageTabContext);
 
     return (
         <ContextMenu

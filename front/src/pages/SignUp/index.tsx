@@ -11,12 +11,12 @@ import { SignUpContext } from "./context";
 const SignUp = () => {
     const [step, setStep] = useState<number>(0);
 
-    const [name, setName] = useState<string>();
-    const [mail, setMail] = useState<string>();
-    const [nickname, setNickname] = useState<string>();
+    const [name, setName] = useState<string>("");
+    const [mail, setMail] = useState<string>("");
+    const [nickname, setNickname] = useState<string>("");
 
-    const [password, setPassword] = useState<string>();
-    const [rePassword, setRePassword] = useState<string>();
+    const [password, setPassword] = useState<string>("");
+    const [rePassword, setRePassword] = useState<string>("");
 
     const [error, setError] = useState<ErrorType>({
         message: "",

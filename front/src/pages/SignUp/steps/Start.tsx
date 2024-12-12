@@ -9,7 +9,7 @@ import Button from "components/Button";
 import Input from "components/Input";
 import { SignUpContext } from "../context";
 import User from "services/user";
-import useDefinedContext from "hooks/useDefinedContext";
+import useSafeContext from "hooks/useSafeContext";
 
 interface ErrorType {
     message: string;
@@ -27,7 +27,7 @@ const Start = () => {
         isError: false,
     });
 
-    const useSignUpContext = useDefinedContext(SignUpContext);
+    const useSignUpContext = useSafeContext(SignUpContext);
     const {
         setNickname,
         nickname,
@@ -84,7 +84,7 @@ const Start = () => {
                 text="name..."
                 setValue={setName}
                 onEnter={nextStep}
-                maxLength={80}
+                length={{ max: 80 }}
                 defaultValue={name}
             />
 
@@ -93,7 +93,7 @@ const Start = () => {
                     text="nickname..."
                     setValue={setNickname}
                     onEnter={nextStep}
-                    maxLength={35}
+                    length={{ max: 35 }}
                     defaultValue={nickname}
                     error={{
                         isError: nickError.isError,
@@ -107,7 +107,7 @@ const Start = () => {
                     text="mail..."
                     setValue={setMail}
                     onEnter={nextStep}
-                    maxLength={120}
+                    length={{ max: 120 }}
                     defaultValue={mail}
                     error={{
                         isError: mailError.isError,

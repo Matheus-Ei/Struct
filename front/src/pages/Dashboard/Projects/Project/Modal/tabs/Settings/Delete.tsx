@@ -8,7 +8,7 @@ import useToggle from "hooks/useToggle";
 import Project from "services/project";
 import ConfirmModal from "components/ConfirmModal";
 import Point from "components/Point";
-import useDefinedContext from "hooks/useDefinedContext";
+import useSafeContext from "hooks/useSafeContext";
 
 interface DeleteProps {
     projectId: number;
@@ -16,7 +16,7 @@ interface DeleteProps {
 }
 
 const Delete = ({ projectId, setModal }: DeleteProps) => {
-    const { refetch } = useDefinedContext(ProjectsContext);
+    const { refetch } = useSafeContext(ProjectsContext);
 
     const [wantDelete, toggleWantDelete] = useToggle(false);
     const [showConfirmDelete, toggleShowConfirmDelete] = useToggle(false);

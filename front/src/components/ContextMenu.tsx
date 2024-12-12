@@ -8,20 +8,20 @@ import Event from "modules/Event";
 interface ContextMenuProps {
     children: JSX.Element;
     onClose: () => void;
+    show: boolean;
     position: { x: number; y: number };
     isAbsolute?: boolean;
-    show: boolean;
-    translateY?: boolean;
+    isTranslateY?: boolean;
     className?: string;
 }
 
 const ContextMenu = ({
     children,
-    show,
     onClose,
+    show,
     position,
     isAbsolute,
-    translateY,
+    isTranslateY,
     className,
 }: ContextMenuProps) => {
     const menuRef = useRef<HTMLDivElement>(null);
@@ -53,7 +53,7 @@ const ContextMenu = ({
         className
     );
 
-    const translation = translateY
+    const translation = isTranslateY
         ? "translate(0%, -100%)"
         : "translate(0%, 0%)";
     const positionCss = isAbsolute ? "absolute" : "fixed";

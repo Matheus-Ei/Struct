@@ -6,10 +6,10 @@ import { ProjectContext } from "pages/Project/context";
 import EditableField from "components/EditableField";
 import Emoji from "components/Emoji";
 import Page from "services/page";
-import useDefinedContext from "hooks/useDefinedContext";
+import useSafeContext from "hooks/useSafeContext";
 
 const Header = () => {
-    const { page, selectedPage, menu } = useDefinedContext(ProjectContext);
+    const { page, selectedPage, menu } = useSafeContext(ProjectContext);
     const [emoji, setEmoji] = useState<string | undefined>();
 
     useEffect(() => {

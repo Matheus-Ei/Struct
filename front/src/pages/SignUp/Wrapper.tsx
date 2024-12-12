@@ -5,14 +5,14 @@ import GoogleSignUp from "./provider/Google";
 import Card from "components/Card";
 import Icon from "components/Icon";
 import { SignUpContext } from "./context";
-import useDefinedContext from "hooks/useDefinedContext";
+import useSafeContext from "hooks/useSafeContext";
 
 interface WrapperSignUpProps {
     children: JSX.Element;
 }
 
 const WrapperSignUp = ({ children }: WrapperSignUpProps) => {
-    const { step, setStep } = useDefinedContext(SignUpContext);
+    const { step, setStep } = useSafeContext(SignUpContext);
 
     const prevStep = () => {
         goPrevStep(setStep);

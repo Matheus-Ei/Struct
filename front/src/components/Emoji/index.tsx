@@ -49,7 +49,7 @@ const Emoji = ({
     if (!emoji)
         return (
             <div className={css} onClick={handleClick}>
-                <Icon name="IoIosDocument" library="io" />
+                <Icon value={{ name: "IoIosDocument", library: "io" }} />
                 <EmojiSelector
                     setEmoji={setNewEmoji}
                     toggleShow={toggleSelector}

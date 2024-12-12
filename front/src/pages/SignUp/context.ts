@@ -8,20 +8,20 @@ export interface SignUpContextType {
     step: number;
     setStep: SetStateType<number>;
 
-    name: string | undefined;
-    setName: SetStateType<string | undefined>;
+    name: string;
+    setName: SetStateType<string>;
 
-    mail: string | undefined;
-    setMail: SetStateType<string | undefined>;
+    mail: string;
+    setMail: SetStateType<string>;
 
-    nickname: string | undefined;
-    setNickname: SetStateType<string | undefined>;
+    nickname: string;
+    setNickname: SetStateType<string>;
 
-    password: string | undefined;
-    setPassword: SetStateType<string | undefined>;
+    password: string;
+    setPassword: SetStateType<string>;
 
-    rePassword: string | undefined;
-    setRePassword: SetStateType<string | undefined>;
+    rePassword: string;
+    setRePassword: SetStateType<string>;
 
     error: ErrorType;
     setError: SetStateType<ErrorType>;

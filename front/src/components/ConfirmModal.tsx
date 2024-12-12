@@ -14,11 +14,7 @@ interface ConfirmModalProps {
     cancelText?: string;
 }
 
-const css = clsx(
-    "relative w-96 h-24 sm:w-96 sm:h-24",
-    "flex flex-col items-center justify-center",
-    "rounded-btn"
-);
+const css = clsx("w-96 h-24 sm:w-96 sm:h-24", "items-center justify-center");
 
 const ConfirmModal = ({
     isOpen,

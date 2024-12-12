@@ -1,14 +1,14 @@
 // Local
 import Button from "components/Button";
-import useDefinedContext from "hooks/useDefinedContext";
+import useSafeContext from "hooks/useSafeContext";
 import Project from "services/project";
 import { ProjectsContext } from "../../context";
 import { CreateProjectContext } from "./context";
 
 const CreateButton = () => {
-    const { refetch } = useDefinedContext(ProjectsContext);
+    const { refetch } = useSafeContext(ProjectsContext);
     const { title, description, setModal } =
-        useDefinedContext(CreateProjectContext);
+        useSafeContext(CreateProjectContext);
 
     const handleCreate = async () => {
         if (!title.value) {
