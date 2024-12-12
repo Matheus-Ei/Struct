@@ -1,12 +1,12 @@
 // Local
 import EditableField from "components/EditableField";
 import Emoji from "components/Emoji";
-import useDefinedContext from "hooks/useDefinedContext";
+import useSafeContext from "hooks/useSafeContext";
 import { ProjectContext } from "pages/Project/context";
 import Page from "services/page";
 
 const Header = () => {
-    const { page, selectedPage, menu } = useDefinedContext(ProjectContext);
+    const { page, selectedPage, menu } = useSafeContext(ProjectContext);
 
     const update = async (
         value: string | null | undefined,
@@ -34,16 +34,17 @@ const Header = () => {
                 />
 
                 <EditableField
-                    classNameEditing="text-3xl font-bold"
-                    classNameNotEditing="text-4xl font-bold"
+                    className={{
+                        edit: "text-3xl font-bold",
+                        normal: "text-4xl font-bold",
+                    }}
                     defaultValue={page.data?.name}
                     onUpdate={(value) => update(value, "name")}
                 />
             </div>
 
             <EditableField
-                classNameEditing="text-lg"
-                classNameNotEditing="text-lg"
+                className={{ edit: "text-lg", normal: "text-lg" }}
                 defaultValue={page.data?.description}
                 onUpdate={(value) => update(value, "description")}
             />

@@ -52,7 +52,7 @@ const Page = ({ id, name, emoji, refetch }: PageProps) => {
             <EditableField
                 defaultValue={name}
                 onUpdate={updateName}
-                classNameNotEditing="w-full px-1 line-clamp-1 select-none"
+                className={{ normal: "w-full px-1 line-clamp-1 select-none" }}
             />
 
             <ContextPageMenu

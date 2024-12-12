@@ -6,15 +6,15 @@ import clsx from "clsx";
 import { addPage } from "pages/Project/util/events";
 import { ProjectContext } from "pages/Project/context";
 import Icon from "components/Icon";
-import useDefinedContext from "hooks/useDefinedContext";
+import useSafeContext from "hooks/useSafeContext";
 import { PageTabContext } from "./context";
 
 const HoverButtons = () => {
-    const useProjectContext = useDefinedContext(ProjectContext);
+    const useProjectContext = useSafeContext(ProjectContext);
     const { selectedPage } = useProjectContext;
 
     const { isHover, menu, clickPosition, page, children } =
-        useDefinedContext(PageTabContext);
+        useSafeContext(PageTabContext);
 
     if (!isHover) return null;
     const isSelected = selectedPage.id === page.id;

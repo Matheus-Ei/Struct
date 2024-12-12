@@ -1,5 +1,5 @@
 // Libraries
-import useDefinedContext from "hooks/useDefinedContext";
+import useSafeContext from "hooks/useSafeContext";
 import { useEffect } from "react";
 
 // Local
@@ -14,7 +14,7 @@ interface TextareasProps {
 }
 
 const Textareas = ({ note, type, index }: TextareasProps) => {
-    const { notes, bodyRef } = useDefinedContext(NotesContext);
+    const { notes, bodyRef } = useSafeContext(NotesContext);
 
     useEffect(() => {
         notes.set((prev) => {

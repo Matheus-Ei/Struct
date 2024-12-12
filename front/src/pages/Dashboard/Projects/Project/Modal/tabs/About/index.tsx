@@ -4,12 +4,12 @@ import { useProject } from "services/project/useProject";
 import Project from "services/project";
 import { TabProps } from "../../utils/types";
 import Field from "./Field";
-import useDefinedContext from "hooks/useDefinedContext";
+import useSafeContext from "hooks/useSafeContext";
 import MoreInfo from "./MoreInfo";
 
 const About = ({ projectId }: TabProps) => {
     const { data: project } = useProject(projectId);
-    const { refetch } = useDefinedContext(ProjectsContext);
+    const { refetch } = useSafeContext(ProjectsContext);
 
     const updateTitle = async (newValue: string) => {
         await Project.edit(projectId, newValue, undefined, refetch);

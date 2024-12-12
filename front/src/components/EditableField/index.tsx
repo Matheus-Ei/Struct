@@ -1,30 +1,27 @@
 // Libraries
-import { KeyboardEvent, MouseEvent, useRef, useState } from "react";
+import { FocusEvent, KeyboardEvent, MouseEvent, useRef, useState } from "react";
 import { twMerge } from "tailwind-merge";
 import clsx from "clsx";
 
 // Local
 import Cursor from "modules/Cursor";
 import Event from "modules/Event";
-import Icon from "./Icon";
+import Title from "./Title";
 
 interface EditableFieldProps {
     defaultValue: string | undefined;
     onUpdate: (value: string) => Promise<void>;
-    classNameEditing?: string;
-    classNameNotEditing?: string;
+    className?: { edit?: string; normal?: string };
     title?: {
-        withIcon?: boolean;
-        text: string;
-        iconPosition?: "left" | "right";
+        text?: string;
+        icon?: { position: "left" | "right"; name: string; library: string };
     };
 }
 
 const EditableField = ({
     defaultValue,
     onUpdate,
-    classNameEditing,
-    classNameNotEditing,
+    className,
     title,
 }: EditableFieldProps) => {
     const [isEditing, setIsEditing] = useState<boolean>(false);
@@ -91,33 +88,20 @@ const EditableField = ({
         setIsEditing(false);
     };
 
-    const className = clsx("w-fit h-fit text-base-content outline-none", {
-        "bg-base-200 rounded-btn p-1": isEditing,
-        "bg-base-100 cursor-pointer select-none": !isEditing,
-        [classNameEditing as string]: isEditing,
-        [classNameNotEditing as string]: !isEditing,
-    });
-    const css = twMerge(className);
+    const css = twMerge(
+        clsx("w-fit h-fit text-base-content outline-none", {
+            "bg-base-200 rounded-btn p-1": isEditing,
+            "bg-base-100 cursor-pointer select-none": !isEditing,
+            [className?.edit as string]: isEditing,
+            [className?.normal as string]: !isEditing,
+        })
+    );
 
     const innerHTML = { __html: defaultValue ? defaultValue : "" };
 
     return (
         <div>
-            {title && (
-                <div className="flex items-center gap-x-2">
-                    {title.iconPosition === "right" && title.withIcon && (
-                        <Icon value={{ name: "MdEdit", library: "md" }} />
-                    )}
-
-                    <h1 className="font-bold italic select-none">
-                        {title.text}
-                    </h1>
-
-                    {title.iconPosition !== "right" && title.withIcon && (
-                        <Icon value={{ name: "MdEdit", library: "md" }} />
-                    )}
-                </div>
-            )}
+            <Title {...title} />
 
             <div
                 contentEditable={isEditing}

@@ -22,8 +22,10 @@ const FirstRow = ({ user, update }: FirstRowProps) => {
                     defaultValue={user?.name}
                     onUpdate={(value) => update(value, "name")}
                     title={{ text: "Name" }}
-                    classNameEditing="text-3xl font-bold"
-                    classNameNotEditing="text-4xl font-bold"
+                    className={{
+                        edit: "text-3xl font-bold",
+                        normal: "text-4xl font-bold",
+                    }}
                 />
 
                 <p className="text-neutral italic">@{user?.nickname}</p>

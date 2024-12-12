@@ -27,8 +27,7 @@ const Field = ({ title, value, type, onUpdate }: FieldProps) => {
             <EditableField
                 defaultValue={value}
                 onUpdate={onUpdate}
-                classNameEditing={cssEditing}
-                classNameNotEditing={cssNotEditing}
+                className={{ edit: cssEditing, normal: cssNotEditing }}
                 title={{ text: title ?? "Error" }}
             />
         </div>

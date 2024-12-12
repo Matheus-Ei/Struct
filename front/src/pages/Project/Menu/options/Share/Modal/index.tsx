@@ -1,5 +1,5 @@
 // Local
-import useDefinedContext from "hooks/useDefinedContext";
+import useSafeContext from "hooks/useSafeContext";
 import { ProjectContext } from "pages/Project/context";
 import Modal from "components/Modal";
 
@@ -14,7 +14,7 @@ interface ShareModalProps {
 }
 
 const ShareModal = ({ isOpen, toggleOpen }: ShareModalProps) => {
-    const { projectId } = useDefinedContext(ProjectContext);
+    const { projectId } = useSafeContext(ProjectContext);
 
     const { data: rawShares, refetch: refetchUsers } =
         useProjectShare(projectId);

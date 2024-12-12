@@ -1,6 +1,6 @@
 // Local
 import Icon from "components/Icon";
-import useDefinedContext from "hooks/useDefinedContext";
+import useSafeContext from "hooks/useSafeContext";
 import { ProjectContext } from "pages/Project/context";
 import Page from "services/page";
 import { IconType } from "types/global";
@@ -12,7 +12,7 @@ interface ModuleProps {
 }
 
 const Module = ({ name, description, icon }: ModuleProps) => {
-    const { selectedPage, page } = useDefinedContext(ProjectContext);
+    const { selectedPage, page } = useSafeContext(ProjectContext);
 
     const handleClick = () => {
         if (!selectedPage.id) return;

@@ -1,5 +1,5 @@
 // Local
-import useDefinedContext from "hooks/useDefinedContext";
+import useSafeContext from "hooks/useSafeContext";
 import { PageType } from "services/page/types";
 import PageTab from ".";
 import { PageTabContext } from "./context";
@@ -9,7 +9,7 @@ const renderChildrens = (item: PageType, index: number) => (
 );
 
 const Childrens = () => {
-    const { page, children } = useDefinedContext(PageTabContext);
+    const { page, children } = useSafeContext(PageTabContext);
 
     if (!children.show) return null;
 
