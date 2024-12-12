@@ -4,9 +4,9 @@ import { KeyboardEvent, useEffect, useMemo, useRef, useState } from "react";
 // Local
 import useDefinedContext from "hooks/useDefinedContext";
 import { handleKeyDown } from "../utils/Events";
-import { NotesContext } from "../Body";
 import { Text } from "../utils/Text";
 import Cursor from "modules/Cursor";
+import { NotesContext } from "../context";
 
 interface TitleProps {
     note: string;

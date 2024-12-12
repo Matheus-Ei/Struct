@@ -1,19 +1,21 @@
 // Local
-import { NotesContextType, NotesTextType } from "./types";
+import { NotesTextType } from "./types";
 import { SetStateType } from "types/global";
 import Cursor from "modules/Cursor";
+import { NotesContextType } from "../context";
 
 export class Text {
-    private setNotes: SetStateType<Array<NotesTextType>>;
-    private notes: Array<NotesTextType>;
+    private notes: {
+        value: Array<NotesTextType>;
+        set: SetStateType<Array<NotesTextType>>;
+    };
 
     constructor(useNotesContext: NotesContextType) {
-        this.setNotes = useNotesContext.setNotes;
         this.notes = useNotesContext.notes;
     }
 
     public setType(index: number, type: string) {
-        this.setNotes((prev) => {
+        this.notes.set((prev) => {
             const newNotes = [...prev];
             const { note, element } = newNotes[index];
             newNotes[index] = { note, type, element };
@@ -54,15 +56,15 @@ export class Text {
     }
 
     public setFocus(index: number) {
-        if (!this.notes[index]) return null;
-        const element = this.notes[index].element;
+        if (!this.notes.value[index]) return null;
+        const element = this.notes.value[index].element;
         const cursor = new Cursor(element);
         cursor.focus();
         cursor.move("end");
     }
 
     public setNote(index: number, note: string) {
-        this.setNotes((prev) => {
+        this.notes.set((prev) => {
             const newNotes = [...prev];
             const { type, element } = newNotes[index];
             newNotes[index] = { note, type, element };
@@ -86,7 +88,7 @@ export class Text {
     }
 
     public addLine(index: number) {
-        this.setNotes((prev) => {
+        this.notes.set((prev) => {
             const newNotes = [...prev];
             const { type, note, element } = newNotes[index];
 
@@ -96,7 +98,7 @@ export class Text {
     }
 
     public addNote(index: number) {
-        this.setNotes((prev) => {
+        this.notes.set((prev) => {
             const newNotes = [...prev];
             newNotes.splice(index + 1, 0, {
                 note: "",
@@ -108,7 +110,7 @@ export class Text {
     }
 
     public removeNote(index: number) {
-        this.setNotes((prev) => {
+        this.notes.set((prev) => {
             const newNotes = [...prev];
             newNotes.splice(index, 1);
             return newNotes;

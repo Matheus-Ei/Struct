@@ -1,54 +1,34 @@
 // Libraries
-import { createContext, MouseEvent, useRef, useState } from "react";
+import { MouseEvent, RefObject, useRef, useState } from "react";
+import { NotesContext } from "./context";
+import { NotesTextType } from "./utils/types";
 
-// Local
-import { NotesContextType, NotesTextType } from "./utils/types";
-import Textareas from "./Textareas";
-
-export const NotesContext = createContext<NotesContextType | undefined>(
-    undefined
-);
+const sendFocus = (event: MouseEvent, bodyRef: RefObject<HTMLElement>) => {
+    if (event.target === event.currentTarget) {
+        const firstElement = bodyRef.current?.children[0] as HTMLElement;
+        firstElement?.focus();
+    }
+};
 
 const Body = () => {
+    const bodyRef = useRef<HTMLDivElement>(null);
+
     const [notes, setNotes] = useState<Array<NotesTextType>>([
         { note: "", type: "paragraph", element: null },
     ]);
 
-    const mainDivRef = useRef<HTMLDivElement>(null);
-
-    const sendFocus = (event: MouseEvent) => {
-        if (event.target === event.currentTarget) {
-            const firstElement = mainDivRef.current?.children[0] as HTMLElement;
-            firstElement.focus();
-        }
-    };
-
-    const renderNotes = (item: NotesTextType, index: number) => {
-        return (
-            <Textareas
-                note={item.note}
-                type={item.type}
-                index={index}
-                key={index}
-            />
-        );
+    const contextValue = {
+        notes: { value: notes, set: setNotes },
+        bodyRef,
     };
 
     return (
-        <NotesContext.Provider
-            value={{
-                notes,
-                setNotes,
-                mainDivRef,
-            }}
-        >
+        <NotesContext.Provider value={contextValue}>
             <div
-                ref={mainDivRef}
+                ref={bodyRef}
                 className="flex flex-col gap-1 w-full h-3/4"
-                onClick={sendFocus}
-            >
-                {notes.map(renderNotes)}
-            </div>
+                onClick={(event) => sendFocus(event, bodyRef)}
+            ></div>
         </NotesContext.Provider>
     );
 };
