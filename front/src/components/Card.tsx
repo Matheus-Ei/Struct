@@ -10,7 +10,7 @@ const Card = ({ children, className }: CardProps) => {
     const css = twMerge(
         "w-fit h-fit p-4",
         "flex flex-col items-center justify-center",
-        "border rounded-box border-primary bg-base-100",
+        "border rounded-box border-neutral bg-base-100",
         className
     );
 

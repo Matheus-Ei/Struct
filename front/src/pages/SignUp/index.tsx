@@ -42,7 +42,7 @@ const SignUp = () => {
 
     return (
         <SignUpContext.Provider value={contextValue}>
-            <div className="flex justify-center items-center w-screen h-[97vh]">
+            <div className="flex justify-center items-center w-screen h-screen bg-base-300">
                 <Wrapper>
                     <>
                         {step === 0 && <Start />}

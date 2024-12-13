@@ -47,9 +47,9 @@ const ContextMenu = ({
     if (!show) return null;
 
     const css = twMerge(
-        "p-[10px] z-50",
+        "px-[10px] py-[5px] z-50",
         "flex flex-col items-center justify-center",
-        "bg-base-100 border rounded-btn border-primary",
+        "bg-base-100 border rounded-md border-neutral",
         className
     );
 

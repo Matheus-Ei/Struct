@@ -91,7 +91,7 @@ const EditableField = ({
     const css = twMerge(
         clsx("w-fit h-fit text-base-content outline-none", {
             "bg-base-200 rounded-btn p-1": isEditing,
-            "bg-base-100 cursor-pointer select-none": !isEditing,
+            "bg-base-100 cursor-pointer select-none hover:italic": !isEditing,
             [className?.edit as string]: isEditing,
             [className?.normal as string]: !isEditing,
         })

@@ -27,7 +27,7 @@ const Login = () => {
         );
 
     return (
-        <div className="w-screen h-[97vh] flex items-center justify-center">
+        <div className="w-screen h-screen flex items-center justify-center bg-base-300">
             <Card>
                 <div className="flex flex-col items-center justify-center w-[25vw] py-6 px-4">
                     <Logo className="text-primary w-full h-fit mb-4" />

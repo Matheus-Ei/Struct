@@ -3,12 +3,12 @@ import { createContext, RefObject } from "react";
 import { SetStateType } from "types/global";
 
 // Local
-import { NotesTextType } from "./utils/types";
+import { NodeElementType } from "./types";
 
 export interface NotesContextType {
-    notes: {
-        value: Array<NotesTextType>;
-        set: SetStateType<Array<NotesTextType>>;
+    nodes: {
+        value: Array<NodeElementType>;
+        set: SetStateType<Array<NodeElementType>>;
     };
 
     bodyRef: RefObject<HTMLDivElement>;

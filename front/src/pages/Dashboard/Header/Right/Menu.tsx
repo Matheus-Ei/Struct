@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 // Local
 import ContextMenu from "components/ContextMenu";
-import Icon from "components/Icon";
+import Point from "components/Point";
 
 interface MenuProps {
     showMenu: boolean;
@@ -20,24 +20,20 @@ const Menu = ({ showMenu, toggleShowMenu, position: { x, y } }: MenuProps) => {
             position={{ x: x - 100, y: y - 45 }}
             show={showMenu}
         >
-            <div className="flex flex-col items-start justify-center">
-                <div
-                    className="flex items-center justify-center gap-x-2 cursor-pointer select-none text-lg"
+            <div className="flex flex-col items-start justify-center gap-y-1">
+                <Point
+                    icon={{ name: "FaUser", library: "fa6" }}
+                    text="Profile"
+                    className="m-0 p-0"
                     onClick={() => navigate("/profile")}
-                >
-                    <Icon value={{ name: "FaUser", library: "fa6" }} />
+                />
 
-                    <h1>Profile</h1>
-                </div>
-
-                <div
-                    className="flex items-center justify-center gap-x-2 cursor-pointer select-none text-lg"
+                <Point
+                    icon={{ name: "IoMdSettings", library: "io" }}
+                    text="Settings"
+                    className="m-0 p-0"
                     onClick={() => navigate("/settings")}
-                >
-                    <Icon value={{ name: "IoMdSettings", library: "io" }} />
-
-                    <h1>Settings</h1>
-                </div>
+                />
             </div>
         </ContextMenu>
     );

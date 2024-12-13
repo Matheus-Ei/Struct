@@ -3,45 +3,42 @@ import { useEffect, useMemo, useRef, useState } from "react";
 
 // Local
 import useSafeContext from "hooks/useSafeContext";
-import { handleKeyDown } from "../utils/Events";
-import { Text } from "../utils/Text";
+import { NotesContext } from "../../context";
 import Cursor from "modules/Cursor";
-import { NotesContext } from "../context";
+import { Text } from "./utils/Text";
+import { NodeElementType } from "../../types";
 
-interface ParagraphProps {
-    note: string;
-    index: number;
-}
-
-const Paragraph = ({ note, index }: ParagraphProps) => {
+const Paragraph = ({ content, order, type }: NodeElementType) => {
     const [position, setPosition] = useState<number>(0);
+
     const divRef = useRef<HTMLDivElement | null>(null);
     const cursor = useMemo(() => new Cursor(divRef.current), [divRef]);
 
+    // Sets the cursor position
+    // without this, the cursor blinks at the start of the text
     useEffect(() => {
         cursor.position = position;
     }, [position, cursor]);
 
     const useNotesContext = useSafeContext(NotesContext);
-    const textEditor = new Text(useNotesContext);
+    const editor = new Text(useNotesContext);
 
     const handleChange = () => {
+        // Update the cursor last position
         setPosition(cursor.position);
-        if (divRef.current)
-            textEditor.handleSetText(index, divRef.current.innerHTML);
+        // Sets the text in the node array to correspond to the text in the div
+        if (divRef.current) editor.setText(order, divRef.current.innerHTML);
     };
 
-    const innerHTML = { __html: note };
-
+    const innerHTML = { __html: content };
     return (
         <div
             contentEditable
             dangerouslySetInnerHTML={innerHTML}
             ref={divRef}
-            className="w-full h-auto bg-base-100 resize-none outline-none"
-            onKeyDown={(event) => handleKeyDown(event, index, textEditor)}
+            className="w-full h-auto bg-base-200 rounded-btn px-2 py-0.5 resize-none outline-none"
             onInput={handleChange}
-        ></div>
+        />
     );
 };
 

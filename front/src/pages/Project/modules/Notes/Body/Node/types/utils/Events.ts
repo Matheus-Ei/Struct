@@ -14,7 +14,7 @@ export const handleKeyDown = (
         event.preventDefault();
         textEditor.addNote(index);
 
-        textEditor.setFocus(index + 1);
+        // textEditor.setFocus(index + 1);
     }
 
     // Delete textArea
@@ -24,14 +24,14 @@ export const handleKeyDown = (
         event.preventDefault();
         textEditor.removeNote(index);
 
-        textEditor.setFocus(index - 1);
+        // textEditor.setFocus(index - 1);
     }
 
     // Arrow down
     if (event.key === "ArrowDown") {
         event.preventDefault();
 
-        textEditor.setFocus(index + 1);
+        // textEditor.setFocus(index + 1);
     }
 
     // Arrow up
@@ -40,7 +40,7 @@ export const handleKeyDown = (
 
         event.preventDefault();
 
-        textEditor.setFocus(index - 1);
+        // textEditor.setFocus(index - 1);
     }
 
     // Make the textarea bigger
