@@ -1,5 +1,5 @@
 // Libraries
-import { useEffect, useMemo, useRef, useState } from "react";
+import { KeyboardEvent, useEffect, useMemo, useRef, useState } from "react";
 import clsx from "clsx";
 
 // Local
@@ -11,16 +11,16 @@ import Operations from "../utils/Operations";
 import useToggle from "hooks/useToggle";
 
 const Paragraph = ({ content, order }: NodeElementType) => {
-    const { nodes, nodesUpdater } = useSafeContext(NotesContext);
-    const operations = new Operations(nodes);
+    const { nodes, nodesUpdater, bodyRef } = useSafeContext(NotesContext);
     const [isSelected, toggleSelected] = useToggle(false);
     const [isHovered, toggleHovered] = useToggle(false);
+
+    const operations = new Operations(nodes);
 
     const divRef = useRef<HTMLDivElement | null>(null);
     const [position, setPosition] = useState<number>(0);
 
     const cursor = useMemo(() => new Cursor(divRef.current), [divRef]);
-    console.log(content);
 
     // Sets the cursor position
     // without this, the cursor blinks at the start of the text
@@ -56,6 +56,35 @@ const Paragraph = ({ content, order }: NodeElementType) => {
         }, 0);
     };
 
+    const handleKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
+        const content = nodes.value[order].content;
+
+        if (e.key === "ArrowDown") {
+            e.preventDefault();
+            operations.nextNode(order, bodyRef, cursor.position);
+        } else if (e.key === "ArrowUp") {
+            e.preventDefault();
+            operations.previousNode(order, bodyRef, cursor.position);
+        }
+
+        if (e.key === "Enter" && e.shiftKey) {
+            return;
+        } else if (e.key === "Enter") {
+            e.preventDefault();
+            operations.add(order);
+            operations.nextNode(order, bodyRef);
+        }
+
+        if (
+            e.key === "Backspace" &&
+            (content.trim() === "" || content.trim() === "<br>")
+        ) {
+            e.preventDefault();
+            operations.remove(order);
+            operations.previousNode(order, bodyRef);
+        }
+    };
+
     const css = clsx(
         "w-full h-auto bg-base-100 rounded-btn px-2 py-0.5 resize-none outline-none cursor-text",
         {
@@ -77,6 +106,7 @@ const Paragraph = ({ content, order }: NodeElementType) => {
             onBlur={() => toggleSelected(false)}
             onMouseEnter={() => toggleHovered(true)}
             onMouseLeave={() => toggleHovered(false)}
+            onKeyDown={handleKeyDown}
         />
     );
 };

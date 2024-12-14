@@ -1,4 +1,6 @@
 // Local
+import Cursor from "modules/Cursor";
+import { RefObject } from "react";
 import { NodeState } from "../../context";
 import { NodeElementType } from "../../types";
 
@@ -103,6 +105,51 @@ class Operations {
 
             return updated;
         });
+    }
+
+    // Navigate to the next node
+    public nextNode(
+        currentOrder: number,
+        bodyRef: RefObject<HTMLDivElement>,
+        cursorPosition?: number
+    ) {
+        if (currentOrder === this.node.value.length - 1 || !bodyRef.current)
+            return;
+
+        // Click on the next node
+        const node = bodyRef.current.children[currentOrder + 1]
+            .children[1] as HTMLElement;
+        node.click();
+
+        // Move the cursor to the appropriate position
+        const cursorHandler = new Cursor(node);
+        if (cursorPosition) {
+            cursorHandler.position = cursorPosition || 0;
+        } else {
+            cursorHandler.move("start");
+        }
+    }
+
+    // Navigate to the previous node
+    public previousNode(
+        currentOrder: number,
+        bodyRef: RefObject<HTMLDivElement>,
+        cursorPosition?: number
+    ) {
+        if (!bodyRef.current || currentOrder === 0) return;
+
+        // Navigate to the previous node
+        const node = bodyRef.current.children[currentOrder - 1]
+            .children[1] as HTMLElement;
+        node.click();
+
+        // Move the cursor to the appropriate position
+        const cursorHandler = new Cursor(node);
+        if (cursorPosition) {
+            cursorHandler.position = cursorPosition;
+        } else {
+            cursorHandler.move("end");
+        }
     }
 
     // Update the content of a node

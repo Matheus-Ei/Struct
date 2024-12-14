@@ -43,7 +43,7 @@ const Body = () => {
 
     return (
         <NotesContext.Provider value={contextValue}>
-            <div className="flex flex-col gap-1 w-full h-3/4">
+            <div className="flex flex-col gap-1 w-full h-3/4" ref={bodyRef}>
                 {renderNodes}
             </div>
         </NotesContext.Provider>
