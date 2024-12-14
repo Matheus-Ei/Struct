@@ -2,11 +2,15 @@
 import AddButton from "./AddButton";
 import RemoveButton from "./RemoveButton";
 
-const LateralBar = () => {
+interface LateralBarProps {
+    order: number;
+}
+
+const LateralBar = ({ order }: LateralBarProps) => {
     return (
         <div className="flex mr-4">
-            <AddButton />
-            <RemoveButton />
+            <AddButton order={order} />
+            <RemoveButton order={order} />
         </div>
     );
 };

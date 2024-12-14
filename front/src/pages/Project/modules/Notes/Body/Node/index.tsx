@@ -1,5 +1,7 @@
+// Library
+import { createElement, useMemo } from "react";
+
 // Local
-import { useMemo } from "react";
 import LateralBar from "./LateralBar";
 import typesRouter from "./typesRouter";
 
@@ -15,13 +17,16 @@ const Node = ({ content, type, order }: NodeProps) => {
         const node = typesRouter.find((item) => item.type === type);
         if (!node) return null;
 
-        return <node.element content={content} order={order} type={type} />;
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [type, order]);
+        return createElement(node.element, {
+            content,
+            order,
+            type,
+        });
+    }, [content, type, order]);
 
     return (
         <div className="flex items-center justify-center w-full">
-            <LateralBar />
+            <LateralBar order={order} />
 
             {element}
         </div>

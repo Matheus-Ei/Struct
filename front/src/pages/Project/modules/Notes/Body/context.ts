@@ -5,11 +5,13 @@ import { SetStateType } from "types/global";
 // Local
 import { NodeElementType } from "./types";
 
+export interface NodeState {
+    value: Array<NodeElementType>;
+    set: SetStateType<Array<NodeElementType>>;
+}
+
 export interface NotesContextType {
-    nodes: {
-        value: Array<NodeElementType>;
-        set: SetStateType<Array<NodeElementType>>;
-    };
+    nodes: NodeState;
 
     bodyRef: RefObject<HTMLDivElement>;
 }

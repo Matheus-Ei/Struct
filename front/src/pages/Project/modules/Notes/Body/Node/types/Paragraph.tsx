@@ -5,13 +5,16 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import useSafeContext from "hooks/useSafeContext";
 import { NotesContext } from "../../context";
 import Cursor from "modules/Cursor";
-import { Text } from "./utils/Text";
 import { NodeElementType } from "../../types";
+import Operations from "../utils/Operations";
 
-const Paragraph = ({ content, order, type }: NodeElementType) => {
-    const [position, setPosition] = useState<number>(0);
+const Paragraph = ({ content, order }: NodeElementType) => {
+    const { nodes } = useSafeContext(NotesContext);
+    const operations = new Operations(nodes);
 
     const divRef = useRef<HTMLDivElement | null>(null);
+    const [position, setPosition] = useState<number>(0);
+
     const cursor = useMemo(() => new Cursor(divRef.current), [divRef]);
 
     // Sets the cursor position
@@ -20,14 +23,13 @@ const Paragraph = ({ content, order, type }: NodeElementType) => {
         cursor.position = position;
     }, [position, cursor]);
 
-    const useNotesContext = useSafeContext(NotesContext);
-    const editor = new Text(useNotesContext);
-
     const handleChange = () => {
         // Update the cursor last position
         setPosition(cursor.position);
+
         // Sets the text in the node array to correspond to the text in the div
-        if (divRef.current) editor.setText(order, divRef.current.innerHTML);
+        if (divRef.current)
+            operations.updateContent(order, divRef.current.innerHTML);
     };
 
     const innerHTML = { __html: content };

@@ -22,7 +22,8 @@ class ProjectShare {
         try {
             const response = await Request.get(`project/share/${id}`);
             return response.data;
-        } catch {
+        } catch (error: any) {
+            if (error.response?.status === 404) return null;
             return null;
         }
     }
