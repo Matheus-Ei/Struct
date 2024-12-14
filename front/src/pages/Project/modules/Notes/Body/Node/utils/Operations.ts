@@ -1,17 +1,17 @@
 // Local
 import { NodeState } from "../../context";
-import { NodeElementProp } from "../../types";
+import { NodeElementType } from "../../types";
 
 class Operations {
-    private nodes: NodeState;
+    private node: NodeState;
 
-    constructor(nodes: NodeState) {
-        this.nodes = nodes;
+    constructor(node: NodeState) {
+        this.node = node;
     }
 
     // Add one node
     public add(newOrder: number) {
-        this.nodes.set((oldNodes) => {
+        this.node.set((oldNodes) => {
             // Make all elements with order greater than or equal to newOrder increment by 1
             const incremented = oldNodes.map((node) => {
                 if (node.order > newOrder) {
@@ -21,7 +21,7 @@ class Operations {
             });
 
             // Create a new node with the new order
-            const newNode: NodeElementProp = {
+            const newNode: NodeElementType = {
                 content: "",
                 type: "paragraph",
                 order: newOrder + 1,
@@ -39,7 +39,7 @@ class Operations {
 
     // Remove one node
     public remove(oldOrder: number) {
-        this.nodes.set((oldNodes) => {
+        this.node.set((oldNodes) => {
             // Filter out the node with the order to be removed
             const updated = oldNodes.filter((node) => node.order !== oldOrder);
 
@@ -62,7 +62,7 @@ class Operations {
     public changePosition(oldOrder: number, newOrder: number) {
         if (oldOrder === newOrder) return;
 
-        this.nodes.set((oldNodes) => {
+        this.node.set((oldNodes) => {
             const nodeToMove = oldNodes.find((n) => n.order === oldOrder);
 
             if (!nodeToMove) {
@@ -107,7 +107,7 @@ class Operations {
 
     // Update the content of a node
     public updateContent(order: number, content: string) {
-        this.nodes.set((prev) => {
+        this.node.set((prev) => {
             const newNodes = [...prev];
             const { type } = newNodes[order];
 

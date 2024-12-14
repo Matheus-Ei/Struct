@@ -14,6 +14,8 @@ export interface NotesContextType {
     nodes: NodeState;
 
     bodyRef: RefObject<HTMLDivElement>;
+
+    nodesUpdater: () => void;
 }
 
 export const NotesContext = createContext<NotesContextType | undefined>(
