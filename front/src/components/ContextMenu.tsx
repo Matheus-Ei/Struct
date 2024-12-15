@@ -7,23 +7,17 @@ import Event from "modules/Event";
 
 interface ContextMenuProps {
     children: JSX.Element;
-    onClose: () => void;
     show: boolean;
-    position: { x: number; y: number };
-    isAbsolute?: boolean;
-    isTranslateY?: boolean;
-    className?: string;
+    onClose: () => void;
+    style?: {
+        location: { x: number; y: number };
+        position?: "absolute" | "fixed";
+        translate?: boolean;
+        className?: string;
+    };
 }
 
-const ContextMenu = ({
-    children,
-    onClose,
-    show,
-    position,
-    isAbsolute,
-    isTranslateY,
-    className,
-}: ContextMenuProps) => {
+const ContextMenu = ({ children, onClose, show, style }: ContextMenuProps) => {
     const menuRef = useRef<HTMLDivElement>(null);
     const handleClickOutside = useCallback(
         (event: MouseEvent) => {
@@ -50,23 +44,20 @@ const ContextMenu = ({
         "px-[10px] py-[5px] z-50",
         "flex flex-col items-center justify-center",
         "bg-base-100 border rounded-md border-neutral",
-        className
+        style?.className
     );
-
-    const translation = isTranslateY
-        ? "translate(0%, -100%)"
-        : "translate(0%, 0%)";
-    const positionCss = isAbsolute ? "absolute" : "fixed";
 
     return (
         <div
             ref={menuRef}
             className={css}
             style={{
-                top: position.y,
-                left: position.x,
-                position: positionCss,
-                transform: translation,
+                top: style?.location.y,
+                left: style?.location.x,
+                position: style?.position ?? "fixed",
+                transform: style?.translate
+                    ? "translate(0%, -100%)"
+                    : "translate(0%, 0%)",
             }}
         >
             {children}

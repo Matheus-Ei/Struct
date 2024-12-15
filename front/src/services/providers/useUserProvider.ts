@@ -4,13 +4,13 @@ import { useQuery } from "react-query";
 // Local
 import Request from "modules/Request";
 
-const useUserProvider = (access_token: string | null, provider: "google") => {
-    const getGoogleUser = async (access_token: string | null) => {
+const useUserProvider = (accessToken: string | null, provider: "google") => {
+    const getGoogleUser = async (accessToken: string | null) => {
         try {
-            if (!access_token) return null;
+            if (!accessToken) return null;
 
             const response = await Request.post("provider/user/google", {
-                access_token,
+                access_token: accessToken,
             });
 
             return response.data;
@@ -19,10 +19,10 @@ const useUserProvider = (access_token: string | null, provider: "google") => {
         }
     };
 
-    return useQuery(["google-user-provider", access_token], () => {
+    return useQuery(["google-user-provider", accessToken], () => {
         switch (provider) {
             case "google":
-                return getGoogleUser(access_token);
+                return getGoogleUser(accessToken);
         }
     });
 };

@@ -3,8 +3,9 @@ import { useQuery } from "react-query";
 
 // Local
 import Project from "services/project";
+import { idType } from "types/global";
 
-export function useProject(id: number) {
+export function useProject(id: idType) {
     return useQuery(["project", id], () => Project.get(id));
 }
 

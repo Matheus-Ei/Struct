@@ -19,7 +19,7 @@ const ContextPageMenu = ({
     refetch,
 }: ContextPageMenuProps) => {
     const deletePage = async () => {
-        await Page.delete(pageId, () => {});
+        await Page.delete(pageId);
 
         toggleShowMenu(false);
         refetch();
@@ -29,8 +29,7 @@ const ContextPageMenu = ({
         <ContextMenu
             show={showMenu}
             onClose={() => toggleShowMenu(false)}
-            position={clickPosition}
-            isTranslateY={true}
+            style={{ location: clickPosition, translate: true }}
         >
             <div className="flex flex-col">
                 <button

@@ -5,26 +5,26 @@ import { ChangeEvent, KeyboardEvent } from "react";
 import { SetStateType } from "types/global";
 
 interface TextAreaTypeProps {
-    text?: string;
     defaultValue?: string;
-    length: {
-        min: number;
-        max: number;
+    placeholder?: string;
+    length?: {
+        min?: number;
+        max?: number;
     };
     setValue?: SetStateType<string>;
     onEnter?: () => void;
-    css: string;
+    className: string;
 }
 
 type EventType = ChangeEvent<HTMLTextAreaElement | HTMLInputElement>;
 
 const TextAreaType = ({
-    text,
     defaultValue,
+    placeholder,
     length,
     setValue,
     onEnter,
-    css,
+    className,
 }: TextAreaTypeProps) => {
     const handleChange = (event: EventType) =>
         setValue && setValue(event.target.value);
@@ -34,13 +34,13 @@ const TextAreaType = ({
 
     return (
         <textarea
-            className={css}
-            placeholder={text}
+            className={className}
+            placeholder={placeholder}
             onChange={handleChange}
             onKeyDown={onKeyDown}
             defaultValue={defaultValue}
-            maxLength={length.max}
-            minLength={length.min}
+            maxLength={length?.max}
+            minLength={length?.min}
         ></textarea>
     );
 };

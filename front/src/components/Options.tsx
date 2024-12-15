@@ -6,9 +6,8 @@ import { twMerge } from "tailwind-merge";
 import { SetStateType } from "types/global";
 
 interface OptionsProps {
-    options: string[];
-    selected: number;
-    setSelected: SetStateType<number>;
+    options: Array<string>;
+    selected: { value: number; set: SetStateType<number> };
     placeholder?: string;
     className?: string;
 }
@@ -24,7 +23,6 @@ const renderOptions = (option: string, index: number) => {
 const Options = ({
     options,
     selected,
-    setSelected,
     placeholder,
     className,
 }: OptionsProps) => {
@@ -32,18 +30,19 @@ const Options = ({
 
     const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
         const index = options.indexOf(event.target.value);
-        setSelected(index);
+        selected.set(index);
     };
 
     return (
         <div className="flex flex-col items-center justify-center">
             <select
                 id="options"
-                value={options[selected] || ""}
+                value={options[selected.value] || ""}
                 onChange={handleChange}
                 className={css}
             >
                 <option value="">{placeholder || "Select"}</option>
+
                 {options.map(renderOptions)}
             </select>
         </div>

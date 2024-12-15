@@ -1,10 +1,10 @@
 // Local
 import { GetPageType, GetPagesType, PageType } from "./types";
-import { SuccessResponseType } from "types/global";
 import Request from "modules/Request";
+import { idType } from "types/global";
 
 class Page {
-    public static async get(id: number) {
+    public static async get(id: idType) {
         try {
             const response: GetPageType = await Request.get(`page/${id}`);
             return response.data;
@@ -13,9 +13,7 @@ class Page {
         }
     }
 
-    public static async getAll(
-        projectId: string | number | undefined | null
-    ): Promise<PageType[] | null> {
+    public static async getAll(projectId: idType): Promise<PageType[] | null> {
         try {
             if (!projectId) return null;
 
@@ -31,9 +29,8 @@ class Page {
     public static async create(
         name: string,
         emoji: string | undefined | null,
-        projectId: number,
-        parentPage: number | null,
-        onSuccess?: (response?: SuccessResponseType<PageType>) => void
+        projectId: idType,
+        parentPage: idType
     ) {
         try {
             const response = await Request.post("page", {
@@ -43,20 +40,18 @@ class Page {
                 projectId,
                 parentPage,
             });
-            onSuccess && onSuccess(response);
 
-            return true;
+            return response;
         } catch {
             return false;
         }
     }
 
     public static async edit(
-        id: number,
+        id: idType,
         name: string | undefined | null,
         description: string | undefined | null,
-        emoji: string | undefined | null,
-        onSuccess?: (response?: SuccessResponseType) => void
+        emoji: string | undefined | null
     ) {
         try {
             const response = await Request.patch(`page/${id}`, {
@@ -64,40 +59,30 @@ class Page {
                 description,
                 emoji,
             });
-            onSuccess && onSuccess(response);
 
-            return true;
+            return response;
         } catch {
             return false;
         }
     }
 
-    public static async delete(
-        id: number,
-        onSuccess?: (response?: SuccessResponseType) => void
-    ) {
+    public static async delete(id: idType) {
         try {
             const response = await Request.delete(`page/${id}`);
-            onSuccess && onSuccess(response);
 
-            return true;
+            return response;
         } catch {
             return false;
         }
     }
 
-    public static async setModule(
-        id: number,
-        module: string,
-        onSuccess?: (response?: SuccessResponseType) => void
-    ) {
+    public static async setModule(id: idType, module: string) {
         try {
             const response = await Request.patch(`page/${id}/module`, {
                 module,
             });
-            onSuccess && onSuccess(response);
 
-            return true;
+            return response;
         } catch {
             return false;
         }

@@ -14,7 +14,7 @@ const PageMenu = () => {
         <ContextMenu
             show={menu.show}
             onClose={() => menu.toggle(false)}
-            position={clickPosition.value}
+            style={{ location: clickPosition.value }}
         >
             <div className="flex flex-col">
                 <button

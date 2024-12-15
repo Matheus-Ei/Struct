@@ -26,10 +26,10 @@ const CreateButton = () => {
         }
         description.setError({ message: "", isError: false });
 
-        await Project.create(title.value, description.value, () => {
-            setModal(false);
-            refetch();
-        });
+        await Project.create(title.value, description.value);
+
+        setModal(false);
+        refetch();
     };
 
     return (

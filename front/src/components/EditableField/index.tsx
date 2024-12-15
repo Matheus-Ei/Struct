@@ -14,7 +14,7 @@ interface EditableFieldProps {
     className?: { edit?: string; normal?: string };
     title?: {
         text?: string;
-        icon?: { position: "left" | "right"; name: string; library: string };
+        icon?: { position?: "left" | "right"; name?: string; library?: string };
     };
 }
 

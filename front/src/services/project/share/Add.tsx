@@ -6,6 +6,7 @@ import Input from "components/Input";
 import Options from "components/Options";
 import Point from "components/Point";
 import ProjectShare from ".";
+import { idType } from "types/global";
 
 const permissionOptions = [
     "owner",
@@ -17,7 +18,7 @@ const permissionOptions = [
 ];
 
 interface AddUserProps {
-    projectId: string | undefined;
+    projectId: idType;
     refetch?: () => void;
 }
 
@@ -25,7 +26,7 @@ const AddUser = ({ projectId, refetch }: AddUserProps) => {
     const [nickname, setNickname] = useState<string>("");
     const [permission, setPermission] = useState<number>(0);
 
-    const handleAdition = async () => {
+    const shareProject = async () => {
         await ProjectShare.add(
             projectId,
             nickname,
@@ -38,21 +39,20 @@ const AddUser = ({ projectId, refetch }: AddUserProps) => {
     return (
         <div className="flex gap-x-4 items-center justify-center">
             <Input
-                text="Nickname"
+                placeholder="Nickname"
                 className="border-base-100 rounded-none border-b border-b-neutral m-0 h-8 px-2 pb-1 outline-none bg-base-100"
                 setValue={setNickname}
-                onEnter={handleAdition}
+                onEnter={shareProject}
             />
 
             <Options
                 options={permissionOptions}
-                selected={permission}
-                setSelected={setPermission}
+                selected={{ value: permission, set: setPermission }}
             />
 
             <Point
                 icon={{ name: "BsFillShareFill", library: "bs" }}
-                onClick={handleAdition}
+                onClick={shareProject}
                 className="ml-4"
             />
         </div>

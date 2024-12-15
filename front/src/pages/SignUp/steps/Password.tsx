@@ -22,14 +22,14 @@ const Password = () => {
     return (
         <div className="w-2/4 h-full flex flex-col items-center justify-center">
             <Input
-                text="password..."
+                placeholder="password..."
                 setValue={setPassword}
                 isPassword={true}
                 length={{ max: 80 }}
                 onEnter={signUp}
             />
             <Input
-                text="re-type password..."
+                placeholder="re-type password..."
                 setValue={setRePassword}
                 isPassword={true}
                 length={{ max: 80 }}

@@ -23,14 +23,16 @@ const AddPage = ({ projectId, refetch }: AddPageProps) => {
 
     const [title, setTitle] = useState<string>("");
 
-    const createPage = async () =>
-        title &&
-        (await Page.create(title, emoji?.emoji, projectId, null, refetch));
+    const createPage = async () => {
+        if (!title) return;
+        await Page.create(title, emoji?.emoji, projectId, null);
+        refetch();
+    };
 
     return (
         <div className="flex items-center justify-center absolute bottom-2 right-2 gap-x-4">
             <Input
-                text="Title"
+                placeholder="Title"
                 className="border-base-100 rounded-none border-b border-b-neutral m-0 h-8 px-2 pb-1 outline-none bg-base-100"
                 setValue={setTitle}
                 onEnter={createPage}
@@ -49,9 +51,8 @@ const AddPage = ({ projectId, refetch }: AddPageProps) => {
             />
 
             <EmojiSelector
-                show={showEmoji}
+                show={{ value: showEmoji, toggle: toggleShowEmoji }}
                 setEmoji={setEmoji}
-                toggleShow={toggleShowEmoji}
                 position={{ x: -270, y: -470 }}
             />
         </div>

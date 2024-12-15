@@ -26,14 +26,14 @@ const InputFields = () => {
             </h1>
 
             <Input
-                text="Title"
+                placeholder="Title"
                 type="textarea"
                 setValue={title.set}
                 error={title.error}
             />
 
             <Input
-                text="Description"
+                placeholder="Description"
                 type="textarea"
                 className={descriptionCss}
                 setValue={description.set}

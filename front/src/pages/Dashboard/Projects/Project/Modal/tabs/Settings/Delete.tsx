@@ -25,7 +25,7 @@ const Delete = ({ projectId, setModal }: DeleteProps) => {
     useEffect(() => {
         if (!wantDelete) return;
 
-        Project.delete(projectId, () => {
+        Project.delete(projectId).then(() => {
             setModal({ projectId: 1, show: false });
             refetch();
         });
@@ -36,7 +36,7 @@ const Delete = ({ projectId, setModal }: DeleteProps) => {
             <ConfirmModal
                 message="Are you sure you want to delete?"
                 isOpen={showConfirmDelete}
-                close={() => toggleShowConfirmDelete(false)}
+                onClose={() => toggleShowConfirmDelete(false)}
                 onConfirm={() => toggleWantDelete(true)}
             />
 

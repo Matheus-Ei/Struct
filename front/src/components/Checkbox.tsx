@@ -3,15 +3,14 @@ import Event from "modules/Event";
 import { SetStateType } from "types/global";
 
 interface CheckboxProps {
-    text: string;
+    title: string;
     group: string;
-    setChecked: SetStateType<string>;
-    checked: string;
+    value: { check: string; set: SetStateType<string> };
 }
 
-const Checkbox = ({ text, group, setChecked, checked }: CheckboxProps) => {
-    const condition = text !== checked;
-    const handleCheck = () => Event.onChangeSet(text, setChecked, condition);
+const Checkbox = ({ title, group, value }: CheckboxProps) => {
+    const isChecked = title !== value.check;
+    const handleCheck = () => Event.onChangeSet(title, value.set, isChecked);
 
     return (
         <div className="form-control">
@@ -23,7 +22,7 @@ const Checkbox = ({ text, group, setChecked, checked }: CheckboxProps) => {
                     onChange={handleCheck}
                 />
 
-                <span className="label-text">{text}</span>
+                <span className="label-text">{title}</span>
             </label>
         </div>
     );

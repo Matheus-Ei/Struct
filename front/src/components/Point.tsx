@@ -7,8 +7,8 @@ import Icon from "components/Icon";
 import { IconType } from "types/global";
 
 interface PointProps {
-    icon: IconType;
     text?: string;
+    icon?: IconType;
     isSelected?: boolean;
     className?: string;
     onClick?: () => void;
@@ -31,6 +31,7 @@ const Point = ({ text, icon, isSelected, onClick, className }: PointProps) => {
     return (
         <div onClick={handleClick} className={css}>
             <Icon value={icon} className="text-xl" />
+
             {text && <p>{text}</p>}
         </div>
     );

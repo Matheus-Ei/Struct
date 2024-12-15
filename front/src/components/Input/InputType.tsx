@@ -5,13 +5,13 @@ import { ChangeEvent, KeyboardEvent } from "react";
 import { SetStateType } from "types/global";
 
 interface InputTypeProps {
-    text?: string;
     defaultValue?: string;
-    length: {
-        min: number;
-        max: number;
+    placeholder?: string;
+    length?: {
+        min?: number;
+        max?: number;
     };
-    css: string;
+    className?: string;
     isPassword?: boolean;
     setValue?: SetStateType<string>;
     onEnter?: () => void;
@@ -20,10 +20,10 @@ interface InputTypeProps {
 type EventType = ChangeEvent<HTMLTextAreaElement | HTMLInputElement>;
 
 const InputType = ({
-    text,
     defaultValue,
+    placeholder,
     length,
-    css,
+    className,
     isPassword,
     setValue,
     onEnter,
@@ -36,14 +36,14 @@ const InputType = ({
 
     return (
         <input
-            className={css}
-            placeholder={text}
+            className={className}
+            placeholder={placeholder}
             onChange={handleChange}
             type={!isPassword ? "text" : "password"}
             defaultValue={defaultValue}
             onKeyDown={onKeyDown}
-            maxLength={length.max}
-            minLength={length.min}
+            maxLength={length?.max}
+            minLength={length?.min}
         ></input>
     );
 };

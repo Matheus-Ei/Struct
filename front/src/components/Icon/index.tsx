@@ -1,4 +1,4 @@
-// Libraries
+// Librarie
 import { MouseEvent } from "react";
 import { FaQuestion } from "react-icons/fa";
 
@@ -7,26 +7,27 @@ import library, { LibsType } from "./library";
 import { IconType } from "types/global";
 
 interface IconsProps {
-    value: IconType;
+    value?: IconType;
     className?: string;
     onClick?: (event?: MouseEvent<HTMLElement>) => void;
 }
 
 const Icon = ({ value, className, onClick }: IconsProps) => {
-    const handleClick = (event: any) => onClick && onClick(event);
+    const props = {
+        onClick: (event: any) => onClick && onClick(event),
+        className,
+    };
 
-    if (!value) return <FaQuestion onClick={handleClick} />;
+    if (!value || !value.name || !value.library)
+        return <FaQuestion {...props} />;
 
     try {
         const repository: LibsType = library[value.library];
         const RequiredIcon = repository[value.name];
 
-        if (className)
-            return <RequiredIcon className={className} onClick={handleClick} />;
-
-        return <RequiredIcon onClick={handleClick} />;
-    } catch (error) {
-        return <FaQuestion onClick={handleClick} />;
+        return <RequiredIcon {...props} />;
+    } catch {
+        return <FaQuestion {...props} />;
     }
 };
 

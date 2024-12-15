@@ -1,24 +1,22 @@
 // Local
 import Request from "modules/Request";
+import { idType } from "types/global";
 
 class ProjectShare {
-    public static async add(
-        id: string | undefined,
-        nickname: string,
-        permission: string,
-        onSuccess?: () => void
-    ) {
+    public static async add(id: idType, nickname: string, permission: string) {
         try {
-            await Request.post(`project/share/${id}`, { nickname, permission });
-            onSuccess && onSuccess();
+            const response = await Request.post(`project/share/${id}`, {
+                nickname,
+                permission,
+            });
 
-            return true;
+            return response;
         } catch {
             return false;
         }
     }
 
-    public static async get(id: string | undefined) {
+    public static async get(id: idType) {
         try {
             const response = await Request.get(`project/share/${id}`);
             return response.data;
@@ -28,10 +26,12 @@ class ProjectShare {
         }
     }
 
-    public static async delete(id: string | undefined, nickname: string) {
+    public static async delete(id: idType, nickname: string) {
         try {
-            await Request.delete(`project/share/${id}/${nickname}`);
-            return true;
+            const response = await Request.delete(
+                `project/share/${id}/${nickname}`
+            );
+            return response;
         } catch {
             return false;
         }

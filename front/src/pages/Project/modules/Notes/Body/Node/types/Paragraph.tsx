@@ -59,10 +59,10 @@ const Paragraph = ({ content, order }: NodeElementType) => {
     const handleKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
         const content = nodes.value[order].content;
 
-        if (e.key === "ArrowDown") {
+        if (e.key === "ArrowDown" && e.ctrlKey) {
             e.preventDefault();
             operations.nextNode(order, bodyRef, cursor.position);
-        } else if (e.key === "ArrowUp") {
+        } else if (e.key === "ArrowUp" && e.ctrlKey) {
             e.preventDefault();
             operations.previousNode(order, bodyRef, cursor.position);
         }

@@ -17,8 +17,8 @@ const Menu = ({ showMenu, toggleShowMenu, position: { x, y } }: MenuProps) => {
     return (
         <ContextMenu
             onClose={() => toggleShowMenu(false)}
-            position={{ x: x - 100, y: y - 45 }}
             show={showMenu}
+            style={{ location: { x: x - 100, y: y - 45 } }}
         >
             <div className="flex flex-col items-start justify-center gap-y-1">
                 <Point

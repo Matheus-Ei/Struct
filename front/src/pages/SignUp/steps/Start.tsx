@@ -81,7 +81,7 @@ const Start = () => {
     return (
         <div className="w-2/4 h-full flex flex-col items-center justify-center">
             <Input
-                text="name..."
+                placeholder="name..."
                 setValue={setName}
                 onEnter={nextStep}
                 length={{ max: 80 }}
@@ -90,7 +90,7 @@ const Start = () => {
 
             <div className="relative flex flex-col w-full h-fit items-center justify-center">
                 <Input
-                    text="nickname..."
+                    placeholder="nickname..."
                     setValue={setNickname}
                     onEnter={nextStep}
                     length={{ max: 35 }}
@@ -104,7 +104,7 @@ const Start = () => {
 
             <div className="relative flex flex-col w-full h-fit items-center justify-center">
                 <Input
-                    text="mail..."
+                    placeholder="mail..."
                     setValue={setMail}
                     onEnter={nextStep}
                     length={{ max: 120 }}

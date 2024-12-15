@@ -21,6 +21,8 @@ export interface SuccessResponseType<T = undefined> {
     data: T;
 }
 
+export type idType = string | number | undefined | null;
+
 export interface IconType {
     name: string;
     library: string;

@@ -1,8 +1,9 @@
 // Local
 import Request from "modules/Request";
+import { idType } from "types/global";
 
 class Project {
-    public static async get(id: number | undefined) {
+    public static async get(id: idType) {
         try {
             const response = await Request.get(`project/${id}`);
             return response.data;
@@ -20,49 +21,41 @@ class Project {
         }
     }
 
-    public static async create(
-        title: string,
-        description: string,
-        onSuccess?: () => void
-    ) {
+    public static async create(title: string, description: string) {
         try {
-            await Request.post("project", {
+            const response = await Request.post("project", {
                 title,
                 description,
             });
-            onSuccess && onSuccess();
 
-            return true;
+            return response;
         } catch {
             return false;
         }
     }
 
     public static async edit(
-        id: number | undefined,
+        id: idType,
         title: string | undefined,
-        description: string | undefined,
-        onSuccess?: () => void
+        description: string | undefined
     ) {
         try {
-            await Request.patch(`project/${id}`, {
+            const response = await Request.patch(`project/${id}`, {
                 title,
                 description,
             });
-            onSuccess && onSuccess();
 
-            return true;
+            return response;
         } catch {
             return false;
         }
     }
 
-    public static async delete(id: number | undefined, onSuccess?: () => void) {
+    public static async delete(id: idType) {
         try {
-            await Request.delete(`project/${id}`);
-            onSuccess && onSuccess();
+            const response = await Request.delete(`project/${id}`);
 
-            return true;
+            return response;
         } catch {
             return false;
         }

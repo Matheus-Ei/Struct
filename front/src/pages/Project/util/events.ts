@@ -9,17 +9,16 @@ export const addPage = async (
 ) => {
     if (!pageId && !projectContext) return null;
 
-    await Page.create(
+    const response = await Page.create(
         "New page",
         undefined,
         Number(projectContext.projectId),
-        pageId,
-        (response) => {
-            projectContext.selectedPage.set(response?.data?.id || null);
-            toggleShowChildren && toggleShowChildren(true);
-            projectContext.menu.refetch();
-        }
+        pageId
     );
+
+    projectContext.selectedPage.set(response?.data?.id || null);
+    toggleShowChildren && toggleShowChildren(true);
+    projectContext.menu.refetch();
 };
 
 export const deletePage = async (

@@ -11,16 +11,16 @@ import Icon from "components/Icon";
 interface EmojiProps {
     symbol?: string | null;
     className?: string;
-    onClick?: () => void;
     selectorOnClick?: boolean;
+    onClick?: () => void;
     onUpdate?: (newEmoji?: string | null) => void;
 }
 
 const Emoji = ({
     symbol,
     className,
-    onClick,
     selectorOnClick,
+    onClick,
     onUpdate,
 }: EmojiProps) => {
     const [newEmoji, setNewEmoji] = useState<EmojiClickData | undefined>();
@@ -46,26 +46,20 @@ const Emoji = ({
 
     const css = twMerge("cursor-pointer select-none", className);
 
-    if (!emoji)
-        return (
-            <div className={css} onClick={handleClick}>
-                <Icon value={{ name: "IoIosDocument", library: "io" }} />
-                <EmojiSelector
-                    setEmoji={setNewEmoji}
-                    toggleShow={toggleSelector}
-                    show={showSelector}
-                />
-            </div>
-        );
+    const getEmoji = () => {
+        if (!emoji)
+            return <Icon value={{ name: "IoIosDocument", library: "io" }} />;
+
+        return emoji;
+    };
 
     return (
         <div className={css} onClick={handleClick}>
-            {emoji}
+            {getEmoji()}
 
             <EmojiSelector
                 setEmoji={setNewEmoji}
-                toggleShow={toggleSelector}
-                show={showSelector}
+                show={{ value: showSelector, toggle: toggleSelector }}
             />
         </div>
     );

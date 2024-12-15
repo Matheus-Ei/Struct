@@ -9,27 +9,27 @@ import InputType from "./InputType";
 import TextAreaType from "./TextAreaType";
 
 interface InputProps {
-    text?: string;
+    defaultValue?: string;
     setValue?: SetStateType<string>;
+    placeholder?: string;
     isPassword?: boolean;
     type?: "textarea" | "input";
     onEnter?: () => void;
     length?: { max?: number; min?: number };
-    defaultValue?: string;
     className?: string;
     error?: ErrorType;
 }
 
 const Input = ({
-    text,
-    setValue,
+    placeholder,
+    defaultValue = "",
     isPassword,
     type,
+    length = { max: 100, min: 0 },
+    error,
     className,
     onEnter,
-    length = { max: 100, min: 0 },
-    defaultValue = "",
-    error,
+    setValue,
 }: InputProps) => {
     const defaultCss = clsx(
         "w-[95%] h-14 pl-4 mb-3",
@@ -43,36 +43,36 @@ const Input = ({
     );
     const css = twMerge(defaultCss, className);
 
-    if (type === "textarea") {
-        return (
-            <>
-                <Error error={error} />
-
+    const getField = () => {
+        if (type === "textarea")
+            return (
                 <TextAreaType
-                    text={text}
+                    placeholder={placeholder}
                     setValue={setValue}
                     defaultValue={defaultValue}
                     length={length}
-                    css={css}
+                    className={css}
                     onEnter={onEnter}
                 />
-            </>
+            );
+
+        return (
+            <InputType
+                placeholder={placeholder}
+                setValue={setValue}
+                defaultValue={defaultValue}
+                length={length}
+                className={css}
+                isPassword={isPassword}
+                onEnter={onEnter}
+            />
         );
-    }
+    };
 
     return (
         <>
             <Error error={error} />
-
-            <InputType
-                text={text}
-                setValue={setValue}
-                defaultValue={defaultValue}
-                length={length}
-                css={css}
-                isPassword={isPassword}
-                onEnter={onEnter}
-            />
+            {getField()}
         </>
     );
 };

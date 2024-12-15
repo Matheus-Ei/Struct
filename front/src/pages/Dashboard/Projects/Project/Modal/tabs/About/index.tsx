@@ -12,11 +12,13 @@ const About = ({ projectId }: TabProps) => {
     const { refetch } = useSafeContext(ProjectsContext);
 
     const updateTitle = async (newValue: string) => {
-        await Project.edit(projectId, newValue, undefined, refetch);
+        await Project.edit(projectId, newValue, undefined);
+        refetch();
     };
 
     const updateDescription = async (newValue: string) => {
-        await Project.edit(projectId, undefined, newValue, refetch);
+        await Project.edit(projectId, undefined, newValue);
+        refetch();
     };
 
     return (

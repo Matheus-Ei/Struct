@@ -43,10 +43,10 @@ const Login = () => {
                         isVisible={error}
                     />
 
-                    <Input text="Mail" setValue={setMail} onEnter={login} />
+                    <Input placeholder="Mail" setValue={setMail} onEnter={login} />
 
                     <Input
-                        text="Password"
+                        placeholder="Password"
                         setValue={setPassword}
                         isPassword={true}
                         onEnter={login}
