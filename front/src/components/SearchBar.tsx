@@ -19,11 +19,11 @@ const SearchBar = ({
     placeholder,
     className,
 }: SearchBarProps) => {
-    const startSearchPlace = useRef(searchPlace);
+    const startSearch = useRef(searchPlace);
 
     // Set the result to the search place when the component is mounted
     useEffect(() => {
-        setResult(startSearchPlace.current);
+        setResult(startSearch.current);
     }, [setResult]);
 
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -38,7 +38,7 @@ const SearchBar = ({
     };
 
     const css = twMerge(
-        "w-full",
+        "flex w-full items-center relative",
         "py-2 pl-16 pr-4",
         "placeholder:text-base-content bg-base-100",
         "outline-none border-b border-base-300",
@@ -46,20 +46,18 @@ const SearchBar = ({
     );
 
     return (
-        <div className="relative flex text-base-content w-full">
-            {!className && (
-                <Icon
-                    value={{ name: "IoSearchOutline", library: "io5" }}
-                    className="flex items-center h-full text-xl absolute left-6 text-base-content"
-                />
-            )}
+        <div className={css}>
+            <Icon
+                value={{ name: "IoSearchOutline", library: "io5" }}
+                className="flex items-center h-full text-xl absolute left-6"
+            />
 
             <input
-                className={css}
                 placeholder={placeholder ? placeholder : "Search. . . "}
                 onChange={handleChange}
                 defaultValue=""
-            />
+                className="w-full outline-none"
+            ></input>
         </div>
     );
 };

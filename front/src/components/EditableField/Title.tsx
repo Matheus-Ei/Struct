@@ -32,7 +32,7 @@ const Title = ({ text, icon }: TitleProps) => {
 
     return (
         <div className="flex items-center gap-x-2">
-            <Icon value={iconValue} className={iconCss} />
+            {icon && <Icon value={iconValue} className={iconCss} />}
 
             {text && <h1 className={textCss}>{text}</h1>}
         </div>

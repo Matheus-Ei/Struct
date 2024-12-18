@@ -5,8 +5,8 @@ class Element {
     private element: HTMLElement | null;
     constructor(reference: RefObject<HTMLElement>) {
         this.element = reference.current ? reference.current : null;
-    }
 
+    }
     get style() {
         return this.element?.style;
     }
@@ -34,7 +34,10 @@ class Element {
     get position() {
         if (!this.element) return { top: 0, left: 0, right: 0, bottom: 0 };
 
-        return this.element.getBoundingClientRect() as DOMRect;
+        let { left, right, top, bottom } =
+            this.element.getBoundingClientRect() as DOMRect;
+
+        return { left, right, top, bottom };
     }
 
     focus() {

@@ -2,6 +2,8 @@ export interface ProjectType {
     id: number;
     title: string;
     description: string;
+    number_shared: number;
+    number_pages: number;
 }
 
 export interface SharedUserType {

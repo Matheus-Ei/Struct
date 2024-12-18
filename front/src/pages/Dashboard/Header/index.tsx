@@ -1,7 +1,8 @@
 // Local
 import { SetStateType } from "types/global";
-import Left from "./Left";
-import Right from "./Right";
+import Logo from "./Logo";
+import ProfilePhoto from "./ProfilePhoto";
+import Tabs from "./Tabs";
 
 interface HeaderProps {
     tab: string;
@@ -11,9 +12,12 @@ interface HeaderProps {
 const Header = ({ tab, setTab }: HeaderProps) => {
     return (
         <div className="flex flex-row w-screen h-32 items-center justify-between px-12">
-            <Left tab={tab} setTab={setTab} />
+            <div className="flex flex-row w-fit h-full items-center justify-start gap-12">
+                <Logo />
+                <Tabs tab={tab} setTab={setTab} />
+            </div>
 
-            <Right />
+            <ProfilePhoto />
         </div>
     );
 };

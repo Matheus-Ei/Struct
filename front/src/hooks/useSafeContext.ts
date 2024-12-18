@@ -1,3 +1,4 @@
+// Library
 import { Context, useContext } from "react";
 
 const useSafeContext = <T>(UnknownContext: Context<T>) => {
@@ -5,7 +6,8 @@ const useSafeContext = <T>(UnknownContext: Context<T>) => {
 
     if (context === undefined) {
         throw new Error(
-            `The context\n${UnknownContext}\nis not defined. Make sure to wrap the parent component with the context provider.`
+            `The context\n${UnknownContext}\nis not defined.\n
+             Make sure to wrap the parent component with the context provider.`
         );
     }
 

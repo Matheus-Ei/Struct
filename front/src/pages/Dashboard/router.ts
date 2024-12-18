@@ -1,6 +1,11 @@
 // Components
-import Projects from "./Projects";
+import ProjectsTab from "./Page/ProjectsTab";
 
-const router: Array<[string, () => JSX.Element]> = [["Projects", Projects]];
+export interface RouterType {
+    label: string;
+    element: () => JSX.Element;
+}
+
+const router: Array<RouterType> = [{ label: "Projects", element: ProjectsTab }];
 
 export default router;
