@@ -1,4 +1,4 @@
-const SettingsHeader = () => {
+const Header = () => {
     return (
         <div className="flex flex-row items-center justify-center w-full h-[10vh]">
             <h1 className="font-bold text-lg">Settings</h1>
@@ -6,4 +6,4 @@ const SettingsHeader = () => {
     );
 };
 
-export default SettingsHeader;
+export default Header;

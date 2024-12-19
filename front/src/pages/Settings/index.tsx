@@ -1,6 +1,6 @@
 // Local
-import ThemeController from "./ThemeController";
-import SettingsHeader from "./SettingsHeader";
+import ThemeSelector from "modules/Theme/Selector";
+import Header from "./Header";
 import withLoader from "HOCs/withLoader";
 import GoBackButton from "modules/Navigator/GoBackButton";
 
@@ -10,9 +10,9 @@ const Settings = () => {
             <GoBackButton lastPage="/dashboard" />
 
             <div className="flex flex-col items-center h-full w-2/3 gap-y-4">
-                <SettingsHeader />
+                <Header />
 
-                <ThemeController />
+                <ThemeSelector />
             </div>
         </div>
     );

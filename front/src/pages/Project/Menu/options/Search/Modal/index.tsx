@@ -63,7 +63,7 @@ const SearchModal = ({ isOpen, toggleOpen }: SearchModalProps) => {
         >
             <div className="w-5/6 h-5/6">
                 <SearchBar
-                    className="h-9 pl-4 mb-2"
+                    className="h-9 mb-2"
                     searchPlace={flatPages.map((page) => page.name)}
                     placeholder="Search pages"
                     setResult={setSearchPages}

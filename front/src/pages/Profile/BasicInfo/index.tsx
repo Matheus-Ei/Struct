@@ -2,7 +2,7 @@
 import EditableField from "components/EditableField";
 import User from "services/user";
 import { UserType } from "services/user/type";
-import FirstRow from "./FirstRow";
+import Header from "./Header";
 
 interface BasicInfoProps {
     user: UserType;
@@ -18,7 +18,7 @@ const BasicInfo = ({ user }: BasicInfoProps) => {
 
     return (
         <div className="flex flex-col w-5/6 gap-y-4">
-            <FirstRow user={user} update={update} />
+            <Header user={user} update={update} />
 
             <EditableField
                 defaultValue={user?.about ?? "Description was not provided..."}

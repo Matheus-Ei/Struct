@@ -27,11 +27,10 @@ const Page = () => {
         return page.data.module === item.name;
     });
 
-    const renderPages = () => getModule(module[0]);
     return (
         <div className="w-full h-screen flex justify-center">
             <div className="w-11/12 h-screen flex justify-center">
-                {renderPages()}
+                {getModule(module[0])}
             </div>
         </div>
     );

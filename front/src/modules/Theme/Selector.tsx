@@ -14,11 +14,11 @@ const themeListCss = clsx(
     "z-1 pr-3 p-2"
 );
 
-const ThemeController = () => {
+const ThemeSelector = () => {
     const [theme, setTheme] = useState(Theme.current);
     const themes = Theme.keys;
 
-    const handleThemeChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const changeTheme = (event: ChangeEvent<HTMLInputElement>) => {
         const eventTarget = event.target as HTMLInputElement;
         const { newTheme } = Theme.set(eventTarget.value);
 
@@ -34,7 +34,7 @@ const ThemeController = () => {
                     className="theme-controller btn btn-sm btn-block btn-ghost justify-start"
                     aria-label={item}
                     value={item}
-                    onChange={handleThemeChange}
+                    onChange={changeTheme}
                 />
             </li>
         );
@@ -54,4 +54,4 @@ const ThemeController = () => {
     );
 };
 
-export default ThemeController;
+export default ThemeSelector;

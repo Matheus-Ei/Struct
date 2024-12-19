@@ -9,7 +9,7 @@ import useSafeContext from "hooks/useSafeContext";
 const DashProject = () => {
     const { selectedPage } = useSafeContext(ProjectContext);
 
-    const projectPointCss = clsx("w-full h-9 gap-x-2", "justify-start", {
+    const css = clsx("w-full h-9 gap-x-2", "justify-start", {
         "bg-primary text-primary-content": selectedPage.id === null,
     });
 
@@ -17,7 +17,7 @@ const DashProject = () => {
         <Point
             text="Project"
             icon={{ name: "PiProjectorScreen", library: "pi" }}
-            className={projectPointCss}
+            className={css}
             onClick={() => selectedPage.set(null)}
         />
     );

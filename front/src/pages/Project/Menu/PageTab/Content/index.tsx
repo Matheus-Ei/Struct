@@ -5,10 +5,9 @@ import clsx from "clsx";
 // Local
 import { PageType } from "services/page/types";
 import { ProjectContext } from "pages/Project/context";
-import Emoji from "components/Emoji";
-import Icon from "components/Icon";
 import useSafeContext from "hooks/useSafeContext";
-import { PageTabContext } from "./context";
+import { PageTabContext } from "../context";
+import PageIcon from "./PageIcon";
 
 interface ContentProps {
     childrens: Array<PageType> | null;
@@ -17,7 +16,7 @@ interface ContentProps {
 
 const Content = ({ childrens, onContextMenu }: ContentProps) => {
     const { selectedPage } = useSafeContext(ProjectContext);
-    const { children, isHover, page } = useSafeContext(PageTabContext);
+    const { page } = useSafeContext(PageTabContext);
 
     const isSelected = page.id === selectedPage.id;
 
@@ -30,37 +29,14 @@ const Content = ({ childrens, onContextMenu }: ContentProps) => {
         }
     );
 
-    const pageIcon = () => {
-        if (isHover && childrens?.length !== 0) {
-            if (children.show) {
-                return (
-                    <Icon
-                        value={{ name: "IoIosArrowDown", library: "io" }}
-                        className="text-xl"
-                        onClick={() => children.toggle()}
-                    />
-                );
-            }
-
-            return (
-                <Icon
-                    value={{ name: "IoIosArrowForward", library: "io" }}
-                    className="text-xl"
-                    onClick={() => children.toggle()}
-                />
-            );
-        } else {
-            return <Emoji symbol={page.emoji} />;
-        }
-    };
-
     return (
         <div
             className={css}
             onContextMenu={onContextMenu}
             onClick={() => selectedPage.set(page.id)}
         >
-            {pageIcon()}
+            <PageIcon childrens={childrens} />
+
             <h1 className="line-clamp-1 w-full text-sm">{page.name}</h1>
         </div>
     );

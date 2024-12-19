@@ -1,13 +1,13 @@
 // Local
 import Header from "./Header";
-import Modules from "./Modules";
+import ModulesGrid from "./ModulesGrid";
 
 const Undefined = () => {
     return (
         <div className="flex flex-col w-3/4 h-full items-center justify-start gap-y-2">
             <Header />
 
-            <Modules />
+            <ModulesGrid />
         </div>
     );
 };

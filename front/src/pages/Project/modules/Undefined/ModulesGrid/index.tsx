@@ -6,7 +6,7 @@ import { useState } from "react";
 import Module from "./Module";
 import modules from "./router";
 
-const Modules = () => {
+const ModulesGrid = () => {
     const [moduleList, setModuleList] = useState<string[]>([]);
 
     const getModules = () => {
@@ -31,4 +31,4 @@ const Modules = () => {
     );
 };
 
-export default Modules;
+export default ModulesGrid;

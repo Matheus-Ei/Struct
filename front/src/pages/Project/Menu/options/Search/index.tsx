@@ -8,13 +8,13 @@ const Search = () => {
 
     return (
         <>
-            <SearchModal isOpen={isOpen} toggleOpen={toggleOpen} />
-
             <Point
                 text="Search"
                 icon={{ name: "IoMdSearch", library: "io" }}
                 onClick={() => toggleOpen(true)}
             />
+
+            <SearchModal isOpen={isOpen} toggleOpen={toggleOpen} />
         </>
     );
 };

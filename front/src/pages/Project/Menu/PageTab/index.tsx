@@ -4,7 +4,7 @@ import { MouseEvent, useState } from "react";
 // Local
 import PageMenu from "./PageMenu";
 import { PageType } from "services/page/types";
-import HoverButtons from "./HoverButtons";
+import Hover from "./HoverButtons";
 import useToggle from "hooks/useToggle";
 import Childrens from "./Childrens";
 import Content from "./Content";
@@ -25,7 +25,7 @@ const PageTab = ({ item }: PageTabProps) => {
     const [showMenu, toggleMenu] = useToggle(false);
     const [clickPosition, setClickPosition] = useState({ x: 0, y: 0 });
 
-    const handleContextMenu = (event: MouseEvent) => {
+    const openContextMenu = (event: MouseEvent) => {
         event.preventDefault();
         setClickPosition({ x: event.clientX, y: event.clientY });
         toggleMenu(true);
@@ -47,11 +47,11 @@ const PageTab = ({ item }: PageTabProps) => {
                 onMouseLeave={() => toggleHover(false)}
             >
                 <Content
-                    onContextMenu={handleContextMenu}
+                    onContextMenu={openContextMenu}
                     childrens={item.children_pages}
                 />
 
-                <HoverButtons />
+                <Hover />
 
                 <PageMenu />
             </div>

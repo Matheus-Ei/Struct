@@ -1,7 +1,7 @@
 // Local
 import EditableField from "components/EditableField";
 
-interface FirstRowProps {
+interface HeaderProps {
     user: {
         name: string;
         nickname: string;
@@ -9,7 +9,7 @@ interface FirstRowProps {
     update: (value: string, field: "name" | "about") => Promise<void>;
 }
 
-const FirstRow = ({ user, update }: FirstRowProps) => {
+const Header = ({ user, update }: HeaderProps) => {
     return (
         <div className="flex items-center w-full h-40 gap-x-4">
             <img
@@ -35,4 +35,4 @@ const FirstRow = ({ user, update }: FirstRowProps) => {
     );
 };
 
-export default FirstRow;
+export default Header;

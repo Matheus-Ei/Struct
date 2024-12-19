@@ -8,13 +8,13 @@ const Share = () => {
 
     return (
         <>
-            <ShareModal isOpen={isOpen} toggleOpen={toggleOpen} />
-
             <Point
                 text="Share"
                 icon={{ name: "IoMdShare", library: "io" }}
                 onClick={() => toggleOpen(true)}
             />
+
+            <ShareModal isOpen={isOpen} toggleOpen={toggleOpen} />
         </>
     );
 };

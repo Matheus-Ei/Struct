@@ -20,15 +20,15 @@ const Project = () => {
     const [selectedPageId, setSelectedPageId] = useState<number | null>(null);
     const { data: page, refetch: refetchPage } = usePage(selectedPageId);
 
+    const contextValue = {
+        projectId: id,
+        menu: { tabs, refetch: refetchTabs },
+        page: { data: page, refetch: refetchPage },
+        selectedPage: { id: selectedPageId, set: setSelectedPageId },
+    };
+
     return (
-        <ProjectContext.Provider
-            value={{
-                projectId: id,
-                menu: { tabs, refetch: refetchTabs },
-                page: { data: page, refetch: refetchPage },
-                selectedPage: { id: selectedPageId, set: setSelectedPageId },
-            }}
-        >
+        <ProjectContext.Provider value={contextValue}>
             <div className="flex flex-row pr-10 items-center w-screen h-screen gap-10">
                 <Menu />
 
