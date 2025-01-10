@@ -20,8 +20,10 @@ const Button = ({
     const rawCss = clsx(
         "border border-primary w-fit h-fit px-14 py-2 rounded-btn font-bold",
         {
-            "bg-primary text-primary-content": inverse,
-            "bg-base-100 text-primary": !inverse,
+            "bg-primary text-primary-content hover:bg-secondary hover:text-secondary-content hover:border-secondary":
+                inverse,
+            "bg-base-100 text-primary hover:bg-primary hover:text-primary-content hover:border-primary":
+                !inverse,
         }
     );
     const css = twMerge(rawCss, className);

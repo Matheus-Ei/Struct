@@ -10,7 +10,7 @@ const buttonCss = clsx(
     "w-56 h-16",
     "flex items-center justify-center",
     "gap-6",
-    "rounded-btn border-2 border-dashed border-primary"
+    "rounded-btn border-2 border-dashed border-primary hover:border-secondary"
 );
 
 const CreateProject = () => {

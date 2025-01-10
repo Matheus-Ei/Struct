@@ -4,7 +4,7 @@ import clsx from "clsx";
 
 // Local
 import useToggle from "hooks/useToggle";
-import HoverButtons from "./HoverButtons";
+import HoverButtons from "components/HoverButtons";
 import ProjectModal from "./Modal";
 import { ModalType } from "./Modal/utils/types";
 import { useState } from "react";
@@ -18,7 +18,7 @@ interface ProjectProps {
 const bodyCss = clsx(
     "w-96 h-24 p-3",
     "flex flex-col cursor-pointer",
-    "border border-b-primary border-base-300 rounded-btn  border-b-4"
+    "border border-b-primary border-base-300 rounded-btn border-b-4 hover:border-b-secondary"
 );
 
 const Project = ({ title, description, id }: ProjectProps) => {
@@ -34,6 +34,13 @@ const Project = ({ title, description, id }: ProjectProps) => {
     const hover = () => toggleHover(true);
     const unhover = () => toggleHover(false);
 
+    const hoverFunctions = [
+        {
+            icon: { name: "MdOpenInNew", library: "md" },
+            onClick: () => navigate(`/project/${id}`),
+        },
+    ];
+
     return (
         <>
             <div
@@ -42,12 +49,13 @@ const Project = ({ title, description, id }: ProjectProps) => {
                 onMouseEnter={hover}
                 onMouseLeave={unhover}
             >
-                <div className="flex justify-between items-center">
+                <div className="relative flex justify-between items-center">
                     <h1 className="text-lg font-bold line-clamp-1">{title}</h1>
 
                     <HoverButtons
-                        openProject={() => navigate(`/project/${id}`)}
                         isHover={isHover}
+                        className="absolute right-0 top-0 text-lg"
+                        functions={hoverFunctions}
                     />
                 </div>
 

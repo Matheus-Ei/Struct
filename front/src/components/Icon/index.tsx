@@ -1,6 +1,6 @@
 // Librarie
 import { MouseEvent } from "react";
-import { FaQuestion } from "react-icons/fa";
+import { FaQuestion } from "react-icons/fa"
 
 // Local
 import library, { LibsType } from "./library";
