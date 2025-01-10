@@ -9,7 +9,6 @@ import NewPage from "./options/NewPage";
 import DashProject from "./options/DashProject";
 import Home from "./options/Home";
 import Search from "./options/Search";
-import Share from "./options/Share";
 
 const Menu = () => {
     const { menu } = useSafeContext(ProjectContext);
@@ -21,7 +20,6 @@ const Menu = () => {
     return (
         <div className="flex flex-col w-[300px] items-center h-screen border-r border-neutral gap-y-4 px-1">
             <div className="flex flex-col items-start justify-start w-full h-32 mt-4">
-                <Home />
                 <Search />
             </div>
 
@@ -33,13 +31,10 @@ const Menu = () => {
             </div>
 
             <div className="flex flex-col w-full items-start justify-end h-32 mb-4">
-                <Share />
+                <Home />
             </div>
         </div>
     );
 };
-
-// <Point text="Workflow" icon="GoWorkflow" library="go" />
-// <Point text="Settings" icon="IoMdSettings" library="io" />
 
 export default Menu;

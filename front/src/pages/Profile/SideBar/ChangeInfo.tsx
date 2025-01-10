@@ -12,7 +12,7 @@ interface ChangeInfoProps {
 const ChangeInfo = ({ text, icon, onClick }: ChangeInfoProps) => {
     return (
         <Button
-            className="border-none p-0 font-normal italic hover:text-secondary"
+            className="border-none p-0 font-normal italic hover:text-secondary hover:bg-base-100"
             onClick={onClick}
         >
             <div className="flex gap-x-2 items-center">

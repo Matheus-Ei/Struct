@@ -2,7 +2,6 @@
 import About from "../tabs/About";
 import Pages from "../tabs/Pages";
 import Settings from "../tabs/Settings";
-import Shared from "../tabs/Shared";
 
 // Local
 import { TabProps } from "./types";
@@ -16,7 +15,6 @@ const router: RouterType[] = [
     { title: "About", component: About },
     { title: "Pages", component: Pages },
     { title: "Settings", component: Settings },
-    { title: "Shared", component: Shared },
 ];
 
 export default router;
