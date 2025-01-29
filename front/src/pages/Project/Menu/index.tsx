@@ -1,40 +1,45 @@
-// Libraries
-import { useContext } from "react";
-
 // Local
-import { PagesRequestType } from "../util/types";
-import NewPageTab from "./NewPageTab";
-import { PagesContext } from "..";
+import useSafeContext from "hooks/useSafeContext";
+import { PageType } from "services/page/types";
+import { ProjectContext } from "pages/Project/context";
 import PageTab from "./PageTab";
 
+// Options
+import NewPage from "./options/NewPage";
+import DashProject from "./options/DashProject";
+import Home from "./options/Home";
+import Search from "./options/Search";
+import Share from "./options/Share";
+
 const Menu = () => {
-    const context = useContext(PagesContext);
-    if (!context) return null;
+    const { menu } = useSafeContext(ProjectContext);
 
-    const { menuTabs } = context;
-
-    const renderPages = (item: PagesRequestType, index: number) => {
-        return <PageTab item={item} index={index} key={index} />;
-    };
+    const renderPages = (item: PageType, index: number) => (
+        <PageTab item={item} key={index} />
+    );
 
     return (
-        <div className="flex flex-col w-[300px] items-center h-screen border-r border-neutral gap-4 px-1">
-            <div className="flex flex-col items-center justify-center w-full h-32">
-                <h1>Dashboard</h1>
-                <h1>Shared</h1>
+        <div className="flex flex-col w-[300px] items-center h-screen border-r border-neutral gap-y-4 px-1">
+            <div className="flex flex-col items-start justify-start w-full h-32 mt-4">
+                <Home />
+                <Search />
             </div>
 
             <div className="flex flex-col justify-start items-start w-full h-full overflow-y-scroll">
-                {menuTabs && menuTabs.map(renderPages)}
-                <NewPageTab />
+                <DashProject />
+
+                {menu.tabs && menu.tabs.map(renderPages)}
+                <NewPage />
             </div>
 
-            <div className="flex flex-col w-full items-center justify-center h-32">
-                <h1>Workflows</h1>
-                <h1>Settings</h1>
+            <div className="flex flex-col w-full items-start justify-end h-32 mb-4">
+                <Share />
             </div>
         </div>
     );
 };
+
+// <Point text="Workflow" icon="GoWorkflow" library="go" />
+// <Point text="Settings" icon="IoMdSettings" library="io" />
 
 export default Menu;

@@ -1,13 +1,14 @@
 // Libraries
-import { useContext, useEffect } from "react";
+import { useEffect } from "react";
 
 // Local
-import { projectsContext } from "pages/Dashboard/Projects";
-import Point from "components/Point";
-import useToggle from "hooks/useToggle";
-import ConfirmModal from "components/ConfirmModal";
+import { ProjectsContext } from "pages/Dashboard/Projects/context";
 import { SetStateType } from "types/global";
+import useToggle from "hooks/useToggle";
 import Project from "services/project";
+import ConfirmModal from "components/ConfirmModal";
+import Point from "components/Point";
+import useSafeContext from "hooks/useSafeContext";
 
 interface DeleteProps {
     projectId: number;
@@ -15,7 +16,7 @@ interface DeleteProps {
 }
 
 const Delete = ({ projectId, setModal }: DeleteProps) => {
-    const context = useContext(projectsContext);
+    const { refetch } = useSafeContext(ProjectsContext);
 
     const [wantDelete, toggleWantDelete] = useToggle(false);
     const [showConfirmDelete, toggleShowConfirmDelete] = useToggle(false);
@@ -26,9 +27,9 @@ const Delete = ({ projectId, setModal }: DeleteProps) => {
 
         Project.delete(projectId, () => {
             setModal({ projectId: 1, show: false });
-            context?.refetch();
+            refetch();
         });
-    }, [wantDelete, context, projectId, setModal]);
+    }, [wantDelete, refetch, projectId, setModal]);
 
     return (
         <div className="flex w-fit flex-col items-start">
@@ -40,8 +41,7 @@ const Delete = ({ projectId, setModal }: DeleteProps) => {
             />
 
             <Point
-                icon="MdDelete"
-                library="md"
+                icon={{ name: "MdDelete", library: "md" }}
                 text="Delete"
                 onClick={() => toggleShowConfirmDelete(true)}
             />

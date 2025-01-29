@@ -15,7 +15,7 @@ class Theme {
         return { oldTheme, newTheme };
     }
 
-    public static getCurrent() {
+    public static get current() {
         try {
             const { theme } = LocalStorage.get("theme");
             return theme;
@@ -24,15 +24,15 @@ class Theme {
         }
     }
 
-    public static getKeys() {
+    public static get keys(): Array<string> {
         return themes.map((item) => {
-            if (typeof item === "object") return Object.keys(item);
+            if (typeof item === "object") return Object.keys(item)[0];
 
             return item;
         });
     }
 
-    public static getAll() {
+    public static get theme() {
         return themes;
     }
 }

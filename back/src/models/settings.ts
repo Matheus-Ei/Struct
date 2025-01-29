@@ -2,13 +2,16 @@
 import { DataTypes, Model } from "sequelize";
 
 // Local
-import connection from "../services/database/connection.js";
+import connection from "../services/database/connection";
+import UserModel from "./user";
 
 class SettingsModel extends Model {
     public id!: number;
 
     public language!: string;
     public country!: string;
+
+    public user_id!: number;
 }
 
 SettingsModel.init(
@@ -27,6 +30,16 @@ SettingsModel.init(
         country: {
             type: DataTypes.STRING(50),
             allowNull: false,
+        },
+
+        user_id: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            unique: true,
+            references: {
+                model: UserModel,
+                key: "id",
+            },
         },
     },
     {

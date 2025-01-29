@@ -7,12 +7,14 @@ import Modal from "./Modal";
 
 interface ConfirmModalProps {
     isOpen: boolean;
-    close: () => any;
-    onConfirm: () => any;
+    close: () => void;
+    onConfirm: () => void;
     message?: string;
     confirmText?: string;
     cancelText?: string;
 }
+
+const css = clsx("w-96 h-24 sm:w-96 sm:h-24", "items-center justify-center");
 
 const ConfirmModal = ({
     isOpen,
@@ -22,14 +24,8 @@ const ConfirmModal = ({
     confirmText = "Yes",
     cancelText = "No",
 }: ConfirmModalProps) => {
-    const css = clsx(
-        "relative w-96 h-24",
-        "flex flex-col items-center justify-center",
-        "rounded-btn"
-    );
-
     return (
-        <Modal isOpen={isOpen} close={close} className={css}>
+        <Modal isOpen={isOpen} onClose={close} className={css}>
             <>
                 <h1 className="mb-5">{message}</h1>
 

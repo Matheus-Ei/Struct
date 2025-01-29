@@ -1,51 +1,32 @@
 // Librarie
-import { createContext, useState } from "react";
+import { useState } from "react";
 import { useParams } from "react-router-dom";
+
 // Local
-import { PagesRequestType, ReactProjectContext } from "./util/types";
+import { useAllPages, usePage } from "services/page/usePage";
+import { ProjectContext } from "./context";
 import withLoader from "HOCs/withLoader";
 import Dashboard from "./Dashboard";
 import Menu from "./Menu";
 import Page from "./Page";
-import { useAllPages, usePage } from "services/page/usePage";
-
-export const PagesContext = createContext<ReactProjectContext | undefined>(
-    undefined
-);
-
-type PagesRequestTypeArray = Array<PagesRequestType> | null;
 
 const Project = () => {
     const { id } = useParams();
 
     // Menu tabs request
-    const [menuTabs, setMenuTabs] = useState<PagesRequestTypeArray>(null);
-    const { refetch: refetchMenuTabs } = useAllPages(Number(id), (response) => {
-        setMenuTabs(response);
-    });
+    const { data: tabs, refetch: refetchTabs } = useAllPages(Number(id));
 
     // Page content request
     const [selectedPageId, setSelectedPageId] = useState<number | null>(null);
-    const getSelectedPageId = () => {
-        if (!menuTabs || !selectedPageId) return 0;
-
-        if (!selectedPageId) return menuTabs[0].id;
-
-        return selectedPageId;
-    };
-    const { data: page, refetch: refetchPage } = usePage(getSelectedPageId());
+    const { data: page, refetch: refetchPage } = usePage(selectedPageId);
 
     return (
-        <PagesContext.Provider
+        <ProjectContext.Provider
             value={{
-                page,
-                refetchPage,
-                menuTabs,
-                refetchMenuTabs,
-                setMenuTabs,
-                selectedPageId,
-                setSelectedPageId,
                 projectId: id,
+                menu: { tabs, refetch: refetchTabs },
+                page: { data: page, refetch: refetchPage },
+                selectedPage: { id: selectedPageId, set: setSelectedPageId },
             }}
         >
             <div className="flex flex-row pr-10 items-center w-screen h-screen gap-10">
@@ -53,7 +34,7 @@ const Project = () => {
 
                 {selectedPageId ? <Page /> : <Dashboard />}
             </div>
-        </PagesContext.Provider>
+        </ProjectContext.Provider>
     );
 };
 

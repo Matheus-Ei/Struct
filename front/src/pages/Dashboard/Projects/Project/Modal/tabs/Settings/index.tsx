@@ -1,3 +1,4 @@
+// Local
 import { TabProps } from "../../utils/types";
 import Delete from "./Delete";
 

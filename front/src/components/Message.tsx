@@ -1,3 +1,4 @@
+// Libraries
 import clsx from "clsx";
 
 interface MessageProps {
@@ -22,7 +23,6 @@ const Message = ({ text, type, box, isVisible }: MessageProps) => {
     });
 
     if (!isVisible) return null;
-
     return <p className={css}>{text}</p>;
 };
 

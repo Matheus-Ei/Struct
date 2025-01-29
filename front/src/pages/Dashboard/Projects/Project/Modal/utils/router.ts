@@ -1,8 +1,11 @@
+// Tabs
 import About from "../tabs/About";
 import Pages from "../tabs/Pages";
 import Settings from "../tabs/Settings";
 import Shared from "../tabs/Shared";
 import Workflows from "../tabs/Workflows";
+
+// Local
 import { TabProps } from "./types";
 
 const router: Array<[string, (arg0: TabProps) => JSX.Element | null]> = [

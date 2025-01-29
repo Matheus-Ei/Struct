@@ -1,15 +1,22 @@
 // Libraries
 import clsx from "clsx";
+
+// Local
 import { SetStateType } from "types/global";
+import { ModalType, TabProps } from "./utils/types";
 import router from "./utils/router";
-import { TabProps } from "./utils/types";
+import Icon from "components/Icon";
+import { useNavigate } from "react-router-dom";
 
 interface HeaderProps {
     tab: string;
     setTab: SetStateType<string>;
+    modal: ModalType;
 }
 
-const Header = ({ tab, setTab }: HeaderProps) => {
+const Header = ({ tab, setTab, modal }: HeaderProps) => {
+    const navigate = useNavigate();
+
     const renderTabs = (
         item: [string, (arg0: TabProps) => JSX.Element | null],
         index: number
@@ -29,6 +36,12 @@ const Header = ({ tab, setTab }: HeaderProps) => {
     return (
         <div className="w-fit flex flex-row gap-x-8 p-2 ml-8">
             {router.map(renderTabs)}
+
+            <Icon
+                value={{ name: "MdOpenInNew", library: "md" }}
+                className="absolute top-1 right-10 text-lg"
+                onClick={() => navigate(`/project/${modal.projectId}`)}
+            />
         </div>
     );
 };

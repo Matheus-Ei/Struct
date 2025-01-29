@@ -1,85 +1,58 @@
-// Local
-import clsx from "clsx";
+// Components
 import EditableField from "components/EditableField";
 import Emoji from "components/Emoji";
-import EmojiSelector from "components/EmojiSelector";
-import { EmojiClickData } from "emoji-picker-react";
+
+// Local
 import useToggle from "hooks/useToggle";
-import { useEffect, useState } from "react";
+import { MouseEvent, useState } from "react";
 import ContextPageMenu from "./ContextPageMenu";
 import PageService from "services/page";
 
 interface PageProps {
     id: number;
     name: string;
-    emoji: string;
+    emoji: string | undefined;
     refetch: () => void;
 }
 
 const Page = ({ id, name, emoji, refetch }: PageProps) => {
-    const [showEmojiSelector, toggleEmojiSelector] = useToggle(false);
-    const [newEmoji, setEmoji] = useState<EmojiClickData | undefined>();
-    const [defaultEmoji, setDefauldEmoji] = useState<string | null>();
-
     const [showMenu, toggleShowMenu] = useToggle(false);
     const [clickPosition, setClickPosition] = useState({ x: 0, y: 0 });
 
-    const onContextMenu = (event: any) => {
+    const handleContextMenu = (event: MouseEvent) => {
         event?.preventDefault();
         setClickPosition({ x: event.clientX, y: event.clientY });
         toggleShowMenu(true);
     };
 
-    // Set default emoji on first render
-    useEffect(() => {
-        setDefauldEmoji(emoji);
-    }, [emoji]);
-
-    // Update emoji when newEmoji is set
-    useEffect(() => {
+    const updateEmoji = (newEmoji?: string | null) => {
         if (!newEmoji) return;
 
-        PageService.edit(id, undefined, undefined, newEmoji.emoji, () =>
-            setDefauldEmoji(newEmoji.emoji)
-        );
-    }, [newEmoji, id]);
-
-    const updateName = async (value: string) => {
-        PageService.edit(id, value, undefined, undefined, () => {});
+        PageService.edit(id, undefined, undefined, newEmoji);
     };
 
-    const cssNameEditing = clsx(
-        "w-fit px-1",
-        "text-md text-base-content cursor-text",
-        "outline-none bg-base-200 rounded-btn"
-    );
-    const cssNameNotEditing = clsx(
-        "w-full px-1 line-clamp-1 select-none",
-        "text-md text-base-content cursor-pointer",
-        "outline-none bg-base-100 rounded-btn"
-    );
+    const updateName = async (value: string) => {
+        if (!value) return;
+
+        await PageService.edit(id, value, undefined, undefined);
+    };
 
     return (
         <div
             className="flex gap-x-4 items-center"
-            onContextMenu={onContextMenu}
+            onContextMenu={handleContextMenu}
         >
             <Emoji
-                symbol={defaultEmoji}
-                className="cursor-pointer select-none text-xl"
-                onClick={() => toggleEmojiSelector()}
+                symbol={emoji}
+                className="text-xl"
+                selectorOnClick={true}
+                onUpdate={updateEmoji}
             />
+
             <EditableField
                 defaultValue={name}
                 onUpdate={updateName}
-                classNameEditing={cssNameEditing}
-                classNameNotEditing={cssNameNotEditing}
-            />
-
-            <EmojiSelector
-                setEmoji={setEmoji}
-                toggleShow={toggleEmojiSelector}
-                show={showEmojiSelector}
+                className={{ normal: "w-full px-1 line-clamp-1 select-none" }}
             />
 
             <ContextPageMenu

@@ -1,11 +1,12 @@
 // Libraries
-import { useContext, useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 // Local
+import useSafeContext from "hooks/useSafeContext";
 import { handleKeyDown } from "../utils/Events";
-import { NotesPageContext } from "../Body";
-import Cursor from "../utils/Cursor";
 import { Text } from "../utils/Text";
+import Cursor from "modules/Cursor";
+import { NotesContext } from "../context";
 
 interface ParagraphProps {
     note: string;
@@ -14,37 +15,32 @@ interface ParagraphProps {
 
 const Paragraph = ({ note, index }: ParagraphProps) => {
     const [position, setPosition] = useState<number>(0);
-
-    const context = useContext(NotesPageContext);
-
     const divRef = useRef<HTMLDivElement | null>(null);
-    const cursorObj = useMemo(() => new Cursor(divRef), [divRef]);
+    const cursor = useMemo(() => new Cursor(divRef.current), [divRef]);
 
     useEffect(() => {
-        cursorObj.setCursorPosition(position);
-    }, [position, cursorObj]);
+        cursor.position = position;
+    }, [position, cursor]);
 
-    if (!context) return null;
+    const useNotesContext = useSafeContext(NotesContext);
+    const textEditor = new Text(useNotesContext);
 
-    const textObj = new Text(context);
-
-    const onChange = () => {
-        setPosition(cursorObj.getCursorPosition());
-        if (divRef.current) {
-            textObj.handleSetText(index, divRef.current.innerHTML);
-        }
+    const handleChange = () => {
+        setPosition(cursor.position);
+        if (divRef.current)
+            textEditor.handleSetText(index, divRef.current.innerHTML);
     };
+
+    const innerHTML = { __html: note };
 
     return (
         <div
             contentEditable
-            dangerouslySetInnerHTML={{
-                __html: note,
-            }}
+            dangerouslySetInnerHTML={innerHTML}
             ref={divRef}
             className="w-full h-auto bg-base-100 resize-none outline-none"
-            onKeyDown={(event) => handleKeyDown(event, index, textObj, context)}
-            onInput={onChange}
+            onKeyDown={(event) => handleKeyDown(event, index, textEditor)}
+            onInput={handleChange}
         ></div>
     );
 };

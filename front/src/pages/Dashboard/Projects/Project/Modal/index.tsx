@@ -1,14 +1,15 @@
 // Libraries
 import { createElement, useState } from "react";
 
-// Local
-import Modal from "components/Modal";
-import Footer from "./Footer";
-import Header from "./Header";
-import { ModalType } from "./utils/types";
+// Types
 import { SetStateType } from "types/global";
-import router from "./utils/router";
+import { ModalType } from "./utils/types";
 import { TabProps } from "./utils/types";
+import Modal from "components/Modal";
+
+// Local
+import router from "./utils/router";
+import Header from "./Header";
 
 interface ProjectModalProps {
     modal: ModalType;
@@ -37,13 +38,15 @@ const ProjectModal = ({ modal, setModal }: ProjectModalProps) => {
     };
 
     return (
-        <Modal isOpen={modal.show} close={handleClose}>
+        <Modal
+            isOpen={modal.show}
+            onClose={handleClose}
+            className="w-[100vw] h-[100vh] sm:w-[75vw] sm:h-[55vh] z-30"
+        >
             <div className="w-full h-full">
-                <Header tab={tab} setTab={setTab} />
+                <Header tab={tab} setTab={setTab} modal={modal} />
 
                 {router.map(renderTab)}
-
-                <Footer id={modal.projectId} />
             </div>
         </Modal>
     );

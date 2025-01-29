@@ -1,57 +1,52 @@
 // Libraries
-import { useContext } from "react";
-
-// Local
-import { PagesRequestType } from "pages/Project/util/types";
-import { addPage } from "pages/Project/util/events";
-import { PagesContext } from "pages/Project";
-import Icons from "modules/Icons";
+import { MouseEvent } from "react";
 import clsx from "clsx";
 
-interface HoverButtonsProps {
-    toggleShowChildren: (value?: boolean) => void;
-    showChildren: boolean;
-    isHover: boolean;
-    childrens: Array<PagesRequestType> | null;
-    pageId: number;
-}
+// Local
+import { addPage } from "pages/Project/util/events";
+import { ProjectContext } from "pages/Project/context";
+import Icon from "components/Icon";
+import useSafeContext from "hooks/useSafeContext";
+import { PageTabContext } from "./context";
 
-const HoverButtons = ({
-    toggleShowChildren,
-    showChildren,
-    isHover,
-    childrens,
-    pageId,
-}: HoverButtonsProps) => {
-    const context = useContext(PagesContext);
-    const isSelected = context?.selectedPageId === pageId;
+const HoverButtons = () => {
+    const useProjectContext = useSafeContext(ProjectContext);
+    const { selectedPage } = useProjectContext;
 
-    if (!isHover || !context) return null;
+    const { isHover, menu, clickPosition, page, children } =
+        useSafeContext(PageTabContext);
 
-    const childrenButton = () => {
-        if (childrens?.length === 0) return null;
+    if (!isHover) return null;
+    const isSelected = selectedPage.id === page.id;
 
-        if (showChildren) {
-            return (
-                <Icons name="MdExpandLess" library="md" className="h-full" />
-            );
-        }
+    const handleMenu = (event?: MouseEvent<HTMLElement>) => {
+        if (!event) return;
 
-        return <Icons name="MdExpandMore" library="md" className="h-full" />;
+        menu.toggle(true);
+        clickPosition.set({ x: event.clientX, y: event.clientY });
     };
 
-    const bodyCss = clsx("flex flex-row absolute gap-x-2 right-2 top-2", {
-        "text-primary-content": isSelected,
-        "text-base-content": !isSelected,
-    });
+    const bodyCss = clsx(
+        "h-full flex flex-row items-center justify-center absolute gap-x-2 right-2",
+        {
+            "text-primary-content": isSelected,
+            "text-base-content": !isSelected,
+        }
+    );
 
     return (
         <div className={bodyCss}>
-            <div onClick={() => addPage(context, toggleShowChildren, pageId)}>
-                <Icons name="IoAddOutline" library="io5" className="h-full" />
-            </div>
+            <Icon
+                value={{ name: "IoAddOutline", library: "io5" }}
+                onClick={() =>
+                    addPage(useProjectContext, children.toggle, page.id)
+                }
+            />
 
-            <div onClick={() => toggleShowChildren()}>{childrenButton()}</div>
+            <Icon
+                value={{ name: "MdMoreHoriz", library: "md" }}
+                onClick={handleMenu}
+            />
         </div>
     );
 };

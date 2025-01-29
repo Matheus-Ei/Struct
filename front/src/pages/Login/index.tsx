@@ -1,16 +1,18 @@
 // Libraries
-import GoogleLoginButton from "./GoogleLoginButton";
+import GoogleLogin from "./provider/Google";
 import { useNavigate } from "react-router";
 import { useState } from "react";
 
 // Local
 import { ReactComponent as Logo } from "assets/logo-1800x400-1.svg";
-import Message from "components/Message";
 import useToggle from "hooks/useToggle";
+import User from "services/user";
+
+// Components
+import Message from "components/Message";
 import Button from "components/Button";
 import Input from "components/Input";
 import Card from "components/Card";
-import User from "services/user";
 
 const Login = () => {
     const [mail, setMail] = useState<string>("");
@@ -19,11 +21,10 @@ const Login = () => {
 
     const navigate = useNavigate();
 
-    const handleLogin = () => {
-        User.login(mail, password, "Default", navigate).then(() => {
-            toggleError(true);
-        });
-    };
+    const login = () =>
+        User.login(mail, password, "Default", navigate).then(() =>
+            toggleError(true)
+        );
 
     return (
         <div className="w-screen h-[97vh] flex items-center justify-center">
@@ -42,24 +43,20 @@ const Login = () => {
                         isVisible={error}
                     />
 
-                    <Input
-                        text="Mail"
-                        setValue={setMail}
-                        onEnter={handleLogin}
-                    />
+                    <Input text="Mail" setValue={setMail} onEnter={login} />
 
                     <Input
                         text="Password"
                         setValue={setPassword}
                         isPassword={true}
-                        onEnter={handleLogin}
+                        onEnter={login}
                     />
 
-                    <Button text="Login" inverse={true} onClick={handleLogin} />
+                    <Button text="Login" inverse={true} onClick={login} />
 
                     <div className="divider">Or login with</div>
 
-                    <GoogleLoginButton toggleError={toggleError} />
+                    <GoogleLogin toggleError={toggleError} />
                 </div>
             </Card>
         </div>

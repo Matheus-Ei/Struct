@@ -1,5 +1,5 @@
 // Libraries
-import clsx from "clsx";
+import { twMerge } from "tailwind-merge";
 
 interface CardProps {
     children: JSX.Element;
@@ -7,13 +7,12 @@ interface CardProps {
 }
 
 const Card = ({ children, className }: CardProps) => {
-    const defaultCss = clsx(
+    const css = twMerge(
         "w-fit h-fit p-4",
         "flex flex-col items-center justify-center",
-        "border rounded-box border-primary bg-base-100"
+        "border rounded-box border-primary bg-base-100",
+        className
     );
-
-    const css = className ? className : defaultCss;
 
     return <div className={css}>{children}</div>;
 };

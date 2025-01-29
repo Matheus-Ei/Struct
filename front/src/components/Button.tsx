@@ -1,11 +1,12 @@
 // Libraries
 import clsx from "clsx";
+import { twMerge } from "tailwind-merge";
 
 interface ButtonProps {
     children?: JSX.Element;
     inverse?: boolean;
     text?: string;
-    onClick?: () => any;
+    onClick?: () => void;
     className?: string;
 }
 
@@ -16,19 +17,17 @@ const Button = ({
     onClick,
     className,
 }: ButtonProps) => {
-    const buttonStyle = clsx(
+    const rawCss = clsx(
         "border border-primary w-fit h-fit px-14 py-2 rounded-btn font-bold",
         {
             "bg-primary text-primary-content": inverse,
             "bg-base-100 text-primary": !inverse,
         }
     );
-    const css = className ? className : buttonStyle;
-
-    const handdleClick = () => onClick && onClick();
+    const css = twMerge(rawCss, className);
 
     return (
-        <button className={css} onClick={handdleClick}>
+        <button className={css} onClick={() => onClick && onClick()}>
             {children ? children : <h1>{text}</h1>}
         </button>
     );

@@ -2,11 +2,7 @@
 import { DataTypes, Model } from "sequelize";
 
 // Local
-import connection from "../services/database/connection.js";
-
-// Models
-import SubscriptionModel from "./subscription.js";
-import SettingsModel from "./settings.js";
+import connection from "../services/database/connection";
 
 class UserModel extends Model {
     public id!: number;
@@ -19,9 +15,6 @@ class UserModel extends Model {
     public nickname?: string;
     public password!: string;
     public photo?: string;
-
-    public subscription_id!: number;
-    public settings_id!: number;
 }
 
 UserModel.init(
@@ -59,6 +52,7 @@ UserModel.init(
 
         nickname: {
             type: DataTypes.STRING(50),
+            unique: true,
         },
 
         password: {
@@ -68,24 +62,6 @@ UserModel.init(
 
         photo: {
             type: DataTypes.BLOB,
-        },
-
-        subscription_id: {
-            type: DataTypes.INTEGER,
-            references: {
-                model: SubscriptionModel,
-                key: "id",
-            },
-            onDelete: "CASCADE",
-        },
-
-        settings_id: {
-            type: DataTypes.INTEGER,
-            references: {
-                model: SettingsModel,
-                key: "id",
-            },
-            onDelete: "CASCADE",
         },
     },
     {

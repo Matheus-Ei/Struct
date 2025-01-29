@@ -1,28 +1,27 @@
 // Local
-import { SignUpContextType } from "./types";
-import Request from "modules/Request";
 import { ErrorType, SetStateType } from "types/global";
+import { SignUpContextType } from "../context";
 
 class Validations {
-    private context: SignUpContextType;
+    private useSignUpContext: SignUpContextType;
     private setNickError: SetStateType<ErrorType>;
     private setMailError: SetStateType<ErrorType>;
 
     constructor(
-        context: SignUpContextType,
+        useSignUpContext: SignUpContextType,
         setNickError: SetStateType<ErrorType>,
         setMailError: SetStateType<ErrorType>
     ) {
-        this.context = context;
+        this.useSignUpContext = useSignUpContext;
         this.setMailError = setMailError;
         this.setNickError = setNickError;
     }
 
     private emptyFields() {
-        const { name, nickname, mail } = this.context;
+        const { name, nickname, mail } = this.useSignUpContext;
 
         if (!name || !nickname || !mail) {
-            this.context.setError({
+            this.useSignUpContext.setError({
                 isError: true,
                 message: "Please fill all fields",
             });
@@ -33,7 +32,7 @@ class Validations {
     }
 
     private async nickname() {
-        const nickname = this.context.nickname;
+        const nickname = this.useSignUpContext.nickname;
         if (!nickname) return false;
 
         // Nickname validation
@@ -42,36 +41,12 @@ class Validations {
             return false;
         }
 
-        // Check if nickname is available
-        const response = await Request.post("user/check/nickname", {
-            nickname: nickname,
-        });
-        if (response.isAvailable === false) {
-            this.setNickError({
-                message: "This nickname is not avaliable",
-                isError: true,
-            });
-            return false;
-        }
-
         return true;
     }
 
     private async mail() {
-        const mail = this.context.mail;
+        const mail = this.useSignUpContext.mail;
         if (!mail) return false;
-
-        // Check if mail registered already
-        const response = await Request.post("user/check/mail", {
-            mail: mail,
-        });
-        if (response.isAvailable === false) {
-            this.setMailError({
-                message: "This mail is already in use",
-                isError: true,
-            });
-            return false;
-        }
 
         // Mail validation
         const mailUser = mail.substring(0, mail.indexOf("@"));
@@ -91,7 +66,7 @@ class Validations {
     }
 
     private resetErrors() {
-        this.context.setError({ message: "", isError: false });
+        this.useSignUpContext.setError({ message: "", isError: false });
         this.setNickError({ message: "", isError: false });
         this.setMailError({ message: "", isError: false });
     }

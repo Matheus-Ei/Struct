@@ -3,17 +3,15 @@ import { Request, Response, NextFunction } from "express";
 import dotenv from "dotenv";
 
 // Local
-import Cookie from "../services/cookie.js";
-import Token from "../services/token.js";
+import Cookie from "../services/cookie";
+import Token from "../services/token";
 
 dotenv.config();
 
 const autorizedPaths = [
-    "/user/check/nickname",
-    "/user/check/mail",
-    "/user/auth/google",
-    "/user/login",
-    "/user/register",
+    "/user",
+    "/user/auth",
+    "/provider/user/google",
     "/token/check",
     "/token/refresh",
 ];

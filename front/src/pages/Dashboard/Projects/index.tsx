@@ -1,17 +1,24 @@
 // Libraries
-import React, { useState } from "react";
+import { useState } from "react";
+import clsx from "clsx";
 
-// Local
+// Components
 import CreateProjectModal from "./CreateProject/Modal";
+import SearchBar from "components/SearchBar";
 import CreateProject from "./CreateProject";
 import ProjectModal from "./Project/Modal";
 import Project from "./Project";
-import clsx from "clsx";
-import { ModalType } from "./Project/Modal/utils/types";
-import { useAllProjects } from "services/project/useProject";
-import SearchBar from "components/SearchBar";
 
-export const projectsContext = React.createContext<any>(undefined);
+// Local
+import { useAllProjects } from "services/project/useProject";
+import { ModalType } from "./Project/Modal/utils/types";
+import { ProjectType } from "services/project/type";
+import { ProjectsContext } from "./context";
+
+const projectsDivCss = clsx(
+    "grid items-center justify-items-start gap-x-6 gap-y-2",
+    "grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4"
+);
 
 const Projects = () => {
     const [showCreateProject, setShowCreateProject] = useState(false);
@@ -22,9 +29,11 @@ const Projects = () => {
 
     const { data: projects, refetch } = useAllProjects();
     const [searchResult, setSearchResult] = useState<Array<string>>([]);
-    const searchPlace = projects?.map((item: any): string => item.title);
 
-    const renderProject = (item: any, index: number) => {
+    const searchPlace = projects?.map(
+        (item: ProjectType): string => item.title
+    );
+    const renderProject = (item: ProjectType, index: number) => {
         // If the searchPlace is set and the item is not in the searchPlace, return null
         if (searchResult?.length >= 0 && !searchResult?.includes(item.title))
             return null;
@@ -40,13 +49,8 @@ const Projects = () => {
         );
     };
 
-    const projectsDivCss = clsx(
-        "grid items-center justify-items-start gap-6",
-        "grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4"
-    );
-
     return (
-        <projectsContext.Provider value={{ refetch }}>
+        <ProjectsContext.Provider value={{ refetch }}>
             <div className="flex flex-col items-center justify-center w-[95%] gap-4">
                 <div className="w-[40%]">
                     <SearchBar
@@ -68,7 +72,7 @@ const Projects = () => {
                 showModal={showCreateProject}
                 setModal={setShowCreateProject}
             />
-        </projectsContext.Provider>
+        </ProjectsContext.Provider>
     );
 };
 

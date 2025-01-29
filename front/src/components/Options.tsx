@@ -1,5 +1,6 @@
 // Libraries
-import clsx from "clsx";
+import { ChangeEvent } from "react";
+import { twMerge } from "tailwind-merge";
 
 // Local
 import { SetStateType } from "types/global";
@@ -11,8 +12,6 @@ interface OptionsProps {
     placeholder?: string;
     className?: string;
 }
-
-const defaultCss = clsx("bg-base-300 px-2 py-1 rounded-btn");
 
 const renderOptions = (option: string, index: number) => {
     return (
@@ -29,10 +28,11 @@ const Options = ({
     placeholder,
     className,
 }: OptionsProps) => {
-    const css = className ? className : defaultCss;
+    const css = twMerge("bg-base-300 px-2 py-1 rounded-btn", className);
 
-    const onChange = (event: any) => {
-        setSelected(options.indexOf(event.target.value));
+    const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
+        const index = options.indexOf(event.target.value);
+        setSelected(index);
     };
 
     return (
@@ -40,7 +40,7 @@ const Options = ({
             <select
                 id="options"
                 value={options[selected] || ""}
-                onChange={onChange}
+                onChange={handleChange}
                 className={css}
             >
                 <option value="">{placeholder || "Select"}</option>

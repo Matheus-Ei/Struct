@@ -1,22 +1,24 @@
 // Local
-import { PagesRequestType } from "pages/Project/util/types";
+import useSafeContext from "hooks/useSafeContext";
+import { PageType } from "services/page/types";
 import PageTab from ".";
+import { PageTabContext } from "./context";
 
-interface ChildrensProps {
-    items: Array<PagesRequestType> | null;
-    parentPageId: number;
-    show: boolean;
-}
+const renderChildrens = (item: PageType, index: number) => (
+    <PageTab item={item} key={index} />
+);
 
-const Childrens = ({ show, items }: ChildrensProps) => {
-    const renderChildrens = (item: PagesRequestType, index: number) => {
-        return <PageTab item={item} index={index} key={index} />;
-    };
+const Childrens = () => {
+    const { page, children } = useSafeContext(PageTabContext);
 
-    if (!show) return null;
+    if (!children.show) return null;
 
     return (
-        <div className="flex flex-col pl-4">{items?.map(renderChildrens)}</div>
+        <div className="flex flex-col relative w-full justify-start">
+            <div className="flex flex-col pl-4">
+                {page.children_pages?.map(renderChildrens)}
+            </div>
+        </div>
     );
 };
 

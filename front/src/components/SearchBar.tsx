@@ -1,9 +1,9 @@
 // Libraries
-import clsx from "clsx";
 import { ChangeEvent, useEffect, useRef } from "react";
+import { twMerge } from "tailwind-merge";
 
 // Local
-import Icons from "modules/Icons";
+import Icon from "components/Icon";
 import { SetStateType } from "types/global";
 
 interface SearchBarProps {
@@ -13,27 +13,20 @@ interface SearchBarProps {
     className?: string;
 }
 
-const defaultCss = clsx(
-    "w-full shadow-sm shadow-neutral",
-    "py-2 pl-16 pr-4",
-    "bg-base-200 placeholder:text-base-content",
-    "rounded-badge outline-none"
-);
-
 const SearchBar = ({
     searchPlace,
     setResult,
     placeholder,
     className,
 }: SearchBarProps) => {
-    const initialSearchPlace = useRef(searchPlace);
+    const startSearchPlace = useRef(searchPlace);
 
     // Set the result to the search place when the component is mounted
     useEffect(() => {
-        setResult(initialSearchPlace.current);
+        setResult(startSearchPlace.current);
     }, [setResult]);
 
-    const onChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
         const search = event.target.value as string;
         if (!search) return setResult(searchPlace);
 
@@ -44,19 +37,27 @@ const SearchBar = ({
         setResult(result);
     };
 
-    const css = className ? className : defaultCss;
+    const css = twMerge(
+        "w-full",
+        "py-2 pl-16 pr-4",
+        "placeholder:text-base-content bg-base-100",
+        "outline-none border-b border-base-300",
+        className
+    );
+
     return (
-        <div className="relative flex text-xl text-base-content w-full">
-            <Icons
-                name="IoSearchOutline"
-                library="io5"
-                className="flex items-center h-full absolute left-6 text-primary"
-            />
+        <div className="relative flex text-base-content w-full">
+            {!className && (
+                <Icon
+                    value={{ name: "IoSearchOutline", library: "io5" }}
+                    className="flex items-center h-full text-xl absolute left-6 text-base-content"
+                />
+            )}
 
             <input
                 className={css}
                 placeholder={placeholder ? placeholder : "Search. . . "}
-                onChange={onChange}
+                onChange={handleChange}
                 defaultValue=""
             />
         </div>

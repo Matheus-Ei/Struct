@@ -1,57 +1,62 @@
 // Libraries
-import clsx from "clsx";
 import { useCallback, useEffect, useRef } from "react";
+import { twMerge } from "tailwind-merge";
+
+// Local
+import Event from "modules/Event";
 
 interface ContextMenuProps {
     children: JSX.Element;
     onClose: () => void;
-    position: { x: number; y: number };
     show: boolean;
-    translateY?: boolean;
+    position: { x: number; y: number };
+    isAbsolute?: boolean;
+    isTranslateY?: boolean;
     className?: string;
 }
 
 const ContextMenu = ({
     children,
-    show,
     onClose,
+    show,
     position,
-    translateY,
+    isAbsolute,
+    isTranslateY,
     className,
 }: ContextMenuProps) => {
     const menuRef = useRef<HTMLDivElement>(null);
-
     const handleClickOutside = useCallback(
         (event: MouseEvent) => {
-            if (
-                menuRef.current &&
+            if (!menuRef.current) return;
+
+            Event.onClickCallback(
+                onClose,
                 !menuRef.current.contains(event.target as Node)
-            ) {
-                onClose();
-            }
+            );
         },
         [onClose]
     );
 
+    // Close the context menu when clicking outside of it
     useEffect(() => {
-        document.addEventListener("mousedown", handleClickOutside);
+        Event.addListener("mousedown", handleClickOutside);
 
-        return () => {
-            document.removeEventListener("mousedown", handleClickOutside);
-        };
+        return () => Event.removeListener("mousedown", handleClickOutside);
     }, [onClose, handleClickOutside]);
 
     if (!show) return null;
 
-    const defaultCss = clsx(
-        "fixed p-[10px] z-50",
+    const css = twMerge(
+        "p-[10px] z-50",
         "flex flex-col items-center justify-center",
-        "bg-base-100 border rounded-btn border-primary"
+        "bg-base-100 border rounded-btn border-primary",
+        className
     );
-    const css = className ? className : defaultCss;
-    const translation = translateY
+
+    const translation = isTranslateY
         ? "translate(0%, -100%)"
         : "translate(0%, 0%)";
+    const positionCss = isAbsolute ? "absolute" : "fixed";
 
     return (
         <div
@@ -60,6 +65,7 @@ const ContextMenu = ({
             style={{
                 top: position.y,
                 left: position.x,
+                position: positionCss,
                 transform: translation,
             }}
         >

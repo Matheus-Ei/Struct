@@ -3,12 +3,12 @@ import { EmojiClickData } from "emoji-picker-react";
 import { useState } from "react";
 
 // Components
+import EmojiSelector from "components/Emoji/Selector";
 import Emoji from "components/Emoji";
-import EmojiSelector from "components/EmojiSelector";
 import Input from "components/Input";
 import Point from "components/Point";
 
-// Other Locals
+// Local
 import useToggle from "hooks/useToggle";
 import Page from "services/page";
 
@@ -23,36 +23,36 @@ const AddPage = ({ projectId, refetch }: AddPageProps) => {
 
     const [title, setTitle] = useState<string>("");
 
-    const createPage = async () => {
-        if (!title) return;
-
-        Page.create(title, emoji?.emoji, projectId, null, refetch);
-    };
+    const createPage = async () =>
+        title &&
+        (await Page.create(title, emoji?.emoji, projectId, null, refetch));
 
     return (
-        <div className="flex items-center justify-center absolute bottom-3 left-5">
-            <div className="flex items-center justify-center gap-x-4 mr-8">
-                <Input
-                    text="Title"
-                    className="border-b border-neutral px-2 pb-1 outline-none bg-base-100"
-                    setValue={setTitle}
-                    onEnter={createPage}
-                />
+        <div className="flex items-center justify-center absolute bottom-2 right-2 gap-x-4">
+            <Input
+                text="Title"
+                className="border-base-100 rounded-none border-b border-b-neutral m-0 h-8 px-2 pb-1 outline-none bg-base-100"
+                setValue={setTitle}
+                onEnter={createPage}
+            />
 
-                <Emoji
-                    symbol={emoji?.emoji}
-                    onClick={() => toggleShowEmoji()}
-                    className="cursor-pointer select-none scale-125 py-1 px-2"
-                />
-            </div>
+            <Emoji
+                symbol={emoji?.emoji}
+                onClick={() => toggleShowEmoji()}
+                className="scale-125 py-1 px-2"
+            />
 
-            <Point icon="FaPlus" library="fa6" onClick={createPage} />
+            <Point
+                icon={{ name: "FaPlus", library: "fa6" }}
+                onClick={createPage}
+                className="ml-4"
+            />
 
             <EmojiSelector
                 show={showEmoji}
                 setEmoji={setEmoji}
                 toggleShow={toggleShowEmoji}
-                position={{ x: 80, y: -470 }}
+                position={{ x: -270, y: -470 }}
             />
         </div>
     );

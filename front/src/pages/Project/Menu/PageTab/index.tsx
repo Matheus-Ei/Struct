@@ -1,66 +1,63 @@
 // Libraries
-import { useState } from "react";
+import { MouseEvent, useState } from "react";
 
 // Local
-import { PagesRequestType } from "pages/Project/util/types";
-import ContextPageMenu from "./ContextPageMenu";
+import PageMenu from "./PageMenu";
+import { PageType } from "services/page/types";
 import HoverButtons from "./HoverButtons";
 import useToggle from "hooks/useToggle";
 import Childrens from "./Childrens";
 import Content from "./Content";
+import { PageTabContext } from "./context";
 
 interface PageTabProps {
-    item: PagesRequestType;
-    index: number;
+    item: PageType;
 }
 
-const PageTab = ({ item, index }: PageTabProps) => {
+const PageTab = ({ item }: PageTabProps) => {
     // States
     const [isHover, toggleHover] = useToggle(false);
 
     // Children
-    const [showChildren, toggleShowChildren] = useToggle(false);
+    const [showChildren, toggleChildren] = useToggle(false);
 
     // Context menu
-    const [showMenu, toggleShowMenu] = useToggle(false);
+    const [showMenu, toggleMenu] = useToggle(false);
     const [clickPosition, setClickPosition] = useState({ x: 0, y: 0 });
 
-    const onContextMenu = (event: any) => {
-        event?.preventDefault();
+    const handleContextMenu = (event: MouseEvent) => {
+        event.preventDefault();
         setClickPosition({ x: event.clientX, y: event.clientY });
-        toggleShowMenu(true);
+        toggleMenu(true);
+    };
+
+    const contextValue = {
+        menu: { show: showMenu, toggle: toggleMenu },
+        children: { show: showChildren, toggle: toggleChildren },
+        isHover,
+        clickPosition: { value: clickPosition, set: setClickPosition },
+        page: item,
     };
 
     return (
-        <div
-            className="flex flex-col relative w-full justify-start"
-            onMouseOver={() => toggleHover(true)}
-            onMouseLeave={() => toggleHover(false)}
-            key={index}
-        >
-            <Content item={item} onContextMenu={onContextMenu} />
+        <PageTabContext.Provider value={contextValue}>
+            <div
+                className="flex flex-col relative w-full h-9 justify-start items-center"
+                onMouseOver={() => toggleHover(true)}
+                onMouseLeave={() => toggleHover(false)}
+            >
+                <Content
+                    onContextMenu={handleContextMenu}
+                    childrens={item.children_pages}
+                />
 
-            <HoverButtons
-                showChildren={showChildren}
-                toggleShowChildren={toggleShowChildren}
-                isHover={isHover}
-                childrens={item.children_pages}
-                pageId={item.id}
-            />
+                <HoverButtons />
 
-            <Childrens
-                items={item.children_pages}
-                show={showChildren}
-                parentPageId={item.id}
-            />
+                <PageMenu />
+            </div>
 
-            <ContextPageMenu
-                showMenu={showMenu}
-                toggleShowMenu={toggleShowMenu}
-                clickPosition={clickPosition}
-                pageId={item.id}
-            />
-        </div>
+            <Childrens />
+        </PageTabContext.Provider>
     );
 };
 

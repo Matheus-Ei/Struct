@@ -24,6 +24,7 @@
         "react-query": "^3.39.3",
         "react-router-dom": "^6.28.0",
         "react-scripts": "5.0.1",
+        "tailwind-merge": "^2.5.5",
         "uuid": "^11.0.3",
         "web-vitals": "^2.1.4"
     },
@@ -34,7 +35,7 @@
         "pm2:serve": "pm2 serve build 3000 --name 'struct-frontend'",
         "pm2:stop": "pm2 stop struct-frontend",
         "pm2:delete": "pm2 delete struct-frontend",
-        "test": "react-scripts test",
+        "test": "npx majestic",
         "eject": "react-scripts eject"
     },
     "eslintConfig": {

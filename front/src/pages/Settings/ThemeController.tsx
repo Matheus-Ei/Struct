@@ -1,22 +1,31 @@
 // Libraries
+import { ChangeEvent, useState } from "react";
 import clsx from "clsx";
-import { useState } from "react";
 
 // Local
-import Icons from "modules/Icons";
+import Icon from "components/Icon";
 import Theme from "modules/Theme";
 
-const ThemeController = () => {
-    const [theme, setTheme] = useState(Theme.getCurrent());
-    const themes = Theme.getKeys();
+const themeListCss = clsx(
+    "dropdown-content",
+    "w-52 h-56",
+    "overflow-y-scroll overflow-x-hidden",
+    "bg-base-300 rounded-box shadow-2xl",
+    "z-1 pr-3 p-2"
+);
 
-    const handleThemeChange = (event: any) => {
-        const { newTheme } = Theme.set(event.target.value);
+const ThemeController = () => {
+    const [theme, setTheme] = useState(Theme.current);
+    const themes = Theme.keys;
+
+    const handleThemeChange = (event: ChangeEvent<HTMLInputElement>) => {
+        const eventTarget = event.target as HTMLInputElement;
+        const { newTheme } = Theme.set(eventTarget.value);
 
         setTheme(newTheme);
     };
 
-    const renderThemes = (item: any, index: number) => {
+    const renderThemes = (item: string, index: number) => {
         return (
             <li key={index}>
                 <input
@@ -31,19 +40,11 @@ const ThemeController = () => {
         );
     };
 
-    const themeListCss = clsx(
-        "dropdown-content",
-        "w-52 h-56",
-        "overflow-y-scroll overflow-x-hidden",
-        "bg-base-300 rounded-box shadow-2xl",
-        "z-1 pr-3 p-2"
-    );
-
     return (
         <div className="dropdown">
             <div tabIndex={0} role="button" className="btn m-1">
                 <p className="w-20 text-start">{theme}</p>
-                <Icons name="MdExpandMore" library="md" />
+                <Icon value={{ name: "MdExpandMore", library: "md" }} />
             </div>
 
             <ul tabIndex={0} className={themeListCss}>

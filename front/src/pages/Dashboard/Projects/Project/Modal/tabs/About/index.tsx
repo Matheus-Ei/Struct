@@ -1,26 +1,22 @@
-// Libraries
-import Point from "components/Point";
-import { projectsContext } from "pages/Dashboard/Projects";
-import { useContext } from "react";
-
 // Local
-import { TabProps } from "../../utils/types";
-import Field from "./Field";
+import { ProjectsContext } from "pages/Dashboard/Projects/context";
 import { useProject } from "services/project/useProject";
 import Project from "services/project";
+import { TabProps } from "../../utils/types";
+import Field from "./Field";
+import useSafeContext from "hooks/useSafeContext";
+import MoreInfo from "./MoreInfo";
 
 const About = ({ projectId }: TabProps) => {
     const { data: project } = useProject(projectId);
-
-    const context = useContext(projectsContext);
-    if (!context) return null;
+    const { refetch } = useSafeContext(ProjectsContext);
 
     const updateTitle = async (newValue: string) => {
-        await Project.edit(projectId, newValue, undefined, context.refetch);
+        await Project.edit(projectId, newValue, undefined, refetch);
     };
 
     const updateDescription = async (newValue: string) => {
-        await Project.edit(projectId, undefined, newValue, context.refetch);
+        await Project.edit(projectId, undefined, newValue, refetch);
     };
 
     return (
@@ -39,19 +35,7 @@ const About = ({ projectId }: TabProps) => {
                 onUpdate={updateDescription}
             />
 
-            <div className="relative flex flex-col items-start justify-center w-full right-4">
-                <Point
-                    text={`Shared with ${project?.number_shared} users`}
-                    icon="FaUsers"
-                    library="fa6"
-                />
-
-                <Point
-                    text={`Has ${project?.number_pages} pages`}
-                    icon="GoPaperclip"
-                    library="go"
-                />
-            </div>
+            <MoreInfo project={project} />
         </div>
     );
 };

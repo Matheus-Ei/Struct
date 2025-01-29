@@ -1,10 +1,14 @@
 // Libraries
+import { useNavigate } from "react-router-dom";
 import clsx from "clsx";
 
 // Local
-import Icons from "modules/Icons";
-import { SetStateType } from "types/global";
+import useToggle from "hooks/useToggle";
+
+// Types
 import { ModalType } from "./Modal//utils/types";
+import { SetStateType } from "types/global";
+import HoverButtons from "./HoverButtons";
 
 interface ProjectProps {
     title: string;
@@ -13,27 +17,35 @@ interface ProjectProps {
     id: number;
 }
 
-const Project = ({ title, description, id, setModal }: ProjectProps) => {
-    const handleOpen = () => {
-        setModal({ projectId: id, show: true });
-    };
+const bodyCss = clsx(
+    "w-96 h-24 p-3",
+    "flex flex-col cursor-pointer",
+    "border border-b-primary border-base-300 rounded-btn  border-b-4"
+);
 
-    const bodyCss = clsx(
-        "w-96 h-32 p-3",
-        "flex flex-col justify-between",
-        "border border-primary rounded-btn"
-    );
+const Project = ({ title, description, id, setModal }: ProjectProps) => {
+    const navigate = useNavigate();
+    const [isHover, toggleHover] = useToggle(false);
+
+    const openModal = () => setModal({ projectId: id, show: true });
 
     return (
-        <div className={bodyCss}>
-            <div>
+        <div
+            className={bodyCss}
+            onClick={openModal}
+            onMouseEnter={() => toggleHover(true)}
+            onMouseLeave={() => toggleHover(false)}
+        >
+            <div className="flex justify-between items-center">
                 <h1 className="text-lg font-bold line-clamp-1">{title}</h1>
-                <p className="line-clamp-2">{description}</p>
+
+                <HoverButtons
+                    openProject={() => navigate(`/project/${id}`)}
+                    isHover={isHover}
+                />
             </div>
 
-            <button onClick={handleOpen} className="w-fit">
-                <Icons name="MdOpenInNew" library="md" className="text-xl" />
-            </button>
+            <p className="line-clamp-2 text-sm">{description}</p>
         </div>
     );
 };

@@ -2,11 +2,11 @@
 import { DataTypes, Model } from "sequelize";
 
 // Local
-import connection from "../services/database/connection.js";
+import connection from "../services/database/connection";
 
 // Models
-import ProjectModel from "./project.js";
-import ModuleModel from "./module.js";
+import ProjectModel from "./project";
+import ModuleModel from "./module";
 
 class PageModel extends Model {
     public id!: number;

@@ -2,10 +2,10 @@
 import { DataTypes, Model } from "sequelize";
 
 // Local
-import connection from "../services/database/connection.js";
+import connection from "../services/database/connection";
 
 // Models
-import PageModel from "./page.js";
+import PageModel from "./page";
 
 class NotesPageDataModel extends Model {
     public id!: number;

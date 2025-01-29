@@ -1,4 +1,5 @@
 // Local
+import Event from "modules/Event";
 import { SetStateType } from "types/global";
 
 interface CheckboxProps {
@@ -9,7 +10,8 @@ interface CheckboxProps {
 }
 
 const Checkbox = ({ text, group, setChecked, checked }: CheckboxProps) => {
-    const handleCheck = () => text !== checked && setChecked(text);
+    const condition = text !== checked;
+    const handleCheck = () => Event.onChangeSet(text, setChecked, condition);
 
     return (
         <div className="form-control">

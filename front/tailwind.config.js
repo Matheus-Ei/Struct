@@ -6,5 +6,5 @@ export default  {
     content: ["./src/**/*.{js,jsx,ts,tsx}"],
     theme: {},
     plugins: [require("daisyui")],
-    daisyui: { themes: Theme.getAll() },
+    daisyui: { themes: Theme.theme },
 };

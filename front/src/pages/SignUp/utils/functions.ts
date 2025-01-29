@@ -1,16 +1,18 @@
 // Libraries
 import { NavigateFunction } from "react-router-dom";
+
 // Local
-import { SignUpContextType } from "./types";
-import User from "services/user";
+import { SignUpContextType } from "../context";
 import { SetStateType } from "types/global";
+import User from "services/user";
 
 export const makeSignUp = async (
-    context: SignUpContextType | null,
+    useSignUpContext: SignUpContextType | null,
     navigate: NavigateFunction
 ) => {
-    if (!context) return null;
-    const { password, rePassword, nickname, mail, name, setError } = context;
+    if (!useSignUpContext) return null;
+    const { password, rePassword, nickname, mail, name, setError } =
+        useSignUpContext;
 
     try {
         if (!password || !nickname || !mail || !name) {

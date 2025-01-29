@@ -1,15 +1,13 @@
+// Libraries
 import { useQuery } from "react-query";
+
+// Local
 import Page from ".";
 
-export const usePage = (id: number) => {
-    return useQuery(["page", id], () => Page.get(id));
+export const usePage = (id: number | null) => {
+    return useQuery(["page", id], () => (id ? Page.get(id) : null));
 };
 
-export const useAllPages = (
-    projectId: number,
-    onSuccess?: (response: any) => void
-) => {
-    return useQuery(["all-pages", projectId], () =>
-        Page.getAll(projectId).then(onSuccess)
-    );
+export const useAllPages = (projectId?: string | number | null) => {
+    return useQuery(["all-pages", projectId], () => Page.getAll(projectId));
 };
