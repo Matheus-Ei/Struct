@@ -48,7 +48,7 @@ const PageTab = ({ item }: PageTabProps) => {
       >
         <Content
           onContextMenu={openContextMenu}
-          childrens={item.children_pages}
+          childrens={item.child_pages}
         />
 
         <Hover />

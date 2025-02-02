@@ -147,7 +147,7 @@ class ProjectController {
         `
           UPDATE project
           SET title = $1,
-              description $2
+              description = $2
           WHERE id = $3
         `,
         [title, description, id],
@@ -166,16 +166,16 @@ class ProjectController {
       const rawPages = await pool.query(
         `
           SELECT 
-            page.id,
-            page.title,
-            page.emoji,
-            page.description,
-            page.position,
-            get_child(page.id) AS child_pages
-          FROM project
-          JOIN page ON page.project_id = project.id
-          WHERE project.id = $1 AND page.parent_page_id IS NULL
-          ORDER BY page.position, page.id;
+            id,
+            title,
+            emoji,
+            description,
+            position,
+			      parent_page_id,
+            get_child(id) AS child_pages
+          FROM page
+          WHERE project_id = $1 AND parent_page_id IS NULL
+          ORDER BY position, id;
         `,
         [id],
       );

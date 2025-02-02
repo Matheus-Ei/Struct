@@ -30,7 +30,7 @@ const Login = () => {
           <Logo className='text-primary w-full h-fit mb-4' />
 
           <p className='text-primary mb-32 text-center text-lg'>
-            Venha fazer parte de um mundo mais organizado.
+            Come be part of a more organized world.
           </p>
 
           <Message

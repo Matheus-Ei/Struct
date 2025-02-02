@@ -27,17 +27,17 @@ class AccountController {
           `,
           [query],
         );
-        const account = rawAccount.rows[0];
+        const account = rawAccount.rows;
 
-        if (account) {
+        if (account.length === 0) {
           res
             .status(200)
-            .json({ message: 'Account found', isAvailable: false });
+            .json({ message: 'Account not found', isAvailable: true });
           return;
         } else {
           res
             .status(200)
-            .json({ message: 'Account not found', isAvailable: true });
+            .json({ message: 'Account found', isAvailable: false });
           return;
         }
       }

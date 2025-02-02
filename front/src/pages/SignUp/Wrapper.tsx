@@ -40,7 +40,7 @@ const WrapperSignUp = ({ children }: WrapperSignUpProps) => {
             <Logo className='text-primary w-52 h-fit mb-4' />
 
             <p className='text-primary text-center text-lg w-72'>
-              Venha fazer parte de um mundo mais organizado.
+              Come be part of a more organized world.
             </p>
           </div>
 

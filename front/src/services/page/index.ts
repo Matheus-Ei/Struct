@@ -1,12 +1,12 @@
 // Local
-import { GetPageType, GetPagesType, PageType } from './types';
+import { PageType } from './types';
 import Request from 'modules/Request';
 import { idType } from 'types/global';
 
 class Page {
   public static async get(id: idType) {
     try {
-      const response: GetPageType = await Request.get(`page/${id}`);
+      const response = await Request.get(`page/${id}`);
       return response.data;
     } catch {
       return null;
@@ -17,9 +17,7 @@ class Page {
     try {
       if (!projectId) return null;
 
-      const response: GetPagesType = await Request.get(
-        `project/${projectId}/pages`,
-      );
+      const response = await Request.get(`project/${projectId}/pages`);
       return response.data;
     } catch {
       return null;

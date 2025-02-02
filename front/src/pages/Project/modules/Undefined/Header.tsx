@@ -41,7 +41,7 @@ const Header = () => {
         />
 
         <EditableField
-          defaultValue={page.data?.name}
+          defaultValue={page.data?.title}
           onUpdate={(value) => update(value, 'name')}
         />
       </div>

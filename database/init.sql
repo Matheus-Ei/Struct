@@ -127,7 +127,7 @@ CREATE TABLE tool (
 );
 
 -- Functions
-CREATE OR REPLACE FUNCTION get_child(parent_page_id INT)
+CREATE OR REPLACE FUNCTION get_child(parent_id INT)
 RETURNS JSONB
 LANGUAGE SQL 
 AS $$
@@ -135,15 +135,15 @@ AS $$
     JSONB_AGG(
       JSONB_BUILD_OBJECT(
         'id', child_page.id,
-        'title', child_page.title,
         'emoji', child_page.emoji,
-        'position', child_page.position,
+        'title', child_page.title,
         'description', child_page.description,
+        'position', child_page.position,
         'child_pages', get_child(child_page.id)
       )
       ORDER BY child_page.position, child_page.id
     ), '[]'::JSONB
   )
   FROM page AS child_page
-  WHERE child_page.parent_page_id = parent_page_id;
+  WHERE child_page.parent_page_id = parent_id;
 $$;

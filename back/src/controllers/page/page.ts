@@ -21,7 +21,7 @@ class PageController {
             p.parent_page_id AS parent_page_id,
             m.title AS module
           FROM page p
-          JOIN module m ON p.module_id = m.id
+          LEFT JOIN module m ON p.module_id = m.id
           WHERE p.id = $1;
         `,
         [id],
@@ -49,7 +49,7 @@ class PageController {
         message: 'Page found',
         data: {
           id: page.id,
-          name: page.name,
+          title: page.title,
           description: page.description,
           emoji: page.emoji,
           project_id: page.project_id,
@@ -85,8 +85,8 @@ class PageController {
   public async create(req: Request, res: Response) {
     const {
       title,
-      description,
       projectId,
+      description = 'Description not set... ',
       emoji = undefined,
       parentPage = null,
       moduleId = null,
@@ -103,8 +103,8 @@ class PageController {
     try {
       await pool.query(
         `
-          INSERT INTO page (title, description, emoji, project_id, module_id, parent_page_id)
-          VALUES ($1, $2, $3, $4, $5, $6);
+          INSERT INTO page (title, description, emoji, project_id, module_id, parent_page_id, position)
+          VALUES ($1, $2, $3, $4, $5, $6, (SELECT MAX(position + 1) FROM page WHERE parent_page_id = $6));
         `,
         [title, description, emoji, projectId, moduleId, parentPage],
       );

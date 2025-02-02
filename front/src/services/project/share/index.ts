@@ -3,11 +3,11 @@ import Request from 'modules/Request';
 import { idType } from 'types/global';
 
 class ProjectShare {
-  public static async add(id: idType, nickname: string, permission: string) {
+  public static async add(id: idType, nickname: string, role: string) {
     try {
       const response = await Request.post(`project/share/${id}`, {
         nickname,
-        permission,
+        role,
       });
 
       return response;

@@ -20,7 +20,7 @@ interface AcountsGridProps {
 }
 
 const AccountGrid = ({ accounts, refetch }: AcountsGridProps) => {
-  if (!accounts) return <Message404 text='No users found' />;
+  if (!accounts?.length) return <Message404 text='No users found' />;
 
   return (
     <div className={css}>

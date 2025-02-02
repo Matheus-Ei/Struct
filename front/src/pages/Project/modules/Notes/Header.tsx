@@ -38,7 +38,7 @@ const Header = () => {
             edit: 'text-3xl font-bold',
             normal: 'text-4xl font-bold',
           }}
-          defaultValue={page.data?.name}
+          defaultValue={page.data?.title}
           onUpdate={(value) => update(value, 'name')}
         />
       </div>

@@ -50,9 +50,9 @@ class ShareController {
     const { id } = req.params;
     const { nickname, role } = req.body;
 
-    // Check if the nickname and permission are present
+    // Check if the nickname and role are present
     if (!nickname || !role) {
-      res.status(400).json({ message: 'Missing nickname or permission' });
+      res.status(400).json({ message: 'Missing nickname or role' });
       return;
     }
 

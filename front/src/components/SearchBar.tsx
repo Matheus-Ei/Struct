@@ -56,7 +56,7 @@ const SearchBar = ({
         placeholder={placeholder ? placeholder : 'Search. . . '}
         onChange={handleChange}
         defaultValue=''
-        className='w-full outline-none'
+        className='w-full outline-none bg-base-100'
       ></input>
     </div>
   );

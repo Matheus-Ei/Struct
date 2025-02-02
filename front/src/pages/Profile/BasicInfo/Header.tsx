@@ -11,7 +11,7 @@ const Header = ({ account, update }: HeaderProps) => {
   return (
     <div className='flex items-center w-full h-40 gap-x-4'>
       <img
-        src='https://via.placeholder.com/500'
+        src='https://placehold.co/500'
         className='h-full rounded-full'
         alt='profile'
       />

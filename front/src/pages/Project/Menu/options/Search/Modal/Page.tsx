@@ -28,7 +28,7 @@ const Page = ({ page, selectedPage, toggleOpen }: PageProps) => {
       }}
     >
       <Emoji symbol={page.emoji} />
-      <h1 className='line-clamp-1 w-full text-sm'>{page.name}</h1>
+      <h1 className='line-clamp-1 w-full text-sm'>{page.title}</h1>
     </div>
   );
 };

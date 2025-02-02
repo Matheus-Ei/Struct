@@ -8,7 +8,7 @@ import Point from 'components/Point';
 import ProjectShare from '.';
 import { idType } from 'types/global';
 
-const permissionOptions = [
+const roleOptions = [
   'owner',
   'admin',
   'editor',
@@ -24,10 +24,10 @@ interface NewShareProps {
 
 const NewShare = ({ projectId, refetch }: NewShareProps) => {
   const [nickname, setNickname] = useState<string>('');
-  const [permission, setPermission] = useState<number>(0);
+  const [role, setRole] = useState<number>(0);
 
   const shareProject = async () => {
-    await ProjectShare.add(projectId, nickname, permissionOptions[permission]);
+    await ProjectShare.add(projectId, nickname, roleOptions[role]);
 
     refetch && refetch();
   };
@@ -42,8 +42,8 @@ const NewShare = ({ projectId, refetch }: NewShareProps) => {
       />
 
       <Options
-        options={permissionOptions}
-        selected={{ value: permission, set: setPermission }}
+        options={roleOptions}
+        selected={{ value: role, set: setRole }}
       />
 
       <Point

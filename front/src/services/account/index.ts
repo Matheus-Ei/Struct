@@ -88,7 +88,7 @@ class Account {
       }
 
       if (email) {
-        const response = await Request.get('account?mail=' + email);
+        const response = await Request.get('account?email=' + email);
         return response.isAvailable;
       }
 

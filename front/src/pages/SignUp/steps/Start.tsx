@@ -34,7 +34,7 @@ const Start = () => {
     setName,
     name,
     setMail,
-    mail,
+    mail: email,
     setStep,
     error,
   } = useSignUpContext;
@@ -51,7 +51,7 @@ const Start = () => {
 
     // Check if the nickname and mail are avaliable
     const nickResponse = await Account.checkAvailability(nickname);
-    const mailResponse = await Account.checkAvailability(undefined, mail);
+    const mailResponse = await Account.checkAvailability(undefined, email);
 
     if (nickResponse === false) {
       setNickError({
@@ -104,11 +104,11 @@ const Start = () => {
 
       <div className='relative flex flex-col w-full h-fit items-center justify-center'>
         <Input
-          placeholder='mail...'
+          placeholder='email...'
           setValue={setMail}
           onEnter={nextStep}
           length={{ max: 120 }}
-          defaultValue={mail}
+          defaultValue={email}
           error={{
             isError: mailError.isError,
             message: mailError.message,

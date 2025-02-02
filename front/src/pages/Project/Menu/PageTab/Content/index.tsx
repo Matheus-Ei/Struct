@@ -37,7 +37,7 @@ const Content = ({ childrens, onContextMenu }: ContentProps) => {
     >
       <PageIcon childrens={childrens} />
 
-      <h1 className='line-clamp-1 w-full text-sm'>{page.name}</h1>
+      <h1 className='line-clamp-1 w-full text-sm'>{page.title}</h1>
     </div>
   );
 };
