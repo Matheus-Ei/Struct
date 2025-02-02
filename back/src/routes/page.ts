@@ -17,7 +17,6 @@ class PageRoute {
         this.router.get("/:id", pageController.get);
         this.router.delete("/:id", pageController.delete);
         this.router.patch("/:id", pageController.edit);
-        this.router.get("/:id/children", pageController.children);
         this.router.patch("/:id/module", pageController.setModule);
     }
 }

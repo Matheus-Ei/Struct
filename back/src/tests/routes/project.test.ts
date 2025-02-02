@@ -1,37 +1,40 @@
 // Library
-import request from "supertest";
-import express from "express";
+import request, { Response } from 'supertest';
+import express from 'express';
 
 // Local
-import setup from "../setup";
-import ProjectController from "../../controllers/project/project";
+import ProjectController from '../../controllers/project/project';
 
 const app = express();
+app.use(express.json());
 
-let cookies: string | undefined = "";
-beforeAll(async () => {
-    const { loginCookies } = await setup(app, true);
-    cookies = loginCookies;
+// Routes
+app.post('/project', ProjectController.create);
+app.delete('/project/:id', ProjectController.delete);
+app.get('/project', ProjectController.getAll);
+app.get('/project/:id', ProjectController.get);
+app.get('/project/:id', ProjectController.getPages);
+app.patch('/project/:id', ProjectController.edit);
 
-    // Routes
-    app.post("/project", ProjectController.create);
-});
+describe('Project', () => {
+  describe('Create', () => {
+    let response: Response;
 
-describe("POST /project", () => {
-    it("should create a project", async () => {
-        const res = await request(app)
-            .post("/project")
-            .set("Cookie", cookies ?? "")
-            .send({
-                title: "Project 1",
-                description: "Description of project 1",
-            });
+    beforeAll(async () => {
+      const newProject = {
+        title: 'Project 1',
+        description: 'Description of project',
+      };
 
-        expect(res.statusCode).toEqual(201);
-        expect(res.body.message).toBe("Project created");
-        expect(res.body.data).toMatchObject({
-            title: "Project 1",
-            description: "Description of project 1",
-        });
+      response = await request(app).post('/project').send(newProject);
     });
+
+    it('Should return 201 status', () => {
+      expect(response.statusCode).toEqual(201);
+    });
+
+    it('Should have a success message', () => {
+      expect(response.body.message).toBe('Project created');
+    });
+  });
 });

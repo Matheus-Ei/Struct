@@ -1,166 +1,120 @@
 // Libraries
-import { Request, Response } from "express";
+import { Request, Response } from 'express';
 
 // Local
-import operations from "../../services/database/operations";
-
-// Models
-import RelationshipSharedProject from "../../models/relationshipSharedProject";
-import PermissionLevelModel from "../../models/permissionLevel";
-import ProjectModel from "../../models/project";
-import UserModel from "../../models/user";
+import pool from '../../services/database';
 
 class ShareController {
-    public async get(req: Request, res: Response) {
-        const { id } = req.params;
+  public async get(req: Request, res: Response) {
+    const { id } = req.params;
 
-        try {
-            const response = await operations.query(`
-                SELECT relationship_shared_project.project_id as project_id,
-	                permission_level_id,
-	                permission_level.name AS permission_level_name,
-	                permission_level.description AS permission_level_description,
-	                users.id AS user_id,
-	                users.name AS user_name,
-	                users.nickname AS user_nickname,
-	                users.mail AS user_mail,
-	                users.photo AS user_photo
-                FROM relationship_shared_project
-                JOIN permission_level ON relationship_shared_project.permission_level_id = permission_level.id
-                JOIN users ON relationship_shared_project.user_shared_id = users.id
-                WHERE relationship_shared_project.project_id = ${id};
-            `);
+    try {
+      const rawShares = await pool.query(
+        `
+          WITH shares AS (
+            SELECT 
+              sp.project_id AS project_id,
+	            r.id AS role_id,
+	            r.name AS role_name,
+	            r.description AS role_description,
+	            a.id AS account_id,
+	            a.full_name AS account_full_name,
+	            a.nickname AS account_nickname,
+	            a.email AS account_email,
+	            a.picture AS account_picture
+            FROM shared_project sp
+            LEFT JOIN role r ON sp.role_id = r.id
+            LEFT JOIN account a ON sp.account_id = a.id
+            WHERE sp.project_id = $1
+          )
 
-            // Check if the project exists and has shared users
-            if (response[0].length === 0) {
-                res.status(404).json({
-                    message: "No shared users found",
-                    data: [],
-                });
-                return;
-            }
+          SELECT * FROM shares;
+        `,
+        [id],
+      );
+      const shares = rawShares.rows;
 
-            res.status(200).send({
-                message: "Shared users found",
-                data: response[0],
-            });
-        } catch (error) {
-            res.status(500).send({
-                message: "Error fetching the shared users",
-                error,
-            });
-        }
+      res.status(200).send({
+        message: 'Shared users found',
+        data: shares,
+      });
+    } catch (error) {
+      res.status(500).send({
+        message: 'Error fetching the shared users',
+        error,
+      });
+    }
+  }
+
+  public async share(req: Request, res: Response) {
+    const { id } = req.params;
+    const { nickname, role } = req.body;
+
+    // Check if the nickname and permission are present
+    if (!nickname || !role) {
+      res.status(400).json({ message: 'Missing nickname or permission' });
+      return;
     }
 
-    public async share(req: Request, res: Response) {
-        const { id } = req.params;
-        const { nickname, permission } = req.body;
+    try {
+      await pool.query(
+        `
+          WITH cte_account AS (
+            SELECT id
+            FROM account
+            WHERE nickname = $2
+          ),
+          cte_role AS (
+            SELECT id
+            FROM role
+            WHERE name = $3
+          )
 
-        // Check if the nickname and permission are present
-        if (!nickname || !permission) {
-            res.status(400).json({ message: "Missing nickname or permission" });
-            return;
-        }
+          INSERT INTO shared_project (project_id, account_id, role_id)
+          VALUES ($1, (SELECT id FROM cte_account), (SELECT id FROM cte_role));
+        `,
+        [id, nickname, role],
+      );
 
-        try {
-            const project = await ProjectModel.findByPk(id);
-            const user = await UserModel.findOne({
-                where: { nickname },
-            });
+      res.status(201).json({ message: 'Project shared' });
+      return;
+    } catch (error) {
+      res.status(500).json({ message: 'Error sharing the project', error });
 
-            const permissionLevel = await PermissionLevelModel.findOne({
-                where: { name: permission },
-            });
+      return;
+    }
+  }
 
-            // Check if the project, user and permission level exist
-            if (!project || !user || !permissionLevel || !permissionLevel) {
-                res.status(404).json({
-                    message: "Project, user or permission level not found",
-                });
-                return;
-            }
+  public async unshare(req: Request, res: Response) {
+    const { id, nickname } = req.params;
 
-            // Check if the user is already shared
-            const shared = await RelationshipSharedProject.findOne({
-                where: {
-                    project_id: id,
-                    user_shared_id: user.id,
-                },
-            });
-            if (shared) {
-                res.status(400).json({
-                    message: "User already shared with this project",
-                });
-                return;
-            }
-
-            await RelationshipSharedProject.create({
-                project_id: id,
-                user_shared_id: user.id,
-                permission_level_id: permissionLevel.id,
-            });
-
-            res.status(201).json({ message: "Project shared" });
-            return;
-        } catch (error) {
-            res.status(500).json({
-                message: "Error sharing the project",
-                error,
-            });
-
-            return;
-        }
+    // Check if the nickname is present
+    if (!nickname) {
+      res.status(400).json({ message: 'Missing nickname' });
+      return;
     }
 
-    public async unshare(req: Request, res: Response) {
-        const { id, nickname } = req.params;
+    try {
+      await pool.query(
+        `
+          WITH cte_account AS (
+            SELECT id
+            FROM account
+            WHERE nickname = $2
+          )
 
-        // Check if the nickname is present
-        if (!nickname) {
-            res.status(400).json({ message: "Missing nickname" });
-            return;
-        }
+          DELETE FROM shared_project
+          WHERE project_id = $1 
+            AND account_id = (SELECT id FROM cte_account);
+        `,
+        [id, nickname],
+      );
 
-        try {
-            const project = await ProjectModel.findByPk(id);
-            const user = await UserModel.findOne({
-                where: { nickname },
-            });
-
-            // Check if the project and user exist
-            if (!project || !user) {
-                res.status(404).json({ message: "Project or user not found" });
-                return;
-            }
-
-            // Check if the user is already shared
-            const shared = await RelationshipSharedProject.findOne({
-                where: {
-                    project_id: id,
-                    user_shared_id: user.id,
-                },
-            });
-
-            if (!shared) {
-                res.status(400).json({
-                    message: "User not shared with this project",
-                });
-                return;
-            }
-
-            await shared.destroy();
-
-            res.status(200).json({ message: "User removed from the project" });
-            return;
-        } catch (error) {
-            res.status(500).json({
-                message: "Error unsharing the project",
-                error,
-            });
-
-            return;
-        }
+      res.status(200).json({ message: 'User removed from the project' });
+    } catch (error) {
+      res.status(500).json({ message: 'Error unsharing the project', error });
     }
+  }
 }
 
 export default new ShareController();

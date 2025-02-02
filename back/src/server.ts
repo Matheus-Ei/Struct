@@ -6,7 +6,6 @@ import dotenv from "dotenv";
 import cors from "cors";
 
 // Local
-import "./services/database/associations";
 import mainRoutes from "./system/routes";
 import auth from "./middlewares/auth";
 

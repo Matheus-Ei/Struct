@@ -16,6 +16,7 @@
     "license": "ISC",
     "description": "",
     "dependencies": {
+        "@types/pg": "^8.11.11",
         "@types/sequelize": "^4.28.20",
         "axios": "^1.7.9",
         "bcrypt": "^5.1.1",
@@ -26,9 +27,9 @@
         "esm": "^3.2.25",
         "express": "^4.21.2",
         "jsonwebtoken": "^9.0.2",
+        "majestic": "^1.8.1",
         "nodemon": "^3.1.7",
         "pg": "^8.13.1",
-        "sequelize": "^6.37.5",
         "sequelize-typescript": "^2.1.6",
         "ts-node": "^10.9.2"
     },

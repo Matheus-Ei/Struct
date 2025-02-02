@@ -18,7 +18,7 @@ CREATE TABLE account (
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE user_settings (
+CREATE TABLE account_settings (
   id SERIAL PRIMARY KEY,
 
   language VARCHAR(50) DEFAULT 'EN',
@@ -32,14 +32,14 @@ CREATE TABLE subscription_plan (
   id SERIAL PRIMARY KEY,
 
   title VARCHAR(100) NOT NULL UNIQUE,
-  price NUMERIC(10, 2) NOT NULL CHECK (price > 0)
+  price NUMERIC(10, 2) NOT NULL CHECK (price >= 0)
 );
 
 CREATE TABLE subscription (
   id SERIAL PRIMARY KEY,
 
   last_paid DATE DEFAULT CURRENT_DATE,
-  status subscription_status DEFAULT,
+  status subscription_status DEFAULT 'Active',
 
   subscription_plan_id INT REFERENCES subscription_plan (id) ON DELETE CASCADE,
   account_id INT REFERENCES account (id) ON DELETE CASCADE
@@ -57,6 +57,8 @@ CREATE TABLE project (
 
   title VARCHAR(255) NOT NULL,
   description TEXT,
+
+  owner_account_id INT REFERENCES account (id) ON DELETE CASCADE ,
 
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -105,7 +107,7 @@ CREATE TABLE note_page_data (
   id SERIAL PRIMARY KEY,
 
   content TEXT NOT NULL,
-  page_id INT REFERENCES page (id) ON DELETE CASCADE
+  page_id INT UNIQUE REFERENCES page (id) ON DELETE CASCADE
 );
 
 CREATE TABLE feedback (
@@ -137,7 +139,7 @@ AS $$
         'emoji', child_page.emoji,
         'position', child_page.position,
         'description', child_page.description,
-        'child_pages', get_children(child_page.id)
+        'child_pages', get_child(child_page.id)
       )
       ORDER BY child_page.position, child_page.id
     ), '[]'::JSONB
