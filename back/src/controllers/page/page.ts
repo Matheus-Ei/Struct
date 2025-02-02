@@ -84,7 +84,7 @@ class PageController {
 
   public async create(req: Request, res: Response) {
     const {
-      name,
+      title,
       description,
       projectId,
       emoji = undefined,
@@ -93,7 +93,7 @@ class PageController {
     } = req.body;
 
     // Check if the required fields are present
-    if (!name || !description || !projectId) {
+    if (!title || !description || !projectId) {
       res
         .status(400)
         .send({ message: 'Missing name, description or project id' });
@@ -106,7 +106,7 @@ class PageController {
           INSERT INTO page (title, description, emoji, project_id, module_id, parent_page_id)
           VALUES ($1, $2, $3, $4, $5, $6);
         `,
-        [name, description, emoji, projectId, moduleId, parentPage],
+        [title, description, emoji, projectId, moduleId, parentPage],
       );
 
       res.status(201).send({ message: 'Page created' });

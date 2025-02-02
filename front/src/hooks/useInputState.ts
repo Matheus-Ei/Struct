@@ -1,35 +1,35 @@
 // Library
-import { useState } from "react";
+import { useState } from 'react';
 
 // Local
-import { ErrorType } from "types/global";
+import { ErrorType } from 'types/global';
 
 const useInputState = () => {
-    const [value, set] = useState<string>("");
-    const [error, setError] = useState<ErrorType>({
-        message: "",
-        isError: false,
-    });
+  const [value, set] = useState<string>('');
+  const [error, setError] = useState<ErrorType>({
+    message: '',
+    isError: false,
+  });
 
-    const reset = () => {
-        set("");
-        setError({ message: "", isError: false });
-    };
+  const reset = () => {
+    set('');
+    setError({ message: '', isError: false });
+  };
 
-    const validate = () => {
-        if (!value) {
-            setError({
-                message: `This field is required.`,
-                isError: true,
-            });
-            return false;
-        }
+  const validate = () => {
+    if (!value) {
+      setError({
+        message: `This field is required.`,
+        isError: true,
+      });
+      return false;
+    }
 
-        setError({ message: "", isError: false });
-        return true;
-    };
+    setError({ message: '', isError: false });
+    return true;
+  };
 
-    return { value, set, error, setError, reset, validate };
+  return { value, set, error, setError, reset, validate };
 };
 
 export default useInputState;

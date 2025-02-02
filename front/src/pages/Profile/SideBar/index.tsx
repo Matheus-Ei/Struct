@@ -1,30 +1,30 @@
 // Local
-import Logout from "services/user/Logout";
-import { UserType } from "services/user/type";
-import ChangeInfo from "./ChangeInfo";
+import Logout from 'services/account/Logout';
+import { AccountType } from 'services/account/type';
+import ChangeInfo from './ChangeInfo';
 
 interface SideBarProps {
-    user: UserType;
+  account: AccountType;
 }
 
-const SideBar = ({ user }: SideBarProps) => {
-    return (
-        <div className="flex flex-col items-start w-1/6 h-full gap-y-4 mt-10">
-            <ChangeInfo
-                text="Change password"
-                icon={{ name: "IoIosLock", library: "io" }}
-                onClick={() => {}}
-            />
+const SideBar = ({ account }: SideBarProps) => {
+  return (
+    <div className='flex flex-col items-start w-1/6 h-full gap-y-4 mt-10'>
+      <ChangeInfo
+        text='Change password'
+        icon={{ name: 'IoIosLock', library: 'io' }}
+        onClick={() => {}}
+      />
 
-            <ChangeInfo
-                text="Change email"
-                icon={{ name: "IoIosMail", library: "io" }}
-                onClick={() => {}}
-            />
+      <ChangeInfo
+        text='Change email'
+        icon={{ name: 'IoIosMail', library: 'io' }}
+        onClick={() => {}}
+      />
 
-            <Logout />
-        </div>
-    );
+      <Logout />
+    </div>
+  );
 };
 
 export default SideBar;

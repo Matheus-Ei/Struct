@@ -1,18 +1,18 @@
 // Local
-import AddButton from "./AddButton";
-import RemoveButton from "./RemoveButton";
+import AddButton from './AddButton';
+import RemoveButton from './RemoveButton';
 
 interface LateralBarProps {
-    order: number;
+  order: number;
 }
 
 const LateralBar = ({ order }: LateralBarProps) => {
-    return (
-        <div className="flex mr-4">
-            <AddButton order={order} />
-            <RemoveButton order={order} />
-        </div>
-    );
+  return (
+    <div className='flex mr-4'>
+      <AddButton order={order} />
+      <RemoveButton order={order} />
+    </div>
+  );
 };
 
 export default LateralBar;

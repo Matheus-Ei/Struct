@@ -1,19 +1,19 @@
 // Library
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
 // Local
-import Point from "components/Point";
+import Point from 'components/Point';
 
 const Home = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    return (
-        <Point
-            text="Home"
-            icon={{ name: "IoMdHome", library: "io" }}
-            onClick={() => navigate("/dashboard")}
-        />
-    );
+  return (
+    <Point
+      text='Home'
+      icon={{ name: 'IoMdHome', library: 'io' }}
+      onClick={() => navigate('/dashboard')}
+    />
+  );
 };
 
 export default Home;

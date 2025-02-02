@@ -1,29 +1,29 @@
 // Local
-import { NodeState } from "../../context";
+import { NodeState } from '../../context';
 
 class Text {
-    private nodes: NodeState;
+  private nodes: NodeState;
 
-    constructor(nodes: NodeState) {
-        this.nodes = nodes;
-    }
+  constructor(nodes: NodeState) {
+    this.nodes = nodes;
+  }
 
-    public setNode(order: number, content: string) {
-        this.nodes.set((prev) => {
-            const newNodes = [...prev];
-            const { type } = newNodes[order];
+  public setNode(order: number, content: string) {
+    this.nodes.set((prev) => {
+      const newNodes = [...prev];
+      const { type } = newNodes[order];
 
-            newNodes[order] = { content, type, order };
+      newNodes[order] = { content, type, order };
 
-            return newNodes;
-        });
-    }
+      return newNodes;
+    });
+  }
 
-    public setType(index: number, type: string) {}
+  public setType(index: number, type: string) {}
 
-    public addNode(index: number) {}
+  public addNode(index: number) {}
 
-    public removeNode(index: number) {}
+  public removeNode(index: number) {}
 }
 
 /* public setFocus(index: number) {

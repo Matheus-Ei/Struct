@@ -1,53 +1,53 @@
 // Libraries
-import cookieParser from "cookie-parser";
-import compression from "compression";
-import express from "express";
-import dotenv from "dotenv";
-import cors from "cors";
+import cookieParser from 'cookie-parser';
+import compression from 'compression';
+import express from 'express';
+import dotenv from 'dotenv';
+import cors from 'cors';
 
 // Local
-import mainRoutes from "./system/routes";
-import auth from "./middlewares/auth";
+import mainRoutes from './system/routes';
+import auth from './middlewares/auth';
 
 export class App {
-    private app: any;
+  private app: any;
 
-    constructor() {
-        this.app = express();
+  constructor() {
+    this.app = express();
 
-        this.middlewares();
-        this.routes();
-    }
+    this.middlewares();
+    this.routes();
+  }
 
-    private routes(): void {
-        mainRoutes.map((item) => {
-            this.app.use(item[0], item[1]);
-        });
-    }
+  private routes(): void {
+    mainRoutes.map((item) => {
+      this.app.use(item[0], item[1]);
+    });
+  }
 
-    private middlewares(): void {
-        this.app.use(cookieParser());
-        this.app.use(express.json());
-        this.app.use(compression());
+  private middlewares(): void {
+    this.app.use(cookieParser());
+    this.app.use(express.json());
+    this.app.use(compression());
 
-        this.app.use(
-            cors({
-                origin: ["https://dev.struct.me", "http://localhost:3000"],
-                methods: "GET,POST,PUT,PATCH,DELETE,OPTIONS",
-                allowedHeaders: "Authorization, Content-Type",
-                credentials: true,
-            })
-        );
+    this.app.use(
+      cors({
+        origin: ['https://dev.struct.me', 'http://localhost:3000'],
+        methods: 'GET,POST,PUT,PATCH,DELETE,OPTIONS',
+        allowedHeaders: 'Authorization, Content-Type',
+        credentials: true,
+      }),
+    );
 
-        this.app.use(auth);
-    }
+    this.app.use(auth);
+  }
 
-    public listen(port: number) {
-        this.app.listen(port, () => {
-            console.clear();
-            console.log("Running the server in the port " + port);
-        });
-    }
+  public listen(port: number) {
+    this.app.listen(port, () => {
+      console.clear();
+      console.log('Running the server in the port ' + port);
+    });
+  }
 }
 
 const app = new App();

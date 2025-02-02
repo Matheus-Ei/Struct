@@ -4,38 +4,38 @@ import { useEffect, useMemo, useState } from "react";
 // Local
 import Message404 from "components/Message404";
 import SearchBar from "components/SearchBar";
-import { SharedUserType } from "services/project/type";
-import UsersGrid from "./UsersGrid";
+import { SharedAccountType } from "services/project/type";
+import UsersGrid from "./AccountsGrid";
 
-interface UsersLayoutProps {
-    rawShares: SharedUserType[];
+interface AccountsLayoutProps {
+    rawShares: SharedAccountType[];
     refetch: () => void;
 }
 
-const UsersLayout = ({ rawShares, refetch }: UsersLayoutProps) => {
+const AccountsLayout = ({ rawShares, refetch }: AccountsLayoutProps) => {
     const [shares, setShares] = useState<string[]>([]);
 
     // Set shares to be the nicknames of the users
     useEffect(() => {
         if (rawShares) {
             setShares(
-                rawShares.map((share: SharedUserType) => share.user_nickname)
+                rawShares.map((share: SharedAccountType) => share.account_nickname)
             );
         }
     }, [rawShares]);
 
     // Filter the users based on the search result
-    const searchUsersNick: SharedUserType[] = useMemo(
+    const searchUsersNick: SharedAccountType[] = useMemo(
         () =>
-            rawShares?.filter((share: SharedUserType) =>
-                shares.includes(share.user_nickname)
+            rawShares?.filter((share: SharedAccountType) =>
+                shares.includes(share.account_nickname)
             ),
         [rawShares, shares]
     );
 
     // Get the nicknames of the users
     const usersNick: string[] = useMemo(
-        () => rawShares?.map((share: SharedUserType) => share.user_nickname),
+        () => rawShares?.map((share: SharedAccountType) => share.account_nickname),
         [rawShares]
     );
 
@@ -50,10 +50,10 @@ const UsersLayout = ({ rawShares, refetch }: UsersLayoutProps) => {
                     setResult={setShares}
                 />
 
-                <UsersGrid users={searchUsersNick} refetch={refetch} />
+                <UsersGrid accounts={searchUsersNick} refetch={refetch} />
             </>
         </div>
     );
 };
 
-export default UsersLayout;
+export default AccountsLayout;

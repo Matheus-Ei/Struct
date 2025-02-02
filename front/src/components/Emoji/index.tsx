@@ -1,12 +1,12 @@
 // Library
-import { EmojiClickData } from "emoji-picker-react";
-import { useEffect, useState } from "react";
-import { twMerge } from "tailwind-merge";
+import { EmojiClickData } from 'emoji-picker-react';
+import { useEffect, useState } from 'react';
+import { twMerge } from 'tailwind-merge';
 
 // Local
-import EmojiSelector from "./Selector";
-import useToggle from "hooks/useToggle";
-import Icon from "components/Icon";
+import EmojiSelector from './Selector';
+import useToggle from 'hooks/useToggle';
+import Icon from 'components/Icon';
 
 interface EmojiProps {
   symbol?: string | null;
@@ -44,11 +44,11 @@ const Emoji = ({
     onClick && onClick();
   };
 
-  const css = twMerge("cursor-pointer select-none", className);
+  const css = twMerge('cursor-pointer select-none', className);
 
   const getEmoji = () => {
     if (!emoji)
-      return <Icon value={{ name: "IoIosDocument", library: "io" }} />;
+      return <Icon value={{ name: 'IoIosDocument', library: 'io' }} />;
 
     return emoji;
   };

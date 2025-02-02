@@ -1,6 +1,6 @@
 // Local
-import Notes from "../modules/Notes";
+import Notes from '../modules/Notes';
 
-const router = [{ endpoint: Notes, name: "notes" }];
+const router = [{ endpoint: Notes, name: 'notes' }];
 
 export default router;

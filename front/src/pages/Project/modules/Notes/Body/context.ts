@@ -1,23 +1,23 @@
 // Libraries
-import { createContext, RefObject } from "react";
-import { SetStateType } from "types/global";
+import { createContext, RefObject } from 'react';
+import { SetStateType } from 'types/global';
 
 // Local
-import { NodeElementType } from "./types";
+import { NodeElementType } from './types';
 
 export interface NodeState {
-    value: Array<NodeElementType>;
-    set: SetStateType<Array<NodeElementType>>;
+  value: Array<NodeElementType>;
+  set: SetStateType<Array<NodeElementType>>;
 }
 
 export interface NotesContextType {
-    nodes: NodeState;
+  nodes: NodeState;
 
-    bodyRef: RefObject<HTMLDivElement>;
+  bodyRef: RefObject<HTMLDivElement>;
 
-    nodesUpdater: () => void;
+  nodesUpdater: () => void;
 }
 
 export const NotesContext = createContext<NotesContextType | undefined>(
-    undefined
+  undefined,
 );

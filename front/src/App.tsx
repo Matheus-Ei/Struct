@@ -1,17 +1,17 @@
 // Libraries
-import { useEffect } from "react";
+import { useEffect } from 'react';
 
 // Local
-import Navigator from "modules/Navigator";
-import Theme from "modules/Theme";
+import Navigator from 'modules/Navigator';
+import Theme from 'modules/Theme';
 
 function App() {
-    useEffect(() => {
-        Theme.set();
-    }, []);
+  useEffect(() => {
+    Theme.set();
+  }, []);
 
-    const navigate = new Navigator();
-    return navigate.setup();
+  const navigate = new Navigator();
+  return navigate.setup();
 }
 
 export default App;

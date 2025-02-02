@@ -8,4 +8,3 @@ declare namespace NodeJS {
     DATABASE_PASSWORD: string;
   }
 }
-

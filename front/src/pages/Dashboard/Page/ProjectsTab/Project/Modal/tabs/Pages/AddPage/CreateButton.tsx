@@ -1,17 +1,17 @@
 // Local
-import Point from "components/Point";
+import Point from 'components/Point';
 
 interface CreateButtonProps {
-    onClick: () => void;
+  onClick: () => void;
 }
 const CreateButton = ({ onClick }: CreateButtonProps) => {
-    return (
-        <Point
-            icon={{ name: "FaPlus", library: "fa6" }}
-            onClick={onClick}
-            className="ml-4"
-        />
-    );
+  return (
+    <Point
+      icon={{ name: 'FaPlus', library: 'fa6' }}
+      onClick={onClick}
+      className='ml-4'
+    />
+  );
 };
 
 export default CreateButton;

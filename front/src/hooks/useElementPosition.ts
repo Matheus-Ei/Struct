@@ -1,36 +1,36 @@
 // Library
-import { useRef, useState, RefObject, useEffect } from "react";
+import { useRef, useState, RefObject, useEffect } from 'react';
 
 // Local
-import Element from "modules/Element";
+import Element from 'modules/Element';
 
 interface Position {
-    left: number;
-    top: number;
-    right: number;
-    bottom: number;
+  left: number;
+  top: number;
+  right: number;
+  bottom: number;
 }
 
 const startPosition = {
-    left: 0,
-    top: 0,
-    right: 0,
-    bottom: 0,
+  left: 0,
+  top: 0,
+  right: 0,
+  bottom: 0,
 };
 
 const useElementPosition = <T>() => {
-    const ref = useRef<T>(null);
-    const [position, setPosition] = useState<Position>(startPosition);
+  const ref = useRef<T>(null);
+  const [position, setPosition] = useState<Position>(startPosition);
 
-    useEffect(() => {
-        const element = new Element(ref as RefObject<HTMLElement>);
+  useEffect(() => {
+    const element = new Element(ref as RefObject<HTMLElement>);
 
-        if (ref.current) {
-            setPosition(element.position);
-        }
-    }, [setPosition]);
+    if (ref.current) {
+      setPosition(element.position);
+    }
+  }, [setPosition]);
 
-    return { ref, position };
+  return { ref, position };
 };
 
 export default useElementPosition;

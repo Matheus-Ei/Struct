@@ -1,22 +1,22 @@
 // Libraries
-import { Router } from "express";
+import { Router } from 'express';
 
 // Local
-import tokenController from "../controllers/token";
+import tokenController from '../controllers/token';
 
 class TokenRoute {
-    public router: Router;
+  public router: Router;
 
-    constructor() {
-        this.router = Router();
-        this.init();
-    }
+  constructor() {
+    this.router = Router();
+    this.init();
+  }
 
-    private init() {
-        this.router.get("/refresh", tokenController.refresh);
+  private init() {
+    this.router.get('/refresh', tokenController.refresh);
 
-        this.router.get("/check", tokenController.check);
-    }
+    this.router.get('/check', tokenController.check);
+  }
 }
 
 export default new TokenRoute();

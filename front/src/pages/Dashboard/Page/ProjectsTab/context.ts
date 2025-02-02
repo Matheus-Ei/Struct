@@ -1,10 +1,10 @@
 // Library
-import { createContext } from "react";
+import { createContext } from 'react';
 
 export interface ProjectsContextType {
-    refetch: () => void;
+  refetch: () => void;
 }
 
 export const ProjectsContext = createContext<ProjectsContextType | undefined>(
-    undefined
+  undefined,
 );
