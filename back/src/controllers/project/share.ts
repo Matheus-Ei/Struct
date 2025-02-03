@@ -57,7 +57,7 @@ class ShareController {
     }
 
     try {
-      await pool.query(
+      const rawNewShare = await pool.query(
         `
           WITH cte_account AS (
             SELECT id
@@ -71,12 +71,14 @@ class ShareController {
           )
 
           INSERT INTO shared_project (project_id, account_id, role_id)
-          VALUES ($1, (SELECT id FROM cte_account), (SELECT id FROM cte_role));
+          VALUES ($1, (SELECT id FROM cte_account), (SELECT id FROM cte_role))
+          RETURNING id;
         `,
         [id, nickname, role],
       );
+      const newShare = rawNewShare.rows[0];
 
-      res.status(201).json({ message: 'Project shared' });
+      res.status(201).json({ message: 'Project shared', data: newShare });
       return;
     } catch (error) {
       res.status(500).json({ message: 'Error sharing the project', error });

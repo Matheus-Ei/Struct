@@ -175,6 +175,26 @@ class AccountController {
     res.status(200).send({ message: 'Logout was made successfuly' });
   }
 
+  public async delete(req: Request, res: Response) {
+    const id = Cookie.get('id', req);
+
+    try {
+      Cookie.delete(['access_token', 'id', 'refresh_token'], res);
+
+      await pool.query(
+        `
+          DELETE FROM account
+          WHERE id = $1
+        `,
+        [id],
+      );
+
+      res.status(200).send({ message: 'The account was deleted successfuly' });
+    } catch (error) {
+      res.status(500).send({ message: 'Error deleting the account', error });
+    }
+  }
+
   public async update(req: Request, res: Response) {
     const id = Cookie.get('id', req);
 

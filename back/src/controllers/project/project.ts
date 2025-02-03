@@ -50,6 +50,7 @@ class ProjectController {
           SELECT *
           FROM project
           WHERE owner_account_id = $1
+          ORDER BY id;
         `,
         [accountId],
       );
@@ -78,7 +79,7 @@ class ProjectController {
     }
 
     try {
-      await pool.query(
+      const rawNewProject = await pool.query(
         `
         WITH new_project AS (
           INSERT INTO project (title, description, owner_account_id) 
@@ -87,12 +88,16 @@ class ProjectController {
         )
 
         INSERT INTO project_settings (project_id) 
-        SELECT id FROM new_project;
+        SELECT id FROM new_project
+        RETURNING (SELECT id FROM new_project);
       `,
         [title, description, ownerAccountId],
       );
+      const newProject = rawNewProject.rows[0];
 
-      res.status(201).json({ message: 'Project created' });
+      res
+        .status(201)
+        .json({ message: 'Project created', data: { id: newProject.id } });
 
       return;
     } catch (error) {

@@ -15,8 +15,8 @@ export interface RouterType {
 const router: RouterType[] = [
   { title: 'About', component: About },
   { title: 'Pages', component: Pages },
-  { title: 'Settings', component: Settings },
   { title: 'Shared', component: Shared },
+  { title: 'Settings', component: Settings },
 ];
 
 export default router;

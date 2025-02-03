@@ -8,7 +8,7 @@ class NotesModule {
         SELECT npd.content AS content
         FROM page
         JOIN note_page_data npd ON page.id = npd.page_id
-        WHERE page.id = 1;
+        WHERE page.id = $1;
       `,
       [id],
     );
@@ -17,13 +17,19 @@ class NotesModule {
   }
 
   public async set(id: string) {
-    return await pool.query(
-      `
+    try {
+      const response = await pool.query(
+        `
         INSERT INTO note_page_data(page_id, content)
-        VALUE ($1, $2);
+        VALUES ($1, $2)
       `,
-      [id, 'Where your imagination leaves you...'],
-    );
+        [id, 'Where your imagination leaves you...'],
+      );
+
+      return response.rows[0];
+    } catch (error) {
+      throw new Error('Error creating the note page data');
+    }
   }
 }
 

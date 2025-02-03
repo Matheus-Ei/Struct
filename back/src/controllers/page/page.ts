@@ -96,20 +96,22 @@ class PageController {
     if (!title || !description || !projectId) {
       res
         .status(400)
-        .send({ message: 'Missing name, description or project id' });
+        .send({ message: 'Missing title, description or project id' });
       return;
     }
 
     try {
-      await pool.query(
+      const rawNewPage = await pool.query(
         `
           INSERT INTO page (title, description, emoji, project_id, module_id, parent_page_id, position)
-          VALUES ($1, $2, $3, $4, $5, $6, (SELECT MAX(position + 1) FROM page WHERE parent_page_id = $6));
+          VALUES ($1, $2, $3, $4, $5, $6, (SELECT MAX(position + 1) FROM page WHERE parent_page_id = $6))
+          RETURNING id;
         `,
         [title, description, emoji, projectId, moduleId, parentPage],
       );
+      const newPage = rawNewPage.rows[0];
 
-      res.status(201).send({ message: 'Page created' });
+      res.status(201).send({ message: 'Page created', data: newPage });
     } catch (error) {
       res.status(500).send({ message: 'Error creating the page', error });
     }
@@ -152,7 +154,7 @@ class PageController {
         [id, title, description, emoji],
       );
 
-      res.status(201).send({ message: 'Page updated' });
+      res.status(200).send({ message: 'Page updated' });
     } catch (error) {
       res.status(500).send({ message: 'Error updating the page', error });
     }
@@ -169,6 +171,8 @@ class PageController {
       return;
     }
 
+    pool.query('BEGIN');
+
     try {
       const rawModule = await pool.query(
         `
@@ -178,12 +182,11 @@ class PageController {
       `,
         [module],
       );
-
-      const moduleFound = rawModule.rows[0];
+      const moduleId = rawModule.rows[0].id;
 
       // Check if the page exists
-      if (!moduleFound) {
-        res.status(404).send({ message: 'Page or module not found' });
+      if (!moduleId) {
+        res.status(404).send({ message: 'Module not found' });
         return;
       }
 
@@ -202,10 +205,13 @@ class PageController {
         SET module_id = $2
         WHERE id = $1
       `,
-        [id, moduleFound.id],
+        [id, moduleId],
       );
-      res.status(201).send({ message: 'Module set' });
+
+      pool.query('COMMIT');
+      res.status(200).send({ message: 'Module set' });
     } catch (error) {
+      pool.query('ROLLBACK');
       res.status(500).send({ message: 'Error updating the module', error });
     }
   }

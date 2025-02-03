@@ -34,7 +34,6 @@ const pool = new Pool(credentials);
 pool
   .connect()
   .then((client) => {
-    console.log('✅ -> Connected to the database ');
     client.release();
   })
   .catch((error) => {
