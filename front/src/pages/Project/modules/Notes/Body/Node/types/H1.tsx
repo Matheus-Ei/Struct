@@ -60,7 +60,7 @@ const H1 = ({ content, order }: NodeElementType) => {
 
     if (e.key === 'ArrowDown' && e.ctrlKey) {
       e.preventDefault();
-      operations.nextNode(order, bodyRef, cursor.position);
+      operations.nextNode(order, bodyRef, cursor.position)
     } else if (e.key === 'ArrowUp' && e.ctrlKey) {
       e.preventDefault();
       operations.previousNode(order, bodyRef, cursor.position);
@@ -71,7 +71,7 @@ const H1 = ({ content, order }: NodeElementType) => {
     } else if (e.key === 'Enter') {
       e.preventDefault();
       operations.add(order);
-      operations.nextNode(order, bodyRef);
+      setTimeout(() => operations.nextNode(order, bodyRef), 0);
     }
 
     if (

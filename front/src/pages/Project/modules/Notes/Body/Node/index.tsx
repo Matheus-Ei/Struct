@@ -1,12 +1,12 @@
 // Library
 import clsx from 'clsx';
-import useSafeContext from 'hooks/useSafeContext';
-import useToggle from 'hooks/useToggle';
 import { createElement, useMemo, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
-import { NotesContext } from '../context';
 
 // Local
+import useSafeContext from 'hooks/useSafeContext';
+import { NotesContext } from '../context';
+import useToggle from 'hooks/useToggle';
 import LateralBar from './LateralBar';
 import typesRouter from './typesRouter';
 import Operations from './utils/Operations';

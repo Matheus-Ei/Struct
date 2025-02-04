@@ -12,9 +12,12 @@ const Body = () => {
   const [updaterAnchor, nodesUpdater] = useToggle(false);
 
   const [nodes, setNodes] = useState<Array<NodeElementType>>([
-    { content: 'Text 1', type: 'paragraph', order: 0 },
-    { content: 'Text 2', type: 'paragraph', order: 1 },
-    { content: 'Text 3', type: 'paragraph', order: 2 },
+    { content: 'My first header', type: 'h1', order: 0 },
+    {
+      content: 'This is an example of a paragraph',
+      type: 'paragraph',
+      order: 1,
+    },
   ]);
 
   const createNodes = useCallback(
@@ -43,10 +46,7 @@ const Body = () => {
 
   return (
     <NotesContext.Provider value={contextValue}>
-      <div
-        className='flex flex-col gap-1 w-full h-3/4'
-        ref={bodyRef}
-      >
+      <div className='flex flex-col gap-1 w-full h-3/4' ref={bodyRef}>
         {renderNodes}
       </div>
     </NotesContext.Provider>

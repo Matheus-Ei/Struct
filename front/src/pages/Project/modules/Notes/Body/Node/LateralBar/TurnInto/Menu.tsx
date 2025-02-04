@@ -16,7 +16,7 @@ const Menu = ({ show, onClose, order }: MenuProps) => {
   if (!show) return null;
   const operations = new Operations(nodes);
 
-  const renderTypes = (t: NodesType) => {
+  const renderTypes = (t: NodesType, index: number) => {
     const typeTitle =
       t.type.slice(0, 1).toUpperCase() + t.type.slice(1, t.type.length);
 
@@ -26,7 +26,11 @@ const Menu = ({ show, onClose, order }: MenuProps) => {
     };
 
     return (
-      <b className='font-normal hover:font-bold' onClick={handleClick}>
+      <b
+        key={index}
+        className='font-normal hover:font-bold w-full'
+        onClick={handleClick}
+      >
         {typeTitle}
       </b>
     );

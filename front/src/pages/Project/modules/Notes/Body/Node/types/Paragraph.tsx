@@ -71,7 +71,7 @@ const Paragraph = ({ content, order }: NodeElementType) => {
     } else if (e.key === 'Enter') {
       e.preventDefault();
       operations.add(order);
-      operations.nextNode(order, bodyRef);
+      setTimeout(() => operations.nextNode(order, bodyRef), 0);
     }
 
     if (

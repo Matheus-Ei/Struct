@@ -10,7 +10,7 @@ import { NodeElementType } from '../../types';
 import Operations from '../utils/Operations';
 import useToggle from 'hooks/useToggle';
 
-const H1 = ({ content, order }: NodeElementType) => {
+const H3 = ({ content, order }: NodeElementType) => {
   const { nodes, nodesUpdater, bodyRef } = useSafeContext(NotesContext);
   const [isSelected, toggleSelected] = useToggle(false);
 
@@ -71,7 +71,7 @@ const H1 = ({ content, order }: NodeElementType) => {
     } else if (e.key === 'Enter') {
       e.preventDefault();
       operations.add(order);
-      operations.nextNode(order, bodyRef);
+      setTimeout(() => operations.nextNode(order, bodyRef), 0);
     }
 
     if (
@@ -80,7 +80,7 @@ const H1 = ({ content, order }: NodeElementType) => {
     ) {
       e.preventDefault();
       operations.remove(order);
-      operations.previousNode(order, bodyRef);
+      operations.previousNode(order, bodyRef)
     }
   };
 
@@ -103,4 +103,4 @@ const H1 = ({ content, order }: NodeElementType) => {
   );
 };
 
-export default H1;
+export default H3;

@@ -67,7 +67,7 @@ class Cursor {
   focus() {
     if (!this.element) return null;
 
-    this.element.focus();
+    setTimeout(() => this.element?.focus(), 0);
   }
 }
 

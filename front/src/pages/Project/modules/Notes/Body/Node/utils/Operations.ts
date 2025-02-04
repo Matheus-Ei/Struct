@@ -115,20 +115,22 @@ class Operations {
     bodyRef: RefObject<HTMLDivElement>,
     cursorPosition?: number,
   ) {
-    if (currentOrder === this.node.value.length - 1 || !bodyRef.current) return;
+      if (currentOrder === this.node.value.length - 1 || !bodyRef.current)
+        return;
 
-    // Click on the next node
-    const node = bodyRef.current.children[currentOrder + 1]
-      .children[1] as HTMLElement;
-    node.click();
+      // Click on the next node
+      const node = bodyRef.current.children[currentOrder + 1]
+        .children[1] as HTMLElement;
 
-    // Move the cursor to the appropriate position
-    const cursorHandler = new Cursor(node);
-    if (cursorPosition) {
-      cursorHandler.position = cursorPosition || 0;
-    } else {
-      cursorHandler.move('start');
-    }
+      node.click();
+
+      // Move the cursor to the appropriate position
+      const cursorHandler = new Cursor(node);
+      if (cursorPosition) {
+        cursorHandler.position = cursorPosition || 0;
+      } else {
+        cursorHandler.move('start');
+      }
   }
 
   // Navigate to the previous node
