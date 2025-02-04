@@ -28,6 +28,11 @@ export interface IconType {
 }
 
 export interface ObjectState<T> {
-  value: Array<T>;
-  set: SetStateType<Array<T>>;
+  value: T;
+  set: SetStateType<T>;
+}
+
+export interface ObjectStateToggle {
+  value: boolean;
+  toggle: (value?: boolean) => void;
 }
