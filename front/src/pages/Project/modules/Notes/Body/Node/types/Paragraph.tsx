@@ -13,7 +13,6 @@ import useToggle from 'hooks/useToggle';
 const Paragraph = ({ content, order }: NodeElementType) => {
   const { nodes, nodesUpdater, bodyRef } = useSafeContext(NotesContext);
   const [isSelected, toggleSelected] = useToggle(false);
-  const [isHovered, toggleHovered] = useToggle(false);
 
   const operations = new Operations(nodes);
 
@@ -86,11 +85,7 @@ const Paragraph = ({ content, order }: NodeElementType) => {
   };
 
   const css = clsx(
-    'w-full h-auto bg-base-100 rounded-btn px-2 py-0.5 resize-none outline-none cursor-text min-h-[1.8em]',
-    {
-      'bg-base-200': isHovered,
-      'bg-base-300': isSelected,
-    },
+    'w-full h-auto px-2 py-0.5 resize-none outline-none cursor-text min-h-[1.8em]',
   );
   const innerHTML = { __html: content };
 
@@ -103,8 +98,6 @@ const Paragraph = ({ content, order }: NodeElementType) => {
       onInput={handleChange}
       onClick={handleClick}
       onBlur={() => toggleSelected(false)}
-      onMouseEnter={() => toggleHovered(true)}
-      onMouseLeave={() => toggleHovered(false)}
       onKeyDown={handleKeyDown}
     />
   );

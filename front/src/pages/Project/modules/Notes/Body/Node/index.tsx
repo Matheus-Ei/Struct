@@ -1,5 +1,7 @@
 // Library
+import clsx from 'clsx';
 import useSafeContext from 'hooks/useSafeContext';
+import useToggle from 'hooks/useToggle';
 import { createElement, useMemo, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
 import { NotesContext } from '../context';
@@ -19,6 +21,7 @@ const Node = ({ content, type, order }: NodeProps) => {
   const { nodes, nodesUpdater } = useSafeContext(NotesContext);
   const operations = new Operations(nodes);
   const [dragCss, setDragCss] = useState('');
+  const [isHovered, toggleHovered] = useToggle(false);
 
   // Render the element based on the type
   const element = useMemo(() => {
@@ -32,7 +35,12 @@ const Node = ({ content, type, order }: NodeProps) => {
     });
   }, [content, type, order]);
 
-  const defaultCss = 'flex items-center justify-center w-full';
+  const defaultCss = clsx(
+    'relative pl-8 flex items-center justify-center w-full rounded-btn',
+    {
+      'bg-base-200': isHovered,
+    },
+  );
 
   const handleDragStart = (event: React.DragEvent<HTMLDivElement>) => {
     event.dataTransfer.setData('text/plain', order.toString());
@@ -40,7 +48,11 @@ const Node = ({ content, type, order }: NodeProps) => {
 
   const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault();
-    setDragCss('border-t-2 border-base-300');
+    const oldOrder = Number(event.dataTransfer.getData('text/plain'));
+    const newOrder = order;
+
+    if (oldOrder > newOrder) setDragCss('border-t-2 border-base-300');
+    if (oldOrder < newOrder) setDragCss('border-b-2 border-base-300');
   };
 
   const handleDragLeave = (event: React.DragEvent<HTMLDivElement>) => {
@@ -67,9 +79,11 @@ const Node = ({ content, type, order }: NodeProps) => {
       onDragStart={handleDragStart}
       onDragOver={handleDragOver}
       onDragLeave={handleDragLeave}
+      onMouseEnter={() => toggleHovered(true)}
+      onMouseLeave={() => toggleHovered(false)}
       onDrop={handleDrop}
     >
-      <LateralBar order={order} />
+      <LateralBar isHovered={isHovered} />
 
       {element}
     </div>

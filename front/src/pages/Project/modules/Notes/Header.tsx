@@ -24,7 +24,7 @@ const Header = () => {
   };
 
   return (
-    <div className='flex flex-col items-start gap-4 mb-6'>
+    <div className='pl-8 flex flex-col items-start gap-4 mb-6'>
       <div className='flex gap-6 items-center'>
         <Emoji
           symbol={page.data?.emoji}

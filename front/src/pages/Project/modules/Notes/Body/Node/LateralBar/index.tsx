@@ -2,12 +2,14 @@
 import MoveButton from './MoveButton';
 
 interface LateralBarProps {
-  order: number;
+  isHovered: boolean;
 }
 
-const LateralBar = ({ order }: LateralBarProps) => {
+const LateralBar = ({ isHovered }: LateralBarProps) => {
+  if (!isHovered) return <div className='absolute left-0 flex mr-4 gap-x-2' />;
+
   return (
-    <div className='flex mr-4 gap-x-2'>
+    <div className='absolute left-0 flex mr-4 gap-x-2'>
       <MoveButton />
     </div>
   );
