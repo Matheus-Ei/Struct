@@ -28,7 +28,7 @@ class NotesModule {
 
       return response.rows[0];
     } catch (error) {
-      throw new Error('Error creating the note page data');
+      console.error(error);
     }
   }
 }

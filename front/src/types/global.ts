@@ -26,3 +26,8 @@ export interface IconType {
   name: string;
   library: string;
 }
+
+export interface ObjectState<T> {
+  value: Array<T>;
+  set: SetStateType<Array<T>>;
+}

@@ -24,8 +24,8 @@ class Operations {
 
       // Create a new node with the new order
       const newNode: NodeElementType = {
-        content: '',
         type: 'paragraph',
+        content: '',
         order: newOrder + 1,
       };
 
@@ -41,6 +41,8 @@ class Operations {
 
   // Remove one node
   public remove(oldOrder: number) {
+    if (this.node.value.length === 1) return;
+
     this.node.set((oldNodes) => {
       // Filter out the node with the order to be removed
       const updated = oldNodes.filter((node) => node.order !== oldOrder);

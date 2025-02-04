@@ -86,11 +86,10 @@ const Paragraph = ({ content, order }: NodeElementType) => {
   };
 
   const css = clsx(
-    'w-full h-auto bg-base-100 rounded-btn px-2 py-0.5 resize-none outline-none cursor-text',
+    'w-full h-auto bg-base-100 rounded-btn px-2 py-0.5 resize-none outline-none cursor-text min-h-[1.8em]',
     {
       'bg-base-200': isHovered,
       'bg-base-300': isSelected,
-      'h-[1.5em]': content === '',
     },
   );
   const innerHTML = { __html: content };

@@ -3,6 +3,9 @@ export interface PageType {
   title: string;
   description: string;
   emoji: string | undefined;
-  module: string | null;
+  project_id: string;
+  parent_page_id: string;
   child_pages: Array<PageType> | null;
+  module_title: string | null;
+  module_information: Object | null;
 }

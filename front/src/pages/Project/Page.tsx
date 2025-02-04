@@ -24,7 +24,7 @@ const Page = () => {
   const module: Array<RouterType> = router.filter((item) => {
     if (!page.data) return false;
 
-    return page.data.module === item.name;
+    return page.data.module_title === item.name;
   });
 
   return (
