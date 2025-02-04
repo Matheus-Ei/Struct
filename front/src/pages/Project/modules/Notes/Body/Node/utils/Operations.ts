@@ -154,12 +154,19 @@ class Operations {
   }
 
   // Update the content of a node
-  public updateContent(order: number, content: string) {
+  public updateContent(order: number, content?: string, type?: string) {
     this.node.set((prev) => {
       const newNodes = [...prev];
-      const { type } = newNodes[order];
 
-      newNodes[order] = { content, type, order };
+      const currentNode = newNodes[order];
+      if (!currentNode) return prev;
+
+      // Atualiza apenas os valores fornecidos
+      newNodes[order] = {
+        order,
+        content: content !== undefined ? content : currentNode.content,
+        type: type !== undefined ? type : currentNode.type,
+      };
 
       return newNodes;
     });

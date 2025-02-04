@@ -36,7 +36,7 @@ const Node = ({ content, type, order }: NodeProps) => {
   }, [content, type, order]);
 
   const defaultCss = clsx(
-    'relative pl-8 flex items-center justify-center w-full rounded-btn',
+    'relative pl-16 flex items-center justify-center w-full rounded-btn',
     {
       'bg-base-200': isHovered,
     },
@@ -83,7 +83,7 @@ const Node = ({ content, type, order }: NodeProps) => {
       onMouseLeave={() => toggleHovered(false)}
       onDrop={handleDrop}
     >
-      <LateralBar isHovered={isHovered} />
+      <LateralBar order={order} isHovered={isHovered} />
 
       {element}
     </div>

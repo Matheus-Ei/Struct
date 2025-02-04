@@ -10,7 +10,7 @@ interface ContextMenuProps {
   show: boolean;
   onClose: () => void;
   style?: {
-    location: { x: number; y: number };
+    location?: { x: number; y: number };
     position?: 'absolute' | 'fixed';
     translate?: boolean;
     className?: string;
@@ -52,8 +52,8 @@ const ContextMenu = ({ children, onClose, show, style }: ContextMenuProps) => {
       ref={menuRef}
       className={css}
       style={{
-        top: style?.location.y,
-        left: style?.location.x,
+        top: style?.location?.y,
+        left: style?.location?.x,
         position: style?.position ?? 'fixed',
         transform: style?.translate
           ? 'translate(0%, -100%)'
