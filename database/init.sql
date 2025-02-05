@@ -115,7 +115,7 @@ CREATE TABLE note_node (
 
   content TEXT,
   metadata TEXT,
-  position FLOAT DEFAULT 0,
+  position FLOAT DEFAULT 1 NOT NULL,
   type VARCHAR(100) NOT NULL,
 
   page_id INT REFERENCES note_page_data (page_id) ON DELETE CASCADE,
@@ -160,3 +160,18 @@ AS $$
   FROM page AS child_page
   WHERE child_page.parent_page_id = parent_id;
 $$;
+
+CREATE OR REPLACE FUNCTION insert_node()
+RETURNS TRIGGER AS $$
+BEGIN
+  INSERT INTO note_node (content, position, type, page_id) 
+  VALUES (' ', 0, 'paragraph', NEW.page_id);
+
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trigger_insert_node
+AFTER INSERT ON note_page_data
+FOR EACH ROW
+EXECUTE FUNCTION insert_node();

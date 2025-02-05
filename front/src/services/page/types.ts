@@ -7,5 +7,5 @@ export interface PageType {
   parent_page_id: string;
   child_pages: Array<PageType> | null;
   module_title: string | null;
-  module_information: Object | null;
+  module_information: Array<Object> | null;
 }

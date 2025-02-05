@@ -14,7 +14,8 @@ class NoteModule {
           type
         FROM note_page_data nt
         JOIN note_node nd ON nd.page_id = nt.page_id
-        WHERE nt.page_id = $1;
+        WHERE nt.page_id = $1
+        ORDER BY position;
       `,
       [id],
     );
