@@ -57,10 +57,9 @@ CREATE TABLE project (
 
   title VARCHAR(255) NOT NULL,
   description TEXT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
-  owner_account_id INT REFERENCES account (id) ON DELETE CASCADE ,
-
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  owner_account_id INT REFERENCES account (id) ON DELETE CASCADE
 );
 
 CREATE TABLE project_settings (
@@ -73,6 +72,7 @@ CREATE TABLE project_settings (
 
 CREATE TABLE shared_project (
   id SERIAL PRIMARY KEY,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
   role_id INT REFERENCES role (id),
   account_id INT REFERENCES account (id) ON DELETE CASCADE,
@@ -95,6 +95,7 @@ CREATE TABLE page (
   description TEXT,
   emoji VARCHAR(10),
   position FLOAT DEFAULT 0,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
   parent_page_id INT REFERENCES page (id) ON DELETE CASCADE,
   project_id INT REFERENCES project (id) ON DELETE CASCADE,
@@ -103,11 +104,22 @@ CREATE TABLE page (
   UNIQUE(project_id, parent_page_id, position)
 );
 
+-- Note page type
 CREATE TABLE note_page_data (
+  page_id INT PRIMARY KEY REFERENCES page (id) ON DELETE CASCADE,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE note_node (
   id SERIAL PRIMARY KEY,
 
-  content TEXT NOT NULL,
-  page_id INT UNIQUE REFERENCES page (id) ON DELETE CASCADE
+  content TEXT,
+  metadata TEXT,
+  position FLOAT DEFAULT 0,
+  type VARCHAR(100) NOT NULL,
+
+  page_id INT REFERENCES note_page_data (page_id) ON DELETE CASCADE,
+  UNIQUE(page_id, position)
 );
 
 CREATE TABLE feedback (
@@ -115,6 +127,7 @@ CREATE TABLE feedback (
 
   email VARCHAR(200) NOT NULL,
   commentary TEXT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   rating INT CHECK (rating BETWEEN 1 AND 5)
 );
 

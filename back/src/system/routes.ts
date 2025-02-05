@@ -3,7 +3,8 @@ import accountRoute from '../routes/account';
 import tokenRoute from '../routes/token';
 import projectRoute from '../routes/project/project';
 import shareRoute from '../routes/project/share';
-import pageRoute from '../routes/page';
+import pageRoute from '../routes/page/page';
+import notePageRoute from '../routes/page/modules/note';
 import rootRoute from '../routes/root';
 
 type MainRoutesType = Array<[String, Object]>;
@@ -11,11 +12,14 @@ type MainRoutesType = Array<[String, Object]>;
 const mainRoutes: MainRoutesType = [
   ['/account', accountRoute.router],
   ['/token', tokenRoute.router],
-  ['/page', pageRoute.router],
 
   // Project
   ['/project', projectRoute.router],
   ['/project/share', shareRoute.router],
+
+  // Page
+  ['/page', pageRoute.router],
+  ['/page/note', notePageRoute.router],
 
   ['/', rootRoute.router],
 ];

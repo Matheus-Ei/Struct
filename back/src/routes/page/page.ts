@@ -2,7 +2,7 @@
 import { Router } from 'express';
 
 // Local
-import pageController from '../controllers/page/page';
+import pageController from '../../controllers/page/page';
 
 class PageRoute {
   public router: Router;

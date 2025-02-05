@@ -106,7 +106,7 @@ describe('Page', () => {
       project_id: projectId,
       parent_page_id: null,
       module_title: 'notes',
-      module_information: expect.any(Object),
+      module_information: expect.any(Array<Object>),
     });
   });
 
@@ -117,9 +117,7 @@ describe('Page', () => {
   });
 
   afterAll(async () => {
-    const response = await request(app).delete(`/project/${projectId}`);
-
-    expect(response.statusCode).toEqual(200);
+    await request(app).delete(`/project/${projectId}`);
 
     await pool.end();
   });

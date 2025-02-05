@@ -2,7 +2,7 @@
 import { Request, Response } from 'express';
 
 // Local
-import NotesModule from './modules/notes';
+import NoteModule from './modules/note';
 import pool from '../../services/database';
 
 class PageController {
@@ -36,10 +36,10 @@ class PageController {
         return;
       }
 
-      let module = null;
+      let moduleData = null;
       switch (page.module) {
         case 'notes':
-          module = await NotesModule.get(id);
+          moduleData = await NoteModule.get(id);
           break;
         default:
           break;
@@ -56,7 +56,7 @@ class PageController {
           parent_page_id: page.parent_page_id,
 
           module_title: page.module,
-          module_information: module,
+          module_information: moduleData,
         },
       });
     } catch (error) {
@@ -192,7 +192,7 @@ class PageController {
 
       switch (module) {
         case 'notes':
-          NotesModule.set(id);
+          NoteModule.set(id);
           break;
         default:
           res.status(400).send({ message: 'Module not set' });
