@@ -28,6 +28,7 @@ app.patch('/page/:id/module', pageController.setModule);
 app.post('/page/note', notePageController.newNode);
 app.delete('/page/note/:nodeId', notePageController.deleteNode);
 app.patch('/page/note/:nodeId', notePageController.updateNode);
+app.patch('/page/note/:nodeId/:arrivalPrevNodeId', notePageController.moveNode);
 
 describe('Note page module', () => {
   let projectId: string;
@@ -72,9 +73,7 @@ describe('Note page module', () => {
   });
 
   it('Should add a new node', async () => {
-    const response = await request(app)
-      .post(`/page/note`)
-      .send({ pageId, position: 0 });
+    const response = await request(app).post(`/page/note`).send({ pageId });
 
     nodeId = response.body.data.id;
 
@@ -86,7 +85,6 @@ describe('Note page module', () => {
       content: 'My header',
       type: 'h1',
       metadata: 'metadata',
-      position: 1,
     });
 
     expect(response.statusCode).toBe(200);
@@ -96,12 +94,12 @@ describe('Note page module', () => {
     const response = await request(app).get(`/page/${pageId}`);
 
     expect(response.statusCode).toBe(200);
-    expect(response.body.data.module_information[0]).toMatchObject({
+    expect(response.body.data.module_information[1]).toMatchObject({
       id: nodeId,
       content: 'My header',
       type: 'h1',
       metadata: 'metadata',
-      position: 1,
+      next_id: null,
     });
   });
 

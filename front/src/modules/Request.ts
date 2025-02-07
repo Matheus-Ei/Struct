@@ -50,7 +50,7 @@ class Request {
     }
   }
 
-  static async put(route: string, data: Object, base?: string) {
+  static async put(route: string, data?: Object, base?: string) {
     const backendBase = process.env.REACT_APP_BACK_URL as string;
     const baseUrl = base ? base : backendBase;
     const url = `${baseUrl}/${route}`;
@@ -66,7 +66,7 @@ class Request {
     }
   }
 
-  static async patch(route: string, data: Object, base?: string) {
+  static async patch(route: string, data?: Object, base?: string) {
     const backendBase = process.env.REACT_APP_BACK_URL as string;
     const baseUrl = base ? base : backendBase;
     const url = `${baseUrl}/${route}`;

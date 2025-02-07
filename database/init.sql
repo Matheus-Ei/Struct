@@ -115,11 +115,10 @@ CREATE TABLE note_node (
 
   content TEXT,
   metadata TEXT,
-  position FLOAT DEFAULT 1 NOT NULL,
   type VARCHAR(100) NOT NULL,
 
-  page_id INT REFERENCES note_page_data (page_id) ON DELETE CASCADE,
-  UNIQUE(page_id, position)
+  next_id INT REFERENCES note_node (id) ON DELETE SET NULL,
+  page_id INT REFERENCES note_page_data (page_id) ON DELETE CASCADE
 );
 
 CREATE TABLE feedback (
@@ -164,8 +163,8 @@ $$;
 CREATE OR REPLACE FUNCTION insert_node()
 RETURNS TRIGGER AS $$
 BEGIN
-  INSERT INTO note_node (content, position, type, page_id) 
-  VALUES (' ', 0, 'paragraph', NEW.page_id);
+  INSERT INTO note_node (content, next_id, type, page_id) 
+  VALUES (' ', NULL, 'paragraph', NEW.page_id);
 
   RETURN NEW;
 END;

@@ -16,6 +16,7 @@ class NotePageRoute {
     this.router.post('/', notePageController.newNode);
     this.router.delete('/:nodeId', notePageController.deleteNode);
     this.router.patch('/:nodeId', notePageController.updateNode);
+    this.router.patch('/:nodeId/:arrivalPrevNodeId', notePageController.moveNode);
   }
 }
 
