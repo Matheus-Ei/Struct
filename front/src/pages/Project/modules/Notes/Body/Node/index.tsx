@@ -4,24 +4,27 @@ import { createElement, useMemo, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
 
 // Local
-import useSafeContext from 'hooks/useSafeContext';
-import { NotesContext } from '../context';
 import useToggle from 'hooks/useToggle';
 import LateralBar from './LateralBar';
 import typesRouter from './typesRouter';
-import Operations from './utils/Operations';
+import { idType } from 'types/global';
+// import Operations from './utils/Operations';
+import { NotesContext } from '../context';
+import useSafeContext from 'hooks/useSafeContext';
 
 interface NodeProps {
+  id: idType;
   content: string;
   type: string;
-  order: number;
+  next_id: idType;
 }
 
-const Node = ({ content, type, order }: NodeProps) => {
-  const { nodes, nodesUpdater } = useSafeContext(NotesContext);
-  const operations = new Operations(nodes);
+const Node = ({ id, content, type, next_id }: NodeProps) => {
+  const { nodes } = useSafeContext(NotesContext);
   const [dragCss, setDragCss] = useState('');
   const [isHovered, toggleHovered] = useToggle(false);
+
+  // const operations = new Operations(nodes);
 
   // Render the element based on the type
   const element = useMemo(() => {
@@ -29,11 +32,12 @@ const Node = ({ content, type, order }: NodeProps) => {
     if (!node) return null;
 
     return createElement(node.element, {
+      id,
       content,
-      order,
       type,
+      next_id,
     });
-  }, [content, type, order]);
+  }, [id, content, type, next_id]);
 
   const defaultCss = clsx(
     'relative pl-16 flex items-center justify-center w-full rounded-btn',
@@ -43,16 +47,18 @@ const Node = ({ content, type, order }: NodeProps) => {
   );
 
   const handleDragStart = (event: React.DragEvent<HTMLDivElement>) => {
-    event.dataTransfer.setData('text/plain', order.toString());
+    event.dataTransfer.setData('text/plain', id ? id.toString() : '0');
   };
 
   const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault();
-    const oldOrder = Number(event.dataTransfer.getData('text/plain'));
-    const newOrder = order;
+    const dragId = Number(event.dataTransfer.getData('text/plain'));
 
-    if (oldOrder > newOrder) setDragCss('border-t-2 border-base-300');
-    if (oldOrder < newOrder) setDragCss('border-b-2 border-base-300');
+    const oldIndex = nodes.value.findIndex((node) => node.id === dragId);
+    const newIndex = nodes.value.findIndex((node) => node.id === id);
+
+    if (oldIndex > newIndex) setDragCss('border-t-2 border-base-300');
+    if (oldIndex < newIndex) setDragCss('border-b-2 border-base-300');
   };
 
   const handleDragLeave = (event: React.DragEvent<HTMLDivElement>) => {
@@ -60,17 +66,17 @@ const Node = ({ content, type, order }: NodeProps) => {
     setDragCss('border-none');
   };
 
-  const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
+  const handleDrop = async (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault();
-    const oldOrder = Number(event.dataTransfer.getData('text/plain'));
-    const newOrder = order;
+    const dragId = Number(event.dataTransfer.getData('text/plain'));
+    const newPrevId = id;
 
-    if (oldOrder !== newOrder) {
-      operations.changePosition(oldOrder, newOrder);
+    if (dragId !== newPrevId) {
+      // await operations.move(dragId, newPrevId);
+      // nodesUpdater()
     }
 
     setDragCss('border-none');
-    nodesUpdater();
   };
 
   return (
@@ -83,7 +89,7 @@ const Node = ({ content, type, order }: NodeProps) => {
       onMouseLeave={() => toggleHovered(false)}
       onDrop={handleDrop}
     >
-      <LateralBar order={order} isHovered={isHovered} />
+      <LateralBar id={id} isHovered={isHovered} />
 
       {element}
     </div>

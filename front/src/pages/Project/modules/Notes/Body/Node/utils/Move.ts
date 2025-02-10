@@ -8,15 +8,15 @@ import { idType } from 'types/global';
 
 class Move {
   public static up(
-    id: idType,
+    nodeId: idType,
     bodyRef: RefObject<HTMLDivElement>,
     nodes: NodeElementType[],
   ) {
-    const prevIndex = nodes.findIndex((n) => n.next_id === id);
+    const prevIndex = nodes.findIndex((n) => n.next_id === nodeId);
     if (!bodyRef.current || prevIndex < 0) return;
 
     // Navigate to the previous node
-    const node = bodyRef.current.children[prevIndex].children[2] as HTMLElement;
+    const node = bodyRef.current.children[prevIndex].children[1] as HTMLElement;
     node.click();
 
     // Move the cursor to the appropriate position
@@ -25,21 +25,20 @@ class Move {
   }
 
   public static down(
-    next_id: idType,
+    nextNodeId: idType,
     bodyRef: RefObject<HTMLDivElement>,
     nodes: NodeElementType[],
   ) {
     const nextIndex = nodes.findIndex(
-      (n) => n.id === next_id && next_id !== null,
+      (n) => n.id === nextNodeId && nextNodeId !== null,
     );
-
 
     // Click on the next node
     setTimeout(() => {
       if (!bodyRef.current || nextIndex < 0) return;
 
       const node = bodyRef.current.children[nextIndex]
-        .children[2] as HTMLElement;
+        .children[1] as HTMLElement;
       node.click();
 
       // Move the cursor to the appropriate position

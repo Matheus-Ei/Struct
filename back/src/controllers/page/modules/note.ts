@@ -76,7 +76,7 @@ class NoteModule {
         `
           INSERT INTO note_node (content, type, page_id, next_id)
           VALUES (' ', 'paragraph', $1, (SELECT next_id FROM note_node WHERE id = $2))
-          RETURNING id;
+          RETURNING id, content, type, next_id;
         `,
         [pageId, prevNodeId],
       );
@@ -93,7 +93,7 @@ class NoteModule {
 
       res.status(201).send({
         message: 'New node created',
-        data: { id: newNode.id },
+        data: { newNode },
       });
     } catch (error) {
       res.status(500).send({ message: 'Error adding a new node', error });

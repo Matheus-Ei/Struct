@@ -1,13 +1,14 @@
 // Local
 import Icon from 'components/Icon';
 import useToggle from 'hooks/useToggle';
+import { idType } from 'types/global';
 import Menu from './Menu';
 
 interface TurnIntoProps {
-  order: number;
+  id: idType;
 }
 
-const TurnInto = ({ order }: TurnIntoProps) => {
+const TurnInto = ({ id }: TurnIntoProps) => {
   const [showMenu, toggleMenu] = useToggle(false);
 
   return (
@@ -18,7 +19,7 @@ const TurnInto = ({ order }: TurnIntoProps) => {
         onClick={() => toggleMenu(true)}
       />
 
-      <Menu order={order} show={showMenu} onClose={() => toggleMenu(false)} />
+      <Menu id={id} show={showMenu} onClose={() => toggleMenu(false)} />
     </div>
   );
 };

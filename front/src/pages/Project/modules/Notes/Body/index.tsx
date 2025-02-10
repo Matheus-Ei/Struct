@@ -1,6 +1,8 @@
 // Libraries
+import useSafeContext from 'hooks/useSafeContext';
 import useToggle from 'hooks/useToggle';
-import { useCallback, useMemo, useRef, useState } from 'react';
+import { ProjectContext } from 'pages/Project/context';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 // Local
 import { NotesContext } from './context';
@@ -10,33 +12,36 @@ import { NodeElementType } from './types';
 const Body = () => {
   const bodyRef = useRef<HTMLDivElement>(null);
   const [updaterAnchor, nodesUpdater] = useToggle(false);
+  const { page } = useSafeContext(ProjectContext);
 
-  const [nodes, setNodes] = useState<Array<NodeElementType>>([
-    { content: 'My first header', type: 'h1', order: 0 },
-    {
-      content: 'This is an example of a paragraph',
-      type: 'paragraph',
-      order: 1,
-    },
-  ]);
+  const nodesContent = page.data?.module_information as NodeElementType[];
+
+  const [nodes, setNodes] = useState<Array<NodeElementType>>([]);
+
+  useEffect(() => {
+    setNodes(nodesContent);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const createNodes = useCallback(
     (node: NodeElementType) => (
       <Node
-        key={node.order}
+        key={node.id}
+        id={node.id}
         content={node.content}
-        order={node.order}
+        next_id={node.next_id}
         type={node.type}
       />
     ),
-    [],
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [updaterAnchor],
   );
 
   const renderNodes = useMemo(() => {
     return nodes.map(createNodes);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [updaterAnchor, nodes.length, createNodes]);
+  }, [nodes.length, createNodes]);
 
   const contextValue = {
     nodes: { value: nodes, set: setNodes },

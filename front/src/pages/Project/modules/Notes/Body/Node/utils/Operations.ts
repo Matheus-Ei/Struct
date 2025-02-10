@@ -1,8 +1,8 @@
 // Local
-import Cursor from 'modules/Cursor';
-import { RefObject } from 'react';
-import { NodeState } from '../../context';
+import NotePage from 'services/page/modules/note';
 import { NodeElementType } from '../../types';
+import { NodeState } from '../../context';
+import { idType } from 'types/global';
 
 class Operations {
   private node: NodeState;
@@ -12,165 +12,129 @@ class Operations {
   }
 
   // Add one node
-  public add(newOrder: number) {
+  public async add(pageId: idType, prevNodeId?: idType) {
+    const response = await NotePage.addNode(pageId, prevNodeId);
+
+    const data = response.data.newNode;
+
+    // Create the new node
+    const newNode: NodeElementType = data;
+
+    // Update the nodes array locally
     this.node.set((oldNodes) => {
-      // Make all elements with order greater than or equal to newOrder increment by 1
-      const incremented = oldNodes.map((node) => {
-        if (node.order > newOrder) {
-          return { ...node, order: node.order + 1 };
-        }
-        return node;
-      });
+      const updated = [...oldNodes, newNode];
 
-      // Create a new node with the new order
-      const newNode: NodeElementType = {
-        type: 'paragraph',
-        content: '',
-        order: newOrder + 1,
-      };
+      const prevNode = updated.find((node) => node.id === prevNodeId);
+      if (prevNode) prevNode.next_id = newNode.id;
 
-      // Add the new node to the array
-      const updated = [...incremented, newNode];
-
-      // Sort the array by order
-      updated.sort((a, b) => a.order - b.order);
-
-      return updated;
+      return this.sort(updated);
     });
   }
 
+  // Get the list in order
+  private sort(nodes: NodeElementType[]): NodeElementType[] {
+    if (nodes.length === 0) return [];
+
+    const nodeMap = new Map<idType, NodeElementType>();
+    nodes.forEach((node) => nodeMap.set(node.id, node));
+
+    const nextIds = new Set<idType>(nodes.map((node) => node.next_id));
+
+    const head = nodes.find((node) => !nextIds.has(node.id));
+    if (!head) {
+      throw new Error('Head of the list not finded');
+    }
+
+    const organized: NodeElementType[] = [];
+    let current: NodeElementType | undefined = head;
+
+    while (current) {
+      organized.push(current);
+      current = nodeMap.get(current.next_id);
+    }
+
+    return organized;
+  }
+
   // Remove one node
-  public remove(oldOrder: number) {
+  public async remove(nodeId: idType) {
     if (this.node.value.length === 1) return;
 
+    await NotePage.deleteNode(nodeId);
+
+    // Remove locally
     this.node.set((oldNodes) => {
-      // Filter out the node with the order to be removed
-      const updated = oldNodes.filter((node) => node.order !== oldOrder);
+      let updated = [...oldNodes];
 
-      // Make all elements with order greater than oldOrder decrement by 1
-      const decremented = updated.map((node) => {
-        if (node.order > oldOrder) {
-          return { ...node, order: node.order - 1 };
-        }
-        return node;
-      });
+      const prevNode = updated.find((node) => node.next_id === nodeId);
+      const currentNode = updated.find((node) => node.id === nodeId);
 
-      // Sort the array by order
-      decremented.sort((a, b) => a.order - b.order);
+      if (!currentNode) {
+        throw new Error('Node to remove not found');
+      }
 
-      return decremented;
+      // Set the list to ignore the current node
+      if (prevNode) {
+        prevNode.next_id = currentNode.next_id;
+      }
+
+      // Filter the current node out of the list
+      updated = updated.filter((node) => node.id !== nodeId);
+
+      return this.sort(updated);
     });
   }
 
   // Change the position of a node
-  public changePosition(oldOrder: number, newOrder: number) {
-    if (oldOrder === newOrder) return;
+  public async move(nodeId: idType, newPrevId: idType) {
+    if (nodeId === newPrevId) return;
 
+    const oldIndex = this.node.value.findIndex((node) => node.id === nodeId);
+    const newIndex = this.node.value.findIndex((node) => node.id === newPrevId);
+
+    await NotePage.moveNode(nodeId, newPrevId);
+
+    // Move locally
     this.node.set((oldNodes) => {
-      const nodeToMove = oldNodes.find((n) => n.order === oldOrder);
-
-      if (!nodeToMove) {
-        return oldNodes;
-      }
-
       let updated = [...oldNodes];
 
-      // Remove the node from the old position
-      updated = updated.filter((n) => n.order !== oldOrder);
+      // Get all the needed nodes
+      const lastPrevNode = updated.find((node) => node.next_id === nodeId);
+      const currentNode = updated.find((node) => node.id === nodeId);
+      const newPrevNode = updated.find((node) =>
+        oldIndex < newIndex
+          ? node.id === newPrevId
+          : node.next_id === newPrevId,
+      );
 
-      if (oldOrder < newOrder) {
-        // Moving forward
-        // Decrement the order of the nodes that are between oldOrder+1 and newOrder
-        updated = updated.map((n) => {
-          if (n.order > oldOrder && n.order <= newOrder) {
-            return { ...n, order: n.order - 1 };
-          }
-          return n;
-        });
-      } else {
-        // Moving back
-        // Increment the order of the nodes that are between newOrder and oldOrder-1
-        updated = updated.map((n) => {
-          if (n.order >= newOrder && n.order < oldOrder) {
-            return { ...n, order: n.order + 1 };
-          }
-          return n;
-        });
-      }
+      if (!currentNode || !newPrevNode) return oldNodes;
 
-      // Add the node to the new position
-      const movedNode = { ...nodeToMove, order: newOrder };
-      updated.push(movedNode);
+      // Remove the currentNode from the original position
+      if (lastPrevNode) lastPrevNode.next_id = currentNode.next_id;
 
-      // Sort the array by order
-      updated.sort((a, b) => a.order - b.order);
+      // Add the node in the new position
+      currentNode.next_id = newPrevNode.next_id;
+      newPrevNode.next_id = nodeId;
 
-      return updated;
+      return this.sort(updated);
     });
   }
 
-  // Navigate to the next node
-  public nextNode(
-    currentOrder: number,
-    bodyRef: RefObject<HTMLDivElement>,
-    cursorPosition?: number,
-  ) {
-      if (currentOrder === this.node.value.length - 1 || !bodyRef.current)
-        return;
-
-      // Click on the next node
-      const node = bodyRef.current.children[currentOrder + 1]
-        .children[1] as HTMLElement;
-
-      node.click();
-
-      // Move the cursor to the appropriate position
-      const cursorHandler = new Cursor(node);
-      if (cursorPosition) {
-        cursorHandler.position = cursorPosition || 0;
-      } else {
-        cursorHandler.move('start');
-      }
-  }
-
-  // Navigate to the previous node
-  public previousNode(
-    currentOrder: number,
-    bodyRef: RefObject<HTMLDivElement>,
-    cursorPosition?: number,
-  ) {
-    if (!bodyRef.current || currentOrder === 0) return;
-
-    // Navigate to the previous node
-    const node = bodyRef.current.children[currentOrder - 1]
-      .children[1] as HTMLElement;
-    node.click();
-
-    // Move the cursor to the appropriate position
-    const cursorHandler = new Cursor(node);
-    if (cursorPosition) {
-      cursorHandler.position = cursorPosition;
-    } else {
-      cursorHandler.move('end');
-    }
-  }
-
   // Update the content of a node
-  public updateContent(order: number, content?: string, type?: string) {
-    this.node.set((prev) => {
-      const newNodes = [...prev];
+  public async update(nodeId: idType, content?: string, type?: string) {
+    await NotePage.editNode(nodeId, undefined, content, type);
 
-      const currentNode = newNodes[order];
-      if (!currentNode) return prev;
+    // Update locally
+    this.node.set((oldNodes) => {
+      const updated = [...oldNodes];
 
-      // Atualiza apenas os valores fornecidos
-      newNodes[order] = {
-        order,
-        content: content !== undefined ? content : currentNode.content,
-        type: type !== undefined ? type : currentNode.type,
-      };
+      const currentNode = updated.find((node) => node.id === nodeId);
+      if (!currentNode) return oldNodes;
 
-      return newNodes;
+      currentNode.content = content ? content : currentNode.content;
+      currentNode.type = type ? type : currentNode.type;
+
+      return updated;
     });
   }
 }

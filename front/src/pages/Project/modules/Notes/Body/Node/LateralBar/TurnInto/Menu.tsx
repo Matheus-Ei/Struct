@@ -1,16 +1,17 @@
 // Local
 import ContextMenu from 'components/ContextMenu';
+import { idType } from 'types/global';
+import typesRouter, { NodesType } from '../../typesRouter';
 import useSafeContext from 'hooks/useSafeContext';
 import { NotesContext } from '../../../context';
-import typesRouter, { NodesType } from '../../typesRouter';
 import Operations from '../../utils/Operations';
 
 interface MenuProps {
   show: boolean;
   onClose: () => void;
-  order: number;
+  id: idType;
 }
-const Menu = ({ show, onClose, order }: MenuProps) => {
+const Menu = ({ show, onClose, id }: MenuProps) => {
   const { nodes, nodesUpdater } = useSafeContext(NotesContext);
 
   if (!show) return null;
@@ -20,8 +21,8 @@ const Menu = ({ show, onClose, order }: MenuProps) => {
     const typeTitle =
       t.type.slice(0, 1).toUpperCase() + t.type.slice(1, t.type.length);
 
-    const handleClick = () => {
-      operations.updateContent(order, undefined, t.type);
+    const handleClick = async () => {
+      await operations.update(id, undefined, t.type);
       nodesUpdater();
     };
 
