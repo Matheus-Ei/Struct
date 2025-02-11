@@ -223,15 +223,16 @@ class AccountController {
         full_name = account.full_name,
         email = account.email,
         bio = account.bio,
+        picture = account.picure,
       } = req.body;
 
       await pool.query(
         `
           UPDATE account
-          SET full_name = $1, email = $2, bio = $3
-          WHERE id = $4
+          SET full_name = $2, email = $3, bio = $4, picture = $5
+          WHERE id = $1
         `,
-        [full_name, email, bio, id],
+        [id, full_name, email, bio, picture],
       );
 
       res.status(200).json({ message: 'Account updated' });

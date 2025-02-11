@@ -21,7 +21,7 @@ const Body = () => {
   useEffect(() => {
     setNodes(nodesContent);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [page.data?.id]);
 
   const createNodes = useCallback(
     (node: NodeElementType) => (
