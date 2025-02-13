@@ -3,6 +3,8 @@ import { NavigateFunction } from 'react-router-dom';
 
 // Local
 import Request from 'modules/Request';
+import Upload from 'services/upload';
+import { AccountType } from './type';
 
 class Account {
   static async login(
@@ -98,10 +100,13 @@ class Account {
     }
   }
 
-  static async get() {
+  static async get(): Promise<AccountType | null> {
     try {
       const response = await Request.get('account');
-      return response.data;
+      const pictureData = await Upload.get(response.data.picture);
+
+      const userWithPic = { ...response.data, pictureData };
+      return userWithPic;
     } catch {
       return null;
     }
@@ -114,6 +119,17 @@ class Account {
   ) {
     try {
       await Request.patch('account', { full_name, bio, email });
+      return true;
+    } catch {
+      return false;
+    }
+  }
+
+  static async changePicture(picture: File) {
+    try {
+      const fileName = await Upload.make(picture);
+      await Request.patch('account', { picture: fileName });
+
       return true;
     } catch {
       return false;

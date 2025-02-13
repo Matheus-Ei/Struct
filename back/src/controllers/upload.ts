@@ -4,7 +4,11 @@ import Upload from '../services/upload';
 
 class UploadController {
   public async get(req: Request, res: Response) {
-    const { fileName } = req.params;
+    const { type, fileName } = req.params;
+
+    if (type === 'image') {
+      res.setHeader('Content-Type', 'image/jpeg');
+    }
 
     const file = await Upload.get(fileName);
 
@@ -28,7 +32,11 @@ class UploadController {
 
     try {
       const savedPath = Upload.make(file);
-      res.status(201).json({ fileUrl: savedPath });
+
+      res.status(201).json({
+        message: 'File uploaded successfuly',
+        data: { fileName: savedPath },
+      });
     } catch (error) {
       res.status(500).json({
         message: 'Error making the upload of the file',

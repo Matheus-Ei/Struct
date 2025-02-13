@@ -5,5 +5,7 @@ export interface AccountType {
   bio: string;
   email: string;
   password: string;
+  picture: string | null;
+  pictureData?: Buffer | null;
   is_verified: boolean;
 }

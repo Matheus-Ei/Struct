@@ -1,8 +1,12 @@
 // Libraries
-import axios from 'axios';
+import axios, { ResponseType } from 'axios';
 
 class Request {
-  static async get(route: string, base?: string) {
+  static async get(
+    route: string,
+    base?: string,
+    responseType: ResponseType = 'json',
+  ) {
     const backendBase = process.env.REACT_APP_BACK_URL as string;
     const baseUrl = base ? base : backendBase;
     const url = `${baseUrl}/${route}`;
@@ -10,6 +14,7 @@ class Request {
     try {
       const request = await axios.get(url, {
         withCredentials: true,
+        responseType,
       });
       const data = await request.data;
       return data;
@@ -31,6 +36,27 @@ class Request {
       return response;
     } catch (error) {
       throw new Error(`Post method, url ${url}, error: ${error}`);
+    }
+  }
+
+  static async postFile(route: string, file: File, base?: string) {
+    const backendBase = process.env.REACT_APP_BACK_URL as string;
+    const baseUrl = base ? base : backendBase;
+    const url = `${baseUrl}/${route}`;
+
+    try {
+      const formData = new FormData();
+      formData.append('file', file);
+
+      const request = await axios.post(url, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+        withCredentials: true,
+      });
+      return request.data;
+    } catch (error) {
+      throw new Error(`Post file method, url ${url}, error: ${error}`);
     }
   }
 

@@ -1,5 +1,7 @@
 // Local
 import EditableField from 'components/EditableField';
+import Image from 'components/Image';
+import Account from 'services/account';
 import { AccountType } from 'services/account/type';
 
 interface HeaderProps {
@@ -8,12 +10,16 @@ interface HeaderProps {
 }
 
 const Header = ({ account, update }: HeaderProps) => {
+  const handleUpdate = async (imageData: File) => {
+    await Account.changePicture(imageData);
+  };
+
   return (
-    <div className='flex items-center w-full h-40 gap-x-4'>
-      <img
-        src='https://placehold.co/500'
-        className='h-full rounded-full'
-        alt='profile'
+    <div className='flex items-center w-[90%] h-52 gap-x-4'>
+      <Image
+        src={account?.pictureData}
+        onUpdate={handleUpdate}
+        className={{ container: 'mr-8' }}
       />
 
       <div className='flex flex-col gap-y-1'>
