@@ -16,7 +16,7 @@ const GoBackButton = ({ lastPage }: GoBackButtonProps) => {
       icon={{ name: 'IoIosArrowBack', library: 'io' }}
       text='Go back'
       onClick={() => navigate(lastPage)}
-      className='absolute left-20 top-20 hover:text-primary'
+      className='absolute left-20 top-20 hover:opacity-60'
     />
   );
 };

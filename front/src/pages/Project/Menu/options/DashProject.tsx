@@ -11,6 +11,7 @@ const DashProject = () => {
 
   const css = clsx('w-full h-9 gap-x-2', 'justify-start', {
     'bg-primary text-primary-content': selectedPage.id === null,
+    'hover:opacity-60': selectedPage.id !== null,
   });
 
   return (

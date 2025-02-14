@@ -9,7 +9,7 @@ const CreateButton = ({ onClick }: CreateButtonProps) => {
     <Point
       icon={{ name: 'FaPlus', library: 'fa6' }}
       onClick={onClick}
-      className='ml-4'
+      className='ml-4 hover:opacity-60'
     />
   );
 };

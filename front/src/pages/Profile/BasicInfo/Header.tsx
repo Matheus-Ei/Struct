@@ -5,7 +5,7 @@ import Account from 'services/account';
 import { AccountType } from 'services/account/type';
 
 interface HeaderProps {
-  account: AccountType;
+  account: AccountType | null | undefined;
   update: (value: string, field: 'name' | 'about') => Promise<void>;
 }
 
@@ -33,7 +33,9 @@ const Header = ({ account, update }: HeaderProps) => {
           }}
         />
 
-        <p className='text-neutral italic'>@{account?.nickname}</p>
+        <p className='text-base-content opacity-60 italic cursor-default'>
+          @{account?.nickname}
+        </p>
       </div>
     </div>
   );

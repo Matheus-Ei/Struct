@@ -9,7 +9,7 @@ const Settings = () => {
     <div className='relative flex justify-center h-screen w-screen pt-20'>
       <GoBackButton lastPage='/dashboard' />
 
-      <div className='flex flex-col items-center h-full w-2/3 gap-y-4'>
+      <div className='flex flex-col items-center h-full w-2/3'>
         <Header />
 
         <ThemeSelector />

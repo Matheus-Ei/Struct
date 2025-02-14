@@ -19,10 +19,10 @@ const WrapperSignUp = ({ children }: WrapperSignUpProps) => {
 
   return (
     <Card>
-      <div className='relative w-[55vw] h-[450px] p-4 flex flex-col items-center justify-center'>
+      <div className='relative w-[55vw] h-[450px] p-4 flex flex-col items-center justify-center cursor-default'>
         {step !== 0 && (
           <button
-            className='absolute flex top-4 left-4 gap-2 items-center justify-center text-neutral'
+            className='absolute flex top-4 left-4 gap-2 items-center justify-center opacity-60 hover:opacity-40'
             onClick={prevStep}
           >
             <Icon

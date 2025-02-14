@@ -12,6 +12,7 @@ const Search = () => {
         text='Search'
         icon={{ name: 'IoMdSearch', library: 'io' }}
         onClick={() => toggleOpen(true)}
+        className='hover:opacity-60'
       />
 
       <SearchModal isOpen={isOpen} toggleOpen={toggleOpen} />

@@ -5,7 +5,7 @@ import { AccountType } from 'services/account/type';
 import Header from './Header';
 
 interface BasicInfoProps {
-  account: AccountType;
+  account: AccountType | null | undefined;
 }
 
 const BasicInfo = ({ account }: BasicInfoProps) => {

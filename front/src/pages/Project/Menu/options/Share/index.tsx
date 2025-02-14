@@ -12,6 +12,7 @@ const Share = () => {
         text='Share'
         icon={{ name: 'IoMdShare', library: 'io' }}
         onClick={() => toggleOpen(true)}
+        className='hover:opacity-60'
       />
 
       <ShareModal isOpen={isOpen} toggleOpen={toggleOpen} />

@@ -20,7 +20,7 @@ const Header = ({ tab, setTab, modal }: HeaderProps) => {
   const renderTabs = (item: RouterType) => {
     const tabCss = clsx('select-none cursor-pointer', {
       'font-bold text-xl': tab === item.title,
-      'text-lg': tab !== item.title,
+      'text-lg hover:opacity-60': tab !== item.title,
     });
 
     return (
@@ -40,7 +40,7 @@ const Header = ({ tab, setTab, modal }: HeaderProps) => {
 
       <Icon
         value={{ name: 'MdOpenInNew', library: 'md' }}
-        className='absolute top-1 right-10 text-lg'
+        className='absolute right-12 top-3 sm:right-10 sm:top-1 text-xl hover:opacity-60 cursor-pointer'
         onClick={() => navigate(`/project/${modal.projectId}`)}
       />
     </div>

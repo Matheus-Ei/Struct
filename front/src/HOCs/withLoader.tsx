@@ -10,11 +10,9 @@ const withLoader = (WrappedComponent: ComponentType, checkLogin?: boolean) => {
   return function WithLoader() {
     const navigate = useNavigate();
 
-    const check = () => {
+    useEffect(() => {
       if (checkLogin) Account.verifyLogin(navigate);
-    };
-
-    useEffect(check, [navigate]);
+    }, [navigate]);
 
     return (
       <motion.div

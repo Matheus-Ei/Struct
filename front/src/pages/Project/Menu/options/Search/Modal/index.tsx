@@ -19,7 +19,10 @@ const flattenPages = (pages?: PageType[] | null): PageType[] => {
       title: page.title,
       emoji: page.emoji,
       description: page.description,
-      module: page.module,
+      module_title: page.module_title,
+      module_information: page.module_information,
+      parent_page_id: page.parent_page_id,
+      project_id: page.project_id,
       child_pages: [],
     });
 
@@ -59,7 +62,7 @@ const SearchModal = ({ isOpen, toggleOpen }: SearchModalProps) => {
     <Modal
       isOpen={isOpen}
       onClose={() => toggleOpen(false)}
-      className='sm:w-[30vw] sm:h-[30rem] xl:w-[15vw]'
+      className='sm:w-[30vw] sm:h-[80vh] 2xl:h-[50vh] xl:w-[15vw]'
     >
       <div className='w-5/6 h-5/6'>
         <SearchBar

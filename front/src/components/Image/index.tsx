@@ -17,8 +17,10 @@ const Image = ({ src, className, onUpdate, onClick }: ImageProps) => {
   const [isHovering, toggleHover] = useToggle(false);
   const [source, setSource] = useState<string>('https://placehold.co/500x500');
 
+  console.log(src);
+
   useEffect(() => {
-    if (src) setSource(URL.createObjectURL(src as any));
+    if (src && src.size !== 0) setSource(URL.createObjectURL(src as any));
   }, [src]);
 
   const imgCss = twMerge(
@@ -42,6 +44,7 @@ const Image = ({ src, className, onUpdate, onClick }: ImageProps) => {
         onUpdate={onUpdate}
         className={className?.image}
       />
+
       <img src={source} className={imgCss} alt='profile' onClick={onClick} />
     </div>
   );

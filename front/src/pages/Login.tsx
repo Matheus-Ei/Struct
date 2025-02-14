@@ -29,7 +29,7 @@ const Login = () => {
         <div className='flex flex-col items-center justify-center w-[25vw] py-6 px-4'>
           <Logo className='text-primary w-full h-fit mb-4' />
 
-          <p className='text-primary mb-32 text-center text-lg'>
+          <p className='text-primary mb-32 text-center text-lg cursor-default'>
             Come be part of a more organized world.
           </p>
 

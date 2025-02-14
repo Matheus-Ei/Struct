@@ -13,7 +13,7 @@ const Message404 = ({ text }: Message404Props) => {
         className='text-4xl w-fit'
       />
 
-      <h1 className='text-xl w-fit'>{text}</h1>
+      <h1 className='text-xl w-fit cursor-default'>{text}</h1>
     </div>
   );
 };

@@ -12,6 +12,7 @@ const Home = () => {
       text='Home'
       icon={{ name: 'IoMdHome', library: 'io' }}
       onClick={() => navigate('/dashboard')}
+      className='hover:opacity-60'
     />
   );
 };

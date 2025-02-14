@@ -22,7 +22,7 @@ const ShareModal = ({ isOpen, toggleOpen }: ShareModalProps) => {
     <Modal
       isOpen={isOpen}
       onClose={() => toggleOpen(false)}
-      className='pb-4 sm:pb-0 sm:h-[40rem] sm:w-[60vw] md:w-[50vw] lg:w-[35vw] xl:w-[30vw] 2xl:w-[25vw]'
+      className='pb-4 sm:pb-0 sm:h-[80vh] sm:w-[60vw] md:w-[50vw] lg:w-[35vw] xl:w-[30vw] 2xl:w-[25vw] 2xl:h-[60vh]'
     >
       <div className='flex flex-col w-full h-full items-center justify-between'>
         <AccountsLayout refetch={refetchUsers} rawShares={rawShares} />

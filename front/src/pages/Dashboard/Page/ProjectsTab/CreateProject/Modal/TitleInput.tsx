@@ -12,6 +12,7 @@ const TitleInput = () => {
       type='input'
       setValue={title.set}
       error={title.error}
+      className='min-h-10'
     />
   );
 };

@@ -26,7 +26,10 @@ const Options = ({
   placeholder,
   className,
 }: OptionsProps) => {
-  const css = twMerge('bg-base-300 px-2 py-1 rounded-btn', className);
+  const css = twMerge(
+    'bg-base-300 px-2 py-1 rounded-btn cursor-pointer',
+    className,
+  );
 
   const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
     const index = options.indexOf(event.target.value);

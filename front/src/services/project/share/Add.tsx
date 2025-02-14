@@ -41,15 +41,12 @@ const NewShare = ({ projectId, refetch }: NewShareProps) => {
         onEnter={shareProject}
       />
 
-      <Options
-        options={roleOptions}
-        selected={{ value: role, set: setRole }}
-      />
+      <Options options={roleOptions} selected={{ value: role, set: setRole }} />
 
       <Point
         icon={{ name: 'BsFillShareFill', library: 'bs' }}
         onClick={shareProject}
-        className='ml-4'
+        className='ml-4 hover:opacity-60'
       />
     </div>
   );

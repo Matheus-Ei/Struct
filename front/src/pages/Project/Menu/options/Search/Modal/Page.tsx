@@ -8,7 +8,7 @@ import { SetStateType } from 'types/global';
 
 const pageCss = clsx(
   'w-full h-fit gap-x-2 rounded-btn py-2 px-4',
-  'flex flex-row justify-start items-start text-start',
+  'flex flex-row justify-start items-center text-start',
   'cursor-pointer select-none hover:bg-base-200',
 );
 

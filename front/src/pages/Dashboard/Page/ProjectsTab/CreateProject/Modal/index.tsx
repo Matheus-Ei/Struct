@@ -51,13 +51,15 @@ const CreateProjectModal = ({
       <Modal
         isOpen={showModal}
         onClose={closeModal}
-        className='sm:w-[30vw] sm:h-[40rem]'
+        className='sm:w-[30vw] sm:h-[70vh]'
       >
         <div className={css}>
           <Header />
 
-          <TitleInput />
-          <DescriptionInput />
+          <div className='w-full h-full flex flex-col items-center justify-center overflow-y-scroll overflow-x-hidden'>
+            <TitleInput />
+            <DescriptionInput />
+          </div>
 
           <CreateButton />
         </div>

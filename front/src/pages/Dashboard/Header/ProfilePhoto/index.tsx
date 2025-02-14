@@ -1,17 +1,14 @@
 // Local
-import Icon from 'components/Icon';
 import useToggle from 'hooks/useToggle';
 import Menu from './Menu';
 import useElementPosition from 'hooks/useElementPosition';
 import Image from 'components/Image';
-import Account from 'services/account';
-import { useState } from 'react';
+import { useAccount } from 'services/account/useAccount';
 
 const ProfilePhoto = () => {
   const [showMenu, toggleMenu] = useToggle(false);
 
-  const [picture, setPicture] = useState<Buffer | null | undefined>(null);
-  Account.get().then((res) => setPicture(res?.pictureData));
+  const { data: account } = useAccount();
 
   const openOptions = () => toggleMenu();
   const { ref: menuRef, position } = useElementPosition<HTMLDivElement>();
@@ -22,7 +19,7 @@ const ProfilePhoto = () => {
       ref={menuRef}
     >
       <Image
-        src={picture}
+        src={account?.pictureData}
         className={{ container: 'w-14 h-14' }}
         onClick={openOptions}
       />

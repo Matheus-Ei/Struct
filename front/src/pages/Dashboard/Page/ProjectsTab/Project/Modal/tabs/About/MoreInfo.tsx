@@ -12,11 +12,13 @@ const MoreInfo = ({ project }: MoreInfoProps) => {
       <Point
         text={`Shared with ${project?.number_shared} users`}
         icon={{ name: 'FaUsers', library: 'fa6' }}
+        className='cursor-default'
       />
 
       <Point
         text={`Has ${project?.number_pages} pages`}
         icon={{ name: 'GoPaperclip', library: 'go' }}
+        className='cursor-default'
       />
     </div>
   );

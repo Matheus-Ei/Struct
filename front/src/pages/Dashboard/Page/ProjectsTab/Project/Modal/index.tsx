@@ -37,9 +37,9 @@ const ProjectModal = ({ modal, setModal }: ProjectModalProps) => {
     <Modal
       isOpen={modal.show}
       onClose={handleClose}
-      className='w-[100vw] h-[100vh] sm:w-[75vw] sm:h-[55vh] z-30'
+      className='w-screen h-screen sm:w-[75vw] sm:h-[55vh] z-30'
     >
-      <div className='w-full h-full'>
+      <div className='w-full h-full overflow-y-scroll overflow-x-hidden'>
         <Header tab={tab} setTab={setTab} modal={modal} />
 
         {router.map(renderTab)}

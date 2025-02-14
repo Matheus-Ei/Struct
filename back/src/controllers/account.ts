@@ -223,7 +223,7 @@ class AccountController {
         full_name = account.full_name,
         email = account.email,
         bio = account.bio,
-        picture = account.picure,
+        picture = account.picture,
       } = req.body;
 
       await pool.query(

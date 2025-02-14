@@ -9,7 +9,7 @@ import Input from 'components/Input';
 const DescriptionInput = () => {
   const { description } = useSafeContext(CreateProjectContext);
 
-  const css = clsx('h-full', {
+  const css = clsx('min-h-10 h-full', {
     'border-error': description.error.isError,
     'border-neutral': !description.error.isError,
   });

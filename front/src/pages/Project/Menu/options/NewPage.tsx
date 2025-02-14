@@ -12,7 +12,7 @@ const bodyCss = clsx(
   'px-4 gap-x-2 mt-4',
   'w-full bg-base-100 hover:text-primary hover:italic',
   'rounded-btn text-start',
-  'cursor-default select-none',
+  'cursor-pointer select-none',
 );
 
 const NewPage = () => {

@@ -24,7 +24,7 @@ const HoverButtons = ({ isHover, functions, className }: HoverButtonsProps) => {
   };
 
   const css = twMerge(
-    'flex items-center justify-center select-none cursor-pointer',
+    'flex items-center justify-center select-none cursor-pointer hover:opacity-60',
     className,
   );
 

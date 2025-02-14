@@ -10,7 +10,7 @@ const Pages = ({ projectId }: TabProps) => {
   const { data: pages, refetch } = useAllPages(projectId);
 
   return (
-    <div className='w-full h-5/6 flex justify-center'>
+    <div className='w-full flex justify-center'>
       <PagesGrid pages={pages} refetch={refetch} />
 
       <AddPage projectId={projectId} refetch={refetch} />
