@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
 interface MessageProps {
-  text: string | null;
+  text: string | null | undefined;
   type: 'error' | 'success';
   box: 'text' | 'block';
   isVisible: boolean;

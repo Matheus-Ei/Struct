@@ -69,7 +69,7 @@ describe('Share', () => {
       account_full_name: expect.any(String),
       account_nickname: 'dev',
       account_email: expect.any(String),
-      account_picture: null,
+      account_picture: expect.any(String) || null,
     });
   });
 

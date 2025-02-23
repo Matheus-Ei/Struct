@@ -40,9 +40,9 @@ const Node = ({ id, content, type, next_id }: NodeProps) => {
   }, [id, content, type, next_id]);
 
   const defaultCss = clsx(
-    'relative pl-16 flex items-center justify-center w-full rounded-btn',
+    'relative pl-16 flex items-center justify-center w-full',
     {
-      'bg-base-200': isHovered,
+      'rounded-btn bg-base-200': isHovered,
     },
   );
 

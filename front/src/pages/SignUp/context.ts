@@ -2,29 +2,18 @@
 import { createContext } from 'react';
 
 // Local
-import { ErrorType, SetStateType } from 'types/global';
+import { ObjectState } from 'types/global';
 
 export interface SignUpContextType {
-  step: number;
-  setStep: SetStateType<number>;
+  step: ObjectState<number>;
 
-  name: string;
-  setName: SetStateType<string>;
+  name: ObjectState<string | undefined>;
+  mail: ObjectState<string | undefined>;
+  nickname: ObjectState<string | undefined>;
+  password: ObjectState<string | undefined>;
+  rePassword: ObjectState<string | undefined>;
 
-  mail: string;
-  setMail: SetStateType<string>;
-
-  nickname: string;
-  setNickname: SetStateType<string>;
-
-  password: string;
-  setPassword: SetStateType<string>;
-
-  rePassword: string;
-  setRePassword: SetStateType<string>;
-
-  error: ErrorType;
-  setError: SetStateType<ErrorType>;
+  error: ObjectState<string | null>;
 }
 
 export const SignUpContext = createContext<SignUpContextType | undefined>(

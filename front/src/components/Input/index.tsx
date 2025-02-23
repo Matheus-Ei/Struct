@@ -3,21 +3,27 @@ import { twMerge } from 'tailwind-merge';
 import clsx from 'clsx';
 
 // Local
-import { ErrorType, SetStateType } from 'types/global';
+import { SetStateType } from 'types/global';
 import Error from './Error';
 import InputType from './InputType';
 import TextAreaType from './TextAreaType';
 
+export type SetValueType =
+  | SetStateType<string | undefined>
+  | SetStateType<string>
+  | SetStateType<string | null>
+  | SetStateType<string | null | undefined>;
+
 interface InputProps {
   defaultValue?: string;
-  setValue?: SetStateType<string>;
+  setValue?: SetValueType;
   placeholder?: string;
   isPassword?: boolean;
   type?: 'textarea' | 'input';
   onEnter?: () => void;
   length?: { max?: number; min?: number };
   className?: string;
-  error?: ErrorType;
+  error?: string | null;
 }
 
 const Input = ({
@@ -36,8 +42,8 @@ const Input = ({
     'bg-base-100 text-base-content',
     'border outline-none rounded-btn',
     {
-      'border-error': error?.isError,
-      'border-neutral': !error?.isError,
+      'border-error': error,
+      'border-neutral': !error,
       'resize-none pt-4': type === 'textarea',
     },
   );

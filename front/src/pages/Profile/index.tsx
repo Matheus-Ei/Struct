@@ -21,4 +21,4 @@ const Profile = () => {
   );
 };
 
-export default withLoader(Profile);
+export default withLoader(Profile, true);

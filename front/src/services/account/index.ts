@@ -1,26 +1,13 @@
-// Libraries
-import { NavigateFunction } from 'react-router-dom';
-
 // Local
 import Request from 'modules/Request';
 import Upload from 'services/upload';
 import { AccountType } from './type';
 
 class Account {
-  static async login(
-    email: string,
-    password: string,
-    navigate: NavigateFunction,
-  ) {
-    try {
-      await Request.post('account/auth', { email, password });
+  static async login(email: string, password: string) {
+    const response = await Request.post('account/auth', { email, password });
 
-      navigate('/dashboard');
-
-      return true;
-    } catch {
-      return false;
-    }
+    return response;
   }
 
   static async refreshAccess() {
@@ -33,27 +20,29 @@ class Account {
     }
   }
 
-  static async verifyLogin(navigate: NavigateFunction) {
+  static async verifyLogin() {
     try {
       await Request.get('token/check');
       return true;
     } catch {
-      const isRefreshed = await Account.refreshAccess();
-
-      if (!isRefreshed) {
-        navigate('/login');
-        return false;
-      }
-
-      return true;
+      return false;
     }
   }
 
-  static async logout(navigate: NavigateFunction) {
+  static async logout() {
     try {
       await Request.delete('account/auth');
 
-      navigate('/');
+      return true;
+    } catch {
+      return false;
+    }
+  }
+
+  static async delete() {
+    try {
+      await Request.delete('account');
+
       return true;
     } catch {
       return false;
@@ -61,25 +50,19 @@ class Account {
   }
 
   static async signUp(
-    full_name: string,
-    nickname: string,
-    email: string,
+    full_name: string | undefined,
+    nickname: string | undefined,
+    email: string | undefined,
     password: string | undefined,
-    navigate: NavigateFunction,
   ) {
-    try {
-      await Request.post('account', {
-        full_name,
-        nickname,
-        password,
-        email,
-      });
+    const response = await Request.post('account', {
+      full_name,
+      nickname,
+      password,
+      email,
+    });
 
-      navigate('/dashboard');
-      return true;
-    } catch {
-      return false;
-    }
+    return response;
   }
 
   static async checkAvailability(nickname?: string, email?: string) {

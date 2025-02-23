@@ -3,7 +3,7 @@ import { Request, Response } from 'express';
 
 // Local
 import Cookie from '../services/cookie';
-import Token from '../services/token';
+import { AccessToken, RefreshToken } from '../services/token';
 import Hash from '../services/hash';
 import pool from '../services/database';
 
@@ -71,7 +71,7 @@ class AccountController {
     const { full_name, nickname, email, password } = req.body;
 
     // Check if the fields are missing
-    if (!full_name || !nickname || !email) {
+    if (!full_name || !nickname || !email || !password) {
       res.status(400).json({ message: 'Missing fields' });
       return;
     }
@@ -105,14 +105,8 @@ class AccountController {
       );
 
       // Generate the tokens and set them as cookies to make account logged in
-      const refresh = new Token(process.env.REFRESH_SECRET as string);
-      const access = new Token(process.env.JWT_SECRET as string);
-
-      const accessTk = access.generate({ id: newAccount.id }, '1h');
-      const refreshTk = refresh.generate({ id: newAccount.id }, '7d');
-
-      Cookie.generate('access_token', accessTk, res);
-      Cookie.generate('refresh_token', refreshTk, res);
+      AccessToken.generate(newAccount.id, res);
+      RefreshToken.generate(newAccount.id, res);
       Cookie.generate('id', newAccount.id, res);
 
       await pool.query('COMMIT');
@@ -152,15 +146,9 @@ class AccountController {
       }
 
       // Generate the tokens
-      const refresh = new Token(process.env.REFRESH_SECRET as string);
-      const access = new Token(process.env.JWT_SECRET as string);
+      AccessToken.generate(account.id, res);
+      RefreshToken.generate(account.id, res);
 
-      const accessTk = access.generate({ id: account.id }, '1h');
-      const refreshTk = refresh.generate({ id: account.id }, '7d');
-
-      // Set the tokens as cookies to make account logged in
-      Cookie.generate('access_token', accessTk, res);
-      Cookie.generate('refresh_token', refreshTk, res);
       Cookie.generate('id', account.id, res);
 
       res.status(200).json({ message: 'The login was a success' });

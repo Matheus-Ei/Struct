@@ -2,7 +2,7 @@
 import { ChangeEvent, KeyboardEvent } from 'react';
 
 // Local
-import { SetStateType } from 'types/global';
+import { SetValueType } from '.';
 
 interface TextAreaTypeProps {
   defaultValue?: string;
@@ -11,7 +11,7 @@ interface TextAreaTypeProps {
     min?: number;
     max?: number;
   };
-  setValue?: SetStateType<string>;
+  setValue?: SetValueType;
   onEnter?: () => void;
   className: string;
 }

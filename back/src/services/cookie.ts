@@ -7,6 +7,7 @@ class Cookie {
     value: string | object,
     res: Response,
     options: {
+      path?: string;
       maxAge?: number;
       httpOnly?: boolean;
       secure?: boolean;
@@ -19,7 +20,7 @@ class Cookie {
     const cookieOptions = {
       httpOnly: true,
       secure: true,
-      maxAge: 7 * 24 * 60 * 60 * 1000,
+      maxAge: 30 * 24 * 60 * 60 * 1000,
       sameSite: 'strict' as 'strict', //"none" as "none"
       ...options,
     };

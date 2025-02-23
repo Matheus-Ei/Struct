@@ -32,21 +32,27 @@ const Header = () => {
   };
 
   return (
-    <div className='flex flex-col w-full h-1/6 items-start justify-center gap-y-3'>
-      <div className='flex flex-row gap-4 w-full text-start text-3xl'>
+    <div className='flex flex-col w-full mb-8 items-start justify-center gap-y-3'>
+      <div className='flex gap-6 items-center'>
         <Emoji
-          symbol={emoji}
-          selectorOnClick={true}
+          symbol={page.data?.emoji}
+          className='text-4xl'
+          selectorOnClick
           onUpdate={(value) => update(value, 'emoji')}
         />
 
         <EditableField
+          className={{
+            edit: 'text-3xl font-bold',
+            normal: 'text-4xl font-bold',
+          }}
           defaultValue={page.data?.title}
           onUpdate={(value) => update(value, 'name')}
         />
       </div>
 
       <EditableField
+        className={{ edit: 'text-lg', normal: 'text-lg' }}
         defaultValue={page.data?.description}
         onUpdate={(value) => update(value, 'description')}
       />

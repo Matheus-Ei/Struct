@@ -8,36 +8,13 @@ import Message from 'components/Message';
 import Button from 'components/Button';
 import Input from 'components/Input';
 import { SignUpContext } from '../context';
-import Account from 'services/account';
 import useSafeContext from 'hooks/useSafeContext';
 
-interface ErrorType {
-  message: string;
-  isError: boolean;
-}
-
 const Start = () => {
-  const [nickError, setNickError] = useState<ErrorType>({
-    message: '',
-    isError: false,
-  });
-
-  const [mailError, setMailError] = useState<ErrorType>({
-    message: '',
-    isError: false,
-  });
-
+  const [nickError, setNickError] = useState<string | null>(null);
+  const [mailError, setMailError] = useState<string | null>(null);
   const useSignUpContext = useSafeContext(SignUpContext);
-  const {
-    setNickname,
-    nickname,
-    setName,
-    name,
-    setMail,
-    mail: email,
-    setStep,
-    error,
-  } = useSignUpContext;
+  const { nickname, name, mail, error, step } = useSignUpContext;
 
   const nextStep = async () => {
     const validations = new Validations(
@@ -49,78 +26,46 @@ const Start = () => {
     const isValid = await validations.verify();
     if (!isValid) return;
 
-    // Check if the nickname and mail are avaliable
-    const nickResponse = await Account.checkAvailability(nickname);
-    const mailResponse = await Account.checkAvailability(undefined, email);
-
-    if (nickResponse === false) {
-      setNickError({
-        message: 'This nickname is not avaliable',
-        isError: true,
-      });
-    } else {
-      setNickError({ message: '', isError: false });
-    }
-
-    if (mailResponse === false) {
-      setMailError({
-        message: 'This mail is not avaliable',
-        isError: true,
-      });
-    } else {
-      setMailError({ message: '', isError: false });
-    }
-
-    if (!mailResponse || !nickResponse) {
-      return false;
-    }
-
-    return goNextStep(setStep);
+    return goNextStep(step.set);
   };
 
   return (
     <div className='w-2/4 h-full flex flex-col items-center justify-center'>
       <Input
         placeholder='name...'
-        setValue={setName}
+        setValue={name.set}
         onEnter={nextStep}
         length={{ max: 80 }}
-        defaultValue={name}
+        defaultValue={name.value}
       />
 
       <div className='relative flex flex-col w-full h-fit items-center justify-center'>
         <Input
           placeholder='nickname...'
-          setValue={setNickname}
+          setValue={nickname.set}
           onEnter={nextStep}
           length={{ max: 35 }}
-          defaultValue={nickname}
-          error={{
-            isError: nickError.isError,
-            message: nickError.message,
-          }}
+          defaultValue={nickname.value}
+          error={nickError}
         />
       </div>
 
       <div className='relative flex flex-col w-full h-fit items-center justify-center'>
         <Input
           placeholder='email...'
-          setValue={setMail}
+          setValue={mail.set}
           onEnter={nextStep}
           length={{ max: 120 }}
-          defaultValue={email}
-          error={{
-            isError: mailError.isError,
-            message: mailError.message,
-          }}
+          defaultValue={mail.value}
+          error={mailError}
         />
       </div>
 
       <Message
         type='error'
         box='text'
-        text={error.message}
-        isVisible={error.isError}
+        text={error.value}
+        isVisible={error.value ? true : false}
       />
 
       <Button inverse={true} text='Next' onClick={nextStep} />

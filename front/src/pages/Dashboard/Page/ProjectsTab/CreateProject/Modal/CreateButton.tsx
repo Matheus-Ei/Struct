@@ -13,7 +13,13 @@ const CreateButton = () => {
     const titleIsValid = title.validate();
     const descriptionIsValid = description.validate();
 
-    if (!titleIsValid || !descriptionIsValid) return;
+    if (
+      !title.value ||
+      !description.value ||
+      !titleIsValid ||
+      !descriptionIsValid
+    )
+      return;
 
     await Project.create(title.value, description.value);
 

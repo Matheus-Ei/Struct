@@ -1,24 +1,13 @@
 // Library
+import { InputStateType } from 'hooks/useInputState';
 import { createContext } from 'react';
 
 // Local
-import { ErrorType, SetStateType } from 'types/global';
+import { SetStateType } from 'types/global';
 
 export interface CreateProjectContextType {
-  title: {
-    value: string;
-    set: SetStateType<string>;
-    error: ErrorType;
-    setError: SetStateType<ErrorType>;
-    validate: () => boolean;
-  };
-  description: {
-    value: string;
-    set: SetStateType<string>;
-    error: ErrorType;
-    setError: SetStateType<ErrorType>;
-    validate: () => boolean;
-  };
+  title: InputStateType<string>;
+  description: InputStateType<string>;
   setModal: SetStateType<boolean>;
 }
 

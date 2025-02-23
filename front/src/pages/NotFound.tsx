@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 // Local
 import Button from 'components/Button';
 import Icon from 'components/Icon';
+import withLoader from 'HOCs/withLoader';
 
 const NotFound = () => {
   const navigate = useNavigate();
@@ -30,4 +31,4 @@ const NotFound = () => {
   );
 };
 
-export default NotFound;
+export default withLoader(NotFound);

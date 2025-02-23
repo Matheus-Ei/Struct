@@ -75,7 +75,7 @@ describe('Note page module', () => {
   it('Should add a new node', async () => {
     const response = await request(app).post(`/page/note`).send({ pageId });
 
-    nodeId = response.body.data.id;
+    nodeId = response.body.data.newNode.id;
 
     expect(response.statusCode).toBe(201);
   });

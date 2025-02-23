@@ -7,7 +7,7 @@ declare namespace NodeJS {
     DATABASE_USER: string;
     DATABASE_PASSWORD: string;
 
-    JWT_SECRET: string;
+    ACCESS_SECRET: string;
     REFRESH_SECRET: string;
 
     BACKEND_PORT: number;

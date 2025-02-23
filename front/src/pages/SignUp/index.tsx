@@ -2,42 +2,32 @@
 import { useState } from 'react';
 
 // Local
-import { ErrorType } from 'types/global';
 import Password from './steps/Password';
 import Start from './steps/Start';
 import Wrapper from './Wrapper';
 import { SignUpContext } from './context';
+import withLoader from 'HOCs/withLoader';
 
 const SignUp = () => {
   const [step, setStep] = useState<number>(0);
 
-  const [name, setName] = useState<string>('');
-  const [mail, setMail] = useState<string>('');
-  const [nickname, setNickname] = useState<string>('');
+  const [name, setName] = useState<string | undefined>();
+  const [mail, setMail] = useState<string | undefined>();
+  const [nickname, setNickname] = useState<string | undefined>();
 
-  const [password, setPassword] = useState<string>('');
-  const [rePassword, setRePassword] = useState<string>('');
+  const [password, setPassword] = useState<string | undefined>();
+  const [rePassword, setRePassword] = useState<string | undefined>();
 
-  const [error, setError] = useState<ErrorType>({
-    message: '',
-    isError: false,
-  });
+  const [error, setError] = useState<string | null>(null);
 
   const contextValue = {
-    step,
-    setStep,
-    name,
-    setName,
-    nickname,
-    setNickname,
-    mail,
-    setMail,
-    password,
-    setPassword,
-    rePassword,
-    setRePassword,
-    error,
-    setError,
+    step: { value: step, set: setStep },
+    name: { value: name, set: setName },
+    mail: { value: mail, set: setMail },
+    nickname: { value: nickname, set: setNickname },
+    password: { value: password, set: setPassword },
+    rePassword: { value: rePassword, set: setRePassword },
+    error: { value: error, set: setError },
   };
 
   return (
@@ -55,4 +45,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default withLoader(SignUp);

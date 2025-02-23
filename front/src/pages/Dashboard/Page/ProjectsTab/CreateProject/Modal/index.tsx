@@ -29,8 +29,8 @@ const CreateProjectModal = ({
   showModal,
   setModal,
 }: CreateProjectModalProps) => {
-  const title = useInputState();
-  const description = useInputState();
+  const title = useInputState<string>();
+  const description = useInputState<string>();
 
   useEffect(() => {
     title.reset();

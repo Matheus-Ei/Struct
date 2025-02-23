@@ -2,7 +2,7 @@
 import { ChangeEvent, KeyboardEvent } from 'react';
 
 // Local
-import { SetStateType } from 'types/global';
+import { SetValueType } from '.';
 
 interface InputTypeProps {
   defaultValue?: string;
@@ -13,7 +13,7 @@ interface InputTypeProps {
   };
   className?: string;
   isPassword?: boolean;
-  setValue?: SetStateType<string>;
+  setValue?: SetValueType;
   onEnter?: () => void;
 }
 

@@ -9,8 +9,11 @@ import Account from 'services/account';
 const Header = () => {
   const navigate = useNavigate();
 
-  const openLogin = async () =>
-    (await Account.verifyLogin(navigate)) && navigate('/dashboard');
+  const openLogin = async () => {
+    const response = await Account.verifyLogin();
+
+    return response ? navigate('/dashboard') : navigate('/login');
+  };
 
   const openSignup = () => navigate('/sign-up');
 

@@ -29,14 +29,14 @@ const Menu = ({ showMenu, toggleShowMenu, position }: MenuProps) => {
         <Point
           icon={{ name: 'FaUser', library: 'fa6' }}
           text='Profile'
-          className='m-0 p-0'
+          className='m-0 p-0 hover:opacity-60'
           onClick={goProfile}
         />
 
         <Point
           icon={{ name: 'IoMdSettings', library: 'io' }}
           text='Settings'
-          className='m-0 p-0'
+          className='m-0 p-0 hover:opacity-60'
           onClick={goSettings}
         />
       </div>

@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 
 // Local
 import Cookie from '../services/cookie';
-import Token from '../services/token';
+import { AccessToken, RefreshToken } from '../services/token';
 
 dotenv.config();
 
@@ -20,17 +20,20 @@ const auth = (req: Request, res: Response, next: NextFunction) => {
     return next();
   }
 
-  const accessToken = Cookie.get('access_token', req);
+  const refreshToken = Cookie.get('refresh_token', req);
   const id = Cookie.get('id', req);
 
-  const tk = new Token(process.env.JWT_SECRET as string);
-
-  if (!accessToken) {
-    return res.status(401).json({ message: 'Missing token cookie' });
+  if (!refreshToken || !id) {
+    return res.status(401).json({ message: 'Missing tokens or id cookies' });
   }
 
-  if (!tk.verify(accessToken, id, 'id')) {
-    return res.status(401).json({ message: 'Invalid token' });
+  const isAccessValid = AccessToken.verify(id, res, req);
+  const isRefreshValid = RefreshToken.verify(id, res, req);
+
+  if (!isAccessValid) {
+    if (isRefreshValid) {
+      AccessToken.generate(id, res);
+    } else return res.status(401).json({ message: 'Invalid token' });
   }
 
   next();

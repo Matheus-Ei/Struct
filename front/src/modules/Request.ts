@@ -2,6 +2,19 @@
 import axios, { ResponseType } from 'axios';
 
 class Request {
+  private static treatError(error: any) {
+    if (error.response) {
+      const { data } = error.response;
+
+      const errorMessage = data.message || 'Unkown error on server';
+      throw new Error(errorMessage);
+    } else if (error.request) {
+      throw new Error('No response recived');
+    } else {
+      throw new Error(error.message);
+    }
+  }
+
   static async get(
     route: string,
     base?: string,
@@ -18,8 +31,8 @@ class Request {
       });
       const data = await request.data;
       return data;
-    } catch (error) {
-      throw new Error(`Get method, url ${url}, error: ${error}`);
+    } catch (error: any) {
+      this.treatError(error);
     }
   }
 
@@ -35,7 +48,7 @@ class Request {
       const response = await request.data;
       return response;
     } catch (error) {
-      throw new Error(`Post method, url ${url}, error: ${error}`);
+      this.treatError(error);
     }
   }
 
@@ -56,7 +69,7 @@ class Request {
       });
       return request.data;
     } catch (error) {
-      throw new Error(`Post file method, url ${url}, error: ${error}`);
+      this.treatError(error);
     }
   }
 
@@ -72,7 +85,7 @@ class Request {
       const response = await request.data;
       return response;
     } catch (error) {
-      throw new Error(`Delete method, url ${url}, error: ${error}`);
+      this.treatError(error);
     }
   }
 
@@ -88,7 +101,7 @@ class Request {
       const response = await request.data;
       return response;
     } catch (error) {
-      throw new Error(`Put method, url ${url}, error: ${error}`);
+      this.treatError(error);
     }
   }
 
@@ -104,7 +117,7 @@ class Request {
       const response = await request.data;
       return response;
     } catch (error) {
-      throw new Error(`Patch method, url ${url}, error: ${error}`);
+      this.treatError(error);
     }
   }
 }

@@ -17,8 +17,6 @@ const Image = ({ src, className, onUpdate, onClick }: ImageProps) => {
   const [isHovering, toggleHover] = useToggle(false);
   const [source, setSource] = useState<string>('https://placehold.co/500x500');
 
-  console.log(src);
-
   useEffect(() => {
     if (src && src.size !== 0) setSource(URL.createObjectURL(src as any));
   }, [src]);

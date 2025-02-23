@@ -16,6 +16,7 @@ class AccountRoute {
     this.router.get('/', accountController.getCurrent);
     this.router.post('/', accountController.register);
     this.router.patch('/', accountController.update);
+    this.router.delete('/', accountController.delete);
 
     this.router.post('/auth', accountController.login);
     this.router.delete('/auth', accountController.logout);

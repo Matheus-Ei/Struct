@@ -26,7 +26,7 @@ const Module = ({ name, description, icon }: ModuleProps) => {
 
   return (
     <div
-      className='w-64 h-28 gap-y-1 border border-base-300 rounded-btn p-2 flex flex-col hover:italic cursor-pointer select-none'
+      className='w-full h-28 gap-y-1 border border-base-300 rounded-btn p-2 flex flex-col hover:opacity-60 cursor-pointer select-none'
       onClick={handleClick}
     >
       <div className='flex items-center gap-x-2'>

@@ -10,8 +10,8 @@ const DescriptionInput = () => {
   const { description } = useSafeContext(CreateProjectContext);
 
   const css = clsx('min-h-10 h-full', {
-    'border-error': description.error.isError,
-    'border-neutral': !description.error.isError,
+    'border-error': description.error,
+    'border-neutral': !description.error,
   });
 
   return (
