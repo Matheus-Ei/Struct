@@ -1,5 +1,5 @@
 // Library
-import { MouseEvent } from 'react';
+import { memo, MouseEvent } from 'react';
 
 // Local
 import ContextMenu from 'components/ContextMenu';
@@ -53,4 +53,4 @@ const Menu = ({ isHover, menu, refetch, onOpen, account }: MenuProps) => {
   );
 };
 
-export default Menu;
+export default memo(Menu);

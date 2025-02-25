@@ -1,4 +1,5 @@
 // Library
+import { memo } from 'react';
 import clsx from 'clsx';
 
 // Local
@@ -39,4 +40,4 @@ const Title = ({ text, icon }: TitleProps) => {
   );
 };
 
-export default Title;
+export default memo(Title);

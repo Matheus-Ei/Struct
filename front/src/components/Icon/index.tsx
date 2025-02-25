@@ -1,5 +1,5 @@
 // Librarie
-import { MouseEvent } from 'react';
+import { memo, MouseEvent } from 'react';
 import { FaQuestion } from 'react-icons/fa';
 
 // Local
@@ -35,4 +35,4 @@ const Icon = ({ value, className, onClick, onBlur, draggable }: IconsProps) => {
   }
 };
 
-export default Icon;
+export default memo(Icon);

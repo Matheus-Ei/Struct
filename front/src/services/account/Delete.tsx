@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import Button from 'components/Button';
 import Account from 'services/account';
 import Icon from 'components/Icon';
+import { memo } from 'react';
 
 const Delete = () => {
   const navigate = useNavigate();
@@ -30,4 +31,4 @@ const Delete = () => {
   );
 };
 
-export default Delete;
+export default memo(Delete);

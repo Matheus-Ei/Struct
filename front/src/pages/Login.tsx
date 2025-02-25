@@ -31,8 +31,8 @@ const Login = () => {
   return (
     <div className='w-screen h-screen flex items-center justify-center bg-base-300'>
       <Card>
-        <div className='flex flex-col items-center justify-center w-[25vw] py-6 px-4'>
-          <Logo className='text-primary w-full h-fit mb-4' />
+        <div className='flex flex-col items-center justify-center max-w-[25rem] h-full overflow-y-scroll'>
+          <Logo className='text-primary w-full min-h-24 h-fit mb-4' />
 
           <p className='text-primary mb-32 text-center text-lg cursor-default'>
             Come be part of a more organized world.
@@ -45,13 +45,19 @@ const Login = () => {
             isVisible={message ? true : false}
           />
 
-          <Input placeholder='Mail' setValue={setMail} onEnter={login} />
+          <Input
+            placeholder='Mail'
+            setValue={setMail}
+            onEnter={login}
+            className='min-h-14'
+          />
 
           <Input
             placeholder='Password'
             setValue={setPassword}
             isPassword={true}
             onEnter={login}
+            className='min-h-14'
           />
 
           <Button text='Login' inverse={true} onClick={login} />

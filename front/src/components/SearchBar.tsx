@@ -1,5 +1,5 @@
 // Libraries
-import { ChangeEvent, useEffect, useRef } from 'react';
+import { ChangeEvent, memo, useEffect, useRef } from 'react';
 import { twMerge } from 'tailwind-merge';
 
 // Local
@@ -62,4 +62,4 @@ const SearchBar = ({
   );
 };
 
-export default SearchBar;
+export default memo(SearchBar);

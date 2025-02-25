@@ -1,3 +1,7 @@
+// Library
+import { memo } from 'react';
+
+// Local
 import { SharedAccountType } from 'services/project/type';
 
 interface BottomProps {
@@ -12,4 +16,4 @@ const Bottom = ({ account }: BottomProps) => {
   );
 };
 
-export default Bottom;
+export default memo(Bottom);

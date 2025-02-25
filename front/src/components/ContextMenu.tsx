@@ -1,5 +1,5 @@
 // Libraries
-import { useCallback, useEffect, useRef } from 'react';
+import { memo, useCallback, useEffect, useRef } from 'react';
 import { twMerge } from 'tailwind-merge';
 
 // Local
@@ -65,4 +65,4 @@ const ContextMenu = ({ children, onClose, show, style }: ContextMenuProps) => {
   );
 };
 
-export default ContextMenu;
+export default memo(ContextMenu);

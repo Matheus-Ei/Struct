@@ -1,5 +1,6 @@
 // Libraries
 import { twMerge } from 'tailwind-merge';
+import { memo } from 'react';
 import clsx from 'clsx';
 
 // Local
@@ -37,4 +38,4 @@ const Point = ({ text, icon, isSelected, onClick, className }: PointProps) => {
   );
 };
 
-export default Point;
+export default memo(Point);

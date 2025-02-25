@@ -1,3 +1,6 @@
+// Library
+import { memo } from 'react';
+
 // Local
 import Event from 'modules/Event';
 import { SetStateType } from 'types/global';
@@ -28,4 +31,4 @@ const Checkbox = ({ title, group, value }: CheckboxProps) => {
   );
 };
 
-export default Checkbox;
+export default memo(Checkbox);

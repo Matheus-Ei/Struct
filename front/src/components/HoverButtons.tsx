@@ -1,5 +1,6 @@
 // Library
 import { twMerge } from 'tailwind-merge';
+import { memo } from 'react';
 
 // Local
 import Icon from 'components/Icon';
@@ -38,4 +39,4 @@ const HoverButtons = ({ isHover, functions, className }: HoverButtonsProps) => {
   return <div className={css}>{functions.map(addFunction)}</div>;
 };
 
-export default HoverButtons;
+export default memo(HoverButtons);

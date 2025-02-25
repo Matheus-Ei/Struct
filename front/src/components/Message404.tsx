@@ -1,3 +1,6 @@
+// Library
+import { memo } from 'react';
+
 // Local
 import Icon from './Icon';
 
@@ -7,7 +10,7 @@ interface Message404Props {
 
 const Message404 = ({ text }: Message404Props) => {
   return (
-    <div className='flex items-center justify-start w-full h-fit gap-x-6 ml-10 mt-4'>
+    <div className='flex items-center justify-start w-full h-fit gap-x-6'>
       <Icon
         value={{ name: 'TbError404', library: 'tb' }}
         className='text-4xl w-fit'
@@ -18,4 +21,4 @@ const Message404 = ({ text }: Message404Props) => {
   );
 };
 
-export default Message404;
+export default memo(Message404);

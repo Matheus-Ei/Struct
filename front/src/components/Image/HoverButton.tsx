@@ -1,6 +1,6 @@
 // Library
 import { twMerge } from 'tailwind-merge';
-import { useRef } from 'react';
+import { memo, useRef } from 'react';
 import Icon from 'components/Icon';
 
 interface HoverButtonProps {
@@ -53,4 +53,4 @@ const HoverButton = ({ show, className, onUpdate }: HoverButtonProps) => {
   );
 };
 
-export default HoverButton;
+export default memo(HoverButton);

@@ -43,7 +43,7 @@ const DeleteProject = ({ projectId, setModal }: DeleteProps) => {
       <Point
         icon={{ name: 'MdDelete', library: 'md' }}
         text='Delete'
-        className='hover:opacity-60'
+        className='hover:opacity-60 m-0 p-0'
         onClick={() => toggleShowConfirmDelete(true)}
       />
     </div>

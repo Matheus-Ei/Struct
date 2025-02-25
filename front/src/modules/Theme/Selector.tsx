@@ -1,5 +1,5 @@
 // Libraries
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, memo, useState } from 'react';
 import clsx from 'clsx';
 
 // Local
@@ -54,4 +54,4 @@ const ThemeSelector = () => {
   );
 };
 
-export default ThemeSelector;
+export default memo(ThemeSelector);

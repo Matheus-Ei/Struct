@@ -1,5 +1,5 @@
 // Libraries
-import { ChangeEvent } from 'react';
+import { ChangeEvent, memo } from 'react';
 import { twMerge } from 'tailwind-merge';
 
 // Local
@@ -52,4 +52,4 @@ const Options = ({
   );
 };
 
-export default Options;
+export default memo(Options);

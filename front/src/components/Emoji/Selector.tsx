@@ -1,5 +1,5 @@
 // Libraries
-import { useCallback, useEffect, useRef } from 'react';
+import { memo, useCallback, useEffect, useRef } from 'react';
 import EmojiPicker, {
   EmojiClickData,
   EmojiStyle,
@@ -67,4 +67,4 @@ const EmojiSelector = ({ setEmoji, show, position }: EmojiSelectorProps) => {
   );
 };
 
-export default EmojiSelector;
+export default memo(EmojiSelector);

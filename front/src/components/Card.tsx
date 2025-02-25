@@ -1,4 +1,5 @@
 // Libraries
+import { memo } from 'react';
 import { twMerge } from 'tailwind-merge';
 
 interface CardProps {
@@ -8,7 +9,7 @@ interface CardProps {
 
 const Card = ({ children, className }: CardProps) => {
   const css = twMerge(
-    'w-fit h-fit p-4',
+    'max-w-full max-h-full h-fit w-fit p-4',
     'flex flex-col items-center justify-center',
     'border rounded-box border-neutral bg-base-100',
     className,
@@ -17,4 +18,4 @@ const Card = ({ children, className }: CardProps) => {
   return <div className={css}>{children}</div>;
 };
 
-export default Card;
+export default memo(Card);

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 // Local
 import Point from 'components/Point';
+import { memo } from 'react';
 
 interface GoBackButtonProps {
   lastPage: string;
@@ -21,4 +22,4 @@ const GoBackButton = ({ lastPage }: GoBackButtonProps) => {
   );
 };
 
-export default GoBackButton;
+export default memo(GoBackButton);

@@ -4,7 +4,8 @@ import { twMerge } from 'tailwind-merge';
 // Local
 import useToggle from 'hooks/useToggle';
 import HoverButton from './HoverButton';
-import { useEffect, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
+import clsx from 'clsx';
 
 interface ImageProps {
   src: Buffer | undefined | null;
@@ -27,7 +28,9 @@ const Image = ({ src, className, onUpdate, onClick }: ImageProps) => {
   );
 
   const divCss = twMerge(
-    'h-48 w-48 relative flex items-center justify-center',
+    clsx('h-48 w-48 relative flex items-center justify-center', {
+      'cursor-pointer': onClick,
+    }),
     className?.container,
   );
 
@@ -48,4 +51,4 @@ const Image = ({ src, className, onUpdate, onClick }: ImageProps) => {
   );
 };
 
-export default Image;
+export default memo(Image);

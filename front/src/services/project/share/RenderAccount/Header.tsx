@@ -1,3 +1,6 @@
+// Library
+import { memo } from 'react';
+
 // Local
 import Icon from 'components/Icon';
 import { SharedAccountType } from 'services/project/type';
@@ -16,4 +19,4 @@ const Header = ({ account }: HeaderProps) => {
   );
 };
 
-export default Header;
+export default memo(Header);

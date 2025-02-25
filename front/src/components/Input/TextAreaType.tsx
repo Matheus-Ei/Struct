@@ -1,5 +1,5 @@
 // Library
-import { ChangeEvent, KeyboardEvent } from 'react';
+import { ChangeEvent, KeyboardEvent, memo } from 'react';
 
 // Local
 import { SetValueType } from '.';
@@ -45,4 +45,4 @@ const TextAreaType = ({
   );
 };
 
-export default TextAreaType;
+export default memo(TextAreaType);

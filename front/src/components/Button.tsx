@@ -1,5 +1,6 @@
 // Libraries
 import clsx from 'clsx';
+import { memo } from 'react';
 import { twMerge } from 'tailwind-merge';
 
 interface ButtonProps {
@@ -35,4 +36,4 @@ const Button = ({
   );
 };
 
-export default Button;
+export default memo(Button);

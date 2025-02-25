@@ -1,6 +1,6 @@
 // Library
 import { EmojiClickData } from 'emoji-picker-react';
-import { useEffect, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
 
 // Local
@@ -65,4 +65,4 @@ const Emoji = ({
   );
 };
 
-export default Emoji;
+export default memo(Emoji);

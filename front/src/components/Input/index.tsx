@@ -7,6 +7,7 @@ import { SetStateType } from 'types/global';
 import Error from './Error';
 import InputType from './InputType';
 import TextAreaType from './TextAreaType';
+import { memo } from 'react';
 
 export type SetValueType =
   | SetStateType<string | undefined>
@@ -83,4 +84,4 @@ const Input = ({
   );
 };
 
-export default Input;
+export default memo(Input);

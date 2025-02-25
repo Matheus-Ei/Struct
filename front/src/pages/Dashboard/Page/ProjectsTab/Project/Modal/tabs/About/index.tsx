@@ -8,7 +8,7 @@ const About = ({ projectId }: TabProps) => {
   const { data: project } = useProject(projectId);
 
   return (
-    <div className='flex flex-col w-full gap-8 mt-8 ml-8'>
+    <div className='flex flex-col w-full gap-y-8'>
       <Header project={project} />
 
       <MoreInfo project={project} />

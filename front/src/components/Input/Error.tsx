@@ -1,3 +1,5 @@
+import { memo } from "react";
+
 interface ErrorProps {
   error?: string | null;
 }
@@ -8,4 +10,4 @@ const Error = ({ error }: ErrorProps) => {
   return <p className='text-error text-sm w-full px-4'>{error}</p>;
 };
 
-export default Error;
+export default memo(Error);

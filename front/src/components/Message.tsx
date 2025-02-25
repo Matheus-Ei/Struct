@@ -1,5 +1,6 @@
 // Libraries
 import clsx from 'clsx';
+import { memo } from 'react';
 import { twMerge } from 'tailwind-merge';
 
 interface MessageProps {
@@ -30,4 +31,4 @@ const Message = ({ text, type, box, isVisible, className }: MessageProps) => {
   return <p className={css}>{text}</p>;
 };
 
-export default Message;
+export default memo(Message);

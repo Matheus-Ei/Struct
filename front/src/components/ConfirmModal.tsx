@@ -1,4 +1,5 @@
 // Libraries
+import { memo } from 'react';
 import { twMerge } from 'tailwind-merge';
 
 // Local
@@ -50,4 +51,4 @@ const ConfirmModal = ({
   );
 };
 
-export default ConfirmModal;
+export default memo(ConfirmModal);

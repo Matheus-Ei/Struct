@@ -1,5 +1,12 @@
 // Libraries
-import { FocusEvent, KeyboardEvent, MouseEvent, useRef, useState } from 'react';
+import {
+  FocusEvent,
+  KeyboardEvent,
+  memo,
+  MouseEvent,
+  useRef,
+  useState,
+} from 'react';
 import { twMerge } from 'tailwind-merge';
 import clsx from 'clsx';
 
@@ -116,4 +123,4 @@ const EditableField = ({
   );
 };
 
-export default EditableField;
+export default memo(EditableField);

@@ -1,5 +1,5 @@
 // Library
-import { MouseEvent, useState } from 'react';
+import { memo, MouseEvent, useState } from 'react';
 
 // Local
 import { SharedAccountType } from '../../type';
@@ -51,4 +51,4 @@ const RenderAccount = ({ account, refetch }: RenderAccountProps) => {
   );
 };
 
-export default RenderAccount;
+export default memo(RenderAccount);

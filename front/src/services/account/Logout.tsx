@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 // Local
 import Button from 'components/Button';
 import Account from 'services/account';
+import { memo } from 'react';
 
 const Logout = () => {
   const navigate = useNavigate();
@@ -18,4 +19,4 @@ const Logout = () => {
   );
 };
 
-export default Logout;
+export default memo(Logout);

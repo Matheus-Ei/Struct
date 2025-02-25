@@ -1,5 +1,6 @@
 // Libraries
 import { twMerge } from 'tailwind-merge';
+import { memo } from 'react';
 import clsx from 'clsx';
 
 // Local
@@ -35,4 +36,4 @@ const Modal = ({ children, isOpen, onClose, className }: ModalProps) => {
   );
 };
 
-export default Modal;
+export default memo(Modal);

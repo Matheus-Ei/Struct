@@ -35,7 +35,7 @@ const Header = ({ tab, setTab, modal }: HeaderProps) => {
   };
 
   return (
-    <div className='w-fit flex flex-row gap-x-8 p-2 ml-8'>
+    <div className='w-fit flex flex-row gap-x-8'>
       {router.map(renderTabs)}
 
       <Icon

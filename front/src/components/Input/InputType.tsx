@@ -1,5 +1,5 @@
 // Library
-import { ChangeEvent, KeyboardEvent } from 'react';
+import { ChangeEvent, KeyboardEvent, memo } from 'react';
 
 // Local
 import { SetValueType } from '.';
@@ -48,4 +48,4 @@ const InputType = ({
   );
 };
 
-export default InputType;
+export default memo(InputType);

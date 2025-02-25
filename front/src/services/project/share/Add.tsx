@@ -1,5 +1,5 @@
 // Library
-import { useState } from 'react';
+import { memo, useState } from 'react';
 
 // Local
 import Input from 'components/Input';
@@ -52,4 +52,4 @@ const NewShare = ({ projectId, refetch }: NewShareProps) => {
   );
 };
 
-export default NewShare;
+export default memo(NewShare);

@@ -1,6 +1,6 @@
 // Library
 import clsx from 'clsx';
-import { MouseEvent } from 'react';
+import { memo, MouseEvent } from 'react';
 
 interface BackgroundProps {
   children: JSX.Element;
@@ -27,4 +27,4 @@ const Background = ({ children, onClick }: BackgroundProps) => {
   );
 };
 
-export default Background;
+export default memo(Background);
