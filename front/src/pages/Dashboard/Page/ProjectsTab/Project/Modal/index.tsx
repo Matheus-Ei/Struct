@@ -37,9 +37,9 @@ const ProjectModal = ({ modal, setModal }: ProjectModalProps) => {
     <Modal
       isOpen={modal.show}
       onClose={handleClose}
-      className='w-screen h-screen sm:w-[75vw] sm:h-[55vh] z-30'
+      className='w-screen h-screen sm:max-w-[80rem] sm:max-h-[25rem] sm:w-[75vw] sm:h-[55vh] z-30'
     >
-      <div className='w-full h-full p-4'>
+      <div className='w-full h-full px-4 py-2'>
         <Header tab={tab} setTab={setTab} modal={modal} />
 
         <div className='w-full h-full overflow-y-scroll overflow-x-hidden pt-8'>

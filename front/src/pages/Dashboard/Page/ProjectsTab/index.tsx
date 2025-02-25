@@ -24,7 +24,7 @@ const ProjectsTab = () => {
           searchPlace={searchPlace}
           setResult={setSearchResult}
           placeholder='Search project. . .'
-          className='w-[40%] bg-base-100'
+          className='w-5/6 sm:w-[40%] bg-base-100'
         />
 
         <ProjectsGrid projects={projects} searchResult={searchResult} />

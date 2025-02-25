@@ -22,9 +22,10 @@ const ShareModal = ({ isOpen, toggleOpen }: ShareModalProps) => {
     <Modal
       isOpen={isOpen}
       onClose={() => toggleOpen(false)}
-      className='pb-4 sm:pb-0 sm:h-[80vh] sm:w-[60vw] md:w-[50vw] lg:w-[35vw] xl:w-[30vw] 2xl:w-[25vw] 2xl:h-[60vh]'
+      // className='pb-4 sm:pb-0 sm:h-[80vh] sm:w-[60vw] md:w-[50vw] lg:w-[35vw] xl:w-[30vw] 2xl:w-[25vw] 2xl:h-[60vh]'
+      className='sm:min-w-[20rem] sm:max-w-[25rem] sm:max-h-[35rem] sm:w-[25vw] sm:h-[65vh] z-30'
     >
-      <div className='flex flex-col w-full h-full items-center justify-between'>
+      <div className='flex flex-col w-full h-full items-center justify-between p-2'>
         <AccountsLayout refetch={refetchUsers} rawShares={rawShares} />
 
         <NewShare projectId={projectId} refetch={refetchUsers} />

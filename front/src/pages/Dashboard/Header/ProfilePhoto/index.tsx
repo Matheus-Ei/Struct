@@ -20,7 +20,7 @@ const ProfilePhoto = () => {
     >
       <Image
         src={account?.pictureData}
-        className={{ container: 'w-14 h-14' }}
+        className={{ container: 'w-24 h-24 sm:w-14 sm:h-14' }}
         onClick={openOptions}
       />
 

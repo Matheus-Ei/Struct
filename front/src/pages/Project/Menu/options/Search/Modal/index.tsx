@@ -62,7 +62,7 @@ const SearchModal = ({ isOpen, toggleOpen }: SearchModalProps) => {
     <Modal
       isOpen={isOpen}
       onClose={() => toggleOpen(false)}
-      className='sm:w-[30vw] sm:h-[80vh] 2xl:h-[50vh] xl:w-[15vw]'
+      className='sm:max-h-[35rem] sm:w-[20rem] sm:h-[80vh] z-30'
     >
       <div className='w-5/6 h-5/6'>
         <SearchBar

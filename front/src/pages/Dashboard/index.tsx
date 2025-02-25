@@ -10,7 +10,7 @@ const Dashboard = () => {
   const [tab, setTab] = useState<string>('Projects');
 
   return (
-    <div className='flex flex-col justify-start items-center w-screen h-[97vh]'>
+    <div className='flex flex-col justify-start items-center w-screen h-screen overflow-x-hidden'>
       <Header tab={tab} setTab={setTab} />
 
       <Page tab={tab} />

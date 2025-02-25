@@ -19,7 +19,7 @@ const CreateProject = () => {
   const openModal = () => setModal(true);
 
   return (
-    <div className='flex w-96 h-32 p-3 justify-start items-center'>
+    <div className='flex w-full h-fit p-3 justify-center md:justify-start items-center'>
       <button onClick={openModal} className={buttonCss}>
         <Icon value={{ name: 'IoAdd', library: 'io5' }} className='text-2xl' />
 

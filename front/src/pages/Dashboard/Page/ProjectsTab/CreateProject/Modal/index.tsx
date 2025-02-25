@@ -51,7 +51,7 @@ const CreateProjectModal = ({
       <Modal
         isOpen={showModal}
         onClose={closeModal}
-        className='sm:w-[30vw] sm:h-[70vh]'
+        className='sm:min-w-[20rem] sm:max-w-[30rem] sm:max-h-[40rem] sm:w-[25vw] sm:h-[65vh] z-30'
       >
         <div className={css}>
           <Header />

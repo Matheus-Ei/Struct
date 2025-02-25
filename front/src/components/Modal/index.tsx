@@ -26,7 +26,7 @@ const Modal = ({ children, isOpen, onClose, className }: ModalProps) => {
 
   return (
     <Background onClick={onClose}>
-      <Card>
+      <Card className='rounded-none sm:rounded-btn'>
         <div className={css}>
           <CloseButton onClick={onClose} />
           {children}
