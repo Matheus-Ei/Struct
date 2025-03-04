@@ -1,67 +1,65 @@
 // Libraries
-import { ChangeEvent, useEffect, useRef } from "react";
-import { twMerge } from "tailwind-merge";
+import { ChangeEvent, memo, useEffect, useRef } from 'react';
+import { twMerge } from 'tailwind-merge';
 
 // Local
-import Icon from "components/Icon";
-import { SetStateType } from "types/global";
+import Icon from 'components/Icon';
+import { SetStateType } from 'types/global';
 
 interface SearchBarProps {
-    searchPlace: Array<string>;
-    setResult: SetStateType<Array<string>>;
-    placeholder?: string;
-    className?: string;
+  searchPlace: Array<string>;
+  setResult: SetStateType<Array<string>>;
+  placeholder?: string;
+  className?: string;
 }
 
 const SearchBar = ({
-    searchPlace,
-    setResult,
-    placeholder,
-    className,
+  searchPlace,
+  setResult,
+  placeholder,
+  className,
 }: SearchBarProps) => {
-    const startSearchPlace = useRef(searchPlace);
+  const startSearch = useRef(searchPlace);
 
-    // Set the result to the search place when the component is mounted
-    useEffect(() => {
-        setResult(startSearchPlace.current);
-    }, [setResult]);
+  // Set the result to the search place when the component is mounted
+  useEffect(() => {
+    setResult(startSearch.current);
+  }, [setResult]);
 
-    const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-        const search = event.target.value as string;
-        if (!search) return setResult(searchPlace);
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const search = event.target.value as string;
+    if (!search) return setResult(searchPlace);
 
-        const result = searchPlace.filter((item) =>
-            item.toLowerCase().includes(search.toLowerCase())
-        );
-
-        setResult(result);
-    };
-
-    const css = twMerge(
-        "w-full",
-        "py-2 pl-16 pr-4",
-        "placeholder:text-base-content bg-base-100",
-        "outline-none border-b border-base-300",
-        className
+    const result = searchPlace.filter((item) =>
+      item.toLowerCase().includes(search.toLowerCase()),
     );
 
-    return (
-        <div className="relative flex text-base-content w-full">
-            {!className && (
-                <Icon
-                    value={{ name: "IoSearchOutline", library: "io5" }}
-                    className="flex items-center h-full text-xl absolute left-6 text-base-content"
-                />
-            )}
+    setResult(result);
+  };
 
-            <input
-                className={css}
-                placeholder={placeholder ? placeholder : "Search. . . "}
-                onChange={handleChange}
-                defaultValue=""
-            />
-        </div>
-    );
+  const css = twMerge(
+    'flex w-full items-center relative',
+    'py-2 pl-16 pr-4',
+    'placeholder:text-base-content bg-base-100',
+    'outline-none border-b border-base-300',
+    className,
+  );
+
+  return (
+    <div className={css}>
+      <Icon
+        value={{ name: 'IoSearchOutline', library: 'io5' }}
+        className='flex items-center h-full text-xl absolute left-6'
+      />
+
+      <input
+        placeholder={placeholder ? placeholder : 'Search. . . '}
+        onChange={handleChange}
+        defaultValue=''
+        className='w-full outline-none bg-base-100'
+      ></input>
+    </div>
+  );
 };
 
-export default SearchBar;
+export default memo(SearchBar);

@@ -1,31 +1,23 @@
-// Library
-import { useNavigate } from "react-router-dom";
-
 // Local
-import ThemeController from "./ThemeController";
-import SettingsHeader from "./SettingsHeader";
-import withLoader from "HOCs/withLoader";
-import Point from "components/Point";
+import ThemeSelector from 'modules/Theme/Selector';
+import Header from './Header';
+import withLoader from 'HOCs/withLoader';
+import GoBackButton from 'modules/Navigator/GoBackButton';
 
 const Settings = () => {
-    const navigate = useNavigate();
+  return (
+    <div className='relative flex flex-col items-center h-screen w-screen pt-8 lg:pt-20'>
+      <div className='flex w-full ml-10 mb-8 lg:mb-0'>
+        <GoBackButton lastPage='/dashboard' className='relative top-0 left-0' />
+      </div>
 
-    return (
-        <div className="relative flex justify-center h-screen w-screen pt-20">
-            <Point
-                icon={{ name: "IoIosArrowBack", library: "io" }}
-                text="Go back"
-                onClick={() => navigate("/dashboard")}
-                className="absolute left-20 top-20"
-            />
+      <div className='flex flex-col items-center h-full w-3/4'>
+        <Header />
 
-            <div className="flex flex-col items-center h-full w-2/3 gap-y-4">
-                <SettingsHeader />
-
-                <ThemeController />
-            </div>
-        </div>
-    );
+        <ThemeSelector />
+      </div>
+    </div>
+  );
 };
 
 export default withLoader(Settings, true);

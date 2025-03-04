@@ -1,250 +1,220 @@
 // Libraries
-import { Request, Response } from "express";
-
-// Models
-import ModuleModel from "../../models/module";
-import PageModel from "../../models/page";
+import { Request, Response } from 'express';
 
 // Local
-import NotesModule from "./modules/notes";
+import NoteModule from './modules/note';
+import pool from '../../services/database';
 
 class PageController {
-    public async get(req: Request, res: Response) {
-        const { id } = req.params;
+  public async get(req: Request, res: Response) {
+    const { id } = req.params;
 
-        try {
-            const page = await PageModel.findByPk(id);
+    try {
+      const rawPage = await pool.query(
+        `
+          SELECT
+            p.id as id,
+            p.title AS title,
+            p.description AS description,
+            p.emoji AS emoji,
+            p.project_id AS project_id,
+            p.parent_page_id AS parent_page_id,
+            m.title AS module
+          FROM page p
+          LEFT JOIN module m ON p.module_id = m.id
+          WHERE p.id = $1;
+        `,
+        [id],
+      );
+      const page = rawPage.rows[0];
 
-            // Check if the page exists
-            if (!page) {
-                res.status(404).send({
-                    message: "The page requested don't exist",
-                });
-                return;
-            }
+      // Check if the page exists
+      if (!page) {
+        res.status(404).send({
+          message: "The page requested don't exist",
+        });
+        return;
+      }
 
-            const module = await ModuleModel.findByPk(page.module_id);
+      let moduleData = null;
+      switch (page.module) {
+        case 'notes':
+          moduleData = await NoteModule.get(id);
+          break;
+        default:
+          break;
+      }
 
-            let moduleInformation = null;
-            switch (module?.name) {
-                case "notes":
-                    moduleInformation = await NotesModule.get(id);
-                    break;
-                default:
-                    break;
-            }
+      res.status(200).send({
+        message: 'Page found',
+        data: {
+          id: page.id,
+          title: page.title,
+          description: page.description,
+          emoji: page.emoji,
+          project_id: page.project_id,
+          parent_page_id: page.parent_page_id,
 
-            res.status(200).send({
-                message: "Page found",
-                data: {
-                    id: page.id,
-                    name: page.name,
-                    description: page.description,
-                    emoji: page.emoji,
-                    project_id: page.project_id,
-                    parent_page_id: page.parent_page_id,
-                    module: module ? module.name : null,
-                    moduleInformation,
-                },
-            });
-        } catch (error) {
-            res.status(500).send({ message: "Error getting the page", error });
-        }
+          module_title: page.module,
+          module_information: moduleData,
+        },
+      });
+    } catch (error) {
+      res.status(500).send({ message: 'Error getting the page', error });
+    }
+  }
+
+  public async delete(req: Request, res: Response) {
+    const { id } = req.params;
+
+    try {
+      await pool.query(
+        `
+          DELETE FROM page
+          WHERE id = $1
+        `,
+        [id],
+      );
+
+      res.status(200).send({ message: 'The page was deleted' });
+    } catch (error) {
+      res.status(500).send({ message: 'Error deleting the page', error });
+    }
+  }
+
+  public async create(req: Request, res: Response) {
+    const {
+      title,
+      projectId,
+      description = 'Description not set... ',
+      emoji = undefined,
+      parentPage = null,
+      moduleId = null,
+    } = req.body;
+
+    // Check if the required fields are present
+    if (!title || !description || !projectId) {
+      res
+        .status(400)
+        .send({ message: 'Missing title, description or project id' });
+      return;
     }
 
-    public async delete(req: Request, res: Response) {
-        const { id } = req.params;
+    try {
+      const rawNewPage = await pool.query(
+        `
+          INSERT INTO page (title, description, emoji, project_id, module_id, parent_page_id, position)
+          VALUES ($1, $2, $3, $4, $5, $6, (SELECT MAX(position + 1) FROM page WHERE parent_page_id = $6))
+          RETURNING id;
+        `,
+        [title, description, emoji, projectId, moduleId, parentPage],
+      );
+      const newPage = rawNewPage.rows[0];
 
-        try {
-            const page = await PageModel.findByPk(id);
+      res.status(201).send({ message: 'Page created', data: newPage });
+    } catch (error) {
+      res.status(500).send({ message: 'Error creating the page', error });
+    }
+  }
 
-            // Check if the page exists
-            if (!page) {
-                res.status(404).send({
-                    message: "The page don't exist, so wasn't deleted",
-                });
-                return;
-            }
+  public async edit(req: Request, res: Response) {
+    const { id } = req.params;
 
-            await page.destroy();
+    try {
+      const rawPage = await pool.query(
+        `
+          SELECT title, description, emoji
+          FROM page
+          WHERE id = $1;
+        `,
+        [id],
+      );
+      const page = rawPage.rows[0];
 
-            res.status(200).send({ message: "The page was deleted" });
-        } catch (error) {
-            res.status(500).send({ message: "Error deleting the page", error });
-        }
+      // Check if the page exists
+      if (!page) {
+        res.status(404).send({ message: 'Page not found' });
+        return;
+      }
+
+      const {
+        title = page.title,
+        description = page.description,
+        emoji = page.emoji,
+      } = req.body;
+
+      await pool.query(
+        `
+          UPDATE page
+          SET title = $2,
+              description = $3,
+              emoji = $4
+          WHERE id = $1
+        `,
+        [id, title, description, emoji],
+      );
+
+      res.status(200).send({ message: 'Page updated' });
+    } catch (error) {
+      res.status(500).send({ message: 'Error updating the page', error });
+    }
+  }
+
+  public async setModule(req: Request, res: Response) {
+    const { id } = req.params;
+    const { module } = req.body;
+
+    if (!module) {
+      res.status(400).send({
+        message: 'Missing module',
+      });
+      return;
     }
 
-    public async children(req: Request, res: Response) {
-        const { id } = req.params;
+    pool.query('BEGIN');
 
-        try {
-            const pages = await PageModel.findAll({
-                where: {
-                    parent_page_id: id,
-                },
-            });
+    try {
+      const rawModule = await pool.query(
+        `
+        SELECT id
+        FROM module
+        WHERE title = $1;
+      `,
+        [module],
+      );
+      const moduleId = rawModule.rows[0].id;
 
-            // Check if the page has children
-            if (!pages) {
-                res.status(404).send({
-                    message: "No children pages found",
-                    data: [],
-                });
-                return;
-            }
+      // Check if the page exists
+      if (!moduleId) {
+        res.status(404).send({ message: 'Module not found' });
+        return;
+      }
 
-            res.status(200).json({
-                message: "Children pages found",
-                data: pages,
-            });
-        } catch (error) {
-            res.status(500).json({
-                message: "Error fetching the children pages",
-                error,
-            });
-        }
+      switch (module) {
+        case 'notes':
+          NoteModule.set(id);
+          break;
+        default:
+          res.status(400).send({ message: 'Module not set' });
+          return;
+      }
+
+      await pool.query(
+        `
+        UPDATE page
+        SET module_id = $2
+        WHERE id = $1
+      `,
+        [id, moduleId],
+      );
+
+      pool.query('COMMIT');
+      res.status(200).send({ message: 'Module set' });
+    } catch (error) {
+      pool.query('ROLLBACK');
+      res.status(500).send({ message: 'Error updating the module', error });
     }
-
-    public async create(req: Request, res: Response) {
-        const {
-            name,
-            description,
-            projectId,
-            emoji = undefined,
-            parentPage = null,
-            moduleId = null,
-        } = req.body;
-
-        // Check if the required fields are present
-        if (!name || !description || !projectId) {
-            res.status(400).send({
-                message: "Missing name, description or project id",
-            });
-            return;
-        }
-
-        try {
-            const page = await PageModel.create({
-                name,
-                description,
-                emoji,
-                project_id: projectId,
-                module_id: moduleId,
-                parent_page_id: parentPage,
-            });
-
-            res.status(201).send({
-                message: "Page created",
-                data: {
-                    id: page.id,
-                    name: page.name,
-                    description: page.description,
-                    emoji: page.emoji,
-                    project_id: page.project_id,
-                    parent_page_id: page.parent_page_id,
-                },
-            });
-        } catch (error) {
-            res.status(500).send({
-                message: "Error creating the page",
-                error,
-            });
-        }
-    }
-
-    public async edit(req: Request, res: Response) {
-        const { id } = req.params;
-
-        try {
-            const page = await PageModel.findByPk(id);
-
-            // Check if the page exists
-            if (!page) {
-                res.status(404).send({ message: "Page not found" });
-                return;
-            }
-
-            const {
-                name = page.name,
-                description = page.description,
-                emoji = page.emoji,
-            } = req.body;
-
-            await page.update({
-                name,
-                description,
-                emoji,
-            });
-
-            res.status(201).send({
-                message: "Page updated",
-                data: {
-                    id: page.id,
-                    name: page.name,
-                    description: page.description,
-                    emoji: page.emoji,
-                    project_id: page.project_id,
-                    parent_page_id: page.parent_page_id,
-                },
-            });
-        } catch (error) {
-            res.status(500).send({
-                message: "Error updating the page",
-                error,
-            });
-        }
-    }
-
-    public async setModule(req: Request, res: Response) {
-        const { id } = req.params;
-        const { module } = req.body;
-
-        if (!module) {
-            res.status(400).send({
-                message: "Missing module",
-            });
-            return;
-        }
-
-        try {
-            const page = await PageModel.findByPk(id);
-            const moduleFound = await ModuleModel.findOne({
-                where: {
-                    name: module,
-                },
-            });
-
-            // Check if the page exists
-            if (!page || !moduleFound) {
-                res.status(404).send({ message: "Page or module not found" });
-                return;
-            }
-
-            switch (module) {
-                case "notes":
-                    NotesModule.set(id);
-                    break;
-                default:
-                    res.status(400).send({
-                        message: "Module not set",
-                    });
-                    return;
-            }
-
-            await page.update({
-                module_id: moduleFound.id,
-            });
-
-            res.status(201).send({
-                message: "Module set",
-            });
-        } catch (error) {
-            res.status(500).send({
-                message: "Error updating the module",
-                error,
-            });
-        }
-    }
+  }
 }
 
 export default new PageController();

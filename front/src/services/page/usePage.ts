@@ -1,13 +1,14 @@
 // Libraries
-import { useQuery } from "react-query";
+import { useQuery } from 'react-query';
 
 // Local
-import Page from ".";
+import { idType } from 'types/global';
+import Page from '.';
 
-export const usePage = (id: number | null) => {
-    return useQuery(["page", id], () => (id ? Page.get(id) : null));
+export const usePage = (id: idType) => {
+  return useQuery(['page', id], () => (id ? Page.get(id) : null));
 };
 
-export const useAllPages = (projectId?: string | number | null) => {
-    return useQuery(["all-pages", projectId], () => Page.getAll(projectId));
+export const useAllPages = (projectId?: idType) => {
+  return useQuery(['all-pages', projectId], () => Page.getAll(projectId));
 };

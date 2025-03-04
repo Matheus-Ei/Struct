@@ -1,11 +1,12 @@
 // Libraries
-import { useQuery } from "react-query";
+import { useQuery } from 'react-query';
 
 // Local
-import ProjectShare from ".";
+import { idType } from 'types/global';
+import ProjectShare from '.';
 
-export function useProjectShare(id?: string) {
-    return useQuery(["project-users", id], () => ProjectShare.get(id), {
-        enabled: !!id,
-    });
+export function useProjectShare(id?: idType) {
+  return useQuery(['project-accounts', id], () => ProjectShare.get(id), {
+    enabled: !!id,
+  });
 }

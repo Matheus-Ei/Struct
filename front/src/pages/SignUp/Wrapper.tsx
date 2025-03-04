@@ -1,58 +1,51 @@
 // Local
-import { ReactComponent as Logo } from "assets/logo-500x500-3.svg";
-import { goPrevStep } from "./utils/functions";
-import GoogleSignUp from "./provider/Google";
-import Card from "components/Card";
-import Icon from "components/Icon";
-import { SignUpContext } from "./context";
-import useSafeContext from "hooks/useSafeContext";
+import { ReactComponent as Logo } from 'assets/logo-500x500-3.svg';
+import { goPrevStep } from './utils/functions';
+import Card from 'components/Card';
+import Icon from 'components/Icon';
+import { SignUpContext } from './context';
+import useSafeContext from 'hooks/useSafeContext';
+import Point from 'components/Point';
 
 interface WrapperSignUpProps {
-    children: JSX.Element;
+  children: JSX.Element;
 }
 
 const WrapperSignUp = ({ children }: WrapperSignUpProps) => {
-    const { step, setStep } = useSafeContext(SignUpContext);
+  const { step } = useSafeContext(SignUpContext);
 
-    const prevStep = () => {
-        goPrevStep(setStep);
-    };
+  const prevStep = () => goPrevStep(step.set);
 
-    return (
-        <Card>
-            <div className="relative w-[55vw] h-[450px] p-4 flex flex-col items-center justify-center">
-                {step !== 0 && (
-                    <button
-                        className="absolute flex top-4 left-4 gap-2 items-center justify-center text-neutral"
-                        onClick={prevStep}
-                    >
-                        <Icon
-                            value={{
-                                name: "IoArrowBackOutline",
-                                library: "io5",
-                            }}
-                        />
-                        <p>Go back</p>
-                    </button>
-                )}
+  return (
+    <Card>
+      <div className='relative w-[55vw] h-[35rem] md:h-[25rem] md:min-w-[50rem] md:max-w-[75rem] flex flex-col items-center justify-center cursor-default overflow-y-scroll'>
+        {step.value !== 0 && (
+          <div className='w-full flex gap-x-2 opacity-60 hover:opacity-40'>
+            <Point
+              onClick={prevStep}
+              icon={{
+                name: 'IoArrowBackOutline',
+                library: 'io5',
+              }}
+              text={'Go back'}
+            />
+          </div>
+        )}
 
-                <div className="w-full h-full flex items-center justify-center gap-[10%]">
-                    <div className="w-fit h-fit flex flex-col items-center">
-                        <Logo className="text-primary w-52 h-fit mb-4" />
+        <div className='w-full h-full flex flex-col md:flex-row items-center justify-center gap-x-10'>
+          <div className='w-fit h-fit flex flex-col items-center'>
+            <Logo className='text-primary w-52 h-fit mb-4' />
 
-                        <p className="text-primary text-center text-lg w-72">
-                            Venha fazer parte de um mundo mais organizado.
-                        </p>
-                    </div>
+            <p className='text-primary text-center text-lg w-full md:w-72'>
+              Come be part of a more organized world.
+            </p>
+          </div>
 
-                    {children}
-                </div>
-
-                <div className="divider px-40">Or sign-up with</div>
-                <GoogleSignUp />
-            </div>
-        </Card>
-    );
+          {children}
+        </div>
+      </div>
+    </Card>
+  );
 };
 
 export default WrapperSignUp;

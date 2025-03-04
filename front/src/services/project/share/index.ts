@@ -1,40 +1,39 @@
 // Local
-import Request from "modules/Request";
+import Request from 'modules/Request';
+import { idType } from 'types/global';
 
 class ProjectShare {
-    public static async add(
-        id: string | undefined,
-        nickname: string,
-        permission: string,
-        onSuccess?: () => void
-    ) {
-        try {
-            await Request.post(`project/share/${id}`, { nickname, permission });
-            onSuccess && onSuccess();
+  public static async add(id: idType, nickname: string, role: string) {
+    try {
+      const response = await Request.post(`project/share/${id}`, {
+        nickname,
+        role,
+      });
 
-            return true;
-        } catch {
-            return false;
-        }
+      return response;
+    } catch {
+      return false;
     }
+  }
 
-    public static async get(id: string | undefined) {
-        try {
-            const response = await Request.get(`project/share/${id}`);
-            return response.data;
-        } catch {
-            return null;
-        }
+  public static async get(id: idType) {
+    try {
+      const response = await Request.get(`project/share/${id}`);
+      return response.data;
+    } catch (error: any) {
+      if (error.response?.status === 404) return null;
+      return null;
     }
+  }
 
-    public static async delete(id: string | undefined, nickname: string) {
-        try {
-            await Request.delete(`project/share/${id}/${nickname}`);
-            return true;
-        } catch {
-            return false;
-        }
+  public static async delete(id: idType, nickname: string) {
+    try {
+      const response = await Request.delete(`project/share/${id}/${nickname}`);
+      return response;
+    } catch {
+      return false;
     }
+  }
 }
 
 export default ProjectShare;

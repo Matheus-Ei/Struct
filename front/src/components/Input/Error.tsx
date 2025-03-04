@@ -1,14 +1,13 @@
-// Local
-import { ErrorType } from "types/global";
+import { memo } from "react";
 
 interface ErrorProps {
-    error?: ErrorType;
+  error?: string | null;
 }
 
 const Error = ({ error }: ErrorProps) => {
-    if (!error || !error.isError) return null;
+  if (!error) return null;
 
-    return <p className="text-error text-sm w-full px-4">{error.message}</p>;
+  return <p className='text-error text-sm w-full px-4'>{error}</p>;
 };
 
-export default Error;
+export default memo(Error);

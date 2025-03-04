@@ -1,17 +1,19 @@
 export interface ProjectType {
-    id: number;
-    title: string;
-    description: string;
+  id: number;
+  title: string;
+  description: string;
+  number_shared: number;
+  number_pages: number;
 }
 
-export interface SharedUserType {
-    project_id: number;
-    user_id: number;
-    user_name: string;
-    user_nickname: string;
-    user_mail: string;
-    user_photo: string;
-    permission_level_id: number;
-    permission_level_name: string;
-    permission_level_description: string;
+export interface SharedAccountType {
+  project_id: number;
+  account_id: number;
+  account_full_name: string;
+  account_nickname: string;
+  account_email: string;
+  account_picture: string;
+  role_id: number;
+  role_name: string;
+  role_description: string;
 }

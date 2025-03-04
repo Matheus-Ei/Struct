@@ -1,33 +1,38 @@
-// Libraries
-import { MouseEvent } from "react";
-import { FaQuestion } from "react-icons/fa";
+// Librarie
+import { memo, MouseEvent } from 'react';
+import { FaQuestion } from 'react-icons/fa';
 
 // Local
-import library, { LibsType } from "./library";
-import { IconType } from "types/global";
+import library, { LibsType } from './library';
+import { IconType } from 'types/global';
 
 interface IconsProps {
-    value: IconType;
-    className?: string;
-    onClick?: (event?: MouseEvent<HTMLElement>) => void;
+  value?: IconType;
+  className?: string;
+  onClick?: (event?: MouseEvent<HTMLElement>) => void;
+  onBlur?: (event?: MouseEvent<HTMLElement>) => void;
+  draggable?: boolean;
 }
 
-const Icon = ({ value, className, onClick }: IconsProps) => {
-    const handleClick = (event: any) => onClick && onClick(event);
+const Icon = ({ value, className, onClick, onBlur, draggable }: IconsProps) => {
+  const props = {
+    onClick: (event: any) => onClick && onClick(event),
+    onBlur: (event: any) => onBlur && onBlur(event),
+    draggable,
+    className,
+  };
 
-    if (!value) return <FaQuestion onClick={handleClick} />;
+  if (!value || !value.name || !value.library) return <FaQuestion {...props} />;
 
-    try {
-        const repository: LibsType = library[value.library];
-        const RequiredIcon = repository[value.name];
+  try {
+    const repository: LibsType = library[value.library];
+    const RequiredIcon = repository[value.name];
+    if (!RequiredIcon) return <FaQuestion {...props} />;
 
-        if (className)
-            return <RequiredIcon className={className} onClick={handleClick} />;
-
-        return <RequiredIcon onClick={handleClick} />;
-    } catch (error) {
-        return <FaQuestion onClick={handleClick} />;
-    }
+    return <RequiredIcon {...props} />;
+  } catch {
+    return <FaQuestion {...props} />;
+  }
 };
 
-export default Icon;
+export default memo(Icon);

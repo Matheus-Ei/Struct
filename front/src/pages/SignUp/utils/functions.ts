@@ -1,56 +1,16 @@
-// Libraries
-import { NavigateFunction } from "react-router-dom";
-
 // Local
-import { SignUpContextType } from "../context";
-import { SetStateType } from "types/global";
-import User from "services/user";
-
-export const makeSignUp = async (
-    useSignUpContext: SignUpContextType | null,
-    navigate: NavigateFunction
-) => {
-    if (!useSignUpContext) return null;
-    const { password, rePassword, nickname, mail, name, setError } =
-        useSignUpContext;
-
-    try {
-        if (!password || !nickname || !mail || !name) {
-            setError({ isError: true, message: "Please fill all fields" });
-            return;
-        }
-
-        if (password !== rePassword) {
-            setError({ isError: true, message: "Passwords do not match" });
-            return;
-        }
-
-        User.signUp(
-            name,
-            nickname.toLowerCase(),
-            mail.toLowerCase(),
-            password,
-            "Default",
-            navigate
-        );
-    } catch {
-        setError({
-            isError: true,
-            message: "An error occurred, please try again",
-        });
-    }
-};
+import { SetStateType } from 'types/global';
 
 export const goPrevStep = (setStep: SetStateType<number>) => {
-    setStep((prev) => {
-        if (prev === 0) return prev;
+  setStep((prev) => {
+    if (prev === 0) return prev;
 
-        return prev - 1;
-    });
+    return prev - 1;
+  });
 };
 
 export const goNextStep = (setStep: SetStateType<number>) => {
-    setStep((prev) => {
-        return prev + 1;
-    });
+  setStep((prev) => {
+    return prev + 1;
+  });
 };

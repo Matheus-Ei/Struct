@@ -1,34 +1,26 @@
-// Library
-import { useNavigate } from "react-router-dom";
-
 // Local
-import Point from "components/Point";
-import withLoader from "HOCs/withLoader";
-import { useUser } from "services/user/useUser";
-import BasicInfo from "./BasicInfo";
-import SideBar from "./SideBar";
+import withLoader from 'HOCs/withLoader';
+import { useAccount } from 'services/account/useAccount';
+import BasicInfo from './BasicInfo';
+import SideBar from './SideBar';
+import GoBackButton from 'modules/Navigator/GoBackButton';
 
 const Profile = () => {
-    const { data: user } = useUser();
+  const { data: account } = useAccount();
 
-    const navigate = useNavigate();
+  return (
+    <div className='relative w-screen h-screen flex flex-col items-center pt-10 lg:pt-20'>
+      <div className='flex w-full ml-10 mb-8 lg:mb-0'>
+        <GoBackButton lastPage='/dashboard' className='relative top-0 left-0' />
+      </div>
 
-    return (
-        <div className="relative w-screen h-screen flex flex-col items-center pt-20">
-            <Point
-                icon={{ name: "IoIosArrowBack", library: "io" }}
-                text="Go back"
-                onClick={() => navigate("/dashboard")}
-                className="absolute left-20 top-20"
-            />
+      <div className='flex flex-col md:flex-row justify-center w-3/4 max-w-[80rem]'>
+        <BasicInfo account={account} />
 
-            <div className="flex justify-center w-2/4 h-full">
-                <BasicInfo user={user} />
-
-                <SideBar user={user} />
-            </div>
-        </div>
-    );
+        <SideBar account={account} />
+      </div>
+    </div>
+  );
 };
 
-export default withLoader(Profile);
+export default withLoader(Profile, true);

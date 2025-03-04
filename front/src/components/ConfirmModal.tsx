@@ -1,46 +1,54 @@
 // Libraries
-import clsx from "clsx";
+import { memo } from 'react';
+import { twMerge } from 'tailwind-merge';
 
 // Local
-import Button from "./Button";
-import Modal from "./Modal";
+import Button from './Button';
+import Modal from './Modal';
 
 interface ConfirmModalProps {
-    isOpen: boolean;
-    close: () => void;
-    onConfirm: () => void;
-    message?: string;
-    confirmText?: string;
-    cancelText?: string;
+  isOpen: boolean;
+  onClose: () => void;
+  onConfirm: () => void;
+  onDecline?: () => void;
+  message?: string;
+  confirmText?: string;
+  cancelText?: string;
+  className?: string;
 }
 
-const css = clsx("w-96 h-24 sm:w-96 sm:h-24", "items-center justify-center");
-
 const ConfirmModal = ({
-    isOpen,
-    close,
-    onConfirm,
-    message = "Are you sure?",
-    confirmText = "Yes",
-    cancelText = "No",
+  isOpen,
+  onClose,
+  onConfirm,
+  onDecline,
+  className,
+  message = 'Are you sure?',
+  confirmText = 'Yes',
+  cancelText = 'No',
 }: ConfirmModalProps) => {
-    return (
-        <Modal isOpen={isOpen} onClose={close} className={css}>
-            <>
-                <h1 className="mb-5">{message}</h1>
+  const css = twMerge(
+    'w-96 h-24 sm:w-96 sm:h-24',
+    'items-center justify-center',
+    className,
+  );
 
-                <div className="flex gap-4">
-                    <Button
-                        text={confirmText}
-                        onClick={onConfirm}
-                        inverse={true}
-                    />
+  return (
+    <Modal isOpen={isOpen} onClose={onClose} className={css}>
+      <>
+        <h1 className='mb-5'>{message}</h1>
 
-                    <Button text={cancelText} onClick={close} />
-                </div>
-            </>
-        </Modal>
-    );
+        <div className='flex gap-4'>
+          <Button text={confirmText} onClick={onConfirm} inverse={true} />
+
+          <Button
+            text={cancelText}
+            onClick={() => (onDecline ? onDecline() : onClose())}
+          />
+        </div>
+      </>
+    </Modal>
+  );
 };
 
-export default ConfirmModal;
+export default memo(ConfirmModal);

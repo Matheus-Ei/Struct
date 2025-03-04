@@ -1,12 +1,13 @@
 // Local
-import Header from "./Header";
+import withLoader from 'HOCs/withLoader';
+import Header from './Header';
 
-const Integration = () => {
-    return (
-        <div className="flex flex-col items-center w-screen h-screen">
-            <Header />
-        </div>
-    );
+const Landing = () => {
+  return (
+    <div className='flex flex-col items-center w-screen h-screen'>
+      <Header />
+    </div>
+  );
 };
 
-export default Integration;
+export default withLoader(Landing);

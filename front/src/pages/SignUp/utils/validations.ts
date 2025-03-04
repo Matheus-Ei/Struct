@@ -1,90 +1,98 @@
 // Local
-import { ErrorType, SetStateType } from "types/global";
-import { SignUpContextType } from "../context";
+import { SetStateType } from 'types/global';
+import { SignUpContextType } from '../context';
+import Account from 'services/account';
 
 class Validations {
-    private useSignUpContext: SignUpContextType;
-    private setNickError: SetStateType<ErrorType>;
-    private setMailError: SetStateType<ErrorType>;
+  private useSignUpContext: SignUpContextType;
+  private setNickError: SetStateType<string | null>;
+  private setMailError: SetStateType<string | null>;
 
-    constructor(
-        useSignUpContext: SignUpContextType,
-        setNickError: SetStateType<ErrorType>,
-        setMailError: SetStateType<ErrorType>
+  constructor(
+    useSignUpContext: SignUpContextType,
+    setNickError: SetStateType<string | null>,
+    setMailError: SetStateType<string | null>,
+  ) {
+    this.useSignUpContext = useSignUpContext;
+    this.setMailError = setMailError;
+    this.setNickError = setNickError;
+  }
+
+  private emptyFields() {
+    const { name, nickname, mail } = this.useSignUpContext;
+
+    if (!name.value || !nickname.value || !mail.value) {
+      this.useSignUpContext.error.set('Please fill all fields');
+      return false;
+    }
+
+    return true;
+  }
+
+  private async nickname() {
+    const nickname = this.useSignUpContext.nickname;
+    if (!nickname.value) return false;
+
+    // Nickname validation
+    const isAvaliable = await Account.checkAvailability(nickname.value);
+
+    if (nickname.value.length < 3 || nickname.value.search(' ') >= 1) {
+      this.setNickError('Invalid nickname');
+      return false;
+    } else if (!isAvaliable) {
+      this.setNickError('This nickname is not avaliable');
+      return false;
+    }
+
+    return true;
+  }
+
+  private async mail() {
+    const mail = this.useSignUpContext.mail;
+    if (!mail.value) return false;
+
+    // Mail validation
+    const mailResponse = await Account.checkAvailability(undefined, mail.value);
+
+    const mailUser = mail.value.substring(0, mail.value.indexOf('@'));
+    const mailDomain = mail.value.substring(mail.value.indexOf('@') + 1);
+    if (
+      mailUser.length < 1 ||
+      mailDomain.length < 1 ||
+      mailUser.search(' ') >= 1 ||
+      mailDomain.search(' ') >= 1 ||
+      mail.value.search(' ') >= 1
     ) {
-        this.useSignUpContext = useSignUpContext;
-        this.setMailError = setMailError;
-        this.setNickError = setNickError;
+      this.setMailError('Invalid mail');
+      return false;
+    } else if (!mailResponse) {
+      this.setMailError('This mail is not avaliable');
+      return false;
     }
 
-    private emptyFields() {
-        const { name, nickname, mail } = this.useSignUpContext;
+    return true;
+  }
 
-        if (!name || !nickname || !mail) {
-            this.useSignUpContext.setError({
-                isError: true,
-                message: "Please fill all fields",
-            });
-            return false;
-        }
+  private resetErrors() {
+    this.useSignUpContext.error.set(null);
+    this.setNickError(null);
+    this.setMailError(null);
+  }
 
-        return true;
-    }
+  async verify() {
+    this.resetErrors();
 
-    private async nickname() {
-        const nickname = this.useSignUpContext.nickname;
-        if (!nickname) return false;
+    const isNotEmpty = this.emptyFields();
 
-        // Nickname validation
-        if (nickname.length < 3 || nickname.search(" ") >= 1) {
-            this.setNickError({ message: "Invalid nickname", isError: true });
-            return false;
-        }
+    const mailValid = await this.mail();
 
-        return true;
-    }
+    const nickValid = await this.nickname();
 
-    private async mail() {
-        const mail = this.useSignUpContext.mail;
-        if (!mail) return false;
+    if (!isNotEmpty || !mailValid || !nickValid) return false;
 
-        // Mail validation
-        const mailUser = mail.substring(0, mail.indexOf("@"));
-        const mailDomain = mail.substring(mail.indexOf("@") + 1);
-        if (
-            mailUser.length < 1 ||
-            mailDomain.length < 1 ||
-            mailUser.search(" ") >= 1 ||
-            mailDomain.search(" ") >= 1 ||
-            mail.search(" ") >= 1
-        ) {
-            this.setMailError({ message: "Invalid mail", isError: true });
-            return false;
-        }
-
-        return true;
-    }
-
-    private resetErrors() {
-        this.useSignUpContext.setError({ message: "", isError: false });
-        this.setNickError({ message: "", isError: false });
-        this.setMailError({ message: "", isError: false });
-    }
-
-    async verify() {
-        this.resetErrors();
-
-        const isNotEmpty = this.emptyFields();
-
-        const mailValid = await this.mail();
-
-        const nickValid = await this.nickname();
-
-        if (!isNotEmpty || !mailValid || !nickValid) return false;
-
-        this.resetErrors();
-        return true;
-    }
+    this.resetErrors();
+    return true;
+  }
 }
 
 export default Validations;

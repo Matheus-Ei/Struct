@@ -1,26 +1,43 @@
+// Library
+import { memo } from 'react';
+import clsx from 'clsx';
+
 // Local
-import Icon from "components/Icon";
+import Icon from 'components/Icon';
 
 interface TitleProps {
-    text?: string;
-    icon?: { position: "left" | "right"; name: string; library: string };
+  text?: string;
+  icon?: { position?: 'left' | 'right'; name?: string; library?: string };
 }
 
 const Title = ({ text, icon }: TitleProps) => {
-    if (!text && !icon) return null;
+  if (!text && !icon) return null;
 
-    const iconRight = icon && icon.position === "right";
-    const iconLeft = icon && icon.position === "left";
+  const iconLeft = icon?.position === 'left';
+  const iconRight = icon?.position === 'right';
 
-    return (
-        <div className="flex items-center gap-x-2">
-            {iconRight && <Icon value={{ name: "MdEdit", library: "md" }} />}
+  const iconCss = clsx({
+    'order-1': iconLeft,
+    'order-2': iconRight,
+  });
 
-            {text && <h1 className="font-bold italic select-none">{text}</h1>}
+  const textCss = clsx('font-bold italic select-none', {
+    'order-2': iconLeft,
+    'order-1': iconRight,
+  });
 
-            {iconLeft && <Icon value={{ name: "MdEdit", library: "md" }} />}
-        </div>
-    );
+  const iconValue =
+    icon && icon.name && icon.library
+      ? { name: icon.name, library: icon.library }
+      : { name: 'MdEdit', library: 'md' };
+
+  return (
+    <div className='flex items-center gap-x-2'>
+      {icon && <Icon value={iconValue} className={iconCss} />}
+
+      {text && <h1 className={textCss}>{text}</h1>}
+    </div>
+  );
 };
 
-export default Title;
+export default memo(Title);

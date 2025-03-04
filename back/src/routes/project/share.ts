@@ -1,22 +1,22 @@
 // Libraries
-import { Router } from "express";
+import { Router } from 'express';
 
 // Local
-import shareController from "../../controllers/project/share";
+import shareController from '../../controllers/project/share';
 
 class ShareRoute {
-    public router: Router;
+  public router: Router;
 
-    constructor() {
-        this.router = Router();
-        this.init();
-    }
+  constructor() {
+    this.router = Router();
+    this.init();
+  }
 
-    private init() {
-        this.router.get("/:id", shareController.get);
-        this.router.post("/:id", shareController.share);
-        this.router.delete("/:id/:nickname", shareController.unshare);
-    }
+  private init() {
+    this.router.get('/:id', shareController.get);
+    this.router.post('/:id', shareController.share);
+    this.router.delete('/:id/:nickname', shareController.unshare);
+  }
 }
 
 export default new ShareRoute();

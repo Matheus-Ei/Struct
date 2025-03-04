@@ -1,18 +1,11 @@
 export interface PageType {
-    id: number;
-    name: string;
-    description: string;
-    children_pages: Array<PageType> | null;
-    emoji: string | undefined;
-    module: string | null;
-}
-
-export interface GetPagesType {
-    message: string;
-    data: Array<PageType>;
-}
-
-export interface GetPageType {
-    message: string;
-    data: PageType;
+  id: number;
+  title: string;
+  description: string;
+  emoji: string | undefined;
+  project_id: string;
+  parent_page_id: string;
+  child_pages: Array<PageType> | null;
+  module_title: string | null;
+  module_information: Array<Object> | null;
 }
