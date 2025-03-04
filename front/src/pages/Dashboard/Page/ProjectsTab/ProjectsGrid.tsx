@@ -31,9 +31,12 @@ const project = (item: ProjectType, searchResult: string[]) => {
 };
 
 const ProjectsGrid = ({ projects, searchResult }: ProjectsGridProps) => {
-  const renderProjects = () => {
-    if (!projects) return null;
+  if (!projects?.length)
+    return (
+      <CreateProject className='w-fit h-fit border-none hover:border-none hover:text-primary hover:font-bold' />
+    );
 
+  const renderProjects = () => {
     return projects.map((item) => project(item, searchResult));
   };
 

@@ -30,7 +30,7 @@ const Start = () => {
   };
 
   return (
-    <div className='w-2/4 h-full flex flex-col items-center justify-center'>
+    <div className='w-full md:w-2/4 h-full flex flex-col items-center justify-center'>
       <Input
         placeholder='name...'
         setValue={name.set}

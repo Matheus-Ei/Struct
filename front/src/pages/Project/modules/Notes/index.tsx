@@ -4,7 +4,7 @@ import Body from './Body';
 
 const Notes = () => {
   return (
-    <div className='w-full xl:w-4/6 h-full py-16 overflow-x-hidden overflow-y-scroll'>
+    <div className='w-full xl:w-4/6 h-full pt-16 overflow-x-hidden overflow-y-scroll'>
       <Header />
 
       <Body />

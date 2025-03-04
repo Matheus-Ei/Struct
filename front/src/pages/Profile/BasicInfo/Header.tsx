@@ -15,7 +15,7 @@ const Header = ({ account, update }: HeaderProps) => {
   };
 
   return (
-    <div className='flex items-center w-[90%] h-52 gap-x-4'>
+    <div className='flex flex-col lg:flex-row lg:items-center w-full h-fit gap-x-4'>
       <Image
         src={account?.pictureData}
         onUpdate={handleUpdate}

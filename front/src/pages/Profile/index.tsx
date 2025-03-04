@@ -9,10 +9,12 @@ const Profile = () => {
   const { data: account } = useAccount();
 
   return (
-    <div className='relative w-screen h-screen flex flex-col items-center pt-20'>
-      <GoBackButton lastPage='/dashboard' />
+    <div className='relative w-screen h-screen flex flex-col items-center pt-10 lg:pt-20'>
+      <div className='flex w-full ml-10 mb-8 lg:mb-0'>
+        <GoBackButton lastPage='/dashboard' className='relative top-0 left-0' />
+      </div>
 
-      <div className='flex justify-center w-2/4 h-full'>
+      <div className='flex flex-col md:flex-row justify-center w-3/4 max-w-[80rem]'>
         <BasicInfo account={account} />
 
         <SideBar account={account} />

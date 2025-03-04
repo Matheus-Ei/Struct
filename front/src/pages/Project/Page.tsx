@@ -29,7 +29,7 @@ const Page = () => {
 
   return (
     <div className='w-full h-screen flex justify-center'>
-      <div className='w-11/12 h-screen flex justify-center'>
+      <div className='w-full h-screen flex justify-center'>
         {getModule(module[0])}
       </div>
     </div>

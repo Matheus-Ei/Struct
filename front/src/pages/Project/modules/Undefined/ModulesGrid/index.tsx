@@ -22,6 +22,7 @@ const ModulesGrid = () => {
       <SearchBar
         searchPlace={modules.map((item) => item.name)}
         setResult={setModuleList}
+        className='w-full lg:w-3/4'
       />
 
       <div className='w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4 py-4'>

@@ -29,7 +29,7 @@ const Project = () => {
 
   return (
     <ProjectContext.Provider value={contextValue}>
-      <div className='flex flex-row pr-10 items-center w-screen h-screen gap-10'>
+      <div className='flex flex-row items-center w-screen h-screen'>
         <Menu />
 
         {selectedPageId ? <Page /> : <Dashboard />}
